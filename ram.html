@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Карты памяти. QOPP</title>
-<meta name="description" content="Карты памяти microSD QOPP: линейки BASE, RUSH и RUSH+. Объёмы от 32 ГБ до 1 ТБ, гарантия до 10 лет.">
+<title>Оперативная память. QOPP</title>
+<meta name="description" content="Оперативная память QOPP: модули UDIMM для персонального компьютера и SO-DIMM для ноутбука, DDR3, DDR4 и DDR5. Бессрочная гарантия.">
 <meta name="theme-color" content="#f6f6f7">
 <!-- DEPLOY STEP: заменить og:url и og:image на абсолютные адреса живого сайта перед публикацией -->
-<meta property="og:title" content="Карты памяти. QOPP">
-<meta property="og:description" content="BASE, RUSH и RUSH+: вся линейка карт памяти microSD QOPP">
-<meta property="og:url" content="/microsd.html">
-<meta property="og:image" content="/assets/microsd-hero.png">
+<meta property="og:title" content="Оперативная память. QOPP">
+<meta property="og:description" content="UDIMM для компьютера и SO-DIMM для ноутбука: оперативная память QOPP">
+<meta property="og:url" content="/ram.html">
+<meta property="og:image" content="/assets/ram-hero.png">
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="%23101216"/><text x="32" y="44" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="%23e3a94f" text-anchor="middle">Q</text></svg>'>
 <link rel="preload" href="assets/fonts/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
@@ -160,15 +160,16 @@ a.mi{cursor:pointer;text-decoration:none}
   letter-spacing:.5em;text-transform:uppercase;
   color:var(--ink);
   display:flex;align-items:center;gap:14px;
-  white-space:nowrap; /* хиро карт ниже, чем у SSD, подпись не должна ломаться на две колонки */
+  white-space:nowrap;
 }
+@media (min-width:861px) and (max-width:1100px){.side-label{letter-spacing:.32em}}
 .side-label::after{content:"";width:1px;height:44px;background:var(--ink);opacity:.45}
 @media (max-width:860px){
   .side-label{position:static;transform:none;writing-mode:horizontal-tb;letter-spacing:.22em;justify-content:center;padding:10px 0 8px;font-size:12px}
   .side-label::after{display:none}
 }
 
-/* ============ hero: полоса во всю ширину, встык с BASE ============ */
+/* ============ hero: полоса во всю ширину, встык с UDIMM ============ */
 .c-hero{
   position:relative;z-index:1;
   padding:84px 0 0;
@@ -197,10 +198,17 @@ a.mi{cursor:pointer;text-decoration:none}
   font-family:var(--display);font-weight:800;color:var(--ink);
   letter-spacing:.26em;line-height:1;font-size:clamp(15px,2.7vw,60px);
 }
-.st-base{top:50%;left:8.8%;transform:translateY(-50%);color:#454545}
-.st-rush{top:50%;left:8.8%;transform:translateY(-50%);color:#fd0905}
-.st-rushp{top:48%;right:13.5%;transform:translateY(-50%);color:#5915d0}
-.st-all{top:8%;left:0;right:0;text-align:center;letter-spacing:.18em;font-size:clamp(16px,3vw,66px)}
+/* подпись выбора: строки капсом и крупное имя форм-фактора, как в макете */
+.strip-cap{
+  position:absolute;z-index:2;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;gap:.65em;
+  color:var(--ink);text-transform:uppercase;text-align:center;
+  font-size:clamp(7px,1.8vw,40px);line-height:1;
+}
+.cap-line{font-family:var(--body);font-weight:500;letter-spacing:.22em}
+.cap-big{font-family:var(--display);font-weight:800;font-style:italic;font-size:1.4em;letter-spacing:.16em;margin-top:.1em}
+.cap-udimm{top:37%;left:66.6%;right:5.7%}
+.cap-sodimm{top:42%;left:75.5%;right:5.6%}
 .ff-info{display:none!important;
   position:absolute;left:0;right:0;bottom:19%;z-index:2;pointer-events:none;
   display:flex;gap:10px;justify-content:center;width:max-content;margin:0 auto;
@@ -363,8 +371,8 @@ a.fl:hover{color:var(--ink)}
 </nav>
 <div class="cat-drop" id="cat-drop" aria-label="Категории каталога">
   <a class="cd-item" href="ssd.html">Внутренние SSD</a>
-  <a class="cd-item" href="ram.html">Оперативная память</a>
-  <a class="cd-item current" href="microsd.html" aria-current="page">Карты памяти</a>
+  <a class="cd-item current" href="ram.html" aria-current="page">Оперативная память</a>
+  <a class="cd-item" href="microsd.html">Карты памяти</a>
   <a class="cd-item" href="404.html">Флеш-накопители</a>
   <a class="cd-item" href="404.html">Ноутбуки</a>
 </div>
@@ -380,8 +388,8 @@ a.fl:hover{color:var(--ink)}
   <a class="mi" id="mm-catalog">Каталог</a>
   <div class="mm-sub" hidden>
     <a class="mm-si" href="ssd.html">Внутренние SSD</a>
-    <a class="mm-si" href="ram.html">Оперативная память</a>
-    <a class="mm-si" href="microsd.html" aria-current="page">Карты памяти</a>
+    <a class="mm-si" href="ram.html" aria-current="page">Оперативная память</a>
+    <a class="mm-si" href="microsd.html">Карты памяти</a>
     <a class="mm-si" href="404.html">Флеш-накопители</a>
     <a class="mm-si" href="404.html">Ноутбуки</a>
   </div>
@@ -396,72 +404,47 @@ a.fl:hover{color:var(--ink)}
 </div>
 
 <header class="c-hero reveal" id="top">
-  <h1 class="side-label part">Карты памяти</h1>
-  <figure class="shot part" aria-label="Карты памяти QOPP">
-    <img src="assets/microsd-hero.png" alt="Карты памяти QOPP: microSD BASE, RUSH+ и RUSH с адаптером SD" width="2000" height="582">
+  <h1 class="side-label part">Оперативная память</h1>
+  <figure class="shot part" aria-label="Оперативная память QOPP">
+    <img src="assets/ram-hero.png" alt="Оперативная память QOPP: два модуля UDIMM с радиаторами и модуль SO-DIMM QS556C4632 DDR5 32 ГБ" width="2000" height="752">
   </figure>
 </header>
 
 <main id="main" tabindex="-1">
   <div class="strips">
 
-    <!-- BASE: Q80SD -->
-    <section class="strip reveal" id="base">
-      <h2 class="sr">BASE, модель Q80SD: объёмы 32, 64 и 128 ГБ</h2>
-      <span class="strip-link part">
-        <img src="assets/microsd-base.jpg" alt="Карта microSD QOPP BASE 128 ГБ в лотке смартфона" width="2400" height="655">
-      </span>
-      <span class="strip-title st-base" aria-hidden="true">BASE</span>
+    <!-- UDIMM: для персонального компьютера. Страница раздела в работе, пока 404 -->
+    <section class="strip reveal" id="udimm">
+      <h2 class="sr">UDIMM: модули для персонального компьютера, DDR3, DDR4 и DDR5</h2>
+      <a class="strip-link part" href="404.html" aria-label="UDIMM: подробнее">
+        <img src="assets/ram-udimm.jpg" alt="Модуль оперативной памяти QOPP DDR4 UDIMM с радиатором на фоне белого системного блока" width="2400" height="655">
+      </a>
+      <div class="strip-cap cap-udimm" aria-hidden="true">
+        <span class="cap-line">Для персонального</span>
+        <span class="cap-line">компьютера</span>
+        <span class="cap-big">UDIMM</span>
+      </div>
       <div class="strip-acts part">
-        <span class="pbtn" aria-disabled="true">Узнать больше
+        <a class="pbtn" href="404.html">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="pbtn pbtn-blue" aria-disabled="true">Купить</span>
+        </a>
       </div>
     </section>
 
-    <!-- RUSH -->
-    <section class="strip reveal" id="rush">
-      <h2 class="sr">RUSH: объёмы 32, 64, 128 и 256 ГБ</h2>
-      <span class="strip-link part">
-        <img src="assets/microsd-rush.jpg" alt="Карта microSD QOPP RUSH 256 ГБ, A1 V30 U3, на крышке ноутбука" width="2400" height="655">
-      </span>
-      <span class="strip-title st-rush" aria-hidden="true">RUSH</span>
-      <div class="strip-acts part">
-        <span class="pbtn" aria-disabled="true">Узнать больше
-          <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="pbtn pbtn-blue" aria-disabled="true">Купить</span>
+    <!-- SO-DIMM: для ноутбука. Страница раздела в работе, пока 404 -->
+    <section class="strip reveal" id="sodimm">
+      <h2 class="sr">SO-DIMM: модули для ноутбука, DDR3, DDR4 и DDR5</h2>
+      <a class="strip-link part" href="404.html" aria-label="SO-DIMM: подробнее">
+        <img src="assets/ram-sodimm.jpg" alt="Модули оперативной памяти QOPP SO-DIMM: QS556C4632 DDR5 32 ГБ и ST-S R4 DDR4 8 ГБ" width="2400" height="655">
+      </a>
+      <div class="strip-cap cap-sodimm" aria-hidden="true">
+        <span class="cap-line">Для ноутбука</span>
+        <span class="cap-big">SO-DIMM</span>
       </div>
-    </section>
-
-    <!-- RUSH+ -->
-    <section class="strip reveal" id="rushplus">
-      <h2 class="sr">RUSH+: объёмы 128, 256, 512 ГБ и 1 ТБ</h2>
-      <span class="strip-link part">
-        <img src="assets/microsd-rushplus.jpg" alt="Карта microSD QOPP RUSH+ 512 ГБ, A2 V30 U3, и адаптер SD" width="2400" height="655">
-      </span>
-      <span class="strip-title st-rushp" aria-hidden="true">RUSH+</span>
       <div class="strip-acts part">
-        <span class="pbtn" aria-disabled="true">Узнать больше
+        <a class="pbtn" href="404.html">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="pbtn pbtn-blue" aria-disabled="true">Купить</span>
-      </div>
-    </section>
-
-    <!-- все модели -->
-    <section class="strip reveal" id="all">
-      <h2 class="sr">Все модели карт памяти</h2>
-      <span class="strip-link part">
-        <img src="assets/microsd-all.jpg" alt="Линейка карт памяти QOPP: RUSH, RUSH+ и BASE" width="2400" height="656">
-      </span>
-      <span class="strip-title st-all" aria-hidden="true">Все модели</span>
-      <div class="strip-acts part">
-        <span class="pbtn" aria-disabled="true">Узнать больше
-          <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="pbtn pbtn-blue" aria-disabled="true">Купить</span>
+        </a>
       </div>
     </section>
 
@@ -485,10 +468,10 @@ a.fl:hover{color:var(--ink)}
     <div class="foot-col">
       <h3>Продукция</h3>
       <span class="fl">Ноутбуки</span>
-      <a class="fl" href="ram.html">Оперативная память</a>
+      <a class="fl current" href="ram.html" aria-current="page">Оперативная память</a>
       <span class="fl">Внешние SSD</span>
       <a class="fl" href="ssd.html">Внутренние SSD</a>
-      <a class="fl current" href="microsd.html" aria-current="page">Карты памяти</a>
+      <a class="fl" href="microsd.html">Карты памяти</a>
       <span class="fl">Флеш-накопители</span>
     </div>
     <div class="foot-col">
