@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Карты памяти. QOPP</title>
-<meta name="description" content="Карты памяти microSD QOPP: линейки BASE, RUSH и RUSH+. Объёмы от 32 ГБ до 1 ТБ, гарантия до 10 лет.">
+<title>Память UDIMM для персонального компьютера. QOPP</title>
+<meta name="description" content="Оперативная память QOPP UDIMM для персонального компьютера: DDR3 ST-U R3, DDR4 ST-U, ME-U и HI-U R4, DDR5 EPIC. Бессрочная гарантия.">
 <meta name="theme-color" content="#f6f6f7">
 <!-- DEPLOY STEP: заменить og:url и og:image на абсолютные адреса живого сайта перед публикацией -->
-<meta property="og:title" content="Карты памяти. QOPP">
-<meta property="og:description" content="BASE, RUSH и RUSH+: вся линейка карт памяти microSD QOPP">
-<meta property="og:url" content="/microsd.html">
-<meta property="og:image" content="/assets/microsd-hero.png">
+<meta property="og:title" content="Память UDIMM для персонального компьютера. QOPP">
+<meta property="og:description" content="DDR3, DDR4 и DDR5: модули UDIMM QOPP для персонального компьютера">
+<meta property="og:url" content="/udimm.html">
+<meta property="og:image" content="/assets/udimm-hero.png">
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="%23101216"/><text x="32" y="44" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="%23e3a94f" text-anchor="middle">Q</text></svg>'>
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -166,7 +166,6 @@ a.mi{cursor:pointer;text-decoration:none}
   letter-spacing:.5em;text-transform:uppercase;
   color:var(--ink);
   display:flex;align-items:center;gap:14px;
-  white-space:nowrap; /* хиро карт ниже, чем у SSD, подпись не должна ломаться на две колонки */
 }
 .side-label::after{content:"";width:1px;height:44px;background:var(--ink);opacity:.45}
 @media (max-width:860px){
@@ -174,7 +173,7 @@ a.mi{cursor:pointer;text-decoration:none}
   .side-label::after{display:none}
 }
 
-/* ============ hero: полоса во всю ширину, встык с BASE ============ */
+/* ============ hero: полоса во всю ширину, встык с DDR3 ============ */
 .c-hero{
   position:relative;z-index:1;
   padding:84px 0 0;
@@ -203,9 +202,8 @@ a.mi{cursor:pointer;text-decoration:none}
   font-family:var(--display-lat);font-weight:400;color:var(--ink);
   letter-spacing:.2em;line-height:1;font-size:clamp(15px,3.2vw,72px);
 }
-.st-base{top:50%;left:8.8%;transform:translateY(-50%);color:#454545}
-.st-rush{top:50%;left:8.8%;transform:translateY(-50%);color:#fd0905}
-.st-rushp{top:48%;right:13.5%;transform:translateY(-50%);color:#5915d0}
+.st-ddr{top:7.5%;left:0;right:0;text-align:center}
+.st-ddr .ff{font-size:.42em;letter-spacing:.2em;font-style:italic;vertical-align:top;margin-left:.4em}
 .st-all{top:8%;left:0;right:0;text-align:center;font-family:var(--display);font-weight:800;letter-spacing:.18em;font-size:clamp(16px,3vw,66px)}
 .ff-info{display:none!important;
   position:absolute;left:0;right:0;bottom:19%;z-index:2;pointer-events:none;
@@ -373,8 +371,8 @@ a.fl:hover{color:var(--ink)}
 </nav>
 <div class="cat-drop" id="cat-drop" aria-label="Категории каталога">
   <a class="cd-item" href="ssd.html">Внутренние SSD</a>
-  <a class="cd-item" href="ram.html">Оперативная память</a>
-  <a class="cd-item current" href="microsd.html" aria-current="page">Карты памяти</a>
+  <a class="cd-item current" href="ram.html">Оперативная память</a>
+  <a class="cd-item" href="microsd.html">Карты памяти</a>
   <a class="cd-item" href="404.html">Флеш-накопители</a>
   <a class="cd-item" href="404.html">Ноутбуки</a>
 </div>
@@ -391,7 +389,7 @@ a.fl:hover{color:var(--ink)}
   <div class="mm-sub" hidden>
     <a class="mm-si" href="ssd.html">Внутренние SSD</a>
     <a class="mm-si" href="ram.html">Оперативная память</a>
-    <a class="mm-si" href="microsd.html" aria-current="page">Карты памяти</a>
+    <a class="mm-si" href="microsd.html">Карты памяти</a>
     <a class="mm-si" href="404.html">Флеш-накопители</a>
     <a class="mm-si" href="404.html">Ноутбуки</a>
   </div>
@@ -406,22 +404,22 @@ a.fl:hover{color:var(--ink)}
 </div>
 
 <header class="c-hero reveal" id="top">
-  <h1 class="side-label part">Карты памяти</h1>
-  <figure class="shot part" aria-label="Карты памяти QOPP">
-    <img src="assets/microsd-hero.png" alt="Карты памяти QOPP: microSD BASE, RUSH+ и RUSH с адаптером SD" width="2000" height="582">
+  <h1 class="side-label part">Для персонального<br>компьютера</h1>
+  <figure class="shot part" aria-label="Память UDIMM QOPP">
+    <img src="assets/udimm-hero.png" alt="Оперативная память QOPP UDIMM: два модуля DDR4 с радиаторами" width="2000" height="752">
   </figure>
 </header>
 
 <main id="main" tabindex="-1">
   <div class="strips">
 
-    <!-- BASE: Q80SD -->
-    <section class="strip reveal" id="base">
-      <h2 class="sr">BASE, модель Q80SD: объёмы 32, 64 и 128 ГБ</h2>
+    <!-- DDR3: ST-U R3 -->
+    <section class="strip reveal" id="ddr3">
+      <h2 class="sr">DDR3 UDIMM: ST-U R3 8 ГБ и комплект ST-U R3 K2 2×8 ГБ</h2>
       <span class="strip-link part">
-        <img src="assets/microsd-base.jpg" alt="Карта microSD QOPP BASE 128 ГБ в лотке смартфона" width="2400" height="655">
+        <img src="assets/udimm-ddr3.jpg" alt="Модуль оперативной памяти QOPP ST-U R3 DDR3 UDIMM 8 ГБ" width="2400" height="655">
       </span>
-      <span class="strip-title st-base" aria-hidden="true">BASE</span>
+      <span class="strip-title st-ddr" aria-hidden="true">DDR3<span class="ff">DIMM</span></span>
       <div class="strip-acts part">
         <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -430,13 +428,13 @@ a.fl:hover{color:var(--ink)}
       </div>
     </section>
 
-    <!-- RUSH -->
-    <section class="strip reveal" id="rush">
-      <h2 class="sr">RUSH: объёмы 32, 64, 128 и 256 ГБ</h2>
+    <!-- DDR4: ST-U, ME-U, HI-U R4 -->
+    <section class="strip reveal" id="ddr4">
+      <h2 class="sr">DDR4 UDIMM: ST-U R4 и ME-U R4 8 и 16 ГБ, комплекты ST-U, ME-U и HI-U R4 K2 16 и 32 ГБ</h2>
       <span class="strip-link part">
-        <img src="assets/microsd-rush.jpg" alt="Карта microSD QOPP RUSH 256 ГБ, A1 V30 U3, на крышке ноутбука" width="2400" height="655">
+        <img src="assets/udimm-ddr4.jpg" alt="Модуль оперативной памяти QOPP ST-U R4 DDR4 UDIMM 8 ГБ" width="2400" height="655">
       </span>
-      <span class="strip-title st-rush" aria-hidden="true">RUSH</span>
+      <span class="strip-title st-ddr" aria-hidden="true">DDR4<span class="ff">DIMM</span></span>
       <div class="strip-acts part">
         <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -445,13 +443,13 @@ a.fl:hover{color:var(--ink)}
       </div>
     </section>
 
-    <!-- RUSH+ -->
-    <section class="strip reveal" id="rushplus">
-      <h2 class="sr">RUSH+: объёмы 128, 256, 512 ГБ и 1 ТБ</h2>
+    <!-- DDR5: EPIC -->
+    <section class="strip reveal" id="ddr5">
+      <h2 class="sr">DDR5 UDIMM: комплекты EPIC QE560C30K2 2×16 и 2×32 ГБ</h2>
       <span class="strip-link part">
-        <img src="assets/microsd-rushplus.jpg" alt="Карта microSD QOPP RUSH+ 512 ГБ, A2 V30 U3, и адаптер SD" width="2400" height="655">
+        <img src="assets/udimm-ddr5.jpg" alt="Модуль оперативной памяти QOPP с радиатором, DDR5 UDIMM" width="2400" height="655">
       </span>
-      <span class="strip-title st-rushp" aria-hidden="true">RUSH+</span>
+      <span class="strip-title st-ddr" aria-hidden="true">DDR5<span class="ff">DIMM</span></span>
       <div class="strip-acts part">
         <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -462,9 +460,9 @@ a.fl:hover{color:var(--ink)}
 
     <!-- все модели -->
     <section class="strip reveal" id="all">
-      <h2 class="sr">Все модели карт памяти</h2>
+      <h2 class="sr">Все модели памяти UDIMM</h2>
       <span class="strip-link part">
-        <img src="assets/microsd-all.jpg" alt="Линейка карт памяти QOPP: RUSH, RUSH+ и BASE" width="2400" height="656">
+        <img src="assets/udimm-all.jpg" alt="Комплект оперативной памяти QOPP ME-U R4 K2 с радиаторами" width="2400" height="655">
       </span>
       <span class="strip-title st-all" aria-hidden="true">Все модели</span>
       <div class="strip-acts part">
@@ -495,10 +493,10 @@ a.fl:hover{color:var(--ink)}
     <div class="foot-col">
       <h3>Продукция</h3>
       <span class="fl">Ноутбуки</span>
-      <a class="fl" href="ram.html">Оперативная память</a>
+      <a class="fl current" href="ram.html">Оперативная память</a>
       <span class="fl">Внешние SSD</span>
       <a class="fl" href="ssd.html">Внутренние SSD</a>
-      <a class="fl current" href="microsd.html" aria-current="page">Карты памяти</a>
+      <a class="fl" href="microsd.html">Карты памяти</a>
       <span class="fl">Флеш-накопители</span>
     </div>
     <div class="foot-col">
