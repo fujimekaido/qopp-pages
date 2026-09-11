@@ -24,6 +24,8 @@
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-varitalic-latin-ext.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap;unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-varitalic-cyrillic.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap;unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-varitalic-cyrillic-ext.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap;unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+/* второй шрифт: латинские имена линеек на полосах (замена Ethnocentric из макетов) */
+@font-face{font-family:'Michroma';src:url('assets/fonts/Michroma-latin.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 /* ============ tokens: белый мир каталога ============ */
 :root{
   --canvas:#f6f6f7;
@@ -39,6 +41,7 @@
   --display:'Montserrat',sans-serif;
   --body:'Montserrat',sans-serif;
   --mono:'Montserrat',sans-serif;
+  --display-lat:'Michroma','Montserrat',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{overflow-x:hidden;overflow-x:clip}
@@ -209,7 +212,7 @@ a.mi{cursor:pointer;text-decoration:none}
   font-size:clamp(7px,1.8vw,40px);line-height:1;
 }
 .cap-line{font-family:var(--body);font-weight:500;letter-spacing:.22em}
-.cap-big{font-family:var(--display);font-weight:800;font-style:italic;font-size:1.4em;letter-spacing:.16em;margin-top:.1em}
+.cap-big{font-family:var(--display-lat);font-weight:400;font-style:italic;font-size:1.3em;letter-spacing:.12em;margin-top:.1em}
 .cap-udimm{top:37%;left:66.6%;right:5.7%}
 .cap-sodimm{top:42%;left:75.5%;right:5.6%}
 .ff-info{display:none!important;

@@ -24,6 +24,8 @@
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-varitalic-latin-ext.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap;unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-varitalic-cyrillic.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap;unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-varitalic-cyrillic-ext.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap;unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+/* второй шрифт: латинские имена линеек на полосах (замена Ethnocentric из макетов) */
+@font-face{font-family:'Michroma';src:url('assets/fonts/Michroma-latin.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 /* ============ tokens: белый мир каталога ============ */
 :root{
   --canvas:#f6f6f7;
@@ -39,6 +41,7 @@
   --display:'Montserrat',sans-serif;
   --body:'Montserrat',sans-serif;
   --mono:'Montserrat',sans-serif;
+  --display-lat:'Michroma','Montserrat',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{overflow-x:hidden;overflow-x:clip}
@@ -196,13 +199,13 @@ a.mi{cursor:pointer;text-decoration:none}
 /* заголовки поверх чистых фото-полос, в стиле макета */
 .strip-title{
   position:absolute;z-index:2;pointer-events:none;
-  font-family:var(--display);font-weight:800;color:var(--ink);
-  letter-spacing:.26em;line-height:1;font-size:clamp(15px,2.7vw,60px);
+  font-family:var(--display-lat);font-weight:400;color:var(--ink);
+  letter-spacing:.2em;line-height:1;font-size:clamp(15px,3.2vw,72px);
 }
 .st-sata{top:12%;right:4%}
 .st-n3{top:32%;left:4.2%}
 .st-n4{top:28%;left:4.2%}
-.st-all{top:8%;left:0;right:0;text-align:center;letter-spacing:.18em;font-size:clamp(16px,3vw,66px)}
+.st-all{top:8%;left:0;right:0;text-align:center;font-family:var(--display);font-weight:800;letter-spacing:.18em;font-size:clamp(16px,3vw,66px)}
 .ff-info{display:none!important;
   position:absolute;left:0;right:0;bottom:19%;z-index:2;pointer-events:none;
   display:flex;gap:10px;justify-content:center;width:max-content;margin:0 auto;
