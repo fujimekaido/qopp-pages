@@ -160,10 +160,9 @@ a.mi{cursor:pointer;text-decoration:none}
   letter-spacing:.5em;text-transform:uppercase;
   color:var(--ink);
   display:flex;align-items:center;gap:14px;
+  white-space:nowrap; /* хиро карт ниже, чем у SSD, подпись не должна ломаться на две колонки */
 }
 .side-label::after{content:"";width:1px;height:44px;background:var(--ink);opacity:.45}
-/* карты памяти: продукт начинается у левого края хиро, подпись стоит в пустом правом поле */
-.c-hero .side-label{left:auto;right:clamp(30px,9vw,170px);top:50%}
 @media (max-width:860px){
   .side-label{position:static;transform:none;writing-mode:horizontal-tb;letter-spacing:.22em;justify-content:center;padding:10px 0 8px;font-size:12px}
   .side-label::after{display:none}
