@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Внутренние SSD. QOPP</title>
-<meta name="description" content="Внутренние SSD QOPP: SATA 2.5 и M2, NVMe PCI-E 3.0 и PCI-E 4.0. Линейки Q500S, Q600S, Q600MS, Q2000MN, Q4000MN и Q7000MN.">
+<title>Карты памяти. QOPP</title>
+<meta name="description" content="Карты памяти microSD QOPP: линейки BASE, RUSH и RUSH+. Объёмы от 32 ГБ до 1 ТБ, гарантия до 10 лет.">
 <meta name="theme-color" content="#f6f6f7">
 <!-- DEPLOY STEP: заменить og:url и og:image на абсолютные адреса живого сайта перед публикацией -->
-<meta property="og:title" content="Внутренние SSD. QOPP">
-<meta property="og:description" content="SATA, PCI-E 3.0 и PCI-E 4.0: вся линейка внутренних накопителей QOPP">
-<meta property="og:url" content="/ssd.html">
-<meta property="og:image" content="/assets/ssd-hero.png">
+<meta property="og:title" content="Карты памяти. QOPP">
+<meta property="og:description" content="BASE, RUSH и RUSH+: вся линейка карт памяти microSD QOPP">
+<meta property="og:url" content="/microsd.html">
+<meta property="og:image" content="/assets/microsd-hero.png">
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="%23101216"/><text x="32" y="44" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="%23e3a94f" text-anchor="middle">Q</text></svg>'>
 <link rel="preload" href="assets/fonts/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
@@ -162,12 +162,14 @@ a.mi{cursor:pointer;text-decoration:none}
   display:flex;align-items:center;gap:14px;
 }
 .side-label::after{content:"";width:1px;height:44px;background:var(--ink);opacity:.45}
+/* карты памяти: продукт начинается у левого края хиро, подпись стоит в пустом правом поле */
+.c-hero .side-label{left:auto;right:clamp(30px,9vw,170px);top:50%}
 @media (max-width:860px){
   .side-label{position:static;transform:none;writing-mode:horizontal-tb;letter-spacing:.22em;justify-content:center;padding:10px 0 8px;font-size:12px}
   .side-label::after{display:none}
 }
 
-/* ============ hero: полоса во всю ширину, встык с SATA ============ */
+/* ============ hero: полоса во всю ширину, встык с BASE ============ */
 .c-hero{
   position:relative;z-index:1;
   padding:84px 0 0;
@@ -196,9 +198,9 @@ a.mi{cursor:pointer;text-decoration:none}
   font-family:var(--display);font-weight:800;color:var(--ink);
   letter-spacing:.26em;line-height:1;font-size:clamp(15px,2.7vw,60px);
 }
-.st-sata{top:12%;right:4%}
-.st-n3{top:32%;left:4.2%}
-.st-n4{top:28%;left:4.2%}
+.st-base{top:50%;left:8.8%;transform:translateY(-50%);color:#454545}
+.st-rush{top:50%;left:8.8%;transform:translateY(-50%);color:#fd0905}
+.st-rushp{top:48%;right:13.5%;transform:translateY(-50%);color:#5915d0}
 .st-all{top:8%;left:0;right:0;text-align:center;letter-spacing:.18em;font-size:clamp(16px,3vw,66px)}
 .ff-info{display:none!important;
   position:absolute;left:0;right:0;bottom:19%;z-index:2;pointer-events:none;
@@ -361,9 +363,9 @@ a.fl:hover{color:var(--ink)}
   </button>
 </nav>
 <div class="cat-drop" id="cat-drop" aria-label="Категории каталога">
-  <a class="cd-item current" href="ssd.html" aria-current="page">Внутренние SSD</a>
+  <a class="cd-item" href="ssd.html">Внутренние SSD</a>
   <a class="cd-item" href="404.html">Оперативная память</a>
-  <a class="cd-item" href="microsd.html">Карты памяти</a>
+  <a class="cd-item current" href="microsd.html" aria-current="page">Карты памяти</a>
   <a class="cd-item" href="404.html">Флеш-накопители</a>
   <a class="cd-item" href="404.html">Ноутбуки</a>
 </div>
@@ -378,9 +380,9 @@ a.fl:hover{color:var(--ink)}
 <div class="m-menu" id="m-menu">
   <a class="mi" id="mm-catalog">Каталог</a>
   <div class="mm-sub" hidden>
-    <a class="mm-si" href="ssd.html" aria-current="page">Внутренние SSD</a>
+    <a class="mm-si" href="ssd.html">Внутренние SSD</a>
     <a class="mm-si" href="404.html">Оперативная память</a>
-    <a class="mm-si" href="microsd.html">Карты памяти</a>
+    <a class="mm-si" href="microsd.html" aria-current="page">Карты памяти</a>
     <a class="mm-si" href="404.html">Флеш-накопители</a>
     <a class="mm-si" href="404.html">Ноутбуки</a>
   </div>
@@ -395,37 +397,22 @@ a.fl:hover{color:var(--ink)}
 </div>
 
 <header class="c-hero reveal" id="top">
-  <h1 class="side-label part">Внутренние SSD</h1>
-  <figure class="shot part" aria-label="Внутренние SSD QOPP">
-    <img src="assets/ssd-hero.png" alt="Внутренние SSD QOPP: накопитель 2.5 и модуль M2" width="2000" height="752">
+  <h1 class="side-label part">Карты памяти</h1>
+  <figure class="shot part" aria-label="Карты памяти QOPP">
+    <img src="assets/microsd-hero.png" alt="Карты памяти QOPP: microSD BASE, RUSH+ и RUSH с адаптером SD" width="2000" height="582">
   </figure>
 </header>
 
 <main id="main" tabindex="-1">
   <div class="strips">
 
-    <!-- SATA: Q500S, Q600S, Q600MS -->
-    <section class="strip lift reveal" id="sata">
-      <h2 class="sr">SATA: модели Q500S, Q600S и Q600MS</h2>
-      <a class="strip-link part" href="ssd-sata.html" aria-label="SSD SATA: подробнее">
-        <img src="assets/ssd-sata.jpg" alt="SSD QOPP SATA: накопитель 2.5 и модуль M2 Q600MS" width="2400" height="656">
-      </a>
-      <span class="strip-title st-sata" aria-hidden="true">SATA</span>
-          <div class="strip-acts part">
-        <a class="pbtn" href="ssd-sata.html">Узнать больше
-          <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a class="pbtn pbtn-blue" href="ssd-sata.html">Купить</a>
-      </div>
-    </section>
-
-    <!-- PCI-E 3.0: Q2000MN -->
-    <section class="strip reveal" id="nvme3">
-      <h2 class="sr">PCI-E 3.0: модель Q2000MN</h2>
+    <!-- BASE: Q80SD -->
+    <section class="strip reveal" id="base">
+      <h2 class="sr">BASE, модель Q80SD: объёмы 32, 64 и 128 ГБ</h2>
       <span class="strip-link part">
-        <img src="assets/ssd-nvme3.jpg" alt="QOPP Q2000MN, SSD M2 NVMe PCI-E 3.0" width="2400" height="810">
+        <img src="assets/microsd-base.jpg" alt="Карта microSD QOPP BASE 128 ГБ в лотке смартфона" width="2400" height="655">
       </span>
-      <span class="strip-title st-n3" aria-hidden="true">PCI-E 3.0</span>
+      <span class="strip-title st-base" aria-hidden="true">BASE</span>
       <div class="strip-acts part">
         <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -434,13 +421,28 @@ a.fl:hover{color:var(--ink)}
       </div>
     </section>
 
-    <!-- PCI-E 4.0: Q4000MN, Q7000MN -->
-    <section class="strip reveal" id="nvme4">
-      <h2 class="sr">PCI-E 4.0: модели Q4000MN и Q7000MN</h2>
+    <!-- RUSH -->
+    <section class="strip reveal" id="rush">
+      <h2 class="sr">RUSH: объёмы 32, 64, 128 и 256 ГБ</h2>
       <span class="strip-link part">
-        <img src="assets/ssd-nvme4.jpg" alt="QOPP Q7000MN, SSD M2 NVMe PCI-E 4.0" width="2400" height="656">
+        <img src="assets/microsd-rush.jpg" alt="Карта microSD QOPP RUSH 256 ГБ, A1 V30 U3, на крышке ноутбука" width="2400" height="655">
       </span>
-      <span class="strip-title st-n4" aria-hidden="true">PCI-E 4.0</span>
+      <span class="strip-title st-rush" aria-hidden="true">RUSH</span>
+      <div class="strip-acts part">
+        <span class="pbtn" aria-disabled="true">Узнать больше
+          <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="pbtn pbtn-blue" aria-disabled="true">Купить</span>
+      </div>
+    </section>
+
+    <!-- RUSH+ -->
+    <section class="strip reveal" id="rushplus">
+      <h2 class="sr">RUSH+: объёмы 128, 256, 512 ГБ и 1 ТБ</h2>
+      <span class="strip-link part">
+        <img src="assets/microsd-rushplus.jpg" alt="Карта microSD QOPP RUSH+ 512 ГБ, A2 V30 U3, и адаптер SD" width="2400" height="655">
+      </span>
+      <span class="strip-title st-rushp" aria-hidden="true">RUSH+</span>
       <div class="strip-acts part">
         <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -451,9 +453,9 @@ a.fl:hover{color:var(--ink)}
 
     <!-- все модели -->
     <section class="strip reveal" id="all">
-      <h2 class="sr">Все модели внутренних SSD</h2>
+      <h2 class="sr">Все модели карт памяти</h2>
       <span class="strip-link part">
-        <img src="assets/ssd-all.jpg" alt="Линейка внутренних SSD QOPP" width="2400" height="656">
+        <img src="assets/microsd-all.jpg" alt="Линейка карт памяти QOPP: RUSH, RUSH+ и BASE" width="2400" height="656">
       </span>
       <span class="strip-title st-all" aria-hidden="true">Все модели</span>
       <div class="strip-acts part">
@@ -486,8 +488,8 @@ a.fl:hover{color:var(--ink)}
       <span class="fl">Ноутбуки</span>
       <span class="fl">Оперативная память</span>
       <span class="fl">Внешние SSD</span>
-      <a class="fl current" href="ssd.html" aria-current="page">Внутренние SSD</a>
-      <a class="fl" href="microsd.html">Карты памяти</a>
+      <a class="fl" href="ssd.html">Внутренние SSD</a>
+      <a class="fl current" href="microsd.html" aria-current="page">Карты памяти</a>
       <span class="fl">Флеш-накопители</span>
     </div>
     <div class="foot-col">
