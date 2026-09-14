@@ -127,6 +127,16 @@ nav.logo-hide .logo{opacity:0;transform:translateY(-10px);pointer-events:none}
 .cd-item::after{content:"\203A";font-size:22px;line-height:1;color:rgba(20,22,28,.55)}
 .cd-item:hover{background:#f4f4f6}
 .cd-item+.cd-item{border-top:1px solid rgba(20,22,28,.06)}
+/* подпункты памяти: раскрываются при наведении на «Оперативная память» и открыты в разделе памяти */
+.cd-sub{max-height:0;overflow:hidden;transition:max-height .35s var(--ease)}
+.cd-item:hover+.cd-sub,.cd-sub:hover,.cd-item.current+.cd-sub{max-height:140px}
+.cd-sub+.cd-item{border-top:1px solid rgba(20,22,28,.06)}
+.cd-si{display:flex;justify-content:space-between;align-items:center;padding:11px 22px 11px 40px;font-size:15px;font-weight:500;color:#3c4046;text-decoration:none;border-radius:14px;transition:background .25s var(--ease),color .25s var(--ease)}
+.cd-si:last-child{margin-bottom:6px}
+.cd-si::after{content:"\203A";font-size:20px;line-height:1;color:rgba(20,22,28,.4)}
+.cd-si:hover{background:#f4f4f6;color:#14161c}
+.cd-si.current{color:#b8863b}
+.mm-si2{padding-left:58px;font-size:14.5px;color:#5b6068}
 .cd-item.current{color:var(--accent-deep)}
 @media (min-width:721px) and (hover:hover){.cat-drop{display:flex}}
 .mm-sub{background:#f6f6f7}
@@ -384,6 +394,10 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 <div class="cat-drop" id="cat-drop" aria-label="Категории каталога">
   <a class="cd-item current" href="ssd.html" aria-current="page">Внутренние SSD</a>
   <a class="cd-item" href="ram.html">Оперативная память</a>
+  <div class="cd-sub">
+    <a class="cd-si" href="udimm.html">Для персонального компьютера</a>
+    <a class="cd-si" href="sodimm.html">Для ноутбука</a>
+  </div>
   <a class="cd-item" href="microsd.html">Карты памяти</a>
   <a class="cd-item" href="usb.html">Флеш-накопители</a>
   <a class="cd-item" href="notebooks.html">Ноутбуки</a>
@@ -401,6 +415,8 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="mm-sub" hidden>
     <a class="mm-si" href="ssd.html" aria-current="page">Внутренние SSD</a>
     <a class="mm-si" href="ram.html">Оперативная память</a>
+    <a class="mm-si mm-si2" href="udimm.html">Для персонального компьютера</a>
+    <a class="mm-si mm-si2" href="sodimm.html">Для ноутбука</a>
     <a class="mm-si" href="microsd.html">Карты памяти</a>
     <a class="mm-si" href="usb.html">Флеш-накопители</a>
     <a class="mm-si" href="notebooks.html">Ноутбуки</a>
