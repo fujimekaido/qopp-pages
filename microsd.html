@@ -381,7 +381,7 @@ a.fl:hover{color:var(--ink)}
   <a class="cd-item" href="ram.html">Оперативная память</a>
   <a class="cd-item current" href="microsd.html" aria-current="page">Карты памяти</a>
   <a class="cd-item" href="usb.html">Флеш-накопители</a>
-  <a class="cd-item" href="404.html">Ноутбуки</a>
+  <a class="cd-item" href="notebooks.html">Ноутбуки</a>
 </div>
 <div class="cat-drop" id="contact-drop" aria-label="Контакты">
   <a class="cd-item" href="404.html">Поддержка</a>
@@ -398,7 +398,7 @@ a.fl:hover{color:var(--ink)}
     <a class="mm-si" href="ram.html">Оперативная память</a>
     <a class="mm-si" href="microsd.html" aria-current="page">Карты памяти</a>
     <a class="mm-si" href="usb.html">Флеш-накопители</a>
-    <a class="mm-si" href="404.html">Ноутбуки</a>
+    <a class="mm-si" href="notebooks.html">Ноутбуки</a>
   </div>
   <a class="mi" href="warranty.html">Гарантия</a>
   <a class="mi" id="mm-contacts">Контакты</a>
@@ -499,7 +499,7 @@ a.fl:hover{color:var(--ink)}
     </div>
     <div class="foot-col">
       <h3>Продукция</h3>
-      <span class="fl">Ноутбуки</span>
+      <a class="fl" href="notebooks.html">Ноутбуки</a>
       <a class="fl" href="ram.html">Оперативная память</a>
       <span class="fl">Внешние SSD</span>
       <a class="fl" href="ssd.html">Внутренние SSD</a>
@@ -546,7 +546,7 @@ addEventListener('scroll',()=>{
 /* подпись хиро гаснет, когда её верх уходит под шапку, и возвращается при обратной прокрутке */
 {
   const lab=document.querySelector('.side-label');
-  if(lab){
+  if(lab&&matchMedia('(min-width:861px)').matches){
     const check=()=>{lab.classList.toggle('under',lab.getBoundingClientRect().top<navEl.offsetHeight)};
     addEventListener('scroll',check,{passive:true});check();
   }
