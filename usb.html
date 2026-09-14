@@ -14,6 +14,7 @@
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="%23101216"/><text x="32" y="44" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="%23e3a94f" text-anchor="middle">Q</text></svg>'>
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="assets/usb-hero.webp" type="image/webp" fetchpriority="high">
 <style>
 /* фирменный Montserrat, свой хостинг: переменный шрифт Google, все веса 100-900, прямой и курсив */
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-var-latin.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
@@ -44,6 +45,8 @@
   --display-lat:'Michroma','Montserrat',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
+/* alt-текст не мелькает, пока картинка грузится; для дикторов и поиска он остаётся */
+img[alt]{color:transparent}
 html,body{overflow-x:hidden;overflow-x:clip}
 html{scroll-behavior:smooth}
 body{
@@ -433,7 +436,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 <header class="c-hero reveal" id="top">
   <h1 class="side-label part">Флеш-накопители</h1>
   <figure class="shot part" aria-label="Флеш-накопители QOPP">
-    <img src="assets/usb-hero.png" alt="Флеш-накопители QOPP: металлические USB-A с кольцом и двусторонний с Type-C" width="2000" height="752">
+    <picture><source srcset="assets/usb-hero.webp" type="image/webp"><img src="assets/usb-hero.png" alt="Флеш-накопители QOPP: металлические USB-A с кольцом и двусторонний с Type-C" width="2000" height="752" fetchpriority="high" decoding="async"></picture>
   </figure>
 </header>
 
@@ -444,7 +447,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     <section class="strip reveal" id="usb31">
       <h2 class="sr">USB 3.2: флеш-накопители с разъёмом USB-A</h2>
       <span class="strip-link part">
-        <img src="assets/usb-31.jpg" alt="Металлический флеш-накопитель QOPP с кольцом рядом с портами ноутбука" width="2400" height="655">
+        <picture><source srcset="assets/usb-31.webp" type="image/webp"><img src="assets/usb-31.jpg" alt="Металлический флеш-накопитель QOPP с кольцом рядом с портами ноутбука" width="2400" height="655" decoding="async"></picture>
       </span>
       <span class="strip-title st-u1" aria-hidden="true">USB 3.2</span>
       <div class="strip-acts part">
@@ -459,7 +462,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     <section class="strip reveal" id="usb32c">
       <h2 class="sr">USB 3.2 и Type-C: двусторонние флеш-накопители</h2>
       <span class="strip-link part">
-        <img src="assets/usb-32c.jpg" alt="Двусторонний флеш-накопитель QOPP с разъёмами USB-A и Type-C" width="2400" height="655">
+        <picture><source srcset="assets/usb-32c.webp" type="image/webp"><img src="assets/usb-32c.jpg" alt="Двусторонний флеш-накопитель QOPP с разъёмами USB-A и Type-C" width="2400" height="655" loading="lazy" decoding="async"></picture>
       </span>
       <span class="strip-title st-u2" aria-hidden="true">USB 3.2 +<br>TYPE-C</span>
       <div class="strip-acts part">
@@ -474,7 +477,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     <section class="strip reveal" id="all">
       <h2 class="sr">Все модели флеш-накопителей</h2>
       <span class="strip-link part">
-        <img src="assets/usb-all.jpg" alt="Линейка флеш-накопителей QOPP" width="2400" height="655">
+        <picture><source srcset="assets/usb-all.webp" type="image/webp"><img src="assets/usb-all.jpg" alt="Линейка флеш-накопителей QOPP" width="2400" height="655" loading="lazy" decoding="async"></picture>
       </span>
       <span class="strip-title st-all" aria-hidden="true">Все модели</span>
       <div class="strip-acts part">

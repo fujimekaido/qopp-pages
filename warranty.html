@@ -40,6 +40,8 @@
   --mono:'Montserrat',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
+/* alt-текст не мелькает, пока картинка грузится; для дикторов и поиска он остаётся */
+img[alt]{color:transparent}
 html,body{overflow-x:hidden;overflow-x:clip}
 html{scroll-behavior:smooth}
 body{
@@ -689,7 +691,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 
 <!-- тёмная вставка с SSD -->
 <section class="dark-strip reveal" aria-label="Гарантия как обещание">
-  <img class="ds-photo" src="assets/ram-warranty.jpg" alt="" width="2000" height="804" loading="lazy" aria-hidden="true">
+  <picture><source srcset="assets/ram-warranty.webp" type="image/webp"><img class="ds-photo" src="assets/ram-warranty.jpg" alt="" width="2000" height="804" loading="lazy" aria-hidden="true" decoding="async"></picture>
   <div class="inner">
     <p class="kicker part">Наше обещание</p>
     <h2 class="part">Гарантия: наше обещание, которое мы всегда выполняем</h2>
@@ -830,7 +832,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       </details>
       </div>
       <div class="ssd-photo" aria-hidden="true">
-        <img src="assets/ssd-warranty.jpg" alt="" width="1600" height="953" loading="lazy">
+        <picture><source srcset="assets/ssd-warranty.webp" type="image/webp"><img src="assets/ssd-warranty.jpg" alt="" width="1600" height="953" loading="lazy" loading="lazy" decoding="async"></picture>
       </div>
     </div>
     <p class="tbw-note part"><b>Что такое TBW?</b> Это сколько терабайт можно записать на диск за его жизнь (Terabytes Written). Гарантия на SSD действует до конца срока или до достижения лимита записи, смотря что наступит раньше.</p>
@@ -844,7 +846,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     </div>
     <div class="ram-hero panel-dark part">
       <div class="ram-photo" aria-hidden="true">
-        <img src="assets/ram-epic.jpg" alt="" width="1500" height="1020" loading="lazy">
+        <picture><source srcset="assets/ram-epic.webp" type="image/webp"><img src="assets/ram-epic.jpg" alt="" width="1500" height="1020" loading="lazy" loading="lazy" decoding="async"></picture>
       </div>
       <h3>На каждый модуль памяти QOPP: <em>бессрочная гарантия</em>.</h3>
       <p class="lede">Без сроков и без лимитов. DDR3, DDR4 или DDR5, один модуль или комплект: условие одно для всех.</p>
@@ -894,7 +896,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     </div>
     <div class="duo">
       <div class="duo-card panel-dark part">
-        <div class="duo-photo" aria-hidden="true"><img src="assets/warranty-sd.jpg" alt="" width="1100" height="1466" loading="lazy"></div>
+        <div class="duo-photo" aria-hidden="true"><picture><source srcset="assets/warranty-sd.webp" type="image/webp"><img src="assets/warranty-sd.jpg" alt="" width="1100" height="1466" loading="lazy" loading="lazy" decoding="async"></picture></div>
         <div class="cat">
           <h3>Карты microSD</h3>
           <p class="term">10 лет</p>
@@ -909,7 +911,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
         </table>
       </div>
       <div class="duo-card panel-dark part">
-        <div class="duo-photo" aria-hidden="true"><img src="assets/warranty-usb.jpg" alt="" width="1100" height="1650" loading="lazy"></div>
+        <div class="duo-photo" aria-hidden="true"><picture><source srcset="assets/warranty-usb.webp" type="image/webp"><img src="assets/warranty-usb.jpg" alt="" width="1100" height="1650" loading="lazy" loading="lazy" decoding="async"></picture></div>
         <div class="cat">
           <h3>USB-накопители</h3>
           <p class="term">5 лет</p>
@@ -932,7 +934,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       <h2 class="part">Разбираем ноутбук по частям</h2>
     </div>
     <div class="nb panel-dark part">
-      <div class="nb-photo" aria-hidden="true"><img src="assets/warranty-nb.jpg" alt="" width="1600" height="892" loading="lazy"></div>
+      <div class="nb-photo" aria-hidden="true"><picture><source srcset="assets/warranty-nb.webp" type="image/webp"><img src="assets/warranty-nb.jpg" alt="" width="1600" height="892" loading="lazy" loading="lazy" decoding="async"></picture></div>
       <div>
         <h3>QBOOK15</h3>
         <p class="conf">Все конфигурации: процессоры N100 и N5095, накопители от 128 ГБ до 2 ТБ.</p>

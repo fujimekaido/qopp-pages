@@ -14,6 +14,7 @@
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="%23101216"/><text x="32" y="44" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="%23e3a94f" text-anchor="middle">Q</text></svg>'>
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="assets/sata-hero.webp" type="image/webp" fetchpriority="high">
 <style>
 /* фирменный Montserrat, свой хостинг: переменный шрифт Google, все веса 100-900, прямой и курсив */
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-var-latin.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
@@ -41,6 +42,8 @@
   --mono:'Montserrat',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
+/* alt-текст не мелькает, пока картинка грузится; для дикторов и поиска он остаётся */
+img[alt]{color:transparent}
 html,body{overflow-x:hidden;overflow-x:clip}
 html{scroll-behavior:smooth}
 body{
@@ -564,7 +567,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 <header class="conf reveal" id="top">
   <div class="gallery part">
     <figure class="g-main">
-      <img id="conf-img" src="assets/sata-conf-25.jpg" alt="QOPP Q600S, внутренний SSD 2.5 SATA" width="1400" height="676">
+      <picture><source srcset="assets/sata-conf-25.webp" type="image/webp"><img id="conf-img" src="assets/sata-conf-25.jpg" alt="QOPP Q600S, внутренний SSD 2.5 SATA" width="1400" height="676" decoding="async"></picture>
     </figure>
     <div class="g-thumbs" id="g-thumbs" aria-label="Фотографии продукта"></div>
   </div>
@@ -616,7 +619,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <!-- кино-обзор -->
   <section class="film" id="overview" aria-label="Обзор">
     <div class="strip">
-      <img src="assets/sata-hero.jpg" alt="QOPP Q600S на тёмном столе" width="2200" height="952" loading="lazy">
+      <picture><source srcset="assets/sata-hero.webp" type="image/webp"><img src="assets/sata-hero.jpg" alt="QOPP Q600S на тёмном столе" width="2200" height="952" loading="lazy" fetchpriority="high" decoding="async"></picture>
       <div class="ovl ov-h" aria-hidden="true">
         <span class="t-kick">Внутренний SSD</span>
         <span class="t-sub">2.5" SATA III SSD</span>
@@ -624,7 +627,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       </div>
     </div>
     <div class="strip">
-      <img src="assets/sata-speed.jpg" alt="Скорость чтения 515 МБ/с, записи 440 МБ/с: загрузка системы в 3 раза быстрее HDD" width="2200" height="1028" loading="lazy">
+      <picture><source srcset="assets/sata-speed.webp" type="image/webp"><img src="assets/sata-speed.jpg" alt="Скорость чтения 515 МБ/с, записи 440 МБ/с: загрузка системы в 3 раза быстрее HDD" width="2200" height="1028" loading="lazy" loading="lazy" decoding="async"></picture>
       <span class="ovl ov-s-title t-big" aria-hidden="true">В 3 раза быстрее загрузка<br>и работа системы</span>
       <div class="ovl ov-s-nums" aria-hidden="true">
         <span><span class="t-num">515<small>МБ/С</small></span><br><span class="t-cap">скорость чтения</span></span>
@@ -637,7 +640,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       </div>
     </div>
     <div class="strip">
-      <img src="assets/sata-endure.jpg" alt="Время наработки на отказ 2 000 000 часов, поддержка циклической записи видео" width="2200" height="1070" loading="lazy">
+      <picture><source srcset="assets/sata-endure.webp" type="image/webp"><img src="assets/sata-endure.jpg" alt="Время наработки на отказ 2 000 000 часов, поддержка циклической записи видео" width="2200" height="1070" loading="lazy" loading="lazy" decoding="async"></picture>
       <span class="ovl ov-e-tag ov-e-tag1" aria-hidden="true">&#9656; Время наработки на отказ</span>
       <span class="ovl ov-e-tag ov-e-tag2" aria-hidden="true">&#9662; Ресурс TBW</span>
       <div class="ovl ov-e-r" aria-hidden="true">
@@ -647,21 +650,21 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       </div>
     </div>
     <div class="strip">
-      <img src="assets/sata-compat.jpg" alt="Совместимость с большинством ноутбуков и ПК" width="2200" height="1070" loading="lazy">
+      <picture><source srcset="assets/sata-compat.webp" type="image/webp"><img src="assets/sata-compat.jpg" alt="Совместимость с большинством ноутбуков и ПК" width="2200" height="1070" loading="lazy" loading="lazy" decoding="async"></picture>
       <div class="ovl ov-c" aria-hidden="true">
         <span class="t-big">Совместимость</span>
         <p class="t-line">С большинством ноутбуков и ПК<br>Дольше работа от батареи у ноутбуков<br>и портативных устройств</p>
       </div>
     </div>
     <div class="strip">
-      <img src="assets/sata-quiet.jpg" alt="Бесшумный, низкая температура, устойчивость к вибрациям и ударам" width="2200" height="1188" loading="lazy">
+      <picture><source srcset="assets/sata-quiet.webp" type="image/webp"><img src="assets/sata-quiet.jpg" alt="Бесшумный, низкая температура, устойчивость к вибрациям и ударам" width="2200" height="1188" loading="lazy" loading="lazy" decoding="async"></picture>
       <div class="ovl ov-q" aria-hidden="true">
         <span class="t-big">Тихий и выносливый</span>
         <p class="t-line">Бесшумный<br>Низкая температура<br>Устойчивость к вибрациям и ударам</p>
       </div>
     </div>
     <div class="strip">
-      <img src="assets/sata-quality.jpg" alt="Гарантия QOPP 5 лет" width="2200" height="1070" loading="lazy">
+      <picture><source srcset="assets/sata-quality.webp" type="image/webp"><img src="assets/sata-quality.jpg" alt="Гарантия QOPP 5 лет" width="2200" height="1070" loading="lazy" loading="lazy" decoding="async"></picture>
     </div>
   </section>
 

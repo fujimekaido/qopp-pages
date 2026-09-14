@@ -41,6 +41,8 @@
   --mono:'Montserrat',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
+/* alt-текст не мелькает, пока картинка грузится; для дикторов и поиска он остаётся */
+img[alt]{color:transparent}
 html,body{overflow-x:hidden;overflow-x:clip}
 html{scroll-behavior:smooth}
 body{
@@ -597,7 +599,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 
   <!-- тёмная полоса -->
   <section class="dark-strip reveal" aria-label="Качество видно до включения">
-    <img class="ds-photo" src="assets/about-dark.jpg" alt="" width="2000" height="1152" loading="lazy" aria-hidden="true">
+    <picture><source srcset="assets/about-dark.webp" type="image/webp"><img class="ds-photo" src="assets/about-dark.jpg" alt="" width="2000" height="1152" loading="lazy" aria-hidden="true" decoding="async"></picture>
     <div class="inner">
       <p class="kicker part">Красивое тоже качество</p>
       <h2 class="part">Качество должно быть видно ещё до того, как товар включили</h2>
