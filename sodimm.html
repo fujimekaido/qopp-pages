@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Оперативная память. QOPP</title>
-<meta name="description" content="Оперативная память QOPP: модули UDIMM для персонального компьютера и SO-DIMM для ноутбука, DDR3, DDR4 и DDR5. Бессрочная гарантия.">
+<title>Память SO-DIMM для ноутбука. QOPP</title>
+<meta name="description" content="Оперативная память QOPP SO-DIMM для ноутбука: DDR3, DDR4 и DDR5. Бессрочная гарантия.">
 <meta name="theme-color" content="#f6f6f7">
 <!-- DEPLOY STEP: заменить og:url и og:image на абсолютные адреса живого сайта перед публикацией -->
-<meta property="og:title" content="Оперативная память. QOPP">
-<meta property="og:description" content="UDIMM для компьютера и SO-DIMM для ноутбука: оперативная память QOPP">
-<meta property="og:url" content="/ram.html">
-<meta property="og:image" content="/assets/ram-hero.png">
+<meta property="og:title" content="Память SO-DIMM для ноутбука. QOPP">
+<meta property="og:description" content="DDR3, DDR4 и DDR5: модули SO-DIMM QOPP для ноутбука">
+<meta property="og:url" content="/sodimm.html">
+<meta property="og:image" content="/assets/sodimm-hero.jpg">
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="%23101216"/><text x="32" y="44" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="%23e3a94f" text-anchor="middle">Q</text></svg>'>
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -178,13 +178,15 @@ a.mi{cursor:pointer;text-decoration:none}
   .reveal .side-label.part,.reveal.in .side-label.part{transform:none}
 }
 
-/* ============ hero: полоса во всю ширину, встык с UDIMM ============ */
+/* ============ hero: полоса во всю ширину, встык с DDR3 ============ */
 .c-hero{
   position:relative;z-index:1;
   padding:84px 0 0;
   background:#fbfbfc;
 }
 .c-hero .shot{width:100%}
+/* кадр хиро с белым непрозрачным фоном: подкладка той же белизны, чтобы кадр шёл во всю ширину без плашки */
+.c-hero{background:#fff}
 
 /* ============ изображения ============ */
 .shot{position:relative;display:block}
@@ -204,20 +206,12 @@ a.mi{cursor:pointer;text-decoration:none}
 /* заголовки поверх чистых фото-полос, в стиле макета */
 .strip-title{
   position:absolute;z-index:2;pointer-events:none;
-  font-family:var(--display);font-weight:800;color:var(--ink);
-  letter-spacing:.26em;line-height:1;font-size:clamp(15px,2.7vw,60px);
+  font-family:var(--display-lat);font-weight:400;color:var(--ink);
+  letter-spacing:.2em;line-height:1;font-size:clamp(15px,3.2vw,72px);
 }
-/* подпись выбора: строки капсом и крупное имя форм-фактора, как в макете */
-.strip-cap{
-  position:absolute;z-index:2;pointer-events:none;
-  display:flex;flex-direction:column;align-items:center;gap:.65em;
-  color:var(--ink);text-transform:uppercase;text-align:center;
-  font-size:clamp(7px,1.8vw,40px);line-height:1;
-}
-.cap-line{font-family:var(--body);font-weight:500;letter-spacing:.22em}
-.cap-big{font-family:var(--display-lat);font-weight:400;font-style:italic;font-size:1.3em;letter-spacing:.12em;margin-top:.1em}
-.cap-udimm{top:37%;left:66.6%;right:5.7%}
-.cap-sodimm{top:42%;left:75.5%;right:5.6%}
+.st-ddr{top:7.5%;left:0;right:0;text-align:center}
+.st-ddr .ff{font-size:.42em;letter-spacing:.2em;font-style:italic;vertical-align:top;margin-left:.4em}
+.st-all{top:8%;left:0;right:0;text-align:center;font-family:var(--display);font-weight:800;letter-spacing:.18em;font-size:clamp(16px,3vw,66px)}
 .ff-info{display:none!important;
   position:absolute;left:0;right:0;bottom:19%;z-index:2;pointer-events:none;
   display:flex;gap:10px;justify-content:center;width:max-content;margin:0 auto;
@@ -380,7 +374,7 @@ a.fl:hover{color:var(--ink)}
 </nav>
 <div class="cat-drop" id="cat-drop" aria-label="Категории каталога">
   <a class="cd-item" href="ssd.html">Внутренние SSD</a>
-  <a class="cd-item current" href="ram.html" aria-current="page">Оперативная память</a>
+  <a class="cd-item current" href="ram.html">Оперативная память</a>
   <a class="cd-item" href="microsd.html">Карты памяти</a>
   <a class="cd-item" href="usb.html">Флеш-накопители</a>
   <a class="cd-item" href="404.html">Ноутбуки</a>
@@ -397,7 +391,7 @@ a.fl:hover{color:var(--ink)}
   <a class="mi" id="mm-catalog">Каталог</a>
   <div class="mm-sub" hidden>
     <a class="mm-si" href="ssd.html">Внутренние SSD</a>
-    <a class="mm-si" href="ram.html" aria-current="page">Оперативная память</a>
+    <a class="mm-si" href="ram.html">Оперативная память</a>
     <a class="mm-si" href="microsd.html">Карты памяти</a>
     <a class="mm-si" href="usb.html">Флеш-накопители</a>
     <a class="mm-si" href="404.html">Ноутбуки</a>
@@ -413,47 +407,72 @@ a.fl:hover{color:var(--ink)}
 </div>
 
 <header class="c-hero reveal" id="top">
-  <h1 class="side-label part">Оперативная память</h1>
-  <figure class="shot part" aria-label="Оперативная память QOPP">
-    <img src="assets/ram-hero.png" alt="Оперативная память QOPP: два модуля UDIMM с радиаторами и модуль SO-DIMM QS556C4632 DDR5 32 ГБ" width="2000" height="752">
+  <h1 class="side-label part">Для ноутбука</h1>
+  <figure class="shot part" aria-label="Память SO-DIMM QOPP">
+    <img src="assets/sodimm-hero.jpg" alt="Оперативная память QOPP SO-DIMM: модули ST-S R4 DDR4 16 и 8 ГБ и ST-S R3 DDR3 4 ГБ" width="2000" height="810">
   </figure>
 </header>
 
 <main id="main" tabindex="-1">
   <div class="strips">
 
-    <!-- UDIMM: для персонального компьютера. Страница раздела в работе, пока 404 -->
-    <section class="strip reveal" id="udimm">
-      <h2 class="sr">UDIMM: модули для персонального компьютера, DDR3, DDR4 и DDR5</h2>
-      <a class="strip-link part" href="udimm.html" aria-label="UDIMM: подробнее">
-        <img src="assets/ram-udimm.jpg" alt="Модуль оперативной памяти QOPP DDR4 UDIMM с радиатором на фоне белого системного блока" width="2400" height="655">
-      </a>
-      <div class="strip-cap cap-udimm" aria-hidden="true">
-        <span class="cap-line">Для персонального</span>
-        <span class="cap-line">компьютера</span>
-        <span class="cap-big">UDIMM</span>
-      </div>
+    <!-- DDR3 -->
+    <section class="strip reveal" id="ddr3">
+      <h2 class="sr">DDR3 SO-DIMM: модули ST-S R3</h2>
+      <span class="strip-link part">
+        <img src="assets/sodimm-ddr3.jpg" alt="Модуль оперативной памяти QOPP ST-S R3 DDR3 SO-DIMM 8 ГБ" width="2400" height="655">
+      </span>
+      <span class="strip-title st-ddr" aria-hidden="true">DDR3<span class="ff">SO-DIMM</span></span>
       <div class="strip-acts part">
-        <a class="pbtn" href="udimm.html">Узнать больше
+        <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        </span>
+        <span class="pbtn pbtn-blue" aria-disabled="true">Купить</span>
       </div>
     </section>
 
-    <!-- SO-DIMM: для ноутбука. Страница раздела в работе, пока 404 -->
-    <section class="strip reveal" id="sodimm">
-      <h2 class="sr">SO-DIMM: модули для ноутбука, DDR3, DDR4 и DDR5</h2>
-      <a class="strip-link part" href="sodimm.html" aria-label="SO-DIMM: подробнее">
-        <img src="assets/ram-sodimm.jpg" alt="Модули оперативной памяти QOPP SO-DIMM: QS556C4632 DDR5 32 ГБ и ST-S R4 DDR4 8 ГБ" width="2400" height="655">
-      </a>
-      <div class="strip-cap cap-sodimm" aria-hidden="true">
-        <span class="cap-line">Для ноутбука</span>
-        <span class="cap-big">SO-DIMM</span>
-      </div>
+    <!-- DDR4 -->
+    <section class="strip reveal" id="ddr4">
+      <h2 class="sr">DDR4 SO-DIMM: модули ST-S R4</h2>
+      <span class="strip-link part">
+        <img src="assets/sodimm-ddr4.jpg" alt="Модуль оперативной памяти QOPP ST-S R4 DDR4 SO-DIMM 8 ГБ" width="2400" height="655">
+      </span>
+      <span class="strip-title st-ddr" aria-hidden="true">DDR4<span class="ff">SO-DIMM</span></span>
       <div class="strip-acts part">
-        <a class="pbtn" href="sodimm.html">Узнать больше
+        <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        </span>
+        <span class="pbtn pbtn-blue" aria-disabled="true">Купить</span>
+      </div>
+    </section>
+
+    <!-- DDR5 -->
+    <section class="strip reveal" id="ddr5">
+      <h2 class="sr">DDR5 SO-DIMM: модули QS556</h2>
+      <span class="strip-link part">
+        <img src="assets/sodimm-ddr5.jpg" alt="Модуль оперативной памяти QOPP QS556C4632 DDR5 SO-DIMM 32 ГБ" width="2400" height="655">
+      </span>
+      <span class="strip-title st-ddr" aria-hidden="true">DDR5<span class="ff">SO-DIMM</span></span>
+      <div class="strip-acts part">
+        <span class="pbtn" aria-disabled="true">Узнать больше
+          <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="pbtn pbtn-blue" aria-disabled="true">Купить</span>
+      </div>
+    </section>
+
+    <!-- все модели -->
+    <section class="strip reveal" id="all">
+      <h2 class="sr">Все модели памяти SO-DIMM</h2>
+      <span class="strip-link part">
+        <img src="assets/sodimm-all.jpg" alt="Модули оперативной памяти QOPP SO-DIMM: DDR3 и DDR4" width="2400" height="656">
+      </span>
+      <span class="strip-title st-all" aria-hidden="true">Все модели</span>
+      <div class="strip-acts part">
+        <span class="pbtn" aria-disabled="true">Узнать больше
+          <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="pbtn pbtn-blue" aria-disabled="true">Купить</span>
       </div>
     </section>
 
@@ -477,7 +496,7 @@ a.fl:hover{color:var(--ink)}
     <div class="foot-col">
       <h3>Продукция</h3>
       <span class="fl">Ноутбуки</span>
-      <a class="fl current" href="ram.html" aria-current="page">Оперативная память</a>
+      <a class="fl" href="ram.html">Оперативная память</a>
       <span class="fl">Внешние SSD</span>
       <a class="fl" href="ssd.html">Внутренние SSD</a>
       <a class="fl" href="microsd.html">Карты памяти</a>
