@@ -304,10 +304,6 @@ a.mi{cursor:pointer;text-decoration:none}
 .reveal.in .part:nth-child(4){transition-delay:.27s}
 .reveal.in .part:nth-child(5){transition-delay:.36s}
 .reveal.done .part,.reveal.done .part:nth-child(2),.reveal.done .part:nth-child(3),.reveal.done .part:nth-child(4),.reveal.done .part:nth-child(5){transition-delay:0s}
-/* вертикальная подпись хиро: reveal не должен снимать её поворот (читается снизу вверх, линия сверху) */
-.reveal .side-label.part{transform:translateY(calc(-50% + 22px)) rotate(180deg)}
-.reveal.in .side-label.part{transform:translateY(-50%) rotate(180deg)}
-@media (max-width:860px){.reveal .side-label.part,.reveal.in .side-label.part{transform:none}}
 
 /* ============ подвал, как на главной ============ */
 .site-footer{background:var(--canvas);color:var(--ink);position:relative;z-index:2;padding:clamp(40px,7vh,84px) clamp(20px,5vw,72px) 28px;border-top:1px solid var(--hairline)}

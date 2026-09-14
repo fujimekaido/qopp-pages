@@ -10,7 +10,7 @@
 <meta property="og:title" content="Память UDIMM для персонального компьютера. QOPP">
 <meta property="og:description" content="DDR3, DDR4 и DDR5: модули UDIMM QOPP для персонального компьютера">
 <meta property="og:url" content="/udimm.html">
-<meta property="og:image" content="/assets/udimm-hero.png">
+<meta property="og:image" content="/assets/udimm-hero-b.jpg">
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="%23101216"/><text x="32" y="44" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="%23e3a94f" text-anchor="middle">Q</text></svg>'>
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -168,6 +168,9 @@ a.mi{cursor:pointer;text-decoration:none}
   display:flex;align-items:center;gap:14px;
 }
 .side-label::after{content:"";width:1px;height:44px;background:var(--ink);opacity:.45}
+/* подпись в две колонки слева направо, читается сверху вниз, как на SSD; на средних экранах разрядка уже, чтобы уместиться в хиро */
+@media (min-width:861px){.c-hero .side-label{writing-mode:vertical-lr;line-height:1.7}}
+@media (min-width:861px) and (max-width:1100px){.side-label{letter-spacing:.26em}}
 @media (max-width:860px){
   .side-label{position:static;transform:none;writing-mode:horizontal-tb;letter-spacing:.22em;justify-content:center;padding:10px 0 8px;font-size:12px}
   .side-label::after{display:none}
@@ -180,6 +183,8 @@ a.mi{cursor:pointer;text-decoration:none}
   background:#fbfbfc;
 }
 .c-hero .shot{width:100%}
+/* кадр хиро с белым непрозрачным фоном: подкладка той же белизны, чтобы кадр шёл во всю ширину без плашки */
+.c-hero{background:#fff}
 
 /* ============ изображения ============ */
 .shot{position:relative;display:block}
@@ -303,10 +308,6 @@ a.mi{cursor:pointer;text-decoration:none}
 .reveal.in .part:nth-child(4){transition-delay:.27s}
 .reveal.in .part:nth-child(5){transition-delay:.36s}
 .reveal.done .part,.reveal.done .part:nth-child(2),.reveal.done .part:nth-child(3),.reveal.done .part:nth-child(4),.reveal.done .part:nth-child(5){transition-delay:0s}
-/* вертикальная подпись хиро: reveal не должен снимать её поворот (читается снизу вверх, линия сверху) */
-.reveal .side-label.part{transform:translateY(calc(-50% + 22px)) rotate(180deg)}
-.reveal.in .side-label.part{transform:translateY(-50%) rotate(180deg)}
-@media (max-width:860px){.reveal .side-label.part,.reveal.in .side-label.part{transform:none}}
 
 /* ============ подвал, как на главной ============ */
 .site-footer{background:var(--canvas);color:var(--ink);position:relative;z-index:2;padding:clamp(40px,7vh,84px) clamp(20px,5vw,72px) 28px;border-top:1px solid var(--hairline)}
@@ -406,7 +407,7 @@ a.fl:hover{color:var(--ink)}
 <header class="c-hero reveal" id="top">
   <h1 class="side-label part">Для персонального<br>компьютера</h1>
   <figure class="shot part" aria-label="Память UDIMM QOPP">
-    <img src="assets/udimm-hero.png" alt="Оперативная память QOPP UDIMM: два модуля DDR4 с радиаторами" width="2000" height="752">
+    <img src="assets/udimm-hero-b.jpg" alt="Оперативная память QOPP UDIMM: два модуля DDR4 с радиаторами" width="2000" height="913">
   </figure>
 </header>
 
