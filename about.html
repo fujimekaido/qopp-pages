@@ -426,8 +426,12 @@ main{position:relative;z-index:1}
 .foot-col h3{font-size:15px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;margin-bottom:18px}
 .foot-lede{font-size:14.5px;color:var(--muted);max-width:34ch;margin-bottom:16px}
 .foot-col .fl{display:block;font-size:15px;color:#3c4046;padding:7px 0;cursor:default;text-decoration:none}
-a.fl{cursor:pointer}
-a.fl:hover{color:var(--ink)}
+/* ссылки подвала: при наведении пункт чёрный, под ним слева направо дорисовывается линия, соседи по колонке чуть гаснут */
+a.fl{position:relative;width:max-content;cursor:pointer;transition:color .3s var(--ease)}
+a.fl::after{content:"";position:absolute;left:0;right:0;bottom:5px;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+a.fl:hover,a.fl:focus-visible{color:#14161c}
+a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin:left}
+.foot-col:hover .fl:not(:hover):not(.current){color:#8b9098}
 .fl.current{color:var(--accent-deep)}
 .coop-form input:not([type=checkbox]){display:block;width:100%;max-width:300px;font-family:var(--body);font-size:14px;color:var(--ink);background:#fff;border:1px solid #cfd2d7;border-radius:6px;padding:10px 12px;margin-bottom:10px}
 .coop-form input::placeholder{color:#9aa0a8}
