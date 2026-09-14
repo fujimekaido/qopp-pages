@@ -77,8 +77,6 @@ nav{
   position:fixed;top:0;left:0;right:0;z-index:60;
   display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
   padding:16px clamp(20px,4vw,56px);
-  border-bottom:1px solid transparent;
-  transition:background .45s var(--ease),border-color .45s var(--ease);
 }
 .logo{display:block;justify-self:start}
 /* логотип уходит при прокрутке вниз и возвращается на первом движении вверх (класс ставит js:logo-hide) */
@@ -152,9 +150,7 @@ nav.logo-hide .logo{opacity:0;transform:translateY(-10px);pointer-events:none}
   border-radius:999px;padding:6px;backdrop-filter:blur(14px);
   transition:background .45s var(--ease),box-shadow .45s var(--ease);
 }
-/* после первого экрана шапка становится матовым стеклом, как на товарной: то, что проходит под ней, читается под стеклом */
-nav.solid{background:rgba(246,246,247,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--hairline)}
-nav.solid .menu-pill{background:#fff;box-shadow:0 8px 30px rgba(20,22,28,.08)}
+nav.solid .menu-pill{background:rgba(255,255,255,.82);box-shadow:0 8px 30px rgba(20,22,28,.08)}
 .mi{
   font-size:14px;font-weight:500;letter-spacing:.03em;color:var(--muted);
   padding:9px 22px;border-radius:999px;cursor:default;user-select:none;
@@ -176,6 +172,8 @@ a.mi{cursor:pointer;text-decoration:none}
   display:flex;align-items:center;gap:clamp(14px,1.8vw,26px);
 }
 .side-label::after{content:"";width:1px;height:clamp(60px,7.6vw,110px);background:var(--ink);opacity:.45}
+/* под шапкой подпись гаснет (класс under ставит js:side-label) */
+.reveal.in .side-label.part.under{opacity:0;transition:opacity .35s var(--ease)}
 /* reveal не должен снимать поворот подписи */
 .reveal .side-label.part{transform:rotate(180deg) translateY(-22px)}
 .reveal.in .side-label.part{transform:rotate(180deg)}
@@ -544,6 +542,15 @@ addEventListener('scroll',()=>{
     else if(y>lastY)navEl.classList.add('logo-hide');
     lastY=y;
   },{passive:true});
+}
+
+/* подпись хиро гаснет, когда её верх уходит под шапку, и возвращается при обратной прокрутке */
+{
+  const lab=document.querySelector('.side-label');
+  if(lab){
+    const check=()=>{lab.classList.toggle('under',lab.getBoundingClientRect().top<navEl.offsetHeight)};
+    addEventListener('scroll',check,{passive:true});check();
+  }
 }
 
 /* появление секций, как на главной */
