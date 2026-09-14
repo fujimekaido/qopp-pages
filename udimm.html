@@ -168,8 +168,8 @@ a.mi{cursor:pointer;text-decoration:none}
   display:flex;align-items:center;gap:14px;
 }
 .side-label::after{content:"";width:1px;height:44px;background:var(--ink);opacity:.45}
-/* подпись в две колонки слева направо, читается сверху вниз, как на SSD; на средних экранах разрядка уже, чтобы уместиться в хиро */
-@media (min-width:861px){.c-hero .side-label{writing-mode:vertical-lr;line-height:1.7}}
+/* подпись в две строки: первая строка справа (vertical-rl), при чтении сверху вниз она воспринимается верхней; на средних экранах разрядка уже */
+@media (min-width:861px){.c-hero .side-label{line-height:1.7}}
 @media (min-width:861px) and (max-width:1100px){.side-label{letter-spacing:.26em}}
 @media (max-width:860px){
   .side-label{position:static;transform:none;writing-mode:horizontal-tb;letter-spacing:.22em;justify-content:center;padding:10px 0 8px;font-size:12px}
