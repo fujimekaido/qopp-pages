@@ -76,6 +76,9 @@ nav{
   padding:16px clamp(20px,4vw,56px);
 }
 .logo{display:block;justify-self:start}
+/* логотип уходит при прокрутке вниз и возвращается на первом движении вверх (класс ставит js:logo-hide) */
+.logo{transition:opacity .35s var(--ease),transform .35s var(--ease)}
+nav.logo-hide .logo{opacity:0;transform:translateY(-10px);pointer-events:none}
 .logo img{height:48px;width:auto;display:block;filter:invert(1) brightness(.15) drop-shadow(0 1px 3px rgba(255,255,255,.4))}
 .menu-btn{
   display:none;grid-column:3;justify-self:end;
@@ -763,6 +766,17 @@ addEventListener('scroll',()=>{
   const solid=scrollY>60;
   if(solid!==navEl.classList.contains('solid'))navEl.classList.toggle('solid',solid);
 },{passive:true});
+
+/* логотип: прячется при прокрутке вниз, возвращается при первом движении вверх */
+{
+  let lastY=scrollY;
+  addEventListener('scroll',()=>{
+    const y=scrollY;
+    if(y<=80||y<lastY)navEl.classList.remove('logo-hide');
+    else if(y>lastY)navEl.classList.add('logo-hide');
+    lastY=y;
+  },{passive:true});
+}
 
 /* появление секций */
 const io=new IntersectionObserver(es=>{
