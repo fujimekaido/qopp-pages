@@ -316,6 +316,30 @@ a.mi{cursor:pointer;text-decoration:none}
     inset 0 0 28px rgba(227,169,79,.16),
     0 16px 34px rgba(227,169,79,.28);
 }
+/* покупка: заливка фирменным золотом #b8863b, как kicker на «О компании» */
+.pbtn-buy{
+  color:#14161c;
+  border-color:rgba(255,226,170,.55);
+  background:
+    linear-gradient(168deg,rgba(214,166,88,.92),rgba(184,134,59,.96) 64%),
+    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.4),transparent 58%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 0 -1px 0 rgba(90,60,14,.5),
+    inset 0 0 26px rgba(255,255,255,.1),
+    0 10px 26px rgba(184,134,59,.3);
+}
+.pbtn-buy:hover{
+  border-color:rgba(255,236,196,.85);
+  background:
+    linear-gradient(168deg,rgba(226,180,104,.96),rgba(196,146,70,.98) 64%),
+    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.48),transparent 58%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.58),
+    inset 0 -1px 0 rgba(90,60,14,.55),
+    inset 0 0 30px rgba(255,255,255,.14),
+    0 16px 36px rgba(184,134,59,.42);
+}
 .pbtn[aria-disabled="true"]{cursor:default}
 @media (prefers-reduced-motion: reduce){.pbtn::before{display:none}}
 
@@ -454,7 +478,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
         <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <span class="pbtn pbtn-gold" aria-disabled="true">Купить</span>
+        <span class="pbtn pbtn-buy" aria-disabled="true">Купить</span>
       </div>
     </section>
 
@@ -469,7 +493,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
         <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <span class="pbtn pbtn-gold" aria-disabled="true">Купить</span>
+        <span class="pbtn pbtn-buy" aria-disabled="true">Купить</span>
       </div>
     </section>
 
@@ -484,7 +508,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
         <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <span class="pbtn pbtn-gold" aria-disabled="true">Купить</span>
+        <span class="pbtn pbtn-buy" aria-disabled="true">Купить</span>
       </div>
     </section>
 

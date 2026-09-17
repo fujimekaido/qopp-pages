@@ -312,6 +312,30 @@ a.mi{cursor:pointer;text-decoration:none}
     inset 0 0 28px rgba(227,169,79,.16),
     0 16px 34px rgba(227,169,79,.28);
 }
+/* покупка: заливка фирменным золотом #b8863b, как kicker на «О компании» */
+.pbtn-buy{
+  color:#14161c;
+  border-color:rgba(255,226,170,.55);
+  background:
+    linear-gradient(168deg,rgba(214,166,88,.92),rgba(184,134,59,.96) 64%),
+    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.4),transparent 58%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 0 -1px 0 rgba(90,60,14,.5),
+    inset 0 0 26px rgba(255,255,255,.1),
+    0 10px 26px rgba(184,134,59,.3);
+}
+.pbtn-buy:hover{
+  border-color:rgba(255,236,196,.85);
+  background:
+    linear-gradient(168deg,rgba(226,180,104,.96),rgba(196,146,70,.98) 64%),
+    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.48),transparent 58%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.58),
+    inset 0 -1px 0 rgba(90,60,14,.55),
+    inset 0 0 30px rgba(255,255,255,.14),
+    0 16px 36px rgba(184,134,59,.42);
+}
 .pbtn[aria-disabled="true"]{cursor:default}
 @media (prefers-reduced-motion: reduce){.pbtn::before{display:none}}
 
@@ -560,7 +584,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
         <span class="tab dis">Купить</span>
       </div>
     </div>
-    <span class="pbtn pbtn-gold" aria-disabled="true">Где купить</span>
+    <span class="pbtn pbtn-buy" aria-disabled="true">Где купить</span>
   </div>
 </div>
 
@@ -675,7 +699,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       <dl class="spec-list part">
         <div class="spec"><dt>Модель</dt><dd id="s-model">Q600S</dd></div>
         <div class="spec"><dt>Объём</dt><dd id="s-cap">128 ГБ</dd></div>
-        <div class="spec"><dt>Интерфейс</dt><dd>SATA3 6.0 Гбит/с</dd></div>
+        <div class="spec"><dt>Интерфейс</dt><dd>SATA III 6 Гбит/с</dd></div>
         <div class="spec"><dt>Форм-фактор</dt><dd id="s-ff">2.5"</dd></div>
         <div class="spec"><dt>Контроллер</dt><dd>SMI</dd></div>
         <div class="spec"><dt>Тип флеш-памяти</dt><dd>3D NAND TLC</dd></div>
