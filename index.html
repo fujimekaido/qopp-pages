@@ -767,9 +767,9 @@ function updateCaptions(p){
 }
 
 /* ============ песок: буквы складываются из песчинок ============ */
-/* Первая подпись: ~2000 песчинок летят из струи песка в центре кадра и досыпают буквы снизу вверх.
-   Прогресс привязан к тому же k, что и у подписи: вперёд складывается, назад рассыпается.
-   Финал: при приземлении с заголовка осыпаются последние песчинки. Нет при reduced motion и в статичном режиме. */
+/* Первая подпись: ~2400 песчинок отвесно падают сверху и досыпают буквы снизу вверх (решение владельца: без дуг
+   и без привязки к струе в кадре). Прогресс привязан к тому же k, что и у подписи: вперёд складывается,
+   назад рассыпается. Нет при reduced motion и в статичном режиме. */
 (()=>{
   if(GATES.some(q=>matchMedia(q).matches))return;
   const band=document.getElementById('band-sand'),h2=band&&band.querySelector('h2');
@@ -778,7 +778,7 @@ function updateCaptions(p){
   stage.appendChild(cv);const ctx=cv.getContext('2d');
   const bd=bands.find(b=>b.el===band);
   const GOLD=['#e3a94f','#f0c478','#c98f38','#ffd9a0','#b8863b'];
-  let P=[],W=0,H=0,dpr=1,ready=false,shed=[],lastLive=false;
+  let P=[],W=0,H=0,dpr=1,ready=false;
   const easeOut=t=>1-Math.pow(1-t,3),easeIn=t=>t*t;
   function build(){
     const sr=stage.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,1.5);
@@ -801,22 +801,12 @@ function updateCaptions(p){
     }
     const max=matchMedia(MOBILE_Q).matches?1100:2400;
     while(pts.length>max)pts.splice((Math.random()*pts.length)|0,1);
-    const cx=W/2; /* струя песка в кадре идёт по центру */
     P=pts.map(([tx,ty])=>{
       const ny=(ty-y0)/(y1-y0);
-      return {tx,ty,sx:cx+(Math.random()-.5)*30,sy:H*(.04+Math.random()*.5),
+      return {tx,ty,sx:tx+(Math.random()-.5)*10,sy:-10-Math.random()*Math.max(120,ty*.9),
         th:(1-ny)*.42+Math.random()*.2,sz:Math.random()<.18?2.2:1.4,c:GOLD[(Math.random()*GOLD.length)|0],w:(Math.random()-.5)*40};
     });
     ready=true;
-  }
-  function spawnShed(){
-    const sr=stage.getBoundingClientRect();
-    settleBand.querySelectorAll('h1 .w').forEach(w=>{
-      const r=w.getBoundingClientRect();if(!r.width)return;
-      const n=Math.round(r.width/9);
-      for(let i=0;i<n;i++)shed.push({x:r.left-sr.left+Math.random()*r.width,y:r.top-sr.top+r.height*(.45+Math.random()*.5),
-        vx:(Math.random()-.5)*28,vy:-10-Math.random()*30,life:0,ttl:1.3+Math.random()*1.2,delay:Math.random()*.5,sz:Math.random()<.2?2.2:1.4,c:GOLD[2+((Math.random()*3)|0)]});
-    });
   }
   let prev=performance.now();
   function frame(now){
@@ -824,29 +814,18 @@ function updateCaptions(p){
     const dt=Math.min(.05,(now-prev)/1000);prev=now;
     if(!ready)return;
     const k=bd.k<0?0:bd.k,op=bd.op<0?0:bd.op;
-    const live=settleBand.classList.contains('live');
-    if(live&&!lastLive)spawnShed();lastLive=live;
     const sandOn=op>0&&k>0&&k<1;
-    if(!sandOn&&!shed.length){if(cv._dirty){ctx.clearRect(0,0,cv.width,cv.height);cv._dirty=false}return}
+    if(!sandOn){if(cv._dirty){ctx.clearRect(0,0,cv.width,cv.height);cv._dirty=false}return}
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);cv._dirty=true;
     if(sandOn){
       const fade=op*(1-clamp((k-.84)*6.5,0,1)); /* песчинки уступают место настоящим буквам */
       for(const p of P){
         const t=clamp((k-p.th)/.36,0,1);if(t<=0)continue;
-        const e=t*t*(3-2*t),g=Math.pow(t,1.5);
-        /* дуга: сначала песчинку сносит от струи, в конце она падает на своё место */
-        const x=p.sx+(p.tx-p.sx)*e+p.w*Math.sin(t*3.14),y=p.sy+(p.ty-p.sy)*g-Math.sin(t*3.14)*(40+Math.abs(p.w));
+        /* отвесное падение с ускорением: по горизонтали только лёгкое дрожание, которое гаснет к посадке */
+        const g=t*t,x=p.tx+(p.sx-p.tx)*(1-t)+Math.sin(t*9+p.w)*1.2*(1-t),y=p.sy+(p.ty-p.sy)*g;
         ctx.globalAlpha=fade*Math.min(1,t*4);ctx.fillStyle=t>.98?'#f4e7cf':p.c;
         ctx.fillRect(x,y,p.sz,p.sz);
       }
-    }
-    if(shed.length){
-      for(const q of shed){
-        if(q.delay>0){q.delay-=dt;continue}
-        q.life+=dt;q.vy+=520*dt;q.x+=q.vx*dt;q.y+=q.vy*dt;
-        ctx.globalAlpha=clamp(1-q.life/q.ttl,0,1)*.9;ctx.fillStyle=q.c;ctx.fillRect(q.x,q.y,q.sz,q.sz);
-      }
-      shed=shed.filter(q=>q.life<q.ttl&&q.y<H+10);
     }
     ctx.globalAlpha=1;
   }
