@@ -127,6 +127,7 @@ a{color:inherit}
 .gl-scan{position:absolute;inset:0;pointer-events:none;opacity:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.55) 0 2px,transparent 2px 5px);mix-blend-mode:multiply}
 .gl-noise{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;image-rendering:pixelated;mix-blend-mode:overlay}
 .gl-bar{position:absolute;left:0;right:0;height:3px;background:#fff;opacity:0;pointer-events:none;mix-blend-mode:overlay;box-shadow:0 0 24px 6px rgba(255,255,255,.35)}
+.gl-jp{position:absolute;z-index:3;pointer-events:none;opacity:0;white-space:nowrap;font-family:'Yu Gothic','Hiragino Sans','Noto Sans JP','Meiryo',sans-serif;font-weight:800;letter-spacing:.18em;line-height:1;mix-blend-mode:screen;text-shadow:3px 0 #ff2d55,-3px 0 #00e5ff}
 .err-photo{will-change:transform,filter}
 .err-copy h1{position:relative}
 .err-copy h1::before,.err-copy h1::after{content:attr(data-t);position:absolute;inset:0;opacity:0;pointer-events:none}
@@ -197,57 +198,72 @@ a{color:inherit}
   const nz=document.createElement('canvas');nz.className='gl-noise';nz.width=160;nz.height=90;root.insertBefore(nz,scrim);
   const nx=nz.getContext('2d'),nd=nx.createImageData(160,90);
   const noise=()=>{const d=nd.data;for(let i=0;i<d.length;i+=4){const v=Math.random()*255;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}nx.putImageData(nd,0,0)};
+  const JP=['\u30a8\u30e9\u30fc 404','\u30da\u30fc\u30b8\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093','\u4fe1\u53f7\u306a\u3057','\u30c7\u30fc\u30bf\u7834\u640d','\u8aad\u307f\u8fbc\u307f\u5931\u6557','\u30e1\u30e2\u30ea','\u63a5\u7d9a\u30a8\u30e9\u30fc','\u518d\u8d77\u52d5','\u8b66\u544a','\u30b7\u30b9\u30c6\u30e0\u7570\u5e38','\u8a18\u61b6','\u30ce\u30a4\u30ba'];
+  const jps=[];for(let i=0;i<4;i++){const d=document.createElement('div');d.className='gl-jp';d.setAttribute('aria-hidden','true');d.lang='ja';root.insertBefore(d,scrim.nextSibling);jps.push(d)}
+  const jp=(el,big)=>{
+    el.textContent=P(.3)?pick(JP)+' '+pick(JP):pick(JP);
+    el.style.left=R(2,70)+'%';el.style.top=R(6,84)+'%';
+    el.style.fontSize=(P(.25)?R(44,big?120:84):R(13,34))+'px';
+    el.style.writingMode=P(.3)?'vertical-rl':'horizontal-tb';
+    el.style.color=pick(['#fff','#fff','#ff2d55','#00e5ff','#e3a94f']);
+    el.style.transform='translateX('+R(-14,14)+'px) skewX('+R(-12,12)+'deg)';
+    el.style.clipPath=P(.4)?'inset('+R(0,40)+'% 0 '+R(0,40)+'% 0)':'none';
+    el.style.opacity=R(.45,1);
+  };
   const FILTERS=['none','hue-rotate(90deg) saturate(3)','hue-rotate(200deg) saturate(4)','invert(1)','sepia(1) saturate(6) hue-rotate(-30deg)','contrast(2.2) brightness(1.3)','grayscale(1) contrast(1.8)','saturate(5) hue-rotate(300deg)'];
   const BLENDS=['normal','screen','lighten','difference','hard-light'];
-  const TEXT=h1.dataset.t,GLYPHS=[...'#%&@$0123456789ABCDEF/|<>_=+*','\u2591','\u2592','\u2593','\u2588','\u25A0'];
+  const TEXT=h1.dataset.t,GLYPHS=[...'#%&@$0123456789ABCDEF/|<>_=+*','\u2591','\u2592','\u2593','\u2588','\u25A0',...'\u30a2\u30a8\u30ab\u30b5\u30bf\u30ca\u30cf\u30de\u30e9\u30ef\u30f3\u30e1\u30e2\u30ea'];
   const scramble=k=>{let o='';for(const ch of TEXT)o+=(ch!==' '&&P(k))?pick(GLYPHS):ch;h1.textContent=o;h1.dataset.t=o};
   const restore=()=>{h1.textContent=TEXT;h1.dataset.t=TEXT};
   function slice(el,big){
     if(P(.3)){ /* блок: режем по обеим осям, как битый макроблок видео */
-      const x=R(0,80),y=R(0,80),w=R(8,big?45:26),h=R(6,big?30:16);
+      const x=R(0,80),y=R(0,80),w=R(6,big?30:18),h=R(4,big?20:11);
       el.style.clipPath='inset('+y+'% '+Math.max(0,100-x-w)+'% '+Math.max(0,100-y-h)+'% '+x+'%)';
-      el.style.transform='translate('+R(-90,90)+'px,'+R(-40,40)+'px) scale('+R(1,1.12)+')';
+      el.style.transform='translate('+R(-45,45)+'px,'+R(-18,18)+'px) scale('+R(1,1.06)+')';
     }else{ /* полоса во всю ширину */
-      const y=R(0,92),h=R(1.5,big?26:14);
+      const y=R(0,92),h=R(1,big?14:8);
       el.style.clipPath='inset('+y+'% 0 '+Math.max(0,100-y-h)+'% 0)';
-      el.style.transform='translateX('+R(-1,1)*(big?180:90)+'px)'+(P(.25)?' scaleX('+R(1.02,1.35)+')':'');
+      el.style.transform='translateX('+R(-1,1)*(big?90:42)+'px)'+(P(.2)?' scaleX('+R(1.02,1.15)+')':'');
     }
-    el.style.filter=pick(FILTERS);el.style.mixBlendMode=pick(BLENDS);el.style.opacity=R(.55,1);
+    el.style.filter=pick(FILTERS);el.style.mixBlendMode=pick(BLENDS);el.style.opacity=R(.4,.85);
   }
   const clear=()=>{
-    layers.forEach(l=>{l.style.opacity=0});scan.style.opacity=0;bar.style.opacity=0;nz.style.opacity=0;
+    layers.forEach(l=>{l.style.opacity=0});jps.forEach(l=>{l.style.opacity=0});scan.style.opacity=0;bar.style.opacity=0;nz.style.opacity=0;
     photo.style.transform='';photo.style.filter='';root.style.filter='';root.classList.remove('glitch');restore();
     ['--tx','--ty','--sk','--po','--pl'].forEach(v=>root.style.removeProperty(v));
   };
+  let lastFlash=-9999;
   function burst(){
     if(document.hidden){setTimeout(burst,1200);return}
-    const big=P(.28);let n=big?RI(10,22):RI(3,9),flashed=false;
+    const big=P(.15);let n=big?RI(6,12):RI(2,5),flashed=false;
     root.classList.add('glitch');
     const frame=()=>{
-      const active=RI(big?4:1,big?N:5);
+      const active=RI(big?3:1,big?6:3);
       layers.forEach((l,i)=>{if(i<active)slice(l,big);else l.style.opacity=0});
       /* кадр целиком: рывок, срыв развёртки, перекос */
-      photo.style.transform=P(.55)?'translate('+R(-1,1)*(big?46:16)+'px,'+(P(.18)?R(-1,1)*(big?120:40):R(-6,6))+'px) skewX('+R(-1,1)*(big?7:2)+'deg) scale('+R(1,big?1.08:1.03)+')':'';
-      photo.style.filter=P(.4)?pick(FILTERS):'';
+      photo.style.transform=P(.45)?'translate('+R(-1,1)*(big?22:8)+'px,'+(P(.15)?R(-1,1)*(big?50:18):R(-3,3))+'px) skewX('+R(-1,1)*(big?3:1)+'deg) scale('+R(1,big?1.04:1.015)+')':'';
+      photo.style.filter=P(.2)?pick(FILTERS):'';
       /* одна полноэкранная вспышка на серию, не больше */
-      if(big&&!flashed&&P(.35)){root.style.filter=pick(['invert(1)','brightness(1.9) contrast(1.4)','hue-rotate(180deg) saturate(2)']);flashed=true}else root.style.filter='';
-      scan.style.opacity=P(.6)?R(.25,.8):0;scan.style.transform='translateY('+RI(-4,4)+'px)';
-      if(P(.5)){noise();nz.style.opacity=R(.18,big?.6:.35)}else nz.style.opacity=0;
+      if(big&&!flashed&&P(.3)&&performance.now()-lastFlash>1500){lastFlash=performance.now();root.style.filter=pick(['invert(1)','brightness(1.9) contrast(1.4)','hue-rotate(180deg) saturate(2)']);flashed=true}else root.style.filter='';
+      scan.style.opacity=P(.55)?R(.15,.5):0;scan.style.transform='translateY('+RI(-4,4)+'px)';
+      if(P(.5)){noise();nz.style.opacity=R(.1,big?.35:.22)}else nz.style.opacity=0;
       if(P(.45)){bar.style.top=R(0,100)+'%';bar.style.height=RI(1,big?14:5)+'px';bar.style.opacity=R(.4,1)}else bar.style.opacity=0;
+      /* японские надписи */
+      jps.forEach((el,i)=>{if(i<(big?4:2)&&P(.7))jp(el,big);else el.style.opacity=0});
       /* текст */
-      root.style.setProperty('--gx',R(4,big?26:12)+'px');root.style.setProperty('--gy',R(-5,5)+'px');
+      root.style.setProperty('--gx',R(2,big?13:7)+'px');root.style.setProperty('--gy',R(-5,5)+'px');
       root.style.setProperty('--c1',R(0,45)+'%');root.style.setProperty('--c2',R(30,70)+'%');
       root.style.setProperty('--c3',R(35,75)+'%');root.style.setProperty('--c4',R(0,30)+'%');
-      root.style.setProperty('--tx',(P(.5)?R(-1,1)*(big?30:10):0)+'px');root.style.setProperty('--ty',(P(.3)?R(-8,8):0)+'px');
-      root.style.setProperty('--sk',(P(.35)?R(-1,1)*(big?14:5):0)+'deg');
+      root.style.setProperty('--tx',(P(.4)?R(-1,1)*(big?14:5):0)+'px');root.style.setProperty('--ty',(P(.25)?R(-4,4):0)+'px');
+      root.style.setProperty('--sk',(P(.3)?R(-1,1)*(big?6:2.5):0)+'deg');
       root.style.setProperty('--po',P(.3)?R(.2,.7):1);root.style.setProperty('--pl',P(.25)?R(-1,4)+'px':'normal');
-      if(P(big?.75:.4))scramble(R(.15,big?.7:.35));else restore();
+      if(P(big?.6:.35))scramble(R(.08,big?.35:.2));else restore();
       if(--n>0)setTimeout(frame,R(28,big?95:75));
-      else setTimeout(()=>{clear();setTimeout(burst,P(.3)?R(120,420):R(700,3400))},R(30,80)); /* иногда серия сразу повторяется */
+      else setTimeout(()=>{clear();setTimeout(burst,P(.35)?R(70,220):R(240,850))},R(30,80)); /* иногда серия сразу повторяется */
     };
     frame();
   }
-  setTimeout(burst,R(500,1100));
+  setTimeout(burst,R(40,160)); /* страницу видят около секунды: первый сбой сразу */
 })();
 </script>
 </body>
