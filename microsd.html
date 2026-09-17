@@ -25,8 +25,6 @@
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-varitalic-latin-ext.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap;unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-varitalic-cyrillic.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap;unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-varitalic-cyrillic-ext.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap;unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
-/* второй шрифт: латинские имена линеек на полосах (замена Ethnocentric из макетов) */
-@font-face{font-family:'Michroma';src:url('assets/fonts/Michroma-latin.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 /* ============ tokens: белый мир каталога ============ */
 :root{
   --canvas:#f6f6f7;
@@ -239,6 +237,13 @@ a.mi{cursor:pointer;text-decoration:none}
   color:var(--muted);background:rgba(255,255,255,.55);border:1px solid var(--hairline);
   border-radius:6px;padding:.45em 2.4em;
 }
+/* латинские заголовки: контуры Ethnocentric в SVG (см. САЙТ РЕФЫ/Ethnocentric/make_titles.py), высота = высота прописной в макете */
+.et{display:block;height:clamp(9px,2.32vw,52px);width:auto;overflow:visible}
+.et-title{line-height:0;letter-spacing:0;font-size:0}
+.cap-big .et{height:clamp(8px,1.53vw,34px);margin:0 auto}
+.st-u2.et-title{display:flex;flex-direction:column;align-items:center;gap:clamp(4px,.74vw,17px);width:auto}
+.st-ddr .et{margin:0 auto}
+.cap-line{white-space:nowrap}
 /* ============ кнопки: графит под стеклом, золотая обводка ============ */
 /* ============ кнопки: жидкое стекло, графит и синий ============ */
 .pbtn{
@@ -474,7 +479,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       <span class="strip-link part">
         <picture><source srcset="assets/microsd-base.webp" type="image/webp"><img src="assets/microsd-base.jpg" alt="Карта microSD QOPP BASE 128 ГБ в лотке смартфона" width="2400" height="655" decoding="async"></picture>
       </span>
-      <span class="strip-title st-base" aria-hidden="true">BASE</span>
+      <span class="strip-title st-base et-title" aria-hidden="true"><svg class="et" viewBox="-90 -20 8627 1040" role="img" aria-label="BASE" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 0)" d="M1222.7 485.8Q1288.5 505.2 1334.1 562Q1379.7 618.8 1379.7 708.5Q1379.7 771.3 1360.2 824.4Q1340.8 877.4 1294.5 916.3Q1248.1 955.2 1169.7 977.6Q1091.2 1000 973.1 1000H94.2V391.6H979.1Q1013.5 391.6 1039.6 377.4Q1065.8 363.2 1065.8 324.4Q1065.8 287 1038.9 273.5Q1012 260.1 979.1 260.1H94.2L303.4 0H965.6Q1055.3 0 1127.8 17.2Q1200.3 34.4 1251.9 69.5Q1303.4 104.6 1331.1 156.2Q1358.7 207.8 1358.7 276.5Q1358.7 321.4 1346.8 355.8Q1334.8 390.1 1316.1 416.3Q1297.5 442.5 1272.8 459.6Q1248.1 476.8 1222.7 485.8ZM405.1 605.4V742.9H974.6Q1025.4 742.9 1047.8 725Q1070.3 707 1070.3 672.6Q1070.3 639.8 1047.8 622.6Q1025.4 605.4 974.6 605.4ZM2825.5 1000 3012.4 742.9H3263.5Q3308.4 742.9 3356.9 742.9Q3405.5 742.9 3441.4 745.9Q3420.5 719 3392.8 677.9Q3365.2 636.8 3339.7 600.9L3160.4 336.3L2691 1000H2324.8L2966.1 95.7Q2997.4 52.3 3045.3 17.9Q3093.1 -16.4 3166.3 -16.4Q3236.6 -16.4 3283.7 15.7Q3330.8 47.8 3363.7 95.7L3988.5 1000ZM5893.2 399.1Q6077.1 399.1 6172.8 467.1Q6268.4 535.1 6268.4 672.6Q6268.4 748.9 6244.5 810.2Q6220.6 871.4 6168.3 913.3Q6116 955.2 6034.5 977.6Q5953 1000 5839.4 1000H4908.2L5107 742.9H5863.3Q5918.6 742.9 5944.1 725.7Q5969.5 708.5 5969.5 669.7Q5969.5 630.8 5944.1 614.3Q5918.6 597.9 5863.3 597.9H5319.2Q5222.1 597.9 5151.8 577Q5081.6 556.1 5035.2 518.7Q4988.9 481.3 4966.5 428.3Q4944.1 375.2 4944.1 310.9Q4944.1 240.7 4968.7 183.1Q4993.4 125.6 5045 85.2Q5096.5 44.8 5178 22.4Q5259.5 0 5373.1 0H6241.5L6042.7 260.1H5349.1Q5295.3 260.1 5269.2 275Q5243 290 5243 328.8Q5243 367.7 5269.2 383.4Q5295.3 399.1 5349.1 399.1ZM8434.8 742.9 8236 1000H7273.3V0H8431.8L8231.5 260.1H7584.3V379.7H8376.5L8198.6 606.9H7584.3V742.9Z"/></svg></span>
       <div class="strip-acts part">
         <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -489,7 +494,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       <span class="strip-link part">
         <picture><source srcset="assets/microsd-rush.webp" type="image/webp"><img src="assets/microsd-rush.jpg" alt="Карта microSD QOPP RUSH 256 ГБ, A1 V30 U3, на крышке ноутбука" width="2400" height="655" loading="lazy" decoding="async"></picture>
       </span>
-      <span class="strip-title st-rush" aria-hidden="true">RUSH</span>
+      <span class="strip-title st-rush et-title" aria-hidden="true"><svg class="et" viewBox="-90 -20 9587 1040" role="img" aria-label="RUSH" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 0)" d="M1512.7 1000H1098.7L875.9 735.4H400.6V1000H91.2V488.8H961.1Q1032.9 488.8 1082.2 458.9Q1131.5 429 1131.5 376.7Q1131.5 318.4 1086.7 289.2Q1041.9 260.1 961.1 260.1H91.2L293 0H935.7Q1020.9 0 1112.1 15.7Q1203.3 31.4 1278 71.7Q1352.8 112.1 1401.3 180.9Q1449.9 249.6 1449.9 357.2Q1449.9 415.5 1432 467.9Q1414.1 520.2 1380.4 562Q1346.8 603.9 1298.2 633Q1249.6 662.2 1188.3 674.1Q1213.8 693.6 1245.1 723.5Q1276.5 753.4 1328.8 805.7ZM4109.1 563.5Q4109.1 1016.4 3485.8 1016.4Q3304.9 1016.4 3174.9 988Q3044.8 959.6 2960.4 902.8Q2875.9 846 2836.3 761.6Q2796.7 677.1 2796.7 563.5V0H3104.6V563.5Q3104.6 618.8 3119.6 656.2Q3134.5 693.6 3175.6 716.7Q3216.7 739.9 3291.5 749.6Q3366.2 759.3 3485.8 759.3Q3575.5 759.3 3635.3 748.9Q3695.1 738.4 3730.9 714.5Q3766.8 690.6 3782.5 653.2Q3798.2 615.8 3798.2 563.5V0H4109.1ZM6397.6 399.1Q6581.4 399.1 6677.1 467.1Q6772.8 535.1 6772.8 672.6Q6772.8 748.9 6748.9 810.2Q6724.9 871.4 6672.6 913.3Q6620.3 955.2 6538.8 977.6Q6457.4 1000 6343.8 1000H5412.5L5611.3 742.9H6367.7Q6423 742.9 6448.4 725.7Q6473.8 708.5 6473.8 669.7Q6473.8 630.8 6448.4 614.3Q6423 597.9 6367.7 597.9H5823.6Q5726.4 597.9 5656.2 577Q5585.9 556.1 5539.6 518.7Q5493.2 481.3 5470.8 428.3Q5448.4 375.2 5448.4 310.9Q5448.4 240.7 5473.1 183.1Q5497.7 125.6 5549.3 85.2Q5600.9 44.8 5682.3 22.4Q5763.8 0 5877.4 0H6745.9L6547.1 260.1H5853.5Q5799.7 260.1 5773.5 275Q5747.4 290 5747.4 328.8Q5747.4 367.7 5773.5 383.4Q5799.7 399.1 5853.5 399.1ZM9310.9 1000H9003V614.3H8408V1000H8097.1V0H8408V354.3H9003V0H9310.9Z"/></svg></span>
       <div class="strip-acts part">
         <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -504,7 +509,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       <span class="strip-link part">
         <picture><source srcset="assets/microsd-rushplus.webp" type="image/webp"><img src="assets/microsd-rushplus.jpg" alt="Карта microSD QOPP RUSH+ 512 ГБ, A2 V30 U3, и адаптер SD" width="2400" height="655" loading="lazy" decoding="async"></picture>
       </span>
-      <span class="strip-title st-rushp" aria-hidden="true">RUSH+</span>
+      <span class="strip-title st-rushp et-title" aria-hidden="true"><svg class="et" viewBox="-90 -20 9807 1040" role="img" aria-label="RUSH+" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 0)" d="M1512.7 1000H1098.7L875.9 735.4H400.6V1000H91.2V488.8H961.1Q1032.9 488.8 1082.2 458.9Q1131.5 429 1131.5 376.7Q1131.5 318.4 1086.7 289.2Q1041.9 260.1 961.1 260.1H91.2L293 0H935.7Q1020.9 0 1112.1 15.7Q1203.3 31.4 1278 71.7Q1352.8 112.1 1401.3 180.9Q1449.9 249.6 1449.9 357.2Q1449.9 415.5 1432 467.9Q1414.1 520.2 1380.4 562Q1346.8 603.9 1298.2 633Q1249.6 662.2 1188.3 674.1Q1213.8 693.6 1245.1 723.5Q1276.5 753.4 1328.8 805.7ZM3632.6 563.5Q3632.6 1016.4 3009.3 1016.4Q2828.4 1016.4 2698.3 988Q2568.3 959.6 2483.8 902.8Q2399.4 846 2359.8 761.6Q2320.2 677.1 2320.2 563.5V0H2628.1V563.5Q2628.1 618.8 2643 656.2Q2658 693.6 2699.1 716.7Q2740.2 739.9 2814.9 749.6Q2889.7 759.3 3009.3 759.3Q3098.9 759.3 3158.7 748.9Q3218.5 738.4 3254.4 714.5Q3290.3 690.6 3306 653.2Q3321.7 615.8 3321.7 563.5V0H3632.6ZM5444.5 399.1Q5628.4 399.1 5724 467.1Q5819.7 535.1 5819.7 672.6Q5819.7 748.9 5795.8 810.2Q5771.9 871.4 5719.5 913.3Q5667.2 955.2 5585.8 977.6Q5504.3 1000 5390.7 1000H4459.5L4658.3 742.9H5414.6Q5469.9 742.9 5495.3 725.7Q5520.7 708.5 5520.7 669.7Q5520.7 630.8 5495.3 614.3Q5469.9 597.9 5414.6 597.9H4870.5Q4773.4 597.9 4703.1 577Q4632.9 556.1 4586.5 518.7Q4540.2 481.3 4517.8 428.3Q4495.3 375.2 4495.3 310.9Q4495.3 240.7 4520 183.1Q4544.7 125.6 4596.2 85.2Q4647.8 44.8 4729.3 22.4Q4810.7 0 4924.3 0H5792.8L5594 260.1H4900.4Q4846.6 260.1 4820.4 275Q4794.3 290 4794.3 328.8Q4794.3 367.7 4820.4 383.4Q4846.6 399.1 4900.4 399.1ZM7881.3 1000H7573.3V614.3H6978.4V1000H6667.5V0H6978.4V354.3H7573.3V0H7881.3ZM9566.2 575.5H9240.3V901.3H9072.9V575.5H8750V408.1H9072.9V85.2H9240.3V408.1H9566.2Z"/></svg></span>
       <div class="strip-acts part">
         <span class="pbtn" aria-disabled="true">Узнать больше
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
