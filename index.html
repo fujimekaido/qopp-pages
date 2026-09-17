@@ -221,6 +221,9 @@ a.mi{cursor:pointer;text-decoration:none}
   opacity:var(--kc);
   transform:translate(calc((1 - var(--kc))*var(--jx,0px)),calc((1 - var(--kc))*var(--jy,0px))) rotate(calc((1 - var(--kc))*var(--jr,0deg)));
 }
+/* песок: холст поверх сцены; буквы первой подписи проявляются в конце, под уже сложенными песчинками */
+.sand-cv{position:absolute;inset:0;width:100%;height:100%;z-index:6;pointer-events:none}
+.e-sand .c{opacity:clamp(0,(var(--k,0) - .8)*5,1);transform:none}
 /* entrance: blur-to-sharp (band 2, heat haze clearing) */
 .e-blur h2{position:relative}
 .e-blur .soft,.e-blur .sharp{display:block}
@@ -536,7 +539,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     <video id="hero-video" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
     <div class="scrim" aria-hidden="true"></div>
 
-    <div class="band b-left e-scatter" data-a="0" data-b="0.15" data-entr="sandfall">
+    <div class="band b-left e-scatter" id="band-sand" data-a="0" data-b="0.15" data-entr="sandfall">
       <h2 data-split>Всё начинается с песка</h2>
     </div>
 
@@ -763,11 +766,108 @@ function updateCaptions(p){
   if(cueHidden!==cue.classList.contains('hidden')) cue.classList.toggle('hidden',cueHidden);
 }
 
+/* ============ песок: буквы складываются из песчинок ============ */
+/* Первая подпись: ~2000 песчинок летят из струи песка в центре кадра и досыпают буквы снизу вверх.
+   Прогресс привязан к тому же k, что и у подписи: вперёд складывается, назад рассыпается.
+   Финал: при приземлении с заголовка осыпаются последние песчинки. Нет при reduced motion и в статичном режиме. */
+(()=>{
+  if(GATES.some(q=>matchMedia(q).matches))return;
+  const band=document.getElementById('band-sand'),h2=band&&band.querySelector('h2');
+  if(!band||!h2)return;
+  const cv=document.createElement('canvas');cv.className='sand-cv';cv.setAttribute('aria-hidden','true');
+  stage.appendChild(cv);const ctx=cv.getContext('2d');
+  const bd=bands.find(b=>b.el===band);
+  const GOLD=['#e3a94f','#f0c478','#c98f38','#ffd9a0','#b8863b'];
+  let P=[],W=0,H=0,dpr=1,ready=false,shed=[],lastLive=false;
+  const easeOut=t=>1-Math.pow(1-t,3),easeIn=t=>t*t;
+  function build(){
+    const sr=stage.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,1.5);
+    W=sr.width;H=sr.height;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    const cs=getComputedStyle(h2),fs=parseFloat(cs.fontSize);
+    const off=document.createElement('canvas');off.width=Math.ceil(W);off.height=Math.ceil(H);
+    const o=off.getContext('2d');o.font=cs.fontWeight+' '+fs+'px '+cs.fontFamily;o.textBaseline='alphabetic';o.fillStyle='#fff';
+    const m=o.measureText('М'),A=m.fontBoundingBoxAscent||fs*.95,D=m.fontBoundingBoxDescent||fs*.25;
+    let x0=1e9,y0=1e9,x1=0,y1=0;
+    band.querySelectorAll('.c').forEach(c=>{
+      const r=c.getBoundingClientRect();if(!r.width)return;
+      const x=r.left-sr.left,y=r.top-sr.top+(r.height-(A+D))/2+A;
+      o.fillText(c.textContent,x,y);
+      x0=Math.min(x0,x);y0=Math.min(y0,r.top-sr.top);x1=Math.max(x1,x+r.width);y1=Math.max(y1,r.bottom-sr.top);
+    });
+    if(x1<=x0)return;
+    const data=o.getImageData(0,0,off.width,off.height).data,pts=[],step=fs>34?2:1.5;
+    for(let y=Math.floor(y0);y<y1;y+=step)for(let x=Math.floor(x0);x<x1;x+=step){
+      if(data[((y|0)*off.width+(x|0))*4+3]>140)pts.push([x,y]);
+    }
+    const max=matchMedia(MOBILE_Q).matches?1100:2400;
+    while(pts.length>max)pts.splice((Math.random()*pts.length)|0,1);
+    const cx=W/2; /* струя песка в кадре идёт по центру */
+    P=pts.map(([tx,ty])=>{
+      const ny=(ty-y0)/(y1-y0);
+      return {tx,ty,sx:cx+(Math.random()-.5)*30,sy:H*(.04+Math.random()*.5),
+        th:(1-ny)*.42+Math.random()*.2,sz:Math.random()<.18?2.2:1.4,c:GOLD[(Math.random()*GOLD.length)|0],w:(Math.random()-.5)*40};
+    });
+    ready=true;
+  }
+  function spawnShed(){
+    const sr=stage.getBoundingClientRect();
+    settleBand.querySelectorAll('h1 .w').forEach(w=>{
+      const r=w.getBoundingClientRect();if(!r.width)return;
+      const n=Math.round(r.width/9);
+      for(let i=0;i<n;i++)shed.push({x:r.left-sr.left+Math.random()*r.width,y:r.top-sr.top+r.height*(.45+Math.random()*.5),
+        vx:(Math.random()-.5)*28,vy:-10-Math.random()*30,life:0,ttl:1.3+Math.random()*1.2,delay:Math.random()*.5,sz:Math.random()<.2?2.2:1.4,c:GOLD[2+((Math.random()*3)|0)]});
+    });
+  }
+  let prev=performance.now();
+  function frame(now){
+    requestAnimationFrame(frame);
+    const dt=Math.min(.05,(now-prev)/1000);prev=now;
+    if(!ready)return;
+    const k=bd.k<0?0:bd.k,op=bd.op<0?0:bd.op;
+    const live=settleBand.classList.contains('live');
+    if(live&&!lastLive)spawnShed();lastLive=live;
+    const sandOn=op>0&&k>0&&k<1;
+    if(!sandOn&&!shed.length){if(cv._dirty){ctx.clearRect(0,0,cv.width,cv.height);cv._dirty=false}return}
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);cv._dirty=true;
+    if(sandOn){
+      const fade=op*(1-clamp((k-.84)*6.5,0,1)); /* песчинки уступают место настоящим буквам */
+      for(const p of P){
+        const t=clamp((k-p.th)/.36,0,1);if(t<=0)continue;
+        const e=t*t*(3-2*t),g=Math.pow(t,1.5);
+        /* дуга: сначала песчинку сносит от струи, в конце она падает на своё место */
+        const x=p.sx+(p.tx-p.sx)*e+p.w*Math.sin(t*3.14),y=p.sy+(p.ty-p.sy)*g-Math.sin(t*3.14)*(40+Math.abs(p.w));
+        ctx.globalAlpha=fade*Math.min(1,t*4);ctx.fillStyle=t>.98?'#f4e7cf':p.c;
+        ctx.fillRect(x,y,p.sz,p.sz);
+      }
+    }
+    if(shed.length){
+      for(const q of shed){
+        if(q.delay>0){q.delay-=dt;continue}
+        q.life+=dt;q.vy+=520*dt;q.x+=q.vx*dt;q.y+=q.vy*dt;
+        ctx.globalAlpha=clamp(1-q.life/q.ttl,0,1)*.9;ctx.fillStyle=q.c;ctx.fillRect(q.x,q.y,q.sz,q.sz);
+      }
+      shed=shed.filter(q=>q.life<q.ttl&&q.y<H+10);
+    }
+    ctx.globalAlpha=1;
+  }
+  /* сцена может быть ещё не разложена (фоновая вкладка, нулевая ширина): пробуем, пока не получится; до тех пор подпись входит по-старому */
+  let tries=0;
+  const start=()=>{
+    band.classList.add('e-sand'); /* снимает разброс букв, иначе мишени снимутся со сдвигом */
+    try{if(stage.getBoundingClientRect().width>2)build()}catch(e){ready=false}
+    if(ready)requestAnimationFrame(frame);else band.classList.remove('e-sand');
+    if(ready)return;
+    if(++tries<40)setTimeout(start,300);
+  };
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(start);
+  let rt=null;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{try{if(ready)build()}catch(e){}},200)});
+})();
+
 /* band 1 opens settled: одноразовый входной прогон */
 function runLoadRamp(){
   const t0=performance.now();
   function step(now){
-    loadK=clamp((now-t0)/1400,0,1);
+    loadK=clamp((now-t0)/2400,0,1);
     if(scrubOn) updateCaptions(heroProgress());
     if(loadK<1) requestAnimationFrame(step); else loadKDone= heroProgress()>0.05;
   }
