@@ -778,7 +778,7 @@ function updateCaptions(p){
   stage.appendChild(cv);const ctx=cv.getContext('2d');
   const bd=bands.find(b=>b.el===band);
   const GOLD=['#e3a94f','#f0c478','#c98f38','#ffd9a0','#b8863b'];
-  let P=[],W=0,H=0,dpr=1,ready=false;
+  let P=[],W=0,H=0,dpr=1,ready=false,shed=[],armed=true;
   const easeOut=t=>1-Math.pow(1-t,3),easeIn=t=>t*t;
   function build(){
     const sr=stage.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,1.5);
@@ -815,7 +815,14 @@ function updateCaptions(p){
     if(!ready)return;
     const k=bd.k<0?0:bd.k,op=bd.op<0?0:bd.op;
     const sandOn=op>0&&k>0&&k<1;
-    if(!sandOn){if(cv._dirty){ctx.clearRect(0,0,cv.width,cv.height);cv._dirty=false}return}
+    /* надпись сложилась: с букв осыпаются лишние песчинки (один раз за сборку, взводится заново при откате) */
+    if(k<.5)armed=true;
+    if(armed&&k>=.97&&op>.5&&P.length){armed=false;
+      const n=Math.min(260,Math.round(P.length*.12));
+      for(let i=0;i<n;i++){const p=P[(Math.random()*P.length)|0];
+        shed.push({x:p.tx,y:p.ty,vx:(Math.random()-.5)*14,vy:Math.random()*30,life:0,ttl:.45+Math.random()*.6,delay:Math.random()*.3,sz:p.sz,c:p.c})}
+    }
+    if(!sandOn&&!shed.length){if(cv._dirty){ctx.clearRect(0,0,cv.width,cv.height);cv._dirty=false}return}
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);cv._dirty=true;
     if(sandOn){
       const fade=op*(1-clamp((k-.84)*6.5,0,1)); /* песчинки уступают место настоящим буквам */
@@ -826,6 +833,14 @@ function updateCaptions(p){
         ctx.globalAlpha=fade*Math.min(1,t*4);ctx.fillStyle=t>.98?'#f4e7cf':p.c;
         ctx.fillRect(x,y,p.sz,p.sz);
       }
+    }
+    if(shed.length){
+      for(const q of shed){
+        if(q.delay>0){q.delay-=dt;continue}
+        q.life+=dt;q.vy+=900*dt;q.x+=q.vx*dt;q.y+=q.vy*dt;
+        ctx.globalAlpha=clamp(1-q.life/q.ttl,0,1)*op;ctx.fillStyle=q.c;ctx.fillRect(q.x,q.y,q.sz,q.sz);
+      }
+      shed=shed.filter(q=>q.life<q.ttl&&q.y<H+10);
     }
     ctx.globalAlpha=1;
   }
@@ -846,7 +861,7 @@ function updateCaptions(p){
 function runLoadRamp(){
   const t0=performance.now();
   function step(now){
-    loadK=clamp((now-t0)/2400,0,1);
+    loadK=clamp((now-t0)/1000,0,1);
     if(scrubOn) updateCaptions(heroProgress());
     if(loadK<1) requestAnimationFrame(step); else loadKDone= heroProgress()>0.05;
   }
