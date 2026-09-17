@@ -123,6 +123,8 @@ a{color:inherit}
 }
 .err-nav a:hover{color:var(--text-primary)}
 /* сбой (агрессивная версия): слои-полосы и блоки, сдвиг каналов, развёртка, шум, рывки кадра, скрэмбл заголовка */
+.gl-layer,.gl-jp,.gl-scan,.gl-noise,.gl-bar{transition:opacity .12s linear}
+.err-photo,.err-copy{transition:transform .14s ease-out}
 .gl-layer{position:absolute;inset:0;background:url('assets/err-404.jpg') center 32%/cover no-repeat;opacity:0;pointer-events:none;will-change:transform,clip-path}
 .gl-scan{position:absolute;inset:0;pointer-events:none;opacity:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.55) 0 2px,transparent 2px 5px);mix-blend-mode:multiply}
 .gl-noise{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;image-rendering:pixelated;mix-blend-mode:overlay}
@@ -184,8 +186,8 @@ a{color:inherit}
 
 <script>
 'use strict';
-/* сбой, агрессивная версия. Локальные разрывы частые, полноэкранная вспышка не больше одной на серию
-   (безопасность при светочувствительности). Выключено при prefers-reduced-motion и на скрытой вкладке. */
+/* сбой, спокойная версия: 3-6 смен кадра в секунду, без полноэкранных вспышек, инверсии и пересвета,
+   яркость помех постоянная внутри серии (безопасность при светочувствительности, порог WCAG 3 вспышки в секунду). Выключено при prefers-reduced-motion и на скрытой вкладке. */
 (()=>{
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const root=document.querySelector('.err'),photo=document.querySelector('.err-photo'),scrim=document.querySelector('.err-scrim'),h1=document.querySelector('.err-copy h1');
@@ -210,8 +212,8 @@ a{color:inherit}
     el.style.clipPath=P(.4)?'inset('+R(0,40)+'% 0 '+R(0,40)+'% 0)':'none';
     el.style.opacity=R(.45,1);
   };
-  const FILTERS=['none','hue-rotate(90deg) saturate(3)','hue-rotate(200deg) saturate(4)','invert(1)','sepia(1) saturate(6) hue-rotate(-30deg)','contrast(2.2) brightness(1.3)','grayscale(1) contrast(1.8)','saturate(5) hue-rotate(300deg)'];
-  const BLENDS=['normal','screen','lighten','difference','hard-light'];
+  const FILTERS=['none','hue-rotate(90deg) saturate(2)','hue-rotate(200deg) saturate(2.5)','sepia(1) saturate(4) hue-rotate(-30deg)','grayscale(1) contrast(1.3)','saturate(3) hue-rotate(300deg)'];
+  const BLENDS=['normal','screen','lighten','hard-light'];
   const TEXT=h1.dataset.t,GLYPHS=[...'#%&@$0123456789ABCDEF/|<>_=+*','\u2591','\u2592','\u2593','\u2588','\u25A0',...'\u30a2\u30a8\u30ab\u30b5\u30bf\u30ca\u30cf\u30de\u30e9\u30ef\u30f3\u30e1\u30e2\u30ea'];
   const scramble=k=>{let o='';for(const ch of TEXT)o+=(ch!==' '&&P(k))?pick(GLYPHS):ch;h1.textContent=o;h1.dataset.t=o};
   const restore=()=>{h1.textContent=TEXT;h1.dataset.t=TEXT};
@@ -235,7 +237,7 @@ a{color:inherit}
   let lastFlash=-9999;
   function burst(){
     if(document.hidden){setTimeout(burst,1200);return}
-    const big=P(.15);let n=big?RI(6,12):RI(2,5),flashed=false;
+    const big=P(.15);let n=big?RI(4,6):RI(2,3),flashed=false;
     root.classList.add('glitch');
     const frame=()=>{
       const active=RI(big?3:1,big?6:3);
@@ -244,10 +246,10 @@ a{color:inherit}
       photo.style.transform=P(.45)?'translate('+R(-1,1)*(big?22:8)+'px,'+(P(.15)?R(-1,1)*(big?50:18):R(-3,3))+'px) skewX('+R(-1,1)*(big?3:1)+'deg) scale('+R(1,big?1.04:1.015)+')':'';
       photo.style.filter=P(.2)?pick(FILTERS):'';
       /* одна полноэкранная вспышка на серию, не больше */
-      if(big&&!flashed&&P(.3)&&performance.now()-lastFlash>1500){lastFlash=performance.now();root.style.filter=pick(['invert(1)','brightness(1.9) contrast(1.4)','hue-rotate(180deg) saturate(2)']);flashed=true}else root.style.filter='';
-      scan.style.opacity=P(.55)?R(.15,.5):0;scan.style.transform='translateY('+RI(-4,4)+'px)';
-      if(P(.5)){noise();nz.style.opacity=R(.1,big?.35:.22)}else nz.style.opacity=0;
-      if(P(.45)){bar.style.top=R(0,100)+'%';bar.style.height=RI(1,big?14:5)+'px';bar.style.opacity=R(.4,1)}else bar.style.opacity=0;
+      root.style.filter='';
+      scan.style.opacity=.28;scan.style.transform='translateY('+RI(-4,4)+'px)';
+      noise();nz.style.opacity=.14;
+      if(P(.35)){bar.style.top=R(0,100)+'%';bar.style.height=RI(1,4)+'px';bar.style.opacity=R(.2,.45)}else bar.style.opacity=0;
       /* японские надписи */
       jps.forEach((el,i)=>{if(i<(big?4:2)&&P(.7))jp(el,big);else el.style.opacity=0});
       /* текст */
@@ -258,8 +260,8 @@ a{color:inherit}
       root.style.setProperty('--sk',(P(.3)?R(-1,1)*(big?6:2.5):0)+'deg');
       root.style.setProperty('--po',P(.3)?R(.2,.7):1);root.style.setProperty('--pl',P(.25)?R(-1,4)+'px':'normal');
       if(P(big?.6:.35))scramble(R(.08,big?.35:.2));else restore();
-      if(--n>0)setTimeout(frame,R(28,big?95:75));
-      else setTimeout(()=>{clear();setTimeout(burst,P(.35)?R(70,220):R(240,850))},R(30,80)); /* иногда серия сразу повторяется */
+      if(--n>0)setTimeout(frame,R(170,big?330:280));
+      else setTimeout(()=>{clear();setTimeout(burst,R(650,1700))},R(170,260)); /* иногда серия сразу повторяется */
     };
     frame();
   }
