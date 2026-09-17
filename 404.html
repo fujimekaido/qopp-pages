@@ -122,16 +122,20 @@ a{color:inherit}
   transition:color .3s var(--ease);
 }
 .err-nav a:hover{color:var(--text-primary)}
-/* сбой: в случайные моменты кадр и заголовок на долю секунды рвутся на полосы со сдвигом каналов */
-.gl-layer{position:absolute;inset:0;background:url('assets/err-404.jpg') center 32%/cover no-repeat;opacity:0;pointer-events:none;mix-blend-mode:screen;will-change:transform,clip-path}
-.gl-a{filter:sepia(1) saturate(4) hue-rotate(-12deg)}
-.gl-b{filter:sepia(1) saturate(4) hue-rotate(168deg)}
+/* сбой (агрессивная версия): слои-полосы и блоки, сдвиг каналов, развёртка, шум, рывки кадра, скрэмбл заголовка */
+.gl-layer{position:absolute;inset:0;background:url('assets/err-404.jpg') center 32%/cover no-repeat;opacity:0;pointer-events:none;will-change:transform,clip-path}
+.gl-scan{position:absolute;inset:0;pointer-events:none;opacity:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.55) 0 2px,transparent 2px 5px);mix-blend-mode:multiply}
+.gl-noise{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;image-rendering:pixelated;mix-blend-mode:overlay}
+.gl-bar{position:absolute;left:0;right:0;height:3px;background:#fff;opacity:0;pointer-events:none;mix-blend-mode:overlay;box-shadow:0 0 24px 6px rgba(255,255,255,.35)}
+.err-photo{will-change:transform,filter}
 .err-copy h1{position:relative}
 .err-copy h1::before,.err-copy h1::after{content:attr(data-t);position:absolute;inset:0;opacity:0;pointer-events:none}
-.err-copy h1::before{color:#e3a94f}
-.err-copy h1::after{color:#7fb4ff}
-.err.glitch .err-copy h1::before{opacity:.85;transform:translate(var(--gx,4px),0);clip-path:inset(var(--c1,10%) 0 var(--c2,60%) 0)}
-.err.glitch .err-copy h1::after{opacity:.85;transform:translate(calc(var(--gx,4px)*-1),0);clip-path:inset(var(--c3,55%) 0 var(--c4,12%) 0)}
+.err-copy h1::before{color:#ff2d55}
+.err-copy h1::after{color:#00e5ff}
+.err.glitch .err-copy h1::before{opacity:.9;transform:translate(var(--gx,8px),var(--gy,0));clip-path:inset(var(--c1,10%) 0 var(--c2,60%) 0)}
+.err.glitch .err-copy h1::after{opacity:.9;transform:translate(calc(var(--gx,8px)*-1),calc(var(--gy,0px)*-1));clip-path:inset(var(--c3,55%) 0 var(--c4,12%) 0)}
+.err.glitch .err-copy{transform:translate(var(--tx,0),var(--ty,0)) skewX(var(--sk,0deg))}
+.err.glitch .err-copy p{opacity:var(--po,1);letter-spacing:var(--pl,normal)}
 @media (max-width:720px){
   .err{min-height:56svh}
   .err-copy p{font-size:15.5px}
@@ -154,8 +158,6 @@ a{color:inherit}
   <div class="err-photo" aria-hidden="true">
     <img src="assets/err-404.jpg" alt="" width="2000" height="996">
   </div>
-  <div class="gl-layer gl-a" aria-hidden="true"></div>
-  <div class="gl-layer gl-b" aria-hidden="true"></div>
   <div class="err-scrim" aria-hidden="true"></div>
   <div class="err-copy">
     <h1 data-t="Такой страницы нет или она в разработке">Такой страницы нет или она в разработке</h1>
@@ -181,33 +183,71 @@ a{color:inherit}
 
 <script>
 'use strict';
-/* сбой в случайный момент: 3-6 кадров по 50-90 мс, пауза 2.5-7 с; выключен при reduced motion и на скрытой вкладке */
+/* сбой, агрессивная версия. Локальные разрывы частые, полноэкранная вспышка не больше одной на серию
+   (безопасность при светочувствительности). Выключено при prefers-reduced-motion и на скрытой вкладке. */
 (()=>{
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const root=document.querySelector('.err'),A=document.querySelector('.gl-a'),B=document.querySelector('.gl-b');
-  if(!root||!A||!B)return;
-  const rnd=(a,b)=>a+Math.random()*(b-a);
-  const slice=el=>{
-    const top=rnd(0,82),h=rnd(4,18);
-    el.style.clipPath='inset('+top+'% 0 '+Math.max(0,100-top-h)+'% 0)';
-    el.style.transform='translateX('+rnd(-22,22)+'px)';
-    el.style.opacity=rnd(.35,.8);
+  const root=document.querySelector('.err'),photo=document.querySelector('.err-photo'),scrim=document.querySelector('.err-scrim'),h1=document.querySelector('.err-copy h1');
+  if(!root||!photo||!h1)return;
+  const R=(a,b)=>a+Math.random()*(b-a),RI=(a,b)=>Math.round(R(a,b)),P=p=>Math.random()<p,pick=a=>a[RI(0,a.length-1)];
+  const N=9,layers=[];
+  for(let i=0;i<N;i++){const d=document.createElement('div');d.className='gl-layer';d.setAttribute('aria-hidden','true');root.insertBefore(d,scrim);layers.push(d)}
+  const scan=document.createElement('div');scan.className='gl-scan';root.insertBefore(scan,scrim);
+  const bar=document.createElement('div');bar.className='gl-bar';root.insertBefore(bar,scrim);
+  const nz=document.createElement('canvas');nz.className='gl-noise';nz.width=160;nz.height=90;root.insertBefore(nz,scrim);
+  const nx=nz.getContext('2d'),nd=nx.createImageData(160,90);
+  const noise=()=>{const d=nd.data;for(let i=0;i<d.length;i+=4){const v=Math.random()*255;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}nx.putImageData(nd,0,0)};
+  const FILTERS=['none','hue-rotate(90deg) saturate(3)','hue-rotate(200deg) saturate(4)','invert(1)','sepia(1) saturate(6) hue-rotate(-30deg)','contrast(2.2) brightness(1.3)','grayscale(1) contrast(1.8)','saturate(5) hue-rotate(300deg)'];
+  const BLENDS=['normal','screen','lighten','difference','hard-light'];
+  const TEXT=h1.dataset.t,GLYPHS=[...'#%&@$0123456789ABCDEF/|<>_=+*','\u2591','\u2592','\u2593','\u2588','\u25A0'];
+  const scramble=k=>{let o='';for(const ch of TEXT)o+=(ch!==' '&&P(k))?pick(GLYPHS):ch;h1.textContent=o;h1.dataset.t=o};
+  const restore=()=>{h1.textContent=TEXT;h1.dataset.t=TEXT};
+  function slice(el,big){
+    if(P(.3)){ /* блок: режем по обеим осям, как битый макроблок видео */
+      const x=R(0,80),y=R(0,80),w=R(8,big?45:26),h=R(6,big?30:16);
+      el.style.clipPath='inset('+y+'% '+Math.max(0,100-x-w)+'% '+Math.max(0,100-y-h)+'% '+x+'%)';
+      el.style.transform='translate('+R(-90,90)+'px,'+R(-40,40)+'px) scale('+R(1,1.12)+')';
+    }else{ /* полоса во всю ширину */
+      const y=R(0,92),h=R(1.5,big?26:14);
+      el.style.clipPath='inset('+y+'% 0 '+Math.max(0,100-y-h)+'% 0)';
+      el.style.transform='translateX('+R(-1,1)*(big?180:90)+'px)'+(P(.25)?' scaleX('+R(1.02,1.35)+')':'');
+    }
+    el.style.filter=pick(FILTERS);el.style.mixBlendMode=pick(BLENDS);el.style.opacity=R(.55,1);
+  }
+  const clear=()=>{
+    layers.forEach(l=>{l.style.opacity=0});scan.style.opacity=0;bar.style.opacity=0;nz.style.opacity=0;
+    photo.style.transform='';photo.style.filter='';root.style.filter='';root.classList.remove('glitch');restore();
+    ['--tx','--ty','--sk','--po','--pl'].forEach(v=>root.style.removeProperty(v));
   };
   function burst(){
-    if(document.hidden){setTimeout(burst,1500);return}
-    let n=Math.round(rnd(3,6));
+    if(document.hidden){setTimeout(burst,1200);return}
+    const big=P(.28);let n=big?RI(10,22):RI(3,9),flashed=false;
     root.classList.add('glitch');
     const frame=()=>{
-      slice(A);slice(B);
-      root.style.setProperty('--gx',rnd(2,7)+'px');
-      root.style.setProperty('--c1',rnd(0,45)+'%');root.style.setProperty('--c2',rnd(35,70)+'%');
-      root.style.setProperty('--c3',rnd(40,75)+'%');root.style.setProperty('--c4',rnd(0,30)+'%');
-      if(--n>0)setTimeout(frame,rnd(50,90));
-      else setTimeout(()=>{A.style.opacity=B.style.opacity=0;root.classList.remove('glitch');setTimeout(burst,rnd(2500,7000))},rnd(50,90));
+      const active=RI(big?4:1,big?N:5);
+      layers.forEach((l,i)=>{if(i<active)slice(l,big);else l.style.opacity=0});
+      /* кадр целиком: рывок, срыв развёртки, перекос */
+      photo.style.transform=P(.55)?'translate('+R(-1,1)*(big?46:16)+'px,'+(P(.18)?R(-1,1)*(big?120:40):R(-6,6))+'px) skewX('+R(-1,1)*(big?7:2)+'deg) scale('+R(1,big?1.08:1.03)+')':'';
+      photo.style.filter=P(.4)?pick(FILTERS):'';
+      /* одна полноэкранная вспышка на серию, не больше */
+      if(big&&!flashed&&P(.35)){root.style.filter=pick(['invert(1)','brightness(1.9) contrast(1.4)','hue-rotate(180deg) saturate(2)']);flashed=true}else root.style.filter='';
+      scan.style.opacity=P(.6)?R(.25,.8):0;scan.style.transform='translateY('+RI(-4,4)+'px)';
+      if(P(.5)){noise();nz.style.opacity=R(.18,big?.6:.35)}else nz.style.opacity=0;
+      if(P(.45)){bar.style.top=R(0,100)+'%';bar.style.height=RI(1,big?14:5)+'px';bar.style.opacity=R(.4,1)}else bar.style.opacity=0;
+      /* текст */
+      root.style.setProperty('--gx',R(4,big?26:12)+'px');root.style.setProperty('--gy',R(-5,5)+'px');
+      root.style.setProperty('--c1',R(0,45)+'%');root.style.setProperty('--c2',R(30,70)+'%');
+      root.style.setProperty('--c3',R(35,75)+'%');root.style.setProperty('--c4',R(0,30)+'%');
+      root.style.setProperty('--tx',(P(.5)?R(-1,1)*(big?30:10):0)+'px');root.style.setProperty('--ty',(P(.3)?R(-8,8):0)+'px');
+      root.style.setProperty('--sk',(P(.35)?R(-1,1)*(big?14:5):0)+'deg');
+      root.style.setProperty('--po',P(.3)?R(.2,.7):1);root.style.setProperty('--pl',P(.25)?R(-1,4)+'px':'normal');
+      if(P(big?.75:.4))scramble(R(.15,big?.7:.35));else restore();
+      if(--n>0)setTimeout(frame,R(28,big?95:75));
+      else setTimeout(()=>{clear();setTimeout(burst,P(.3)?R(120,420):R(700,3400))},R(30,80)); /* иногда серия сразу повторяется */
     };
     frame();
   }
-  setTimeout(burst,rnd(900,1800));
+  setTimeout(burst,R(500,1100));
 })();
 </script>
 </body>
