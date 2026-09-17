@@ -215,6 +215,15 @@ a.mi{cursor:pointer;text-decoration:none}
 .b-left{left:clamp(24px,7vw,110px);top:38%}
 .b-right{right:clamp(24px,7vw,110px);top:38%;text-align:right}
 
+/* вход подписей: золотая черта проходит по строке слева направо и проявляет текст (родня дорисовывающимся линиям сайта).
+   Прогресс от той же --k: вперёд проявляет, назад стирает. Черта гаснет в начале и в конце хода. */
+.e-line h2{position:relative;display:inline-block}
+.e-line .ln{display:block;clip-path:inset(-12% calc((1 - var(--k,0))*100%) -12% -2%)}
+.e-line h2::after{
+  content:"";position:absolute;top:-6%;bottom:-6%;width:2px;left:calc(var(--k,0)*100%);
+  background:var(--accent);box-shadow:0 0 16px 2px rgba(227,169,79,.55);
+  opacity:clamp(0,min(var(--k,0)*14,(1 - var(--k,0))*9),1);pointer-events:none;
+}
 /* entrance: scatter (band 1, sand grains) */
 .e-scatter .c{
   --kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);
@@ -536,20 +545,20 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     <video id="hero-video" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
     <div class="scrim" aria-hidden="true"></div>
 
-    <div class="band b-left e-scatter" data-a="0" data-b="0.15" data-entr="sandfall">
-      <h2 data-split>Всё начинается с песка</h2>
+    <div class="band b-left e-line" data-a="0" data-b="0.15">
+      <h2><span class="ln">Всё начинается с песка</span></h2>
     </div>
 
-    <div class="band b-right e-blur" data-a="0.19" data-b="0.35">
-      <h2 class="e-blur-wrap"><span class="soft" aria-hidden="true">Огонь очищает его до кремния</span><span class="sharp">Огонь очищает его до кремния</span></h2>
+    <div class="band b-right e-line" data-a="0.19" data-b="0.35">
+      <h2><span class="ln">Огонь очищает его до кремния</span></h2>
     </div>
 
-    <div class="band b-left e-grid" data-a="0.40" data-b="0.57" data-entr="grid" data-spread="0.45">
-      <h2 data-split>Кремний растёт в один кристалл</h2>
+    <div class="band b-left e-line" data-a="0.40" data-b="0.57">
+      <h2><span class="ln">Кремний растёт в один кристалл</span></h2>
     </div>
 
-    <div class="band b-right e-weave" data-a="0.585" data-b="0.675" data-entr="weave">
-      <h2 data-split>Кристалл становится памятью</h2>
+    <div class="band b-right e-line" data-a="0.585" data-b="0.675">
+      <h2><span class="ln">Кристалл становится памятью</span></h2>
     </div>
 
     <div class="band b-settle" data-a="0.83" data-b="1" data-ramp="0.06">
