@@ -490,8 +490,13 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 
 /* ============ вопросы и ответы ============ */
 .f-hero{min-height:0;padding-bottom:clamp(30px,5vh,56px)}
-.f-hero h1{max-width:16ch}
-.f-search{position:relative;margin-top:clamp(28px,4vh,44px);max-width:640px}
+.f-hero .inner{text-align:center}
+/* заголовок в одну строку, блок сжат по его ширине: поиск под ним ровно той же ширины */
+.f-head{display:inline-block;max-width:100%;text-align:left}
+.f-hero h1{max-width:none;white-space:nowrap;font-size:clamp(24px,6.7vw,88px);text-align:center}
+.f-search{position:relative;margin-top:clamp(28px,4vh,44px);max-width:none;width:100%}
+.f-search input{text-overflow:ellipsis}
+.f-count{text-align:center}
 .f-search input{
   width:100%;font-family:var(--body);font-size:17px;font-weight:500;color:var(--ink);
   background:#fff;border:1px solid var(--hairline);border-radius:16px;
@@ -598,13 +603,14 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 <header class="a-hero f-hero reveal">
   <div class="inner">
     <p class="kicker part">Вопросы и ответы</p>
+    <div class="f-head">
     <h1 class="part">Сначала спросите нас</h1>
-    <p class="sub part">Ответы нашей поддержки на то, о чём покупатели спрашивают чаще всего. Собрано из нескольких тысяч реальных обращений</p>
     <div class="f-search part">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="6.5" stroke="#8b9098" stroke-width="1.6"/><path d="m14 14 4.5 4.5" stroke="#8b9098" stroke-width="1.6" stroke-linecap="round"/></svg>
-      <input id="f-q" type="search" placeholder="Например: XMP, PS5, 4 ГБ, не видит диск" autocomplete="off" aria-label="Поиск по вопросам">
+      <input id="f-q" type="search" placeholder="Например: XMP, PS5, не видит диск, радиатор, 4 ГБ, DDR3L, видеорегистратор, TBW, exFAT, кабель, реальный объём, Type-C, BIOS, серийный номер, гарантия, частота, SO-DIMM" autocomplete="off" aria-label="Поиск по вопросам">
     </div>
     <p class="f-count part" id="f-count" aria-live="polite"></p>
+    </div>
   </div>
 </header>
 
