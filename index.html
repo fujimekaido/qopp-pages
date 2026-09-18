@@ -688,7 +688,12 @@ function pickFilm(){
 }
 const FILM = pickFilm();
 const SOURCES = { desktop: FILM.desktop, mobile: FILM.mobile };
-document.querySelectorAll('.band.e-line .ln').forEach((el,i)=>{if(FILM.caps[i])el.textContent=FILM.caps[i]});
+document.querySelectorAll('.band.e-line').forEach((band,i)=>{
+  if(FILM.caps[i])band.querySelector('.ln').textContent=FILM.caps[i];
+  /* beats: свои доли прокрутки [начало, конец] для подписей; без поля остаются доли из разметки (фильм sand).
+     Первая подпись всегда с 0, финал (.b-settle, с 0.83) общий для всех фильмов */
+  if(FILM.beats&&FILM.beats[i]){band.dataset.a=FILM.beats[i][0];band.dataset.b=FILM.beats[i][1]}
+});
 document.querySelectorAll('.b-settle .sub, .static-copy p').forEach(el=>{el.textContent=FILM.sub});
 const MOBILE_Q = '(max-width: 720px), ((orientation: portrait) and (pointer: coarse))';
 /* строки гейтов: должны совпадать с CSS слово в слово */
