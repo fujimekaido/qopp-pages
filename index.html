@@ -656,10 +656,40 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 <script>
 'use strict';
 /* ============ config ============ */
-const SOURCES = {
-  desktop: { url:'assets/hero-d2.mp4', poster:'assets/hero-poster-d2.jpg', bytes: 12088460 },
-  mobile:  { url:'assets/hero-m6.mp4', poster:'assets/hero-poster-m6.jpg', bytes: 5063470 }
-};
+/* Фильмы главной. Новый фильм = одна запись: id, четыре подписи (доли прокрутки общие, заданы в разметке band),
+   подзаголовок финала и два источника. Все фильмы одной длины и с одной раскладкой сцен, см. ПЕРЕХОД.md.
+   Разметка ниже несёт тексты первого фильма: без JS и для поисковиков страница остаётся цельной. */
+const FILMS = [
+  { id:'sand', sub:'Скорость, рождённая из песка',
+    caps:['Всё начинается с песка','Огонь очищает его до кремния','Кремний растёт в один кристалл','Кристалл становится памятью'],
+    desktop:{ url:'assets/hero-d2.mp4', poster:'assets/hero-poster-d2.jpg', bytes: 12088460 },
+    mobile: { url:'assets/hero-m6.mp4', poster:'assets/hero-poster-m6.jpg', bytes: 5063470 } }
+];
+/* Колода: фильмы идут в случайном порядке, повтор возможен только после того, как показаны все.
+   Новая колода не начинается с фильма, которым закончилась прошлая. Память в localStorage; если он недоступен
+   (приватное окно), выбор просто случайный. Для проверки: ?film=id. */
+function pickFilm(){
+  const ids=FILMS.map(x=>x.id), byId=id=>FILMS.find(x=>x.id===id);
+  const forced=new URLSearchParams(location.search).get('film');
+  if(forced&&byId(forced))return byId(forced);
+  if(ids.length<2)return FILMS[0];
+  const KEY='qopp-film-deck';
+  let deck=[],last=null;
+  try{const st=JSON.parse(localStorage.getItem(KEY)||'{}');
+    deck=(Array.isArray(st.deck)?st.deck:[]).filter(id=>ids.includes(id));last=st.last||null}catch(e){}
+  if(!deck.length){
+    deck=ids.slice();
+    for(let i=deck.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[deck[i],deck[j]]=[deck[j],deck[i]]}
+    if(deck[0]===last)deck.push(deck.shift());
+  }
+  const id=deck.shift();
+  try{localStorage.setItem(KEY,JSON.stringify({deck,last:id}))}catch(e){}
+  return byId(id);
+}
+const FILM = pickFilm();
+const SOURCES = { desktop: FILM.desktop, mobile: FILM.mobile };
+document.querySelectorAll('.band.e-line .ln').forEach((el,i)=>{if(FILM.caps[i])el.textContent=FILM.caps[i]});
+document.querySelectorAll('.b-settle .sub, .static-copy p').forEach(el=>{el.textContent=FILM.sub});
 const MOBILE_Q = '(max-width: 720px), ((orientation: portrait) and (pointer: coarse))';
 /* строки гейтов: должны совпадать с CSS слово в слово */
 const GATES = [
