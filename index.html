@@ -672,7 +672,15 @@ const FILMS = [
     desktop:{ url:'assets/hero-d2.mp4', poster:'assets/hero-poster-d2.jpg', bytes: 12088460,
               lite:{ url:'assets/hero-d2-lite.mp4', bytes: 2579044 } },
     mobile: { url:'assets/hero-m6.mp4', poster:'assets/hero-poster-m6.jpg', bytes: 5063470,
-              lite:{ url:'assets/hero-m6-lite.mp4', bytes: 1448757 } } }
+              lite:{ url:'assets/hero-m6-lite.mp4', bytes: 1448757 } } },
+  /* ЗАГЛУШКА (21.09.2026): собрана из одного клипа влёта в ПК и неподвижного финального кадра, чтобы проверить
+     колоду и загрузку разных фильмов. Подписи черновые. Заменить, когда будут готовы сцены внутри ПК и финал. */
+  { id:'ram', sub:'Скорость, с которой всё оживает', product:'ram.html',
+    caps:['Пока всё спит','Внутри ждёт память','Хватит одного импульса','И система оживает'],
+    desktop:{ url:'assets/hero-ram-d1.mp4', poster:'assets/hero-poster-ram-d1.jpg', bytes: 9389700,
+              lite:{ url:'assets/hero-ram-d1-lite.mp4', bytes: 1602121 } },
+    mobile: { url:'assets/hero-ram-m1.mp4', poster:'assets/hero-poster-ram-m1.jpg', bytes: 2906702,
+              lite:{ url:'assets/hero-ram-m1-lite.mp4', bytes: 835923 } } }
 ];
 /* Колода: фильмы идут в случайном порядке, повтор возможен только после того, как показаны все.
    Новая колода не начинается с фильма, которым закончилась прошлая. Память в localStorage; если он недоступен
@@ -704,6 +712,8 @@ document.querySelectorAll('.band.e-line').forEach((band,i)=>{
   if(FILM.beats&&FILM.beats[i]){band.dataset.a=FILM.beats[i][0];band.dataset.b=FILM.beats[i][1]}
 });
 document.querySelectorAll('.b-settle .sub, .static-copy p').forEach(el=>{el.textContent=FILM.sub});
+/* product: куда ведёт «Смотреть продукт» у этого фильма; без поля остаётся ссылка из разметки */
+if(FILM.product)document.querySelectorAll('.b-settle .btn-ghost').forEach(el=>{el.href=FILM.product});
 const MOBILE_Q = '(max-width: 720px), ((orientation: portrait) and (pointer: coarse))';
 /* строки гейтов: должны совпадать с CSS слово в слово */
 const GATES = [
