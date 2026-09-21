@@ -187,6 +187,8 @@ a.mi{cursor:pointer;text-decoration:none}
   opacity:0;transition:opacity .8s var(--ease);will-change:transform;transform:translateZ(0);
 }
 .stage.video-ready video{opacity:1}
+/* стоп-кадр на время подмены лёгкой версии фильма полной */
+.stage canvas.hold{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .stage.video-failed video{display:none}
 .poster{position:absolute;inset:0;background-size:cover;background-position:center}
 .scrim{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 120% 90% at 50% 45%,rgba(10,10,18,0) 35%,rgba(10,10,18,.62) 100%)}
@@ -662,8 +664,10 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 const FILMS = [
   { id:'sand', sub:'Скорость, рождённая из песка',
     caps:['Всё начинается с песка','Огонь очищает его до кремния','Кремний растёт в один кристалл','Кристалл становится памятью'],
-    desktop:{ url:'assets/hero-d2.mp4', poster:'assets/hero-poster-d2.jpg', bytes: 12088460 },
-    mobile: { url:'assets/hero-m6.mp4', poster:'assets/hero-poster-m6.jpg', bytes: 5063470 } }
+    desktop:{ url:'assets/hero-d2.mp4', poster:'assets/hero-poster-d2.jpg', bytes: 12088460,
+              lite:{ url:'assets/hero-d2-lite.mp4', bytes: 2579044 } },
+    mobile: { url:'assets/hero-m6.mp4', poster:'assets/hero-poster-m6.jpg', bytes: 5063470,
+              lite:{ url:'assets/hero-m6-lite.mp4', bytes: 1448757 } } }
 ];
 /* Колода: фильмы идут в случайном порядке, повтор возможен только после того, как показаны все.
    Новая колода не начинается с фильма, которым закончилась прошлая. Память в localStorage; если он недоступен
@@ -906,30 +910,40 @@ function startBlobFetch(){
   started=true;
   loadHeroBlob().catch(failVideo);
 }
-async function loadHeroBlob(){
-  stage.classList.add('loading');
-  const src=activeSrc;
+/* Две ступени. GitHub Pages отдаёт видео медленно (замер 21.09.2026: 270 КБ/с, полный фильм 44 с),
+   и всё это время посетитель видел бы статичный постер. Поэтому сначала грузится лёгкая версия (lite,
+   около 2,5 МБ), прокрутка оживает с ней, а полная докачивается в фоне и подменяет её в момент покоя.
+   У фильма без lite сразу грузится полная. */
+async function fetchBlobUrl(file,src,onFrac){
   const ctrl=new AbortController();
   let watchdog=setTimeout(()=>ctrl.abort(),20000);
-  const res=await fetch(src.url,{priority:'low',signal:ctrl.signal});
+  const res=await fetch(file.url,{priority:'low',signal:ctrl.signal});
   if(!res.ok) throw new Error('video http '+res.status);
-  const total=Number(res.headers.get('Content-Length'))||src.bytes;
+  const total=Number(res.headers.get('Content-Length'))||file.bytes;
   const reader=res.body.getReader();
-  const chunks=[];let got=0,lastRing=0;
+  const chunks=[];let got=0,last=0;
   for(;;){
     const {done,value}=await reader.read();
     if(done)break;
     clearTimeout(watchdog);
+    if(src!==activeSrc){ctrl.abort();return null} /* источник сменился во время загрузки */
     watchdog=setTimeout(()=>ctrl.abort(),20000);
     chunks.push(value);got+=value.length;
-    const frac=Math.min(1,got/total);
     const now=performance.now();
-    if(now-lastRing>100||frac===1){lastRing=now;ring.style.setProperty('--ld',Math.round(126*(1-frac)))}
+    if(onFrac&&(now-last>100||got>=total)){last=now;onFrac(Math.min(1,got/total))}
   }
   clearTimeout(watchdog);
-  if(src!==activeSrc)return; /* источник сменился во время загрузки */
+  if(src!==activeSrc)return null;
+  return URL.createObjectURL(new Blob(chunks,{type:'video/mp4'}));
+}
+async function loadHeroBlob(){
+  stage.classList.add('loading');
+  const src=activeSrc;
+  const first=src.lite||src;
+  const url=await fetchBlobUrl(first,src,frac=>ring.style.setProperty('--ld',Math.round(126*(1-frac))));
+  if(!url)return;
   ring.style.setProperty('--ld',0);
-  objectUrl=URL.createObjectURL(new Blob(chunks));
+  objectUrl=url;
   video.src=objectUrl;
   video.load();
   video.addEventListener('canplay',()=>{
@@ -937,7 +951,36 @@ async function loadHeroBlob(){
     requestSeek(heroProgress()*video.duration);
     stage.classList.add('video-ready');
     setTimeout(startAttract,900);
+    if(first!==src) upgradeHero(src);
   },{once:true});
+}
+/* полная версия: качаем в фоне, подменяем в момент покоя под стоп-кадром, чтобы не было вспышки */
+async function upgradeHero(src){
+  const c=navigator.connection;
+  if(c&&c.saveData)return; /* режим экономии трафика: остаёмся на лёгкой */
+  let url=null;
+  try{url=await fetchBlobUrl(src,src,null)}catch(e){return} /* не докачалась: лёгкая остаётся */
+  if(!url)return;
+  const idle=()=>scrubOn&&rafId===null&&!seekBusy&&attract.mode!=='play'&&attract.mode!=='return'&&!document.hidden;
+  const wait=()=>{
+    if(src!==activeSrc){URL.revokeObjectURL(url);return}
+    if(!idle()){setTimeout(wait,250);return}
+    const hold=document.createElement('canvas');
+    hold.className='hold';hold.width=video.videoWidth;hold.height=video.videoHeight;
+    try{hold.getContext('2d').drawImage(video,0,0)}catch(e){URL.revokeObjectURL(url);return}
+    video.after(hold);
+    const old=objectUrl;
+    objectUrl=url;
+    video.src=url;video.load();
+    video.addEventListener('canplay',()=>{
+      seekBusy=false;pendingTime=null;
+      video.addEventListener('seeked',()=>requestAnimationFrame(()=>requestAnimationFrame(()=>hold.remove())),{once:true});
+      requestSeek(shown*video.duration);
+      if(old)URL.revokeObjectURL(old);
+    },{once:true});
+    setTimeout(()=>hold.remove(),4000); /* страховка: стоп-кадр не остаётся навсегда */
+  };
+  wait();
 }
 function failVideo(){
   stage.classList.remove('loading');
