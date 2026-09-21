@@ -2,7 +2,8 @@
    видео медленно, поэтому фильм главной и картинки кладём в Cache Storage сами.
    - видео (assets/*.mp4): из кеша навсегда; новый фильм = новое имя файла
    - картинки и шрифты (assets/*): сразу из кеша, в фоне обновляем (заменённая картинка придёт со второго визита)
-   - страницы: всегда из сети (выкладка видна сразу), кеш только как запас без связи
+   - страницы: всегда из сети (выкладка видна сразу), кеш только как запас без связи; ключ без ?параметров,
+     иначе каждая UTM-ссылка плодила бы копию
    Поднять версию кеша = сменить V: старые кеши удалятся при активации. */
 const V = 'qopp-v1';
 const MEDIA = V + '-media', PAGES = V + '-pages';
@@ -36,7 +37,7 @@ self.addEventListener('fetch', e => {
   if (req.mode === 'navigate') {
     e.respondWith(
       fetch(req)
-        .then(r => { if (ok(r)) { const c = r.clone(); e.waitUntil(caches.open(PAGES).then(x => x.put(req, c))); } return r; })
+        .then(r => { if (ok(r)) { const c = r.clone(); e.waitUntil(caches.open(PAGES).then(x => x.put(url.origin + url.pathname, c))); } return r; })
         .catch(() => caches.match(req, { ignoreSearch: true }).then(r => r || Response.error()))
     );
   }
