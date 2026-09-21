@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Где купить. QOPP</title>
-<meta name="description" content="Где купить технику QOPP: официальный магазин бренда с гарантией напрямую и оплатой частями, а также Ozon, Wildberries и Яндекс Маркет.">
+<title>Сотрудничество. QOPP</title>
+<meta name="description" content="Сотрудничество с QOPP: опт, розничные сети, сборщики ПК, корпоративные закупки, селлеры маркетплейсов, блогеры и обзорщики. Оставьте заявку за минуту.">
 <meta name="theme-color" content="#f6f6f7">
 <!-- DEPLOY STEP: заменить og:url и og:image на абсолютные адреса живого сайта перед публикацией -->
-<meta property="og:title" content="Где купить. QOPP">
-<meta property="og:description" content="Официальный магазин QOPP и маркетплейсы">
-<meta property="og:url" content="/buy.html">
+<meta property="og:title" content="Сотрудничество. QOPP">
+<meta property="og:description" content="Расскажите о себе в пять коротких шагов, пришлём условия под ваш формат">
+<meta property="og:url" content="/partners.html">
 <meta property="og:image" content="/assets/about-dark.jpg">
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -498,31 +498,49 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   .q-mark .spark{display:none}
 }
 
-/* ============ где купить ============ */
-.shop{position:relative;z-index:1;background:#101216;color:#f4f1ea}
-.shop .section{padding-top:clamp(70px,10vh,110px);padding-bottom:clamp(70px,10vh,110px)}
-.shop .kicker{color:var(--accent)}
-.shop h2{font-family:var(--display);font-weight:700;font-size:clamp(27px,3.6vw,44px);line-height:1.18;margin-top:14px;max-width:20ch}
-.shop .lede{color:#a9adb5;max-width:56ch;margin-top:14px}
-.shop-why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,44px);margin-top:clamp(30px,5vh,50px);
-  border-top:1px solid rgba(244,241,234,.16);padding-top:clamp(22px,4vh,34px)}
-.shop-why h3{font-family:var(--display);font-weight:700;font-size:clamp(18px,2vw,23px)}
-.shop-why p{color:#a9adb5;margin-top:10px}
-.shop-go{margin-top:clamp(30px,5vh,48px);display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-.shop-go small{color:#8b9098;font-size:13px}
-.b-btn{display:inline-block;font-weight:600;font-size:16px;padding:15px 32px;border-radius:999px;text-decoration:none;font-family:var(--body);
-  background:var(--accent);border:1px solid var(--accent);color:#14161c;transition:background .25s var(--ease),border-color .25s var(--ease)}
-.b-btn:hover,.b-btn:focus-visible{background:#f0c478;border-color:#f0c478}
-@media (max-width:760px){.shop-why{grid-template-columns:1fr}}
-.mp{display:grid;grid-template-columns:minmax(170px,26%) 1fr auto;gap:clamp(14px,3vw,40px);align-items:center;
-  padding:clamp(18px,2.6vh,26px) 0;border-top:1px solid var(--hairline)}
-.mp:last-child{border-bottom:1px solid var(--hairline)}
-.mp h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.2vw,26px);letter-spacing:.01em}
-.mp p{color:var(--muted)}
-.mp a.go{display:inline-block;font-weight:600;font-size:15px;padding:12px 24px;border-radius:999px;color:var(--ink);text-decoration:none;
-  border:1px solid rgba(20,22,28,.28);transition:color .25s var(--ease),border-color .25s var(--ease)}
-.mp a.go:hover,.mp a.go:focus-visible{color:var(--accent-deep);border-color:var(--accent-deep)}
-@media (max-width:760px){.mp{grid-template-columns:1fr}}
+/* ============ сотрудничество: пошаговая форма ============ */
+.wz{max-width:780px}
+.wz-bar{height:2px;background:var(--hairline);position:relative;margin-bottom:clamp(26px,4vh,40px)}
+.wz-bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent-deep);transition:width .5s var(--ease)}
+.wz-n{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--silver);margin-bottom:12px}
+.wz-step[hidden]{display:none}
+.wz-step h3{font-family:var(--display);font-weight:700;font-size:clamp(24px,3.2vw,38px);line-height:1.18;outline:none}
+.wz-step .hint{color:var(--muted);margin-top:10px}
+.wz-opts{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(20px,3.4vh,30px)}
+.wz-opts button{font-family:var(--body);font-size:16px;font-weight:600;color:var(--ink);background:#fff;
+  border:1px solid rgba(20,22,28,.18);border-radius:999px;padding:13px 22px;cursor:pointer;
+  transition:border-color .25s var(--ease),color .25s var(--ease),background .25s var(--ease)}
+.wz-opts button:hover,.wz-opts button:focus-visible{border-color:var(--accent-deep);color:var(--accent-deep)}
+.wz-opts button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.wz-fields{display:grid;gap:12px;margin-top:clamp(20px,3.4vh,30px)}
+.wz-fields.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:640px){.wz-fields.two{grid-template-columns:1fr}}
+.wz-fields label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.wz-fields input,.wz-fields textarea{
+  width:100%;font-family:var(--body);font-size:16px;font-weight:500;color:var(--ink);background:#fff;
+  border:1px solid var(--hairline);border-radius:14px;padding:15px 18px;
+  transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
+.wz-fields textarea{min-height:110px;resize:vertical}
+.wz-fields input:focus,.wz-fields textarea:focus{outline:none;border-color:var(--accent-deep);box-shadow:0 12px 34px rgba(184,134,59,.13)}
+.wz-agree{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:14px;color:var(--muted)}
+.wz-agree input{margin-top:3px;accent-color:#b8863b}
+.wz-err{min-height:1.5em;margin-top:14px;font-size:14px;font-weight:600;color:#a4402c}
+.wz-nav{display:flex;gap:12px;align-items:center;margin-top:8px}
+.wz-next{font-family:var(--body);font-weight:600;font-size:15px;padding:13px 28px;border-radius:999px;background:var(--ink);color:#fff;
+  border:1px solid var(--ink);cursor:pointer;transition:background .25s var(--ease),border-color .25s var(--ease)}
+.wz-next:hover,.wz-next:focus-visible{background:var(--accent-deep);border-color:var(--accent-deep)}
+.wz-back{font-family:var(--body);font-size:14px;color:var(--muted);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.wz-back[hidden]{display:none}
+.wz-out{margin-top:clamp(20px,3.4vh,30px);white-space:pre-wrap;font-family:var(--body);font-size:15px;line-height:1.6;color:var(--ink);
+  background:#fff;border:1px solid var(--hairline);border-radius:16px;padding:20px 22px}
+.wz-send{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.wz-send a,.wz-send button{display:inline-block;font-family:var(--body);font-weight:600;font-size:15px;padding:13px 26px;border-radius:999px;
+  text-decoration:none;cursor:pointer;border:1px solid rgba(20,22,28,.28);background:transparent;color:var(--ink);
+  transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
+.wz-send .main{background:var(--ink);border-color:var(--ink);color:#fff}
+.wz-send .main:hover,.wz-send .main:focus-visible{background:var(--accent-deep);border-color:var(--accent-deep)}
+.wz-send a:hover,.wz-send a:focus-visible{color:var(--accent-deep);border-color:var(--accent-deep)}
+.wz-note{margin-top:14px;font-size:14px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -536,7 +554,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="menu-pill">
     <a class="mi" id="mi-catalog">Каталог</a>
     <a class="mi" href="warranty.html">Гарантия</a>
-    <a class="mi" id="mi-contacts">Контакты</a>
+    <a class="mi active" id="mi-contacts">Контакты</a>
     <a class="mi" href="about.html">О компании</a>
   </div>
   <button class="menu-btn" aria-expanded="false" aria-controls="m-menu">Меню
@@ -556,7 +574,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 </div>
 <div class="cat-drop" id="contact-drop" aria-label="Контакты">
   <a class="cd-item" href="support.html">Поддержка</a>
-  <a class="cd-item" href="partners.html">Сотрудничество</a>
+  <a class="cd-item current" href="partners.html" aria-current="page">Сотрудничество</a>
   <a class="cd-item" href="faq.html">Вопросы и ответы</a>
 </div>
 <button class="to-top" id="to-top" aria-label="Наверх">
@@ -577,7 +595,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <a class="mi" id="mm-contacts">Контакты</a>
   <div class="mm-sub" hidden>
     <a class="mm-si" href="support.html">Поддержка</a>
-    <a class="mm-si" href="partners.html">Сотрудничество</a>
+    <a class="mm-si" href="partners.html" aria-current="page">Сотрудничество</a>
     <a class="mm-si" href="faq.html">Вопросы и ответы</a>
   </div>
   <a class="mi" href="about.html">О компании</a>
@@ -590,53 +608,98 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     <path class="tail" d="M254 233 L318 361 L185 292 Z"/>
   </svg>
   <div class="inner">
-    <p class="kicker part">Где купить</p>
-    <h1 class="part">Покупайте у&nbsp;бренда</h1>
-    <p class="sub part">Технику QOPP мы продаём сами: в официальном магазине бренда и в наших магазинах на маркетплейсах. <b>Так вы точно получаете оригинал и гарантию.</b></p>
+    <p class="kicker part">Сотрудничество</p>
+    <h1 class="part">Давайте работать вместе</h1>
+    <p class="sub part">Оптовикам и розничным сетям, сборщикам ПК, корпоративным заказчикам, селлерам маркетплейсов, блогерам и обзорщикам. <b>Расскажите о себе в пять коротких шагов, и мы пришлём условия под ваш формат.</b></p>
   </div>
 </header>
 
 <main id="main" tabindex="-1">
 
-<!-- официальный магазин -->
-<section class="shop reveal" id="store" aria-labelledby="store-h">
-  <div class="section">
-    <p class="kicker part">Официальный магазин</p>
-    <h2 class="part" id="store-h">Напрямую у бренда</h2>
-    <p class="lede part">Магазин самого бренда, без посредников между вами и производителем.</p>
-    <div class="shop-why">
-      <div class="part"><h3>Гарантия напрямую</h3><p>Вопрос по гарантии решаете с нами, а не через площадку.</p></div>
-      <div class="part"><h3>Оплата частями</h3><p>Доступен Сплит: покупку можно разделить на несколько платежей.</p></div>
-      <div class="part"><h3>Подлинность</h3><p>Товар приходит от самого бренда.</p></div>
+<section class="section reveal" id="form">
+  <div class="wz part" id="wz">
+    <div class="wz-bar" aria-hidden="true"><i id="wz-fill"></i></div>
+    <p class="wz-n" id="wz-n" aria-live="polite">Шаг 1 из 5</p>
+
+    <div class="wz-step" data-step="who">
+      <h3 tabindex="-1">Кто вы?</h3>
+      <div class="wz-opts" role="group" aria-label="Кто вы">
+        <button type="button" data-v="opt" aria-pressed="false">Оптовая компания</button>
+        <button type="button" data-v="retail" aria-pressed="false">Розничная сеть</button>
+        <button type="button" data-v="builder" aria-pressed="false">Сборщик ПК</button>
+        <button type="button" data-v="corp" aria-pressed="false">Корпоративные закупки</button>
+        <button type="button" data-v="seller" aria-pressed="false">Селлер на маркетплейсе</button>
+        <button type="button" data-v="blog" aria-pressed="false">Блогер или обзорщик</button>
+      </div>
     </div>
-    <div class="shop-go part">
-      <a class="b-btn" href="https://qopp.pro/?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-kit">Перейти в магазин</a>
-      <small>qopp.pro</small>
+
+    <div class="wz-step" data-step="detail" hidden>
+      <h3 tabindex="-1" id="wz-dq"></h3>
+      <p class="hint" id="wz-dh"></p>
+      <div class="wz-fields"><div><label for="wz-detail" id="wz-dl"></label><textarea id="wz-detail"></textarea></div></div>
+    </div>
+
+    <div class="wz-step" data-step="cats" hidden>
+      <h3 tabindex="-1">Что интересует?</h3>
+      <p class="hint">Можно выбрать несколько</p>
+      <div class="wz-opts" role="group" aria-label="Категории товаров" id="wz-cats">
+        <button type="button" data-v="SSD" aria-pressed="false">SSD</button>
+        <button type="button" data-v="Оперативная память" aria-pressed="false">Оперативная память</button>
+        <button type="button" data-v="Карты памяти" aria-pressed="false">Карты памяти</button>
+        <button type="button" data-v="Флеш-накопители" aria-pressed="false">Флеш-накопители</button>
+        <button type="button" data-v="Ноутбуки" aria-pressed="false">Ноутбуки</button>
+      </div>
+    </div>
+
+    <div class="wz-step" data-step="company" hidden>
+      <h3 tabindex="-1">Расскажите о компании</h3>
+      <div class="wz-fields two">
+        <div><label for="wz-company">Название</label><input id="wz-company" autocomplete="organization"></div>
+        <div><label for="wz-city">Город</label><input id="wz-city" autocomplete="address-level2"></div>
+        <div><label for="wz-inn">ИНН, если удобно указать</label><input id="wz-inn" inputmode="numeric"></div>
+      </div>
+    </div>
+
+    <div class="wz-step" data-step="contact" hidden>
+      <h3 tabindex="-1">Как с вами связаться?</h3>
+      <div class="wz-fields two">
+        <div><label for="wz-name">Имя</label><input id="wz-name" autocomplete="name"></div>
+        <div><label for="wz-phone">Телефон или мессенджер</label><input id="wz-phone" autocomplete="tel"></div>
+        <div><label for="wz-email">E-mail</label><input id="wz-email" type="email" autocomplete="email"></div>
+      </div>
+      <label class="wz-agree"><input type="checkbox" id="wz-ok"> <span>Согласен на обработку персональных данных</span></label>
+    </div>
+
+    <div class="wz-step" data-step="done" hidden>
+      <h3 tabindex="-1">Заявка готова. Осталось отправить</h3>
+      <p class="hint">Нажмите кнопку: текст заявки скопируется, откроется чат. Вставьте текст в сообщение и отправьте. Ответим в рабочее время, будни с 9:00 до 19:00 по Москве.</p>
+      <div class="wz-out" id="wz-out"></div>
+      <div class="wz-send">
+        <button type="button" class="main" id="wz-copy" data-href="https://t.me/qopphelp_bot">Скопировать и открыть Telegram</button>
+        <a href="https://max.ru/id781604083587_bot" target="_blank" rel="noopener" data-copy-first>MAX</a>
+        <a href="https://app.leadteh.ru/w/dxQgp" target="_blank" rel="noopener" data-copy-first>WhatsApp</a>
+      </div>
+      <p class="wz-note" id="wz-copied" aria-live="polite"></p>
+    </div>
+
+    <p class="wz-err" id="wz-err" role="alert"></p>
+    <div class="wz-nav">
+      <button type="button" class="wz-next" id="wz-next">Далее</button>
+      <button type="button" class="wz-back" id="wz-back" hidden>Назад</button>
     </div>
   </div>
 </section>
 
-<!-- маркетплейсы -->
-<section class="section reveal" id="marketplaces">
+<section class="section who reveal" id="next" style="padding-top:0">
   <div class="section-head">
-    <p class="kicker part">Маркетплейсы</p>
-    <h2 class="part">Наши магазины там, где вам привычнее</h2>
-    <p class="lede part">Это официальные магазины QOPP на площадках. Ссылки ниже ведут прямо в них.</p>
+    <p class="kicker part">Что дальше</p>
+    <h2 class="part">Три шага после заявки</h2>
   </div>
-  <div class="mps">
-    <div class="mp part"><h3>Ozon</h3><p>Магазин QOPP на Ozon.</p><a class="go" href="https://www.ozon.ru/seller/qopp/?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-ozon">Перейти</a></div>
-    <div class="mp part"><h3>Wildberries</h3><p>Магазин QOPP на Wildberries.</p><a class="go" href="https://www.wildberries.ru/seller/346976?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-wb">Перейти</a></div>
-    <div class="mp part"><h3>Яндекс Маркет</h3><p>Магазин QOPP на Яндекс Маркете.</p><a class="go" href="https://market.yandex.ru/business--qopp/57619322?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-market">Перейти</a></div>
+  <div class="vows">
+    <div class="vow part"><h3>Заявка</h3><p>Вы рассказываете, кто вы и что вам интересно. Это занимает около минуты.</p></div>
+    <div class="vow part"><h3>Разговор</h3><p>Мы связываемся с вами и уточняем задачу: объёмы, сроки, формат работы.</p></div>
+    <div class="vow part"><h3>Условия</h3><p>Присылаем предложение под ваш формат сотрудничества.</p></div>
   </div>
-</section>
-
-<!-- перед покупкой -->
-<section class="section who reveal" id="before-buy" style="padding-top:0">
-  <div class="section-head">
-    <p class="kicker part">Перед покупкой</p>
-    <h2 class="part">Не уверены, что подойдёт?</h2>
-  </div>
-  <p class="part">Подберите память или накопитель под своё устройство за минуту на странице <a href="support.html#pick" style="color:inherit;text-underline-offset:3px">поддержки</a> или загляните в <a href="faq.html" style="color:inherit;text-underline-offset:3px">вопросы и ответы</a>. Про сроки и условия гарантии мы рассказали <a href="warranty.html" style="color:inherit;text-underline-offset:3px">отдельно</a>.</p>
 </section>
 
 </main>
@@ -667,7 +730,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     <div class="foot-col">
       <h3>Покупателю</h3>
       <a class="fl" href="about.html">О компании</a>
-      <a class="fl current" href="buy.html" aria-current="page">Где купить</a>
+      <a class="fl" href="buy.html">Где купить</a>
       <a class="fl" href="support.html">Поддержка</a>
       <a class="fl" href="warranty.html">Гарантия</a>
     </div>
@@ -782,10 +845,82 @@ if(coopForm){
 }
 
 
-/* клики по магазинам: когда подключим Яндекс.Метрику, цели уйдут в неё (data-goal = имя цели) */
-document.querySelectorAll('[data-goal]').forEach(el=>el.addEventListener('click',()=>{
-  if(typeof ym==='function'&&window.QOPP_YM)ym(window.QOPP_YM,'reachGoal',el.dataset.goal);
-}));
+/* ============ пошаговая форма сотрудничества ============ */
+{
+  const WHO={opt:'Оптовая компания',retail:'Розничная сеть',builder:'Сборщик ПК',corp:'Корпоративные закупки',seller:'Селлер на маркетплейсе',blog:'Блогер или обзорщик'};
+  const DETAIL={
+    opt:['Где работаете и какие объёмы?','Регион и примерный объём закупки в месяц','Например: Урал и Сибирь, около 500 накопителей в месяц'],
+    retail:['Расскажите о сети','Регион, число магазинов и примерный объём в месяц','Например: 12 магазинов в Поволжье'],
+    builder:['Сколько компьютеров собираете?','Примерное число сборок в месяц и их класс','Например: 40 игровых сборок в месяц'],
+    corp:['Для чего закупка?','Задача и число рабочих мест','Например: обновление памяти и дисков на 120 рабочих местах'],
+    seller:['Где продаёте?','Площадки и примерный оборот по категории','Например: Ozon и Wildberries'],
+    blog:['Где вас смотрят?','Ссылка на канал или площадку и размер аудитории','Например: ссылка на YouTube-канал, 80 тысяч подписчиков']};
+  const KEY='qopp-partner-draft';
+  let st={who:'',detail:'',cats:[],company:'',city:'',inn:'',name:'',phone:'',email:'',ok:false};
+  try{Object.assign(st,JSON.parse(sessionStorage.getItem(KEY)||'{}'))}catch(e){}
+  /* короткая форма в подвале любой страницы передаёт сюда имя, почту и телефон (через sessionStorage, не через адрес) */
+  try{const f=JSON.parse(sessionStorage.getItem('qopp-foot-form')||'null');if(f){Object.assign(st,f);sessionStorage.removeItem('qopp-foot-form')}}catch(e){}
+  const $=id=>document.getElementById(id), steps=[...document.querySelectorAll('.wz-step')];
+  const order=()=>['who','detail','cats'].concat(st.who==='blog'?[]:['company'],['contact','done']);
+  let cur='who';
+  const save=()=>{try{sessionStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+  const press=(box,fn)=>box.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',fn(b)));
+  function text(){
+    const L=['Заявка на сотрудничество с сайта QOPP','','Кто: '+WHO[st.who],'Подробнее: '+st.detail,'Интересует: '+st.cats.join(', ')];
+    if(st.who!=='blog')L.push('Компания: '+st.company+(st.city?', '+st.city:'')+(st.inn?', ИНН '+st.inn:''));
+    L.push('','Контакт: '+st.name);
+    if(st.phone)L.push('Телефон или мессенджер: '+st.phone);
+    if(st.email)L.push('E-mail: '+st.email);
+    return L.join('\n');
+  }
+  function show(id,focus){
+    cur=id;const o=order(),i=o.indexOf(id),n=o.length-1;
+    steps.forEach(s=>s.hidden=s.dataset.step!==id);
+    $('wz-fill').style.width=(id==='done'?100:Math.round(i/n*100))+'%';
+    $('wz-n').textContent=id==='done'?'Готово':'Шаг '+(i+1)+' из '+n;
+    $('wz-back').hidden=i===0;$('wz-next').hidden=id==='done';
+    $('wz-next').textContent=o[i+1]==='done'?'Собрать заявку':'Далее';
+    $('wz-err').textContent='';
+    if(id==='detail'){const d=DETAIL[st.who];$('wz-dq').textContent=d[0];$('wz-dl').textContent=d[1];$('wz-detail').placeholder=d[2];$('wz-dh').textContent=''}
+    if(id==='done')$('wz-out').textContent=text();
+    if(focus){const h=steps.find(s=>s.dataset.step===id).querySelector('h3');h.focus({preventScroll:true});$('wz').scrollIntoView({block:'start',behavior:'smooth'})}
+  }
+  function check(){
+    const v=id=>$(id).value.trim();
+    if(cur==='who')return st.who?'':'Выберите, кто вы';
+    if(cur==='detail'){st.detail=v('wz-detail');return st.detail?'':'Напишите пару слов, так мы быстрее поймём задачу'}
+    if(cur==='cats')return st.cats.length?'':'Выберите хотя бы одну категорию';
+    if(cur==='company'){st.company=v('wz-company');st.city=v('wz-city');st.inn=v('wz-inn');return st.company?'':'Укажите название компании'}
+    if(cur==='contact'){
+      st.name=v('wz-name');st.phone=v('wz-phone');st.email=v('wz-email');st.ok=$('wz-ok').checked;
+      if(!st.name)return 'Как к вам обращаться?';
+      if(!st.phone&&!st.email)return 'Оставьте телефон, мессенджер или e-mail';
+      if(st.email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(st.email))return 'Проверьте e-mail';
+      if(!st.ok)return 'Нужно согласие на обработку персональных данных';
+    }
+    return '';
+  }
+  /* восстановление черновика */
+  [['wz-detail','detail'],['wz-company','company'],['wz-city','city'],['wz-inn','inn'],['wz-name','name'],['wz-phone','phone'],['wz-email','email']].forEach(([id,k])=>{$(id).value=st[k]||'';$(id).addEventListener('input',()=>{st[k]=$(id).value;save();$('wz-err').textContent=''})});
+  $('wz-ok').checked=!!st.ok;
+  const whoBox=document.querySelector('[data-step="who"] .wz-opts'),catBox=$('wz-cats');
+  press(whoBox,b=>b.dataset.v===st.who);press(catBox,b=>st.cats.includes(b.dataset.v));
+  whoBox.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{st.who=b.dataset.v;save();press(whoBox,x=>x===b);$('wz-err').textContent='';show('detail',true)}));
+  catBox.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    const v=b.dataset.v,i=st.cats.indexOf(v);i<0?st.cats.push(v):st.cats.splice(i,1);save();press(catBox,x=>st.cats.includes(x.dataset.v));$('wz-err').textContent='';
+  }));
+  $('wz-next').addEventListener('click',()=>{const e=check();if(e){$('wz-err').textContent=e;return}save();const o=order();show(o[o.indexOf(cur)+1],true)});
+  $('wz-back').addEventListener('click',()=>{const o=order();show(o[Math.max(0,o.indexOf(cur)-1)],true)});
+  document.querySelectorAll('.wz-fields input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('wz-next').click()}}));
+  async function copy(){
+    try{await navigator.clipboard.writeText(text());$('wz-copied').textContent='Текст заявки скопирован. Вставьте его в чат и отправьте.';return true}
+    catch(e){$('wz-copied').textContent='Не получилось скопировать автоматически. Выделите текст заявки выше и скопируйте вручную.';return false}
+  }
+  $('wz-copy').addEventListener('click',async e=>{await copy();window.open(e.currentTarget.dataset.href,'_blank','noopener')});
+  document.querySelectorAll('[data-copy-first]').forEach(l=>l.addEventListener('click',()=>{copy()}));
+  /* пришли из формы в подвале: контакты уже есть, начинаем с первого шага, они подставятся в конце */
+  show('who',false);
+}
 /* пауза анимаций на скрытой вкладке */
 document.addEventListener('visibilitychange',()=>{
   document.body.classList.toggle('paused',document.hidden);

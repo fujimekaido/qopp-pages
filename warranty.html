@@ -666,7 +666,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 </div>
 <div class="cat-drop" id="contact-drop" aria-label="Контакты">
   <a class="cd-item" href="support.html">Поддержка</a>
-  <a class="cd-item" href="404.html">Сотрудничество</a>
+  <a class="cd-item" href="partners.html">Сотрудничество</a>
   <a class="cd-item" href="faq.html">Вопросы и ответы</a>
 </div>
 <button class="to-top" id="to-top" aria-label="Наверх">
@@ -687,7 +687,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <a class="mi" id="mm-contacts">Контакты</a>
   <div class="mm-sub" hidden>
     <a class="mm-si" href="support.html">Поддержка</a>
-    <a class="mm-si" href="404.html">Сотрудничество</a>
+    <a class="mm-si" href="partners.html">Сотрудничество</a>
     <a class="mm-si" href="faq.html">Вопросы и ответы</a>
   </div>
   <a class="mi" href="about.html">О компании</a>
@@ -1058,7 +1058,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
         <input name="name" placeholder="Имя" autocomplete="name" aria-label="Имя">
         <input name="email" type="email" placeholder="E-mail" autocomplete="email" aria-label="E-mail">
         <input name="phone" type="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel" aria-label="Телефон">
-        <button class="foot-btn" type="submit">Отправить</button>
+        <button class="foot-btn" type="submit">Продолжить</button>
         <label class="agree"><input type="checkbox" checked> Согласен на обработку личных данных</label>
         <p class="form-done" hidden>Заявка принята, мы свяжемся с вами</p>
       </form>
@@ -1204,14 +1204,15 @@ addEventListener('scroll',()=>{
 toTop.addEventListener('click',()=>{
   scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'});
 });
-
-/* форма сотрудничества (пока локальное подтверждение) */
+/* форма в подвале: передаёт имя, почту и телефон в пошаговую форму на partners.html (sessionStorage, не адрес) */
 const coopForm=document.querySelector('.coop-form');
 if(coopForm){
   coopForm.addEventListener('submit',e=>{
     e.preventDefault();
-    coopForm.querySelectorAll('input,button').forEach(el=>el.disabled=true);
-    coopForm.querySelector('.form-done').hidden=false;
+    const v=n=>coopForm.elements[n].value.trim();
+    try{sessionStorage.setItem('qopp-foot-form',JSON.stringify({name:v('name'),email:v('email'),phone:v('phone'),ok:coopForm.querySelector('.agree input').checked}))}catch(err){}
+    location.href='partners.html#form';
+    if(location.pathname.endsWith('partners.html'))location.reload();
   });
 }
 
