@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>О компании. QOPP</title>
-<meta name="description" content="QOPP: российский бренд накопителей и памяти. Качество по умолчанию: делать, объяснять, отвечать. Гарантия, сервис и поддержка рядом с покупателем.">
+<title>Поддержка. QOPP</title>
+<meta name="description" content="Поддержка QOPP: напишите нам в Telegram, MAX или WhatsApp, найдите ответ в вопросах и ответах или подберите накопитель и память под своё устройство за минуту.">
 <meta name="theme-color" content="#f6f6f7">
 <!-- DEPLOY STEP: заменить og:url и og:image на абсолютные адреса живого сайта перед публикацией -->
-<meta property="og:title" content="О компании. QOPP">
-<meta property="og:description" content="Качество по умолчанию: делать, объяснять, отвечать">
-<meta property="og:url" content="/about.html">
+<meta property="og:title" content="Поддержка. QOPP">
+<meta property="og:description" content="Поможем выбрать, установить и решить вопрос по гарантии">
+<meta property="og:url" content="/support.html">
 <meta property="og:image" content="/assets/about-dark.jpg">
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -497,6 +497,66 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   .q-mark .tail{opacity:.08}
   .q-mark .spark{display:none}
 }
+
+/* ============ поддержка ============ */
+.s-status{margin-top:22px;font-size:14px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:10px}
+.s-status::before{content:"";width:9px;height:9px;background:var(--silver);flex:none}
+.s-status.on{color:var(--ink)}
+.s-status.on::before{background:var(--accent-deep)}
+.s-search{position:relative;margin-top:clamp(26px,4vh,40px);max-width:640px}
+.s-search input{
+  width:100%;font-family:var(--body);font-size:17px;font-weight:500;color:var(--ink);
+  background:#fff;border:1px solid var(--hairline);border-radius:16px;
+  padding:18px 22px 18px 54px;box-shadow:0 10px 34px rgba(20,22,28,.06);
+  transition:border-color .3s var(--ease),box-shadow .3s var(--ease);text-overflow:ellipsis;
+}
+.s-search input::placeholder{color:var(--silver);font-weight:400}
+.s-search input:focus{outline:none;border-color:var(--accent-deep);box-shadow:0 14px 40px rgba(184,134,59,.14)}
+.s-search svg{position:absolute;left:20px;top:50%;transform:translateY(-50%);pointer-events:none}
+.s-hint{margin-top:12px;font-size:13px;color:var(--silver)}
+.s-hint a{color:var(--muted);text-underline-offset:3px}
+
+/* каналы: строки, не карточки */
+.chan{display:grid;grid-template-columns:minmax(150px,24%) 1fr auto;gap:clamp(14px,3vw,40px);align-items:center;
+  padding:clamp(18px,2.6vh,26px) 0;border-top:1px solid var(--hairline)}
+.chan:last-child{border-bottom:1px solid var(--hairline)}
+.chan h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.2vw,26px);letter-spacing:.01em}
+.chan p{color:var(--muted)}
+.chan-act{display:flex;gap:10px;align-items:center}
+.s-btn{display:inline-block;font-weight:600;font-size:15px;padding:12px 24px;border-radius:999px;background:var(--ink);color:#fff;
+  text-decoration:none;border:1px solid var(--ink);cursor:pointer;font-family:var(--body);transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
+.s-btn:hover,.s-btn:focus-visible{background:var(--accent-deep);border-color:var(--accent-deep)}
+.s-btn.ghost{background:transparent;color:var(--ink);border-color:rgba(20,22,28,.28)}
+.s-btn.ghost:hover,.s-btn.ghost:focus-visible{background:transparent;color:var(--accent-deep);border-color:var(--accent-deep)}
+.chan-sub{margin-top:clamp(34px,6vh,56px);margin-bottom:6px;font-weight:700;font-family:var(--display);font-size:clamp(18px,2vw,22px)}
+@media (max-width:760px){.chan{grid-template-columns:1fr}.chan-act{flex-wrap:wrap}}
+
+/* подбор за минуту */
+.pick{position:relative;z-index:1;background:#101216;color:#f4f1ea}
+.pick .section{padding-top:clamp(70px,10vh,110px);padding-bottom:clamp(70px,10vh,110px)}
+.pick .kicker{color:var(--accent)}
+.pick h2{font-family:var(--display);font-weight:700;font-size:clamp(27px,3.6vw,44px);line-height:1.18;margin-top:14px;max-width:18ch}
+.pick .lede{color:#a9adb5;max-width:56ch}
+.pick-step{margin-top:clamp(28px,5vh,44px)}
+.pick-step[hidden]{display:none}
+.pick-q{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#8b9098;margin-bottom:16px}
+.pick-opts{display:flex;flex-wrap:wrap;gap:10px}
+.pick-opts button{font-family:var(--body);font-size:16px;font-weight:600;color:#f4f1ea;background:transparent;
+  border:1px solid rgba(244,241,234,.28);border-radius:999px;padding:13px 22px;cursor:pointer;
+  transition:border-color .25s var(--ease),color .25s var(--ease),background .25s var(--ease)}
+.pick-opts button:hover,.pick-opts button:focus-visible{border-color:var(--accent);color:var(--accent)}
+.pick-opts button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#14161c}
+.pick-res{margin-top:clamp(28px,5vh,44px);border-top:1px solid rgba(244,241,234,.16);padding-top:clamp(22px,4vh,34px);max-width:720px}
+.pick-res[hidden]{display:none}
+.pick-res h3{font-family:var(--display);font-weight:700;font-size:clamp(21px,2.6vw,30px);line-height:1.22}
+.pick-res p{color:#a9adb5;margin-top:12px}
+.pick-res .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.pick-res .s-btn{background:var(--accent);border-color:var(--accent);color:#14161c}
+.pick-res .s-btn:hover,.pick-res .s-btn:focus-visible{background:#f0c478;border-color:#f0c478}
+.pick-res .s-btn.ghost{background:transparent;color:#f4f1ea;border-color:rgba(244,241,234,.28)}
+.pick-res .s-btn.ghost:hover,.pick-res .s-btn.ghost:focus-visible{color:var(--accent);border-color:var(--accent)}
+.pick-again{margin-top:22px;background:none;border:0;color:#8b9098;font-family:var(--body);font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.pick-again:hover{color:#f4f1ea}
 </style>
 </head>
 <body>
@@ -510,8 +570,8 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="menu-pill">
     <a class="mi" id="mi-catalog">Каталог</a>
     <a class="mi" href="warranty.html">Гарантия</a>
-    <a class="mi" id="mi-contacts">Контакты</a>
-    <a class="mi active" href="about.html" aria-current="page">О компании</a>
+    <a class="mi active" id="mi-contacts">Контакты</a>
+    <a class="mi" href="about.html">О компании</a>
   </div>
   <button class="menu-btn" aria-expanded="false" aria-controls="m-menu">Меню
     <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -529,7 +589,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <a class="cd-item" href="notebooks.html">Ноутбуки</a>
 </div>
 <div class="cat-drop" id="contact-drop" aria-label="Контакты">
-  <a class="cd-item" href="support.html">Поддержка</a>
+  <a class="cd-item current" href="support.html" aria-current="page">Поддержка</a>
   <a class="cd-item" href="404.html">Сотрудничество</a>
   <a class="cd-item" href="faq.html">Вопросы и ответы</a>
 </div>
@@ -550,11 +610,11 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <a class="mi" href="warranty.html">Гарантия</a>
   <a class="mi" id="mm-contacts">Контакты</a>
   <div class="mm-sub" hidden>
-    <a class="mm-si" href="support.html">Поддержка</a>
+    <a class="mm-si" href="support.html" aria-current="page">Поддержка</a>
     <a class="mm-si" href="404.html">Сотрудничество</a>
     <a class="mm-si" href="faq.html">Вопросы и ответы</a>
   </div>
-  <a class="mi" href="about.html" aria-current="page">О компании</a>
+  <a class="mi" href="about.html">О компании</a>
 </div>
 
 <header class="a-hero reveal">
@@ -564,190 +624,108 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     <path class="tail" d="M254 233 L318 361 L185 292 Z"/>
   </svg>
   <div class="inner">
-    <p class="kicker part">О компании</p>
-    <h1 class="part">Качество по&nbsp;умолчанию</h1>
-    <p class="sub part">Это когда не нужно изучать спецификации, чтобы купить правильно, и не нужно волноваться после покупки. Продукт работает так, как написано на упаковке, цена соответствует, а если возник вопрос, поддержка рядом. <b>Так мы делаем каждый продукт QOPP: от SSD до карты памяти.</b></p>
+    <p class="kicker part">Поддержка</p>
+    <h1 class="part">Вопрос решим</h1>
+    <p class="sub part">Поможем выбрать память и накопитель под ваше устройство, разобраться с установкой и оформить обращение по гарантии. <b>Пишите так, как удобно вам.</b></p>
+    <p class="s-status part" id="s-status" aria-live="polite">На связи по будням с 9:00 до 19:00 по Москве</p>
+    <form class="s-search part" id="s-search" action="faq.html" role="search">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="6.5" stroke="#8b9098" stroke-width="1.6"/><path d="m14 14 4.5 4.5" stroke="#8b9098" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <input id="s-q" type="search" placeholder="Сначала спросите: не видит диск, XMP, PS5, 4 ГБ, гарантия" autocomplete="off" aria-label="Поиск по вопросам и ответам">
+    </form>
+    <p class="s-hint part">Ответ откроется в разделе <a href="faq.html">Вопросы и ответы</a></p>
   </div>
 </header>
 
 <main id="main" tabindex="-1">
 
-  <!-- кто мы -->
-  <section class="section who reveal" id="who">
-    <div class="section-head">
-      <p class="kicker part">Кто мы</p>
-      <h2 class="part">Бренд, за который не нужно переживать</h2>
+<!-- каналы -->
+<section class="section reveal" id="channels">
+  <div class="section-head">
+    <p class="kicker part">Написать нам</p>
+    <h2 class="part">Три мессенджера, одна поддержка</h2>
+    <p class="lede part">Чтобы ответить быстрее, сразу назовите модель вашего устройства и товар QOPP, о котором вопрос. Фото наклейки с серийным номером ускоряет дело.</p>
+  </div>
+  <div class="chans">
+    <div class="chan part">
+      <h3>Telegram</h3>
+      <p>Самый быстрый способ. Удобно прислать фото и скриншот.</p>
+      <div class="chan-act"><a class="s-btn" href="https://t.me/qopphelp_bot" target="_blank" rel="noopener">Написать</a><button class="s-btn ghost" type="button" data-copy="https://t.me/qopphelp_bot">Скопировать ссылку</button></div>
     </div>
-    <p class="part">QOPP: российский бренд компьютерных комплектующих и техники. SSD, оперативная память, флеш-накопители, карты памяти, ноутбуки.</p>
-    <p class="part">Мы делаем технику среднего и выше среднего класса, которой можно доверять: качественную, красивую и по честной цене. И отвечаем за неё гарантией, сервисом и поддержкой здесь, рядом с покупателем. Ключевое слово бренда: качество. В него входят надёжность, скорость, упаковка, карточка, поддержка и первая буква названия.</p>
-    <p class="part">Мы не делаем ставку на громкие обещания. Наша сила в реальном качестве, честной подаче, длинной гарантии и понятном сервисе.</p>
-    <div class="pull part">Покупатель должен знать: если что-то случится, вопрос решат</div>
-  </section>
+    <div class="chan part">
+      <h3>MAX</h3>
+      <p>Тот же чат поддержки в мессенджере MAX.</p>
+      <div class="chan-act"><a class="s-btn" href="https://max.ru/id781604083587_bot" target="_blank" rel="noopener">Написать</a><button class="s-btn ghost" type="button" data-copy="https://max.ru/id781604083587_bot">Скопировать ссылку</button></div>
+    </div>
+    <div class="chan part">
+      <h3>WhatsApp</h3>
+      <p>Если привычнее писать здесь.</p>
+      <div class="chan-act"><a class="s-btn" href="https://app.leadteh.ru/w/dxQgp" target="_blank" rel="noopener">Написать</a><button class="s-btn ghost" type="button" data-copy="https://app.leadteh.ru/w/dxQgp">Скопировать ссылку</button></div>
+    </div>
+  </div>
 
-  <!-- три обещания -->
-  <section class="section reveal" id="mission" style="padding-top:0">
-    <div class="section-head">
-      <p class="kicker part">Миссия</p>
-      <h2 class="part">Три наших обещания покупателю</h2>
-      <p class="lede part">Делать технику, которую купили бы сами, объяснять сложное просто и отвечать за результат.</p>
+  <p class="chan-sub part">Активация гарантии</p>
+  <div class="chans">
+    <div class="chan part">
+      <h3>MAX</h3>
+      <p>Активация гарантии после покупки, в мессенджере MAX.</p>
+      <div class="chan-act"><a class="s-btn" href="https://max.ru/id781604083587_1_bot" target="_blank" rel="noopener">Активировать</a></div>
     </div>
-    <div class="vows">
-      <div class="vow part">
-        <h3>Делать</h3>
-        <p>Продукт, который работает так, как написано на упаковке. По цене, которая соответствует характеристикам.</p>
-      </div>
-      <div class="vow part">
-        <h3>Объяснять</h3>
-        <p>Просто и на языке покупателя. Чтобы выбрать правильно можно было за минуту, а не за день.</p>
-      </div>
-      <div class="vow part">
-        <h3>Отвечать</h3>
-        <p>За результат: гарантией, сервисом и поддержкой рядом с покупателем, а не у производителя где-то в мире.</p>
-      </div>
+    <div class="chan part">
+      <h3>Telegram</h3>
+      <p>Активация гарантии в Telegram.</p>
+      <div class="chan-act"><a class="s-btn" href="https://app.leadteh.ru/w/fpq1C" target="_blank" rel="noopener">Активировать</a></div>
     </div>
-  </section>
+    <div class="chan part">
+      <h3>Условия</h3>
+      <p>Сроки по категориям, что покрывает гарантия и как проходит обращение.</p>
+      <div class="chan-act"><a class="s-btn ghost" href="warranty.html">Страница гарантии</a></div>
+    </div>
+  </div>
+</section>
 
-  <!-- тёмная полоса -->
-  <section class="dark-strip reveal" aria-label="Качество видно до включения">
-    <picture><source srcset="assets/about-dark.webp" type="image/webp"><img class="ds-photo" src="assets/about-dark.jpg" alt="" width="2000" height="1152" loading="lazy" aria-hidden="true" decoding="async"></picture>
-    <div class="inner">
-      <p class="kicker part">Красивое тоже качество</p>
-      <h2 class="part">Качество должно быть видно ещё до того, как товар включили</h2>
-      <p class="part">Продукт, упаковка и карточка товара одного уровня. Техника может быть не только рабочей, но и приятной: в руках, на полке, на экране.</p>
-    </div>
-  </section>
+<!-- подбор за минуту -->
+<section class="pick reveal" id="pick" aria-labelledby="pick-h">
+  <div class="section">
+    <p class="kicker part">Подбор за минуту</p>
+    <h2 class="part" id="pick-h">Подойдёт ли к моему устройству?</h2>
+    <p class="lede part" style="margin-top:14px">Половина всех вопросов в поддержку именно об этом. Два нажатия, и вы на нужной странице с нужным ответом.</p>
 
-  <!-- философия -->
-  <section class="philo reveal" id="philosophy">
-    <div class="section">
-      <p class="kicker part">Философия</p>
-      <h2 class="philo-q part" style="margin-top:14px">Одно правило решает большинство споров: <em>«Купили бы мы это сами?»</em></h2>
-      <p class="note part">Купили бы мы продукт, который «почти не глючит»? Коробку с кривым шрифтом? Гарантию, по которой не дозвониться? Нет. Значит, и продавать не будем. Делаем технику, которую купили бы сами.</p>
-      <div class="pillars">
-        <div class="pillar part">
-          <h3>Продукт</h3>
-          <p>Не бывает «и так сойдёт». Компоненты, тестирование, упаковка и дизайн одного уровня.</p>
-        </div>
-        <div class="pillar part">
-          <h3>Покупатель</h3>
-          <p>Он не обязан разбираться. Мы говорим на его языке, помогаем выбрать и остаёмся рядом после покупки.</p>
-        </div>
-        <div class="pillar part">
-          <h3>Команда</h3>
-          <p>Каждый знает, куда идёт компания, и отвечает за результат, а не за присутствие.</p>
-        </div>
+    <div class="pick-step part" id="pick-1">
+      <p class="pick-q">Что вы выбираете</p>
+      <div class="pick-opts" role="group" aria-label="Что вы выбираете">
+        <button type="button" data-k="ram" aria-pressed="false">Оперативную память</button>
+        <button type="button" data-k="ssd" aria-pressed="false">SSD</button>
+        <button type="button" data-k="card" aria-pressed="false">Карту памяти</button>
+        <button type="button" data-k="usb" aria-pressed="false">Флешку</button>
       </div>
     </div>
-  </section>
+    <div class="pick-step" id="pick-2" hidden>
+      <p class="pick-q" id="pick-2q"></p>
+      <div class="pick-opts" id="pick-2o" role="group" aria-labelledby="pick-2q"></div>
+    </div>
+    <div class="pick-res" id="pick-res" hidden aria-live="polite">
+      <h3 id="pick-t"></h3>
+      <p id="pick-d"></p>
+      <div class="row"><a class="s-btn" id="pick-go" href="#"></a><a class="s-btn ghost" id="pick-faq" href="#"></a></div>
+      <p style="margin-top:22px">Не уверены? Напишите модель устройства в <a href="https://t.me/qopphelp_bot" target="_blank" rel="noopener" style="color:#f4f1ea;text-underline-offset:3px">Telegram</a>, подскажем.</p>
+      <button class="pick-again" type="button" id="pick-again">Начать заново</button>
+    </div>
+  </div>
+</section>
 
-  <!-- ценности -->
-  <section class="section reveal" id="values">
-    <div class="section-head">
-      <p class="kicker part">Ценности</p>
-      <h2 class="part">Качество: наша первая буква</h2>
-      <p class="lede part">Принципы, по которым бренд действует, развивается и принимает решения.</p>
-    </div>
-    <div class="val-group part">
-      <h3>Продукт</h3>
-      <div class="vals">
-        <div class="val">
-          <h3>Качество по умолчанию</h3>
-          <p>Компоненты, тестирование, контроль. Это не раздел сайта, а условие, при котором товар вообще выходит под нашим именем.</p>
-        </div>
-        <div class="val">
-          <h3>Эстетика</h3>
-          <p>Красивое тоже качество. Техника может быть приятной: в руках, на полке, на экране.</p>
-        </div>
-      </div>
-    </div>
-    <div class="val-group part">
-      <h3>Покупатели и партнёры</h3>
-      <div class="vals">
-        <div class="val">
-          <h3>Ответственность</h3>
-          <p>На упаковке наше имя, и переложить ответственность не на кого. Гарантия, сервис и поддержка здесь, рядом.</p>
-        </div>
-        <div class="val">
-          <h3>Ясность</h3>
-          <p>Сложное просто. Объясняем на языке покупателя, а для тех, кто любит цифры, даём все цифры.</p>
-        </div>
-        <div class="val">
-          <h3>Честность</h3>
-          <p>Говорим как есть. Цена соответствует характеристикам, характеристики реальности, сроки обещаниям.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- перед обращением -->
+<section class="section who reveal" id="before">
+  <div class="section-head">
+    <p class="kicker part">Перед обращением</p>
+    <h2 class="part">Что подготовить, чтобы решить вопрос с первого сообщения</h2>
+  </div>
+  <div class="vows">
+    <div class="vow part"><h3>Модель</h3><p>Название товара QOPP с упаковки или наклейки и модель вашего компьютера, ноутбука или материнской платы.</p></div>
+    <div class="vow part"><h3>Серийный номер</h3><p>Он напечатан на наклейке товара. <a href="faq.html#serial" style="color:inherit;text-underline-offset:3px">Где его найти</a>.</p></div>
+    <div class="vow part"><h3>Что происходит</h3><p>Одной фразой, что не так, и после чего это началось. Фото или скриншот помогают больше длинного описания.</p></div>
+  </div>
+</section>
 
-  <!-- доказательства -->
-  <section class="section reveal" id="why" style="padding-top:0">
-    <div class="section-head">
-      <p class="kicker part">Почему выбирают QOPP</p>
-      <h2 class="part">Не тезисы, а обязательства</h2>
-      <p class="lede part">Каждый пункт подтверждается продуктом, условиями гарантии и работой сервиса. Если пункт перестаёт быть правдой, он уходит со страницы.</p>
-    </div>
-    <div class="proofs">
-      <div class="proof part">
-        <h3>Качество и контроль</h3>
-        <p>Проверенные компоненты, тестирование и контроль на каждом этапе. Поэтому в отзывах пишут «работает», а не «повезло».</p>
-      </div>
-      <div class="proof part">
-        <h3>Гарантия</h3>
-        <p>Бессрочная на модули памяти и многолетняя на карты памяти, SSD и USB-накопители.</p>
-      </div>
-      <div class="proof part">
-        <h3>Честная цена</h3>
-        <p>Не экономим на компонентах ради низкой цены и не накручиваем за бренд.</p>
-      </div>
-      <div class="proof part">
-        <h3>Понятный выбор</h3>
-        <p>Карточки, инструкции и обзоры, по которым можно выбрать правильно. Для тех, кто любит цифры, полные характеристики и тесты.</p>
-      </div>
-      <div class="proof part">
-        <h3>Свой дизайн</h3>
-        <p>Свой корпус, своя упаковка и карточка у каждого продукта, чтобы QOPP узнавали с первого взгляда.</p>
-      </div>
-      <div class="proof part">
-        <h3>Вдолгую</h3>
-        <p>Российский бренд, который вдолгую. Линейки развиваются, отзывы копятся годами.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- люди -->
-  <section class="section reveal" id="people" style="padding-top:0">
-    <div class="people part">
-      <div>
-        <h2>QOPP делают люди</h2>
-        <p class="lede">Две команды, которые работают как одна.</p>
-        <p class="one-rule">Разные часовые пояса, одни правила</p>
-      </div>
-      <ul class="teams">
-        <li>
-          <span class="where">За рубежом</span>
-          <p>заводы, компоненты и контроль качества на месте</p>
-        </li>
-        <li>
-          <span class="where">В России</span>
-          <p>продукт, дизайн, сервис и поддержка</p>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- финал -->
-  <section class="section final reveal" id="vision">
-    <p class="kicker part">Видение</p>
-    <h2 class="part" style="margin-top:14px">Сначала дом, потом мир</h2>
-    <p class="lede part">Сначала стать брендом, которому доверяют дома. Потом доказать, что качественную и честную технику из России ждут и на других рынках.</p>
-    <p class="promise part">Гарантия: наше обещание, которое мы всегда выполняем</p>
-    <div class="act-row part">
-      <a class="pbtn" href="ssd.html">Смотреть SSD
-        <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a class="pbtn pbtn-gold" href="warranty.html">Гарантия</a>
-    </div>
-  </section>
 </main>
 
 <footer id="footer" class="site-footer">
@@ -775,9 +753,9 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     </div>
     <div class="foot-col">
       <h3>Покупателю</h3>
-      <a class="fl current" href="about.html" aria-current="page">О компании</a>
+      <a class="fl" href="about.html">О компании</a>
       <a class="fl" href="buy.html">Где купить</a>
-      <a class="fl" href="support.html">Поддержка</a>
+      <a class="fl current" href="support.html" aria-current="page">Поддержка</a>
       <a class="fl" href="warranty.html">Гарантия</a>
     </div>
   </div>
@@ -889,6 +867,73 @@ if(coopForm){
   });
 }
 
+
+/* ============ поддержка ============ */
+{
+  /* рабочие часы: будни 9:00-19:00 по Москве (UTC+3), считаем от UTC, чтобы не зависеть от пояса посетителя */
+  const st=document.getElementById('s-status');
+  const now=new Date(Date.now()+3*3600e3), d=now.getUTCDay(), h=now.getUTCHours()+now.getUTCMinutes()/60;
+  const open=d>=1&&d<=5&&h>=9&&h<19;
+  if(open){st.classList.add('on');st.textContent='Сейчас на связи: будни с 9:00 до 19:00 по Москве'}
+  else{
+    const next=(d===5&&h>=19)||d===6?'в понедельник':(d===0?'в понедельник':(h<9?'сегодня':'завтра'));
+    st.textContent='Сейчас нерабочее время. Напишите, ответим '+next+' с 9:00 по Москве';
+  }
+  /* поиск ведёт в вопросы и ответы с готовым запросом */
+  document.getElementById('s-search').addEventListener('submit',e=>{
+    e.preventDefault();
+    const q=document.getElementById('s-q').value.trim();
+    location.href='faq.html'+(q?'#q='+encodeURIComponent(q):'');
+  });
+  /* скопировать ссылку */
+  document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{
+    const t=b.textContent;
+    try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent='Скопировано'}
+    catch(e){b.textContent='Не получилось'}
+    setTimeout(()=>{b.textContent=t},1600);
+  }));
+  /* подбор: только навигация по уже существующим страницам и ответам, без новых технических утверждений */
+  const TREE={
+    ram:{q:'Куда ставим',o:[
+      {l:'В ПК',t:'Вам нужна память UDIMM',d:'Это полноразмерные модули для настольных компьютеров. Перед покупкой сверьте поколение (DDR3, DDR4 или DDR5) с вашей материнской платой.',go:['udimm.html','Память для ПК'],faq:['faq.html#ram-fit','Как проверить совместимость']},
+      {l:'В ноутбук',t:'Вам нужна память SO-DIMM',d:'Это укороченные модули для ноутбуков и мини-ПК. Сначала убедитесь, что память в вашей модели не распаяна и слот свободен.',go:['sodimm.html','Память для ноутбука'],faq:['faq.html#ram-fit','Как проверить совместимость']}]},
+    ssd:{q:'Куда ставим',o:[
+      {l:'ПК или ноутбук со слотом M.2',t:'Вам нужен SSD формата M.2',d:'Проверьте, какой интерфейс поддерживает слот вашего устройства: от этого зависит, какая модель раскроется полностью.',go:['ssd.html','Внутренние SSD'],faq:['faq.html#ssd-fit','Как проверить совместимость']},
+      {l:'Вместо жёсткого диска 2,5 дюйма',t:'Вам нужен SSD 2,5 дюйма с интерфейсом SATA',d:'Он ставится на место обычного диска в ноутбуке или ПК, разъём тот же.',go:['ssd-sata.html','SSD SATA Q600S'],faq:['faq.html#ssd-kit','Что идёт в комплекте']},
+      {l:'В PlayStation 5',t:'Для PS5 нужен M.2 2280 с PCI-E 4.0 и радиатор',d:'Накопители SATA и PCI-E 3.0 консоль не примет. Подробности в ответе.',go:['ssd.html','Внутренние SSD'],faq:['faq.html#ssd-heat','SSD и PS5']},
+      {l:'Во внешний бокс',t:'Бокс должен совпадать с типом накопителя',d:'Для диска 2,5 дюйма подойдёт любой бокс SATA, для M.2 нужен бокс под свой тип: SATA или NVMe.',go:['ssd.html','Внутренние SSD'],faq:['faq.html#ssd-box','SSD во внешнем боксе']}]},
+    card:{q:'Для чего карта',o:[
+      {l:'Видеорегистратор или съёмка 4K',t:'Нужна карта с запасом по скорости записи',d:'Для непрерывной записи важен класс скорости. Какой именно, написано в ответе.',go:['microsd.html','Карты памяти'],faq:['faq.html#card-4k','Карта для регистратора и 4K']},
+      {l:'Телефон, планшет или приставка',t:'Подойдёт любая карта QOPP, смотрите только объём',d:'Это стандартные microSD. Ограничение одно: максимальный объём, который поддерживает само устройство, он указан в его характеристиках.',go:['microsd.html','Карты памяти'],faq:['faq.html#card-phone','Подойдёт ли карта к устройству']}]},
+    usb:{q:'Куда будете подключать',o:[
+      {l:'К компьютеру',t:'Выбирайте по разъёму и объёму',d:'Посмотрите, какой разъём свободен на компьютере. Если будете носить файлы больше 4 ГБ, прочитайте короткий ответ про файловую систему.',go:['usb.html','Флеш-накопители'],faq:['faq.html#usb-4gb','Файлы больше 4 ГБ']},
+      {l:'К телефону на Android',t:'Работает без форматирования',d:'Для разъёма USB-A понадобится переходник OTG, у двусторонней модели с Type-C он не нужен.',go:['usb.html','Флеш-накопители'],faq:['faq.html#usb-android','Флешка и Android']},
+      {l:'К телевизору или магнитоле',t:'Важны объём и файловая система',d:'Старая техника видит не любые флешки. Что проверить, написано в ответе.',go:['usb.html','Флеш-накопители'],faq:['faq.html#usb-tv','Если техника не видит флешку']}]}
+  };
+  const s1=document.getElementById('pick-1'),s2=document.getElementById('pick-2'),res=document.getElementById('pick-res');
+  const q2=document.getElementById('pick-2q'),o2=document.getElementById('pick-2o');
+  const press=(box,btn)=>box.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b===btn));
+  s1.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    press(s1,b);res.hidden=true;
+    const node=TREE[b.dataset.k];q2.textContent=node.q;o2.textContent='';
+    node.o.forEach(opt=>{
+      const x=document.createElement('button');x.type='button';x.textContent=opt.l;x.setAttribute('aria-pressed','false');
+      x.addEventListener('click',()=>{
+        press(o2,x);
+        document.getElementById('pick-t').textContent=opt.t;
+        document.getElementById('pick-d').textContent=opt.d;
+        const go=document.getElementById('pick-go'),fq=document.getElementById('pick-faq');
+        go.href=opt.go[0];go.textContent=opt.go[1];fq.href=opt.faq[0];fq.textContent=opt.faq[1];
+        res.hidden=false;
+      });
+      o2.appendChild(x);
+    });
+    s2.hidden=false;
+  }));
+  document.getElementById('pick-again').addEventListener('click',()=>{
+    press(s1,null);s2.hidden=true;res.hidden=true;s1.querySelector('button').focus();
+  });
+}
 /* пауза анимаций на скрытой вкладке */
 document.addEventListener('visibilitychange',()=>{
   document.body.classList.toggle('paused',document.hidden);
