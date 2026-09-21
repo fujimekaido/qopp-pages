@@ -227,14 +227,13 @@ a.mi{cursor:pointer;text-decoration:none}
 .b-left{left:clamp(24px,7vw,110px);top:38%}
 .b-right{right:clamp(24px,7vw,110px);top:38%;text-align:right}
 
-/* вход подписей: золотая черта проходит по строке слева направо и проявляет текст (родня дорисовывающимся линиям сайта).
-   Прогресс от той же --k: вперёд проявляет, назад стирает. Черта гаснет в начале и в конце хода. */
-.e-line h2{position:relative;display:inline-block}
-.e-line .ln{display:block;clip-path:inset(-12% calc((1 - var(--k,0))*100%) -12% -2%)}
-.e-line h2::after{
-  content:"";position:absolute;top:-6%;bottom:-6%;width:2px;left:calc(var(--k,0)*100%);
-  background:var(--accent);box-shadow:0 0 16px 2px rgba(227,169,79,.55);
-  opacity:clamp(0,min(var(--k,0)*14,(1 - var(--k,0))*9),1);pointer-events:none;
+/* вход подписей: проявка. Строка целиком выходит из расфокуса: прозрачность, размытие и подъём на 10px
+   идут от той же --k (вперёд проявляет, назад гасит), со сглаживанием smoothstep. Ход длинный: data-ramp у подписей
+   0.065 прогресса, это 450-500px колеса, чтобы появление читалось как медленное. Размытие на одном элементе, не по буквам. */
+.e-line h2{display:inline-block}
+.e-line .ln{
+  display:block;--e:calc(var(--k,0)*var(--k,0)*(3 - 2*var(--k,0)));
+  opacity:var(--e);filter:blur(calc((1 - var(--e))*7px));transform:translateY(calc((1 - var(--e))*10px));
 }
 /* entrance: scatter (band 1, sand grains) */
 .e-scatter .c{
@@ -557,19 +556,19 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     <video id="hero-video" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
     <div class="scrim" aria-hidden="true"></div>
 
-    <div class="band b-left e-line" data-a="0" data-b="0.15">
+    <div class="band b-left e-line" data-a="0" data-b="0.15" data-ramp="0.065">
       <h2><span class="ln">Всё начинается с песка</span></h2>
     </div>
 
-    <div class="band b-right e-line" data-a="0.19" data-b="0.35">
+    <div class="band b-right e-line" data-a="0.19" data-b="0.35" data-ramp="0.065">
       <h2><span class="ln">Огонь очищает его до кремния</span></h2>
     </div>
 
-    <div class="band b-left e-line" data-a="0.40" data-b="0.57">
+    <div class="band b-left e-line" data-a="0.40" data-b="0.57" data-ramp="0.065">
       <h2><span class="ln">Кремний растёт в один кристалл</span></h2>
     </div>
 
-    <div class="band b-right e-line" data-a="0.585" data-b="0.675">
+    <div class="band b-right e-line" data-a="0.585" data-b="0.675" data-ramp="0.04">
       <h2><span class="ln">Кристалл становится памятью</span></h2>
     </div>
 
@@ -835,7 +834,7 @@ function updateCaptions(p){
 function runLoadRamp(){
   const t0=performance.now();
   function step(now){
-    loadK=clamp((now-t0)/1400,0,1);
+    loadK=clamp((now-t0)/2500,0,1);
     if(scrubOn) updateCaptions(heroProgress());
     if(loadK<1) requestAnimationFrame(step); else loadKDone= heroProgress()>0.05;
   }
