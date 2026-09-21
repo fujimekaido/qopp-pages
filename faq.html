@@ -943,6 +943,123 @@ addEventListener('scroll',()=>{
 toTop.addEventListener('click',()=>{
   scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'});
 });
+
+/* ============ fx: интерактив текстовых страниц (с 22 сентября 2026) ============
+   Пять приёмов, стили внедряет сам скрипт, разметке нужны только атрибуты:
+   1. Кнопка «наверх» становится буквой Q: кольцо дорисовывается по мере чтения, в конце загорается хвост.
+   2. Параллакс: [data-par] едет внутри своей рамки; [data-ghost="СЛОВО"] на секции даёт контурное слово позади, оно плывёт вбок.
+   3. [data-words] и .pull: ключевая фраза наливается по словам, пока проходит середину экрана. Одна на страницу.
+   4. Строки .vow, .chan, .mp, .pillar: золотая линия дорисовывается слева направо при наведении (родня ссылкам подвала).
+   5. Если на странице три и больше section[data-ch], справа появляется указатель глав.
+   Двигаются только transform и opacity. При prefers-reduced-motion приёмы 2 и 3 выключены. Откат: убрать со страницы плейсхолдер js:fx (стоит сразу после js:to-top). */
+(()=>{
+  const RM=matchMedia('(prefers-reduced-motion: reduce)');
+  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+  const st=document.createElement('style');
+  st.textContent=`
+.to-top{overflow:visible}
+.fx-q{position:absolute;left:-5px;top:-5px;width:74px;height:82px;pointer-events:none;overflow:visible}
+.fx-q circle{fill:none;stroke-width:3}
+.fx-q .t{stroke:rgba(20,22,28,.1)}
+.fx-q .p{stroke:#b8863b;stroke-linecap:round;transition:stroke-dashoffset .15s linear}
+.fx-q path{fill:rgba(20,22,28,.14);transition:fill .5s ease}
+.fx-q.full path{fill:#b8863b}
+@media (hover:hover){
+  .vow,.chan,.mp,.pillar{position:relative;transition:padding-left .45s cubic-bezier(.22,.61,.2,1)}
+  .vow::before,.chan::before,.mp::before,.pillar::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:#b8863b;
+    transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.22,.61,.2,1);pointer-events:none}
+  .vow:hover,.chan:hover,.mp:hover{padding-left:10px}
+  .vow:hover::before,.chan:hover::before,.mp:hover::before,.pillar:hover::before{transform:scaleX(1)}
+}
+.fx-par-wrap{overflow:hidden}
+.dark-strip .ds-photo[data-par]{height:124%;top:-12%;will-change:transform}
+[data-ghost]{position:relative;isolation:isolate}
+.fx-ghost{position:absolute;z-index:-1;left:0;top:clamp(20px,6vh,70px);white-space:nowrap;pointer-events:none;user-select:none;
+  font-family:var(--display,'Montserrat',sans-serif);font-weight:800;font-size:clamp(84px,17vw,250px);line-height:1;letter-spacing:.02em;
+  color:transparent;-webkit-text-stroke:1px rgba(20,22,28,.09);will-change:transform}
+.fx-ghost.on-dark{-webkit-text-stroke-color:rgba(244,241,234,.1)}
+.fx-w{transition:opacity .25s linear}
+.fx-ch{position:fixed;z-index:57;right:clamp(14px,1.6vw,26px);top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:2px;
+  opacity:0;pointer-events:none;transition:opacity .4s ease}
+.fx-ch.show{opacity:1;pointer-events:auto}
+@media (min-width:1280px){.fx-ch{display:flex}}
+.fx-ch button{display:flex;align-items:center;justify-content:flex-end;gap:10px;background:none;border:0;cursor:pointer;padding:7px 0;
+  font-family:var(--body,'Montserrat',sans-serif);font-size:12px;font-weight:600;letter-spacing:.06em;color:#5b6068}
+.fx-ch button span{opacity:0;transform:translateX(6px);transition:opacity .3s ease,transform .3s ease;white-space:nowrap;
+  background:rgba(246,246,247,.86);padding:3px 8px;border-radius:6px}
+.fx-ch button i{display:block;height:2px;width:14px;background:rgba(20,22,28,.28);transition:width .35s cubic-bezier(.22,.61,.2,1),background .3s ease}
+.fx-ch button:hover span,.fx-ch button:focus-visible span,.fx-ch button[aria-current="true"] span{opacity:1;transform:none}
+.fx-ch button[aria-current="true"]{color:#14161c}
+.fx-ch button[aria-current="true"] i{width:28px;background:#b8863b}
+`;
+  document.head.appendChild(st);
+
+  /* ---- 1. Q вокруг кнопки «наверх» ---- */
+  const tt=document.getElementById('to-top');
+  let qP=null,qS=null;const LEN=2*Math.PI*27;
+  if(tt){
+    const NS='http://www.w3.org/2000/svg',svg=document.createElementNS(NS,'svg');
+    svg.setAttribute('class','fx-q');svg.setAttribute('viewBox','0 0 74 82');svg.setAttribute('aria-hidden','true');
+    svg.innerHTML='<circle class="t" cx="29" cy="29" r="27"/><circle class="p" cx="29" cy="29" r="27" transform="rotate(-90 29 29)" stroke-dasharray="'+LEN.toFixed(1)+'" stroke-dashoffset="'+LEN.toFixed(1)+'"/><path d="M52.6 47.8 L67.1 76.9 L36.9 61.2 Z"/>';
+    tt.appendChild(svg);qS=svg;qP=svg.querySelector('.p');
+  }
+
+  /* ---- 2. параллакс ---- */
+  const pars=[...document.querySelectorAll('[data-par]')].map(el=>({el,box:el.closest('section,header')||el.parentElement,amp:parseFloat(el.dataset.par)||9,live:false}));
+  const ghosts=[...document.querySelectorAll('[data-ghost]')].map(sec=>{
+    const g=document.createElement('div');g.className='fx-ghost';g.textContent=sec.dataset.ghost;g.setAttribute('aria-hidden','true');
+    if(sec.dataset.ghostDark!==undefined)g.classList.add('on-dark');
+    sec.style.overflow='hidden';sec.prepend(g);return {el:g,box:sec,live:false};
+  });
+
+  /* ---- 3. фраза по словам ---- */
+  const phrases=RM.matches?[]:[...document.querySelectorAll('[data-words],.pull')].slice(0,2).map(el=>{
+    const words=el.textContent.trim().split(/\s+/);el.setAttribute('aria-label',words.join(' '));el.textContent='';
+    const spans=words.map((w,i)=>{const s=document.createElement('span');s.className='fx-w';s.setAttribute('aria-hidden','true');
+      s.textContent=w+(i<words.length-1?' ':'');el.appendChild(s);return s});
+    return {el,spans,live:false};
+  });
+
+  /* ---- 5. указатель глав ---- */
+  const chSecs=[...document.querySelectorAll('section[data-ch]')];let chNav=null,chs=[];
+  if(chSecs.length>2){
+    chNav=document.createElement('nav');chNav.className='fx-ch';chNav.setAttribute('aria-label','Разделы страницы');
+    chs=chSecs.map(sec=>{
+      const b=document.createElement('button');b.type='button';b.innerHTML='<span></span><i></i>';b.firstChild.textContent=sec.dataset.ch;
+      b.addEventListener('click',()=>{const y=sec.getBoundingClientRect().top+scrollY-Math.min(110,innerHeight*.14);scrollTo({top:y,behavior:RM.matches?'auto':'smooth'})});
+      chNav.appendChild(b);return {sec,b};
+    });
+    document.body.appendChild(chNav);
+  }
+
+  /* видимость: считаем только то, что на экране */
+  const io=new IntersectionObserver(es=>es.forEach(e=>{const o=e.target.__fx;if(o)o.live=e.isIntersecting}),{rootMargin:'20% 0px'});
+  [...pars,...ghosts].forEach(o=>{o.box.__fx=o;io.observe(o.box)});
+  phrases.forEach(o=>{o.el.__fx=o;io.observe(o.el)});
+
+  let raf=0;
+  function frame(){
+    raf=0;const vh=innerHeight,max=document.documentElement.scrollHeight-vh,pr=max>0?clamp(scrollY/max,0,1):0;
+    if(qP){qP.setAttribute('stroke-dashoffset',(LEN*(1-pr)).toFixed(1));qS.classList.toggle('full',pr>0.985)}
+    const small=innerWidth<861;
+    if(!RM.matches){
+      for(const o of pars){if(!o.live)continue;const r=o.box.getBoundingClientRect();const k=clamp((r.top+r.height/2-vh/2)/(vh/2+r.height/2),-1,1);
+        o.el.style.transform='translate3d(0,'+(k*o.amp*(small?.5:1)).toFixed(2)+'%,0)'}
+      for(const o of ghosts){if(!o.live)continue;const r=o.box.getBoundingClientRect();const k=clamp((vh-r.top)/(vh+r.height),0,1);
+        o.el.style.transform='translate3d('+((6-k*(small?14:26))).toFixed(2)+'%,0,0)'}
+    }
+    for(const o of phrases){if(!o.live)continue;const r=o.el.getBoundingClientRect();const k=clamp((vh*.88-r.top)/(vh*.42),0,1),n=o.spans.length;
+      o.spans.forEach((s,i)=>{s.style.opacity=(0.2+0.8*clamp(k*(n+3)-i,0,1)/1).toFixed(2)})}
+    if(chNav){
+      chNav.classList.toggle('show',scrollY>vh*.6&&scrollY<max-vh*.35);
+      let cur=chs[0];for(const c of chs){if(c.sec.getBoundingClientRect().top<=vh*.4)cur=c}
+      chs.forEach(c=>c.b.setAttribute('aria-current',c===cur?'true':'false'));
+    }
+  }
+  const req=()=>{if(!raf)raf=requestAnimationFrame(frame)};
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);
+  setTimeout(frame,60);frame();
+})();
 /* форма в подвале: передаёт имя, почту и телефон в пошаговую форму на partners.html (sessionStorage, не адрес) */
 const coopForm=document.querySelector('.coop-form');
 if(coopForm){
