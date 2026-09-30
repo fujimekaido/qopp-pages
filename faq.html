@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Вопросы и ответы. QOPP</title>
-<meta name="description" content="Ответы поддержки QOPP на частые вопросы: совместимость памяти и SSD, установка, частоты и XMP, карты для видеорегистратора, реальный объём, гарантия.">
+<meta name="description" content="50 ответов поддержки QOPP: совместимость памяти и SSD, установка, частоты и XMP, карты для видеорегистратора, флешка и телефон, реальный объём, гарантия и возврат.">
 <meta name="theme-color" content="#f6f6f7">
 <!-- DEPLOY STEP: заменить og:url и og:image на абсолютные адреса живого сайта перед публикацией -->
 <meta property="og:title" content="Вопросы и ответы. QOPP">
@@ -550,6 +550,18 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .f-empty{padding:40px 4px;color:var(--muted)}
 .f-empty b{display:block;color:var(--ink);font-family:var(--display);font-size:20px;margin-bottom:8px}
 @media (max-width:720px){.qa summary{padding:20px 0}.qa summary:hover{padding-left:0}.f-search input{font-size:16px}}
+/* faq v2: счётчики в чипах, подзаголовки тем в общем списке, ссылки на частые вопросы по теме */
+.chip-n{margin-left:7px;font-size:12px;font-weight:500;color:var(--silver)}
+.chip.on .chip-n{color:var(--muted)}
+.qa-gr{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--silver);padding:40px 4px 14px;border-bottom:1px solid var(--hairline)}
+.qa-gr[hidden]{display:none}
+.qa-list>.qa-gr:first-child{padding-top:22px}
+.f-rel{margin-top:30px;padding:0 4px;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.f-rel[hidden]{display:none}
+.f-rel-h{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--silver)}
+.f-rel a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+.f-rel a:hover{color:var(--accent-deep)}
+/* конец faq v2 */
 </style>
 </head>
 <body>
@@ -617,7 +629,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     <h1 class="part">Сначала спросите нас</h1>
     <div class="f-search part">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="6.5" stroke="#8b9098" stroke-width="1.6"/><path d="m14 14 4.5 4.5" stroke="#8b9098" stroke-width="1.6" stroke-linecap="round"/></svg>
-      <input id="f-q" type="search" placeholder="Например: XMP, PS5, не видит диск, радиатор, 4 ГБ, DDR3L, видеорегистратор, TBW, exFAT, кабель, реальный объём, Type-C, BIOS, серийный номер, гарантия, частота, SO-DIMM" autocomplete="off" aria-label="Поиск по вопросам">
+      <input id="f-q" type="search" placeholder="Например: XMP, PS5, не видит диск, радиатор, iPhone, видеорегистратор, медленная карта, FAT32, TBW, двухканал, комплект, серийный номер, возврат, QBOOK" autocomplete="off" aria-label="Поиск по вопросам">
     </div>
     <p class="f-count part" id="f-count" aria-live="polite"></p>
     </div>
@@ -627,193 +639,372 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 <main id="main" tabindex="-1">
   <section class="section f-body">
     <div class="chips" role="group" aria-label="Темы вопросов">
-        <button class="chip on" type="button" data-cat="top" aria-pressed="true">Частые</button>
-        <button class="chip" type="button" data-cat="ssd" aria-pressed="false">SSD</button>
-        <button class="chip" type="button" data-cat="ram" aria-pressed="false">Оперативная память</button>
-        <button class="chip" type="button" data-cat="card" aria-pressed="false">Карты памяти</button>
-        <button class="chip" type="button" data-cat="usb" aria-pressed="false">Флеш-накопители</button>
-        <button class="chip" type="button" data-cat="service" aria-pressed="false">Гарантия и бренд</button>
+        <button class="chip on" type="button" data-cat="top" aria-pressed="true">Частые<span class="chip-n">15</span></button>
+        <button class="chip" type="button" data-cat="ssd" aria-pressed="false">SSD<span class="chip-n">8</span></button>
+        <button class="chip" type="button" data-cat="ram" aria-pressed="false">Оперативная память<span class="chip-n">8</span></button>
+        <button class="chip" type="button" data-cat="card" aria-pressed="false">Карты памяти<span class="chip-n">6</span></button>
+        <button class="chip" type="button" data-cat="usb" aria-pressed="false">Флеш-накопители<span class="chip-n">4</span></button>
+        <button class="chip" type="button" data-cat="qbook" aria-pressed="false">Ноутбук QBOOK<span class="chip-n">4</span></button>
+        <button class="chip" type="button" data-cat="service" aria-pressed="false">Покупка и гарантия<span class="chip-n">5</span></button>
+        <button class="chip" type="button" data-cat="all" aria-pressed="false">Все вопросы<span class="chip-n">50</span></button>
     </div>
     <div class="qa-list" id="qa-list">
-      <details class="qa" id="ram-fit" data-cat="top ram">
+      <h2 class="qa-gr" hidden>Частые</h2>
+      <details class="qa" id="ram-fit" data-cat="top" data-rel="ram" data-k="оперативка озу ram плашка планка совместимость">
         <summary><span class="qa-q">Как понять, подойдёт ли память к моему ноутбуку или ПК?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Совпасть должны три вещи: поколение (DDR3, DDR4 или DDR5), формат (SO-DIMM для ноутбука, UDIMM для настольного ПК) и объём, который поддерживает устройство. Поколения физически несовместимы: ключ на плате стоит в разных местах, модуль просто не встанет в чужой слот.</p>
-        <p>Поколение и формат видны в диспетчере задач Windows на вкладке «Производительность» → «Память» или в бесплатной программе CPU-Z. У части ноутбуков память распаяна на плате, а свободный слот один или его нет: проверьте это в характеристиках модели до покупки.</p>
+        <p>Совпасть должны поколение (DDR3, DDR4 или DDR5) и формат: SO-DIMM для ноутбука, UDIMM для настольного ПК. Поколения физически несовместимы: ключ на плате стоит в разных местах, модуль просто не встанет в чужой слот.</p>
+        <p>Поколение и формат видны в диспетчере задач Windows на вкладке «Производительность» → «Память» или в бесплатной программе CPU-Z. Если частота модуля выше той, что поддерживает устройство, память заработает на частоте устройства.</p>
+        <p>Не уверены? Пройдите <a href="support.html#pick">подбор за минуту</a> или напишите в поддержку точную модель устройства.</p>
         </div>
       </details>
-      <details class="qa" id="ssd-fit" data-cat="top ssd">
+      <details class="qa" id="ssd-fit" data-cat="top" data-rel="ssd" data-k="ссд диск накопитель совместимость материнская плата">
         <summary><span class="qa-q">Как понять, подойдёт ли SSD к моему ноутбуку или ПК?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
         <p>Накопитель 2.5" встанет в любой ноутбук или ПК с отсеком 2.5" и портом SATA, его толщина 7 мм. Для M.2 важен тип слота: SATA или NVMe. Разъёмы похожи, но не взаимозаменяемы, тип слота указан в характеристиках ноутбука или материнской платы.</p>
-        <p>NVMe PCI-E 4.0 работает и в слоте PCI-E 3.0: совместимость полная, скорость будет ограничена возможностями слота. На старых ноутбуках с SATA II накопитель тоже заработает, со скоростью интерфейса.</p>
+        <p>NVMe PCI-E 4.0 работает и в слоте PCI-E 3.0: совместимость полная, скорость будет ограничена возможностями слота. Длина наших M.2 80 мм (типоразмер 2280): проверьте, что в устройстве есть место под эту длину.</p>
         </div>
       </details>
-      <details class="qa" id="ssd-kit" data-cat="top ssd">
-        <summary><span class="qa-q">Идут ли в комплекте кабели и крепёжный винт?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+      <details class="qa" id="card-4k" data-cat="top" data-rel="card" data-k="microsd сд карта регистратор экшн gopro dji видеонаблюдение">
+        <summary><span class="qa-q">Какая карта памяти нужна для видеорегистратора, камеры и съёмки 4K?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Нет, в поставку входит только накопитель. Для 2.5" в настольном ПК нужны кабель SATA для данных и разъём питания SATA от блока питания, чаще всего оба уже есть в корпусе. При установке в ноутбук кабели не нужны.</p>
-        <p>Винт для M.2 поставляется вместе с материнской платой или ноутбуком и обычно уже стоит в стойке возле слота.</p>
+        <p>Класс U3 V30: он гарантирует запись не ниже 30 МБ/с без провалов, этого хватает для 4K. Такой класс у линеек RUSH и RUSH+, они рассчитаны на постоянную циклическую перезапись, как в видеорегистраторе или камере наблюдения.</p>
+        <p>Проверьте максимальный объём карты, который поддерживает устройство, и перед первым использованием отформатируйте карту в нём самом.</p>
         </div>
       </details>
-      <details class="qa" id="ssd-invisible" data-cat="top ssd">
-        <summary><span class="qa-q">Компьютер не видит новый SSD. Что делать?</span><span class="qa-ic" aria-hidden="true"></span></summary>
-        <div class="qa-a">
-        <p>Новый диск нужно инициализировать: правый клик по кнопке «Пуск» → «Управление дисками» → инициализировать диск и создать том. После этого он появится в проводнике.</p>
-        <p>Если диска нет и в BIOS, проверьте посадку в слоте, кабель и порт. На чистый накопитель нужно установить операционную систему: без неё компьютер с него не загрузится.</p>
-        </div>
-      </details>
-      <details class="qa" id="ram-xmp" data-cat="top ram">
+      <details class="qa" id="ram-xmp" data-cat="top" data-rel="ram" data-k="оперативка озу мгц герц bios биос профиль тайминги">
         <summary><span class="qa-q">Почему память работает не на заявленной частоте?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
         <p>Частоты выше базовых, например 3600 МГц, и заявленные тайминги включаются профилем XMP в BIOS. Без него плата выставляет стандартные значения, это нормальное поведение.</p>
-        <p>Итоговая частота зависит ещё от процессора и материнской платы. В ноутбуках профиля XMP обычно нет: память работает на штатной частоте устройства.</p>
+        <p>Итоговая частота зависит ещё от процессора и материнской платы: если платформа поддерживает максимум 2400 МГц, модуль на 3200 МГц будет работать на 2400. В ноутбуках профиля XMP обычно нет: память работает на штатной частоте устройства.</p>
         </div>
       </details>
-      <details class="qa" id="ram-mix" data-cat="top ram">
-        <summary><span class="qa-q">Можно ли ставить память QOPP вместе с модулем другого производителя?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+      <details class="qa" id="ssd-kit" data-cat="top" data-rel="ssd" data-k="ссд шлейф провод болт болтик комплектация">
+        <summary><span class="qa-q">Идут ли в комплекте с SSD кабели и крепёжный винт?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Да, если совпадают поколение и формат. Система автоматически подстроится под частоту и тайминги более медленного модуля.</p>
-        <p>Для двухканального режима и предсказуемого результата берите комплект из двух одинаковых планок.</p>
+        <p>Нет, в поставку входит только накопитель: без кабелей, винтов и радиатора. Для 2.5" в настольном ПК нужны кабель SATA для данных и разъём питания SATA от блока питания, чаще всего оба уже есть в корпусе. При установке в ноутбук кабели не нужны.</p>
+        <p>Винт для M.2 поставляется вместе с материнской платой или ноутбуком и обычно уже стоит в стойке возле слота.</p>
         </div>
       </details>
-      <details class="qa" id="card-4k" data-cat="top card">
-        <summary><span class="qa-q">Какая карта памяти нужна для видеорегистратора и съёмки 4K?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+      <details class="qa" id="ssd-heat" data-cat="top" data-rel="ssd" data-k="ссд ps5 ps4 пс5 пс4 плейстейшн playstation приставка консоль радиатор">
+        <summary><span class="qa-q">Подойдёт ли SSD для PlayStation 5 и PlayStation 4?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Класс U3 V30: он гарантирует запись не ниже 30 МБ/с без провалов, этого хватает для 4K. Линейка RUSH рассчитана на постоянную циклическую перезапись, как в видеорегистраторе.</p>
-        <p>Проверьте максимальный объём карты, который поддерживает устройство. Карты от 64 ГБ отформатированы в exFAT: если устройство просит FAT32, отформатируйте карту в нём самом.</p>
+        <p>Для PS5 подходят накопители M.2 2280 с интерфейсом PCI-E 4.0. Радиатор обязателен: консоль нагружает диск постоянно, без охлаждения он сбрасывает скорость. Подойдёт односторонний радиатор высотой до 8 мм, в комплект он не входит. Накопители SATA и PCI-E 3.0 для слота PS5 не подходят.</p>
+        <p>В PS4 на место штатного жёсткого диска ставится накопитель 2.5" SATA. После замены на консоль нужно заново установить системное программное обеспечение с флешки по инструкции Sony.</p>
         </div>
       </details>
-      <details class="qa" id="ssd-heat" data-cat="top ssd">
-        <summary><span class="qa-q">Нужен ли SSD радиатор и подойдёт ли накопитель для PS5?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+      <details class="qa" id="ram-mix" data-cat="top" data-rel="ram" data-k="оперативка озу плашка планка добавить вторая samsung kingston разные">
+        <summary><span class="qa-q">Можно ли добавить модуль QOPP к памяти другого производителя?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Для PS5 подходят накопители M.2 2280 с интерфейсом PCI-E 4.0, радиатор обязателен: консоль нагружает диск постоянно, без охлаждения он сбрасывает скорость. Накопители SATA и PCI-E 3.0 для PS5 не подходят.</p>
-        <p>В ПК радиатор желателен для PCI-E 4.0 под длительной нагрузкой. Наклейку под радиатор можно снять, но сохраните её: на ней серийный номер, он понадобится при обращении по гарантии.</p>
+        <p>Да, если совпадают поколение и формат. Система подстроится под частоту и тайминги более медленного модуля. Объёмы могут различаться: например, 8 и 16 ГБ дадут 24 ГБ.</p>
+        <p>Для двухканального режима и предсказуемого результата берите два одинаковых модуля или готовый комплект.</p>
         </div>
       </details>
-      <details class="qa" id="real-capacity" data-cat="top usb card ssd">
+      <details class="qa" id="usb-android" data-cat="top" data-rel="usb" data-k="флешка флэшка андроид айфон iphone смартфон otg type-c lightning файлы">
+        <summary><span class="qa-q">Как подключить флешку к телефону на Android или к iPhone?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Android: форматировать накопитель не нужно, телефон увидит его через встроенный файловый менеджер. Для разъёма USB-A нужен переходник OTG, у двусторонней модели с Type-C он не требуется.</p>
+        <p>iPhone 15 и новее, с разъёмом USB-C: накопитель открывается в приложении «Файлы». Для iPhone с разъёмом Lightning нужен адаптер Apple с Lightning на USB для камеры, с обычными переходниками накопитель не определяется.</p>
+        <p>Телефоны читают файловые системы exFAT и FAT32. Накопитель в NTFS телефон не увидит: переформатируйте его на компьютере, заранее сохранив данные.</p>
+        </div>
+      </details>
+      <details class="qa" id="ssd-invisible" data-cat="top" data-rel="ssd" data-k="ссд диск не определяется не отображается bios биос инициализация">
+        <summary><span class="qa-q">Компьютер не видит новый SSD. Что делать?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Новый диск нужно инициализировать: правый клик по кнопке «Пуск» → «Управление дисками» → инициализировать диск и создать том. После этого он появится в проводнике. При установке Windows этого делать не нужно: установщик сам видит чистый диск.</p>
+        <p>Если диска нет и в BIOS, проверьте посадку в слоте, кабель и порт, а для M.2 ещё и тип слота: SATA или NVMe. Не помогло? Напишите в <a href="support.html">поддержку</a>.</p>
+        </div>
+      </details>
+      <details class="qa" id="real-capacity" data-cat="top" data-rel="ssd card usb" data-k="гб gb гигабайт показывает меньше 931 238 58 116">
         <summary><span class="qa-q">Почему доступный объём меньше заявленного?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Производители считают гигабайт как 1 000 000 000 байт, а операционная система как 1 073 741 824. Поэтому накопитель на 256 ГБ система показывает как 238 ГБ, а на 1 ТБ как 931 ГБ. Это норма для любых накопителей любых брендов.</p>
+        <p>Производители считают гигабайт как 1 000 000 000 байт, а операционная система как 1 073 741 824. Поэтому накопитель на 256 ГБ система показывает как 238 ГБ, на 1 ТБ как 931 ГБ, а карту на 64 ГБ примерно как 59 ГБ. Это норма для любых накопителей любых брендов.</p>
         </div>
       </details>
-      <details class="qa" id="warranty-how" data-cat="top service">
-        <summary><span class="qa-q">Что значит бессрочная гарантия и куда обращаться?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+      <details class="qa" id="warranty-terms" data-cat="top" data-rel="service" data-k="гарантийный срок сколько лет пожизненная 50 лет">
+        <summary><span class="qa-q">Какая гарантия на продукцию QOPP и что значит «бессрочная»?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Срок обращения по гарантии на оперативную память QOPP не ограничен по времени. На SSD и флеш-накопители гарантия 5 лет, на карты памяти до 10 лет, на ноутбук QBOOK 15 до 3 лет по компонентам.</p>
-        <p>Напишите в поддержку, назовите серийный номер и опишите, что случилось. Доставку до сервисного центра по гарантийному случаю оплачиваем мы. Подробные условия на странице <a href="warranty.html">Гарантия</a>.</p>
+        <p>На оперативную память гарантия бессрочная: срок обращения не ограничен по времени. На маркетплейсах в карточке может стоять «50 лет»: это технический формат, площадка не принимает бессрочный срок.</p>
+        <p>На SSD гарантия 5 лет или до исчерпания ресурса записи TBW, на флеш-накопители 5 лет, на карты памяти 10 лет. На ноутбук QBOOK 15: 3 года на процессор, накопитель и память и 1 год на остальные компоненты. Полные условия на странице <a href="warranty.html">Гарантия</a>.</p>
         </div>
       </details>
-      <details class="qa" id="ssd-nand" data-cat="ssd">
+      <details class="qa" id="usb-tv" data-cat="top" data-rel="usb card" data-k="флешка флэшка карта тв телевизор автомагнитола машина музыка fat32">
+        <summary><span class="qa-q">Телевизор или магнитола не видит флешку или карту. Что проверить?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Файловую систему: многим телевизорам и магнитолам нужен FAT32, exFAT и NTFS они не читают. Накопители больше 32 ГБ Windows в FAT32 штатно не форматирует: проще сделать это в самом телевизоре или магнитоле, если такая функция есть. Сначала сохраните данные.</p>
+        <p>Ещё у старых устройств есть предел объёма накопителя, он указан в инструкции. И проверьте сам файл: телевизор может не поддерживать формат видео.</p>
+        </div>
+      </details>
+      <details class="qa" id="brand" data-cat="top" data-rel="service" data-k="российский производитель страна производства оригинал фирма">
+        <summary><span class="qa-q">QOPP это чей бренд и почему на упаковке указан Китай?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>QOPP это российский бренд. Мы разрабатываем спецификации, контролируем качество и сами ведём гарантийное обслуживание и поддержку в России.</p>
+        <p>Микросхемы памяти и контроллеры в мире выпускает небольшое число производителей с площадками в Азии, там же собирается продукция. Поэтому страной изготовления указан Китай.</p>
+        </div>
+      </details>
+      <details class="qa" id="ssd-nand" data-cat="top" data-rel="ssd" data-k="ссд tlc qlc mlc драм буфер кеш кэш контроллер hmb slc">
         <summary><span class="qa-q">Какой тип памяти в накопителях QOPP и есть ли DRAM-кэш?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Во всех накопителях стоит память 3D NAND TLC (три бита на ячейку). Все модели безбуферные: отдельной микросхемы DRAM-кэша в них нет. Для установки системы, программ, игр и повседневной работы этого достаточно.</p>
+        <p>Во всех накопителях стоит память 3D NAND TLC (три бита на ячейку). Все модели безбуферные: отдельной микросхемы DRAM-кэша в них нет. Запись ускоряет SLC-кэширование, а накопители NVMe дополнительно используют технологию HMB. Модель контроллера зависит от линейки и партии.</p>
+        <p>Для установки системы, программ, игр и повседневной работы этого достаточно.</p>
         </div>
       </details>
-      <details class="qa" id="ssd-tbw" data-cat="ssd">
+      <details class="qa" id="return" data-cat="top" data-rel="service" data-k="возврат вернуть обмен брак не работает сломался">
+        <summary><span class="qa-q">Товар не подошёл или не работает. Что делать?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Если товар не работает, напишите в <a href="support.html">поддержку</a>: поможем с настройкой, а если случай гарантийный, решим его по гарантии. Сразу назовите модель своего устройства и серийный номер товара.</p>
+        <p>Если товар исправен, но не подошёл к устройству, возврат оформляется там, где вы его покупали, по правилам площадки. Чтобы не ошибиться, до покупки пришлите нам модель устройства: проверим совместимость.</p>
+        </div>
+      </details>
+      <h2 class="qa-gr" hidden>SSD</h2>
+      <details class="qa" id="ssd-sata-nvme" data-cat="ssd" data-k="ссд скорость разница pci-e pcie линейки q500s q600s q600ms q2000mn q4000mn q7000mn">
+        <summary><span class="qa-q">Чем отличаются SATA и NVMe и что выбрать?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>SATA ограничен скоростью около 550 МБ/с. В нём работают накопители 2.5" Q500S и Q600S и модуль M.2 Q600MS. NVMe подключается по шине PCI-E и быстрее в разы: это линейки Q2000MN (PCI-E 3.0), Q4000MN и Q7000MN (PCI-E 4.0), у старшей скорость чтения до 7000 МБ/с.</p>
+        <p>Выбор задаёт устройство. Если в нём есть слот M.2 с поддержкой NVMe, берите NVMe: разница заметна при загрузке системы, запуске игр и копировании больших файлов. Если есть только SATA, подойдёт накопитель 2.5" или M.2 SATA.</p>
+        </div>
+      </details>
+      <details class="qa" id="ssd-m2" data-cat="ssd" data-k="ссд м2 m2 ключ вырез ngff b+m слот">
+        <summary><span class="qa-q">Как отличить M.2 SATA от M.2 NVMe и что будет, если перепутать?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>По вырезам на контактах. У M.2 SATA их два (ключи B и M), у NVMe один (ключ M). Наш M.2 SATA это модель Q600MS, все остальные M.2 в каталоге NVMe.</p>
+        <p>Если перепутать, накопитель не определится. Многие современные платы и ноутбуки поддерживают в слоте M.2 только NVMe, а старые только SATA. Что умеет ваш слот, написано в характеристиках устройства.</p>
+        </div>
+      </details>
+      <details class="qa" id="ssd-radiator" data-cat="ssd" data-k="ссд охлаждение греется температура нагрев стикер наклейка">
+        <summary><span class="qa-q">Нужен ли SSD радиатор в компьютере и можно ли снять наклейку?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Накопителям SATA радиатор не нужен. NVMe нагревается только под нагрузкой, при чтении и записи. При обычной вентиляции корпуса радиатор необязателен, но для PCI-E 4.0 под длительной нагрузкой он желателен.</p>
+        <p>Наклейку под радиатор можно снять, но сохраните её: на ней серийный номер, он понадобится при обращении по гарантии.</p>
+        </div>
+      </details>
+      <details class="qa" id="ssd-tbw" data-cat="ssd" data-k="ссд срок службы надёжность наработка перезапись">
         <summary><span class="qa-q">На сколько хватит ресурса SSD?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
         <p>Ресурс записи (TBW) зависит от модели и объёма, полная таблица есть на странице <a href="warranty.html">Гарантия</a>. Гарантия действует 5 лет или до исчерпания TBW, смотря что наступит раньше. При домашней нагрузке в 20–30 ГБ записи в день ресурса хватает на срок заметно больше гарантийного.</p>
         </div>
       </details>
-      <details class="qa" id="ssd-box" data-cat="ssd">
+      <details class="qa" id="ssd-box" data-cat="ssd" data-k="ссд внешний диск карман переходник usb кейс">
         <summary><span class="qa-q">Можно ли использовать SSD во внешнем боксе?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Да. Для накопителя 2.5" подойдёт любой бокс или переходник SATA → USB, для M.2 нужен бокс под свой тип: SATA или NVMe. Скорость будет ограничена интерфейсом USB и контроллером бокса.</p>
+        <p>Работать будет: для накопителя 2.5" подойдёт бокс или переходник SATA → USB, для M.2 нужен бокс под свой тип, SATA или NVMe.</p>
+        <p>Но это внутренние накопители. Скорость и стабильность через бокс зависят от самого бокса и порта USB, поэтому заявленные характеристики мы гарантируем только при прямом подключении.</p>
         </div>
       </details>
-      <details class="qa" id="ssd-os" data-cat="ssd">
-        <summary><span class="qa-q">После установки SSD компьютер не загружается. Это брак?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+      <details class="qa" id="ssd-os" data-cat="ssd" data-k="ссд виндовс винда windows установка клонирование перенос не загружается">
+        <summary><span class="qa-q">Есть ли на SSD Windows и как перенести систему со старого диска?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Нет. Новый накопитель пуст, на нём нет операционной системы. Установите Windows с загрузочной флешки (образ есть на сайте Microsoft) или перенесите систему со старого диска программой для клонирования.</p>
+        <p>Накопитель поставляется чистым, операционной системы на нём нет. Windows ставится с загрузочной флешки (образ есть на сайте Microsoft), либо систему переносят со старого диска программой для клонирования.</p>
+        <p>Пока системы на диске нет, компьютер с него не загрузится: это не брак.</p>
         </div>
       </details>
-      <details class="qa" id="ssd-recover" data-cat="ssd">
-        <summary><span class="qa-q">Можно ли восстановить данные после форматирования?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+      <details class="qa" id="ssd-hdd" data-cat="ssd" data-k="ссд hdd жёсткий жесткий диск замена второй dvd привод салазки sata 2">
+        <summary><span class="qa-q">Можно ли поставить SSD вместо жёсткого диска или вторым диском?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Шансы есть, если после форматирования на диск почти ничего не записывали. Помогают программы посекторного сканирования: R.saver, PhotoRec, Recuva. Важно не сохранять найденные файлы на тот же накопитель. На SSD с включённой командой TRIM вероятность восстановления ниже, чем на жёстких дисках.</p>
+        <p>Да. Накопитель 2.5" имеет тот же размер и разъём SATA, что и жёсткий диск ноутбука, и ставится на его место. В старых ноутбуках с SATA II он тоже работает, со скоростью интерфейса.</p>
+        <p>В настольном ПК SSD можно добавить вторым диском, если есть свободный порт SATA или слот M.2. В ноутбуке второй диск иногда ставят вместо DVD-привода: для этого нужны отдельные салазки, в комплект они не входят.</p>
         </div>
       </details>
-      <details class="qa" id="ram-format" data-cat="ram">
+      <details class="qa" id="ssd-dvr" data-cat="ssd" data-k="ссд видеонаблюдение регистратор камеры запись 24/7">
+        <summary><span class="qa-q">Подойдёт ли SSD для видеорегистратора системы наблюдения?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Да, если регистратор рассчитан на накопители 2.5" SATA: SSD ставится на место жёсткого диска и поддерживает циклическую запись. Для автомобильных регистраторов и камер со слотом microSD нужны <a href="microsd.html">карты памяти</a>.</p>
+        </div>
+      </details>
+      <h2 class="qa-gr" hidden>Оперативная память</h2>
+      <details class="qa" id="ram-max" data-cat="ram" data-k="оперативка озу максимальный объём слот распаяна сколько гб">
+        <summary><span class="qa-q">Сколько памяти можно поставить в ноутбук и есть ли в нём свободный слот?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Максимальный объём и число слотов задаёт производитель устройства, они указаны в характеристиках модели. У части ноутбуков память распаяна на плате, а свободный слот один или его нет.</p>
+        <p>Даже в пределах одной модели конфигурации различаются, поэтому смотрите полное название модификации на наклейке снизу. Пришлите его в <a href="support.html">поддержку</a>, и мы подскажем, что можно установить.</p>
+        </div>
+      </details>
+      <details class="qa" id="ram-format" data-cat="ram" data-k="оперативка озу dimm sodimm ноутбучная">
         <summary><span class="qa-q">Чем SO-DIMM отличается от UDIMM?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
         <p>SO-DIMM это короткий модуль для ноутбуков, моноблоков и мини-ПК. UDIMM (его же называют DIMM) это длинный модуль для настольных компьютеров. Они разного размера и не взаимозаменяемы. В каталоге память разделена так же: <a href="sodimm.html">для ноутбука</a> и <a href="udimm.html">для персонального компьютера</a>.</p>
         </div>
       </details>
-      <details class="qa" id="ram-ddr3l" data-cat="ram">
+      <details class="qa" id="ram-ddr3l" data-cat="ram" data-k="оперативка озу 1.35 1.5 вольт напряжение низковольтная">
         <summary><span class="qa-q">Подойдёт ли DDR3 в ноутбук, где стоит DDR3L?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
         <p>Модули QOPP DDR3 SO-DIMM работают в ноутбуках с памятью DDR3L. Если сомневаетесь в своей модели, напишите в поддержку её точное название, мы проверим.</p>
         </div>
       </details>
-      <details class="qa" id="ram-chips" data-cat="ram">
-        <summary><span class="qa-q">Как узнать производителя чипов и параметры модуля?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+      <details class="qa" id="ram-kit" data-cat="ram" data-k="оперативка озу двухканал двухканальный dual channel kit k2 две планки 2x8 2x16">
+        <summary><span class="qa-q">Одна планка или комплект из двух: что выбрать?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Программа CPU-Z, вкладка SPD: в поле Manufacturer указан производитель чипов, рядом частоты, тайминги и профили XMP для каждого слота.</p>
+        <p>Два модуля работают в двухканальном режиме: он быстрее одного модуля того же общего объёма, особенно на встроенной графике. Комплекты QOPP (в названии K2) это два одинаковых модуля в одной упаковке. Остальные позиции это одиночные модули.</p>
+        <p>Если в устройстве один слот, берите один модуль нужного объёма.</p>
         </div>
       </details>
-      <details class="qa" id="ram-speed" data-cat="ram">
+      <details class="qa" id="ram-chips" data-cat="ram" data-k="оперативка озу hynix samsung micron ранг rank одноранговая двухранговая cl cpu-z">
+        <summary><span class="qa-q">Как узнать производителя чипов, ранги и тайминги модуля?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>В модулях стоят чипы Samsung, SK Hynix или Micron, производитель зависит от партии. Что именно в вашем модуле, покажет бесплатная программа CPU-Z на вкладке SPD: производитель чипов, число рангов, частоты, тайминги и профили XMP для каждого слота.</p>
+        </div>
+      </details>
+      <details class="qa" id="ram-speed" data-cat="ram" data-k="оперативка озу тормозит быстрее прирост сколько нужно">
         <summary><span class="qa-q">Станет ли компьютер быстрее, если добавить памяти?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Да, если памяти не хватало: система перестаёт сбрасывать данные на диск, вкладки и программы переключаются без задержек. Если памяти и так достаточно, прирост даст переход на два модуля вместо одного: двухканальный режим заметно ускоряет встроенную графику.</p>
+        <p>Да, если памяти не хватало: система перестаёт сбрасывать данные на диск, вкладки и программы переключаются без задержек.</p>
+        <p>Проверить просто: откройте диспетчер задач под обычной нагрузкой. Если память занята на 80–90%, добавка даст заметный эффект. Если занята наполовину, скорость ограничивает процессор или диск.</p>
         </div>
       </details>
-      <details class="qa" id="card-phone" data-cat="card">
-        <summary><span class="qa-q">Подойдёт ли карта к моему телефону, планшету или приставке?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+      <details class="qa" id="ram-apple" data-cat="ram" data-k="оперативка озу макбук аймак mac apple">
+        <summary><span class="qa-q">Подойдёт ли память QOPP для MacBook и iMac?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
-        <p>Карты QOPP это стандартные microSD, они работают в любом устройстве со слотом microSD: телефонах и планшетах на Android, Nintendo Switch, Steam Deck, камерах, дронах. Ограничение одно: максимальный объём, который поддерживает само устройство, он указан в его характеристиках.</p>
+        <p>Совместимость с техникой Apple мы не гарантируем: у неё особые требования к модулям, а в современных моделях память распаяна и не меняется.</p>
+        <p>В старых MacBook и iMac на процессорах Intel модули подходящего поколения часто работают, но проверить это заранее нельзя. Если важна уверенность, выбирайте память из списка совместимости Apple.</p>
         </div>
       </details>
-      <details class="qa" id="card-classes" data-cat="card">
-        <summary><span class="qa-q">Что означают U3, V30, A1 и A2 на карте?</span><span class="qa-ic" aria-hidden="true"></span></summary>
-        <div class="qa-a">
-        <p>U3 и V30 это гарантированная минимальная скорость записи 30 МБ/с, она нужна для видео 4K. A1 и A2 это классы для приложений: скорость работы с мелкими файлами, важна для телефона и игровых консолей. A2 быстрее A1.</p>
-        </div>
-      </details>
-      <details class="qa" id="usb-4gb" data-cat="usb">
-        <summary><span class="qa-q">Флешка не принимает файлы больше 4 ГБ. Почему?</span><span class="qa-ic" aria-hidden="true"></span></summary>
-        <div class="qa-a">
-        <p>Это ограничение файловой системы FAT32, в которой накопитель поставляется ради совместимости с телевизорами и магнитолами. Переформатируйте его в exFAT или NTFS, заранее сохранив данные: форматирование их удалит.</p>
-        </div>
-      </details>
-      <details class="qa" id="usb-android" data-cat="usb">
-        <summary><span class="qa-q">Работает ли флешка с телефоном на Android?</span><span class="qa-ic" aria-hidden="true"></span></summary>
-        <div class="qa-a">
-        <p>Да, форматировать её не нужно, телефон увидит накопитель через встроенный файловый менеджер. Для разъёма USB-A нужен переходник OTG, у двусторонней модели с Type-C он не требуется.</p>
-        </div>
-      </details>
-      <details class="qa" id="usb-tv" data-cat="usb">
-        <summary><span class="qa-q">Телевизор или магнитола не видит флешку. Что проверить?</span><span class="qa-ic" aria-hidden="true"></span></summary>
-        <div class="qa-a">
-        <p>Файловую систему: многим телевизорам и магнитолам нужен FAT32, exFAT и NTFS они не читают. Ещё у старых устройств есть предел объёма накопителя, он указан в инструкции.</p>
-        </div>
-      </details>
-      <details class="qa" id="brand" data-cat="service">
-        <summary><span class="qa-q">QOPP это чей бренд? Продукция оригинальная?</span><span class="qa-ic" aria-hidden="true"></span></summary>
-        <div class="qa-a">
-        <p>QOPP это российский бренд. Продукция выпускается по нашей спецификации и под нашим контролем, гарантийное обслуживание ведём мы сами, в России. Товар у официальных продавцов на маркетплейсах оригинальный.</p>
-        </div>
-      </details>
-      <details class="qa" id="serial" data-cat="service">
-        <summary><span class="qa-q">Где найти серийный номер?</span><span class="qa-ic" aria-hidden="true"></span></summary>
-        <div class="qa-a">
-        <p>На наклейке самого изделия: у SSD и модулей памяти она на корпусе, у карт и флеш-накопителей номер указан на упаковке. Сохраняйте наклейку и упаковку, номер нужен при обращении по гарантии.</p>
-        </div>
-      </details>
-      <details class="qa" id="oc" data-cat="service">
+      <details class="qa" id="oc" data-cat="ram" data-k="оперативка озу разгон напряжение xmp оверклокинг">
         <summary><span class="qa-q">Действует ли гарантия при разгоне памяти?</span><span class="qa-ic" aria-hidden="true"></span></summary>
         <div class="qa-a">
         <p>Включение штатного профиля XMP разгоном не считается. Если модуль вышел из строя из-за ручного разгона с повышением напряжения, это не гарантийный случай. Во всём остальном гарантия действует без оговорок.</p>
         </div>
       </details>
+      <h2 class="qa-gr" hidden>Карты памяти</h2>
+      <details class="qa" id="card-phone" data-cat="card" data-k="microsd сд карта смартфон самсунг xiaomi switch steam deck нинтендо">
+        <summary><span class="qa-q">Подойдёт ли карта к телефону, планшету или игровой приставке?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Карты QOPP это стандартные microSD, они работают в любом устройстве со слотом microSD: телефонах и планшетах на Android, Nintendo Switch, Steam Deck, камерах, дронах. Ограничение одно: максимальный объём, который поддерживает само устройство, он указан в его характеристиках.</p>
+        <p>В PlayStation слота для карт памяти нет.</p>
+        </div>
+      </details>
+      <details class="qa" id="card-classes" data-cat="card" data-k="microsd сд карта класс 10 скорость u1">
+        <summary><span class="qa-q">Что означают U3, V30, A1 и A2 на карте?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>U3 и V30 это гарантированная минимальная скорость записи 30 МБ/с, она нужна для видео 4K. A1 и A2 это классы для приложений: скорость работы с мелкими файлами, важна для телефона и игровых консолей. A2 быстрее A1.</p>
+        </div>
+      </details>
+      <details class="qa" id="card-lines" data-cat="card" data-k="microsd сд карта линейка q80sd отличие разница красная серая">
+        <summary><span class="qa-q">Чем отличаются линейки BASE, RUSH и RUSH+?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>BASE: базовая линейка на 32, 64 и 128 ГБ для телефона и повседневного хранения: фото, музыка, документы.</p>
+        <p>RUSH: класс A1 U3 V30, объёмы от 32 до 256 ГБ. Для видеорегистраторов, камер и съёмки 4K.</p>
+        <p>RUSH+: класс A2 U3 V30, объёмы от 128 ГБ до 1 ТБ. Для телефонов, планшетов и игровых консолей, где важна скорость работы приложений.</p>
+        </div>
+      </details>
+      <details class="qa" id="card-format" data-cat="card" data-k="microsd сд карта форматирование fat32 exfat ошибка файловая система">
+        <summary><span class="qa-q">Устройство просит отформатировать карту или пишет, что формат не поддерживается. Что делать?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Карты на 32 ГБ поставляются в файловой системе FAT32, карты от 64 ГБ в exFAT. Если устройству нужна другая, отформатируйте карту в его меню.</p>
+        <p>Если устройство не справляется само, отформатируйте карту на компьютере в ту систему, которую оно требует (она указана в инструкции), и повторите. Форматирование удаляет данные: сначала сохраните их.</p>
+        </div>
+      </details>
+      <details class="qa" id="card-slow" data-cat="card" data-k="microsd сд карта низкая скорость медленная производительность dji регистратор">
+        <summary><span class="qa-q">Камера или регистратор пишет «медленная карта». Что делать?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Сначала сверьте класс: для 4K устройству нужна карта U3 V30, это линейки RUSH и RUSH+. Затем отформатируйте карту в самом устройстве: часто сообщение после этого пропадает.</p>
+        <p>Если карта нужного класса, а сообщение осталось, напишите в <a href="support.html">поддержку</a>: на карты действует гарантия 10 лет, проверим и заменим.</p>
+        </div>
+      </details>
+      <details class="qa" id="card-lock" data-cat="card" data-k="microsd сд карта защита от записи lock адаптер только чтение">
+        <summary><span class="qa-q">Карта защищена от записи. Как снять защиту?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Если карта стоит в адаптере SD, проверьте ползунок на его боку: в положении Lock запись запрещена, сдвиньте его в сторону контактов.</p>
+        <p>Если ползунок в порядке, а записать и отформатировать карту не удаётся ни на одном устройстве, это признак неисправности: напишите в <a href="support.html">поддержку</a>.</p>
+        </div>
+      </details>
+      <h2 class="qa-gr" hidden>Флеш-накопители</h2>
+      <details class="qa" id="usb-4gb" data-cat="usb" data-k="флешка флэшка большой файл фильм fat32 exfat ntfs">
+        <summary><span class="qa-q">Флешка не принимает файлы больше 4 ГБ. Почему?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Это ограничение файловой системы FAT32: её используют ради совместимости с телевизорами и магнитолами. Переформатируйте накопитель в exFAT, заранее сохранив данные: форматирование их удалит.</p>
+        <p>exFAT понимают компьютеры и телефоны. NTFS подойдёт, только если накопитель работает с компьютерами на Windows.</p>
+        </div>
+      </details>
+      <details class="qa" id="usb-models" data-cat="usb" data-k="флешка флэшка модели q120fl q140fl type-c двусторонняя металлическая">
+        <summary><span class="qa-q">Какие флеш-накопители есть у QOPP и чем они отличаются?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Моделей две, обе с интерфейсом USB 3.2. Первая: металлический накопитель с разъёмом USB-A и кольцом для ключей, объёмы 32, 64 и 128 ГБ. Вторая: двусторонний накопитель с разъёмами USB-A и Type-C, объёмы от 32 до 256 ГБ. Он подключается и к компьютеру, и к телефону без переходника.</p>
+        </div>
+      </details>
+      <details class="qa" id="usb-speed" data-cat="usb" data-k="флешка флэшка медленно копирует скорость записи usb 2.0 3.0">
+        <summary><span class="qa-q">Почему скорость копирования ниже заявленной?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Максимальная скорость в характеристиках относится к чтению, запись всегда медленнее: например, двусторонняя модель читает до 140 МБ/с и записывает до 70 МБ/с.</p>
+        <p>Вторая причина это порт. В USB 2.0 (обычно он чёрного цвета) скорость не поднимется выше 30–35 МБ/с, полная доступна в портах USB 3.0 и новее, они чаще синие. Много мелких файлов копируются медленнее одного большого.</p>
+        </div>
+      </details>
+      <details class="qa" id="usb-record" data-cat="usb" data-k="флешка флэшка запись видео регистратор камера телефона prores">
+        <summary><span class="qa-q">Можно ли записывать видео с регистратора или телефона сразу на флешку?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>С регистратора: только если он поддерживает запись на внешний USB-накопитель. Большинство регистраторов пишет на карту microSD.</p>
+        <p>С телефона: штатная камера почти всегда сохраняет видео во внутреннюю память, а на флешку файлы переносят после съёмки. Прямую запись на внешний накопитель поддерживают отдельные модели, например iPhone 15 Pro и новее в режиме ProRes.</p>
+        </div>
+      </details>
+      <h2 class="qa-gr" hidden>Ноутбук QBOOK</h2>
+      <details class="qa" id="qbook-tasks" data-cat="qbook" data-k="ноутбук ноут qbook игры roblox minecraft n100 n5095 для учёбы">
+        <summary><span class="qa-q">Для каких задач подходит QBOOK 15 и потянет ли он игры?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>QBOOK 15 рассчитан на работу, учёбу и повседневные задачи: документы, браузер, видео, видеосвязь. Нетребовательные игры вроде Minecraft и Roblox идут на встроенной графике, The Sims 4 на низких настройках. Для современных требовательных игр ноутбук не предназначен.</p>
+        </div>
+      </details>
+      <details class="qa" id="qbook-charge" data-cat="qbook" data-k="ноутбук ноут qbook зарядка блок питания зарядное type-c">
+        <summary><span class="qa-q">Можно ли заряжать QBOOK 15 через Type-C?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Нет, ноутбук заряжается только от блока питания с круглым штекером, он идёт в комплекте. Если блок нужно заменить, напишите в <a href="support.html">поддержку</a>: подскажем параметры.</p>
+        </div>
+      </details>
+      <details class="qa" id="qbook-disk" data-cat="qbook" data-k="ноутбук ноут qbook диск c d раздел объём памяти меньше">
+        <summary><span class="qa-q">Почему в QBOOK 15 диск показывает меньше заявленного или разбит на части?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Накопитель может быть разделён на два раздела, например системный C: и D: для данных. В сумме они дают заявленный объём.</p>
+        <p>Часть места занимают Windows и программы, а сама система считает гигабайты иначе, чем производители: об этом в ответе <a href="#real-capacity">про доступный объём</a>.</p>
+        </div>
+      </details>
+      <details class="qa" id="qbook-login" data-cat="qbook" data-k="ноутбук ноут qbook отпечаток пальца пароль пин учётная запись microsoft">
+        <summary><span class="qa-q">Обязательно ли входить по отпечатку пальца и в учётную запись Microsoft?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Нет. Вместо отпечатка можно настроить вход по паролю или ПИН-коду. Входить в учётную запись Microsoft для работы тоже необязательно.</p>
+        </div>
+      </details>
+      <h2 class="qa-gr" hidden>Покупка и гарантия</h2>
+      <details class="qa" id="warranty-how" data-cat="service" data-k="гарантийный случай обращение чек без чека сервисный центр доставка">
+        <summary><span class="qa-q">Как обратиться по гарантии?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Напишите в <a href="support.html">поддержку</a>, назовите серийный номер и опишите, что случилось. Приложите чек или другой документ с датой покупки. Если его нет, срок гарантии считается от даты изготовления товара.</p>
+        <p>Дальше мы подскажем, как отправить товар: доставку до сервисного центра по гарантийному случаю оплачиваем мы. Перед отправкой сохраните важные данные, при замене они не переносятся.</p>
+        </div>
+      </details>
+      <details class="qa" id="warranty-excl" data-cat="service" data-k="не гарантийный случай отказ повреждение вскрытие">
+        <summary><span class="qa-q">В каких случаях гарантия не действует?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Гарантия покрывает производственные дефекты при обычном использовании. Она не действует, если товар вскрывали или ремонтировали самостоятельно, если он повреждён механически (изгиб, трещины, следы удара или воды), если наклейка с серийным номером утрачена, а также при повреждении из-за скачков питания, статического электричества или ручного разгона.</p>
+        <p>Полный список на странице <a href="warranty.html">Гарантия</a>.</p>
+        </div>
+      </details>
+      <details class="qa" id="warranty-replace" data-cat="service" data-k="обмен замена ремонт новый срок после замены">
+        <summary><span class="qa-q">Как проходит замена и сохраняется ли гарантия после неё?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>Если дефект производственный, мы ремонтируем товар или меняем его на такой же либо равноценный по характеристикам: точно той же модели на складе может не быть.</p>
+        <p>На заменённый товар действует остаток первоначальной гарантии или 90 дней, смотря что дольше.</p>
+        </div>
+      </details>
+      <details class="qa" id="serial" data-cat="service" data-k="s/n sn серийник наклейка номер">
+        <summary><span class="qa-q">Где найти серийный номер?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>На наклейке самого изделия: у SSD и модулей памяти она на корпусе, у карт и флеш-накопителей номер указан на упаковке. Сохраняйте наклейку и упаковку, номер нужен при обращении по гарантии.</p>
+        </div>
+      </details>
+      <details class="qa" id="buy-where" data-cat="service" data-k="где купить оригинал подделка магазин ozon wildberries маркет цена опт оптом юрлицо">
+        <summary><span class="qa-q">Где покупать, чтобы товар был оригинальным?</span><span class="qa-ic" aria-hidden="true"></span></summary>
+        <div class="qa-a">
+        <p>В официальном магазине бренда и в магазинах QOPP на Ozon, Wildberries и Яндекс Маркете: ссылки собраны на странице <a href="buy.html">Где купить</a>. Цены на площадках могут различаться: на них влияют комиссии, акции и логистика самих маркетплейсов.</p>
+        <p>Компаниям и оптовым покупателям сюда: <a href="partners.html">Сотрудничество</a>.</p>
+        </div>
+      </details>
     </div>
+    <div class="f-rel" id="f-rel" hidden></div>
     <div class="f-empty" id="f-empty" hidden>
       <b>Такого вопроса у нас пока нет</b>
-      Напишите в поддержку: ответим и добавим вопрос сюда. Как обратиться, описано на странице <a href="warranty.html">Гарантия</a>
+      Напишите в <a href="support.html">поддержку</a>: ответим и добавим вопрос сюда.
     </div>
   </section>
 </main>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Как понять, подойдёт ли память к моему ноутбуку или ПК?", "acceptedAnswer": {"@type": "Answer", "text": "Совпасть должны три вещи: поколение (DDR3, DDR4 или DDR5), формат (SO-DIMM для ноутбука, UDIMM для настольного ПК) и объём, который поддерживает устройство. Поколения физически несовместимы: ключ на плате стоит в разных местах, модуль просто не встанет в чужой слот. Поколение и формат видны в диспетчере задач Windows на вкладке «Производительность» → «Память» или в бесплатной программе CPU-Z. У части ноутбуков память распаяна на плате, а свободный слот один или его нет: проверьте это в характеристиках модели до покупки."}}, {"@type": "Question", "name": "Как понять, подойдёт ли SSD к моему ноутбуку или ПК?", "acceptedAnswer": {"@type": "Answer", "text": "Накопитель 2.5\" встанет в любой ноутбук или ПК с отсеком 2.5\" и портом SATA, его толщина 7 мм. Для M.2 важен тип слота: SATA или NVMe. Разъёмы похожи, но не взаимозаменяемы, тип слота указан в характеристиках ноутбука или материнской платы. NVMe PCI-E 4.0 работает и в слоте PCI-E 3.0: совместимость полная, скорость будет ограничена возможностями слота. На старых ноутбуках с SATA II накопитель тоже заработает, со скоростью интерфейса."}}, {"@type": "Question", "name": "Идут ли в комплекте кабели и крепёжный винт?", "acceptedAnswer": {"@type": "Answer", "text": "Нет, в поставку входит только накопитель. Для 2.5\" в настольном ПК нужны кабель SATA для данных и разъём питания SATA от блока питания, чаще всего оба уже есть в корпусе. При установке в ноутбук кабели не нужны. Винт для M.2 поставляется вместе с материнской платой или ноутбуком и обычно уже стоит в стойке возле слота."}}, {"@type": "Question", "name": "Компьютер не видит новый SSD. Что делать?", "acceptedAnswer": {"@type": "Answer", "text": "Новый диск нужно инициализировать: правый клик по кнопке «Пуск» → «Управление дисками» → инициализировать диск и создать том. После этого он появится в проводнике. Если диска нет и в BIOS, проверьте посадку в слоте, кабель и порт. На чистый накопитель нужно установить операционную систему: без неё компьютер с него не загрузится."}}, {"@type": "Question", "name": "Почему память работает не на заявленной частоте?", "acceptedAnswer": {"@type": "Answer", "text": "Частоты выше базовых, например 3600 МГц, и заявленные тайминги включаются профилем XMP в BIOS. Без него плата выставляет стандартные значения, это нормальное поведение. Итоговая частота зависит ещё от процессора и материнской платы. В ноутбуках профиля XMP обычно нет: память работает на штатной частоте устройства."}}, {"@type": "Question", "name": "Можно ли ставить память QOPP вместе с модулем другого производителя?", "acceptedAnswer": {"@type": "Answer", "text": "Да, если совпадают поколение и формат. Система автоматически подстроится под частоту и тайминги более медленного модуля. Для двухканального режима и предсказуемого результата берите комплект из двух одинаковых планок."}}, {"@type": "Question", "name": "Какая карта памяти нужна для видеорегистратора и съёмки 4K?", "acceptedAnswer": {"@type": "Answer", "text": "Класс U3 V30: он гарантирует запись не ниже 30 МБ/с без провалов, этого хватает для 4K. Линейка RUSH рассчитана на постоянную циклическую перезапись, как в видеорегистраторе. Проверьте максимальный объём карты, который поддерживает устройство. Карты от 64 ГБ отформатированы в exFAT: если устройство просит FAT32, отформатируйте карту в нём самом."}}, {"@type": "Question", "name": "Нужен ли SSD радиатор и подойдёт ли накопитель для PS5?", "acceptedAnswer": {"@type": "Answer", "text": "Для PS5 подходят накопители M.2 2280 с интерфейсом PCI-E 4.0, радиатор обязателен: консоль нагружает диск постоянно, без охлаждения он сбрасывает скорость. Накопители SATA и PCI-E 3.0 для PS5 не подходят. В ПК радиатор желателен для PCI-E 4.0 под длительной нагрузкой. Наклейку под радиатор можно снять, но сохраните её: на ней серийный номер, он понадобится при обращении по гарантии."}}, {"@type": "Question", "name": "Почему доступный объём меньше заявленного?", "acceptedAnswer": {"@type": "Answer", "text": "Производители считают гигабайт как 1 000 000 000 байт, а операционная система как 1 073 741 824. Поэтому накопитель на 256 ГБ система показывает как 238 ГБ, а на 1 ТБ как 931 ГБ. Это норма для любых накопителей любых брендов."}}, {"@type": "Question", "name": "Что значит бессрочная гарантия и куда обращаться?", "acceptedAnswer": {"@type": "Answer", "text": "Срок обращения по гарантии на оперативную память QOPP не ограничен по времени. На SSD и флеш-накопители гарантия 5 лет, на карты памяти до 10 лет, на ноутбук QBOOK 15 до 3 лет по компонентам. Напишите в поддержку, назовите серийный номер и опишите, что случилось. Доставку до сервисного центра по гарантийному случаю оплачиваем мы. Подробные условия на странице Гарантия."}}, {"@type": "Question", "name": "Какой тип памяти в накопителях QOPP и есть ли DRAM-кэш?", "acceptedAnswer": {"@type": "Answer", "text": "Во всех накопителях стоит память 3D NAND TLC (три бита на ячейку). Все модели безбуферные: отдельной микросхемы DRAM-кэша в них нет. Для установки системы, программ, игр и повседневной работы этого достаточно."}}, {"@type": "Question", "name": "На сколько хватит ресурса SSD?", "acceptedAnswer": {"@type": "Answer", "text": "Ресурс записи (TBW) зависит от модели и объёма, полная таблица есть на странице Гарантия. Гарантия действует 5 лет или до исчерпания TBW, смотря что наступит раньше. При домашней нагрузке в 20–30 ГБ записи в день ресурса хватает на срок заметно больше гарантийного."}}, {"@type": "Question", "name": "Можно ли использовать SSD во внешнем боксе?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Для накопителя 2.5\" подойдёт любой бокс или переходник SATA → USB, для M.2 нужен бокс под свой тип: SATA или NVMe. Скорость будет ограничена интерфейсом USB и контроллером бокса."}}, {"@type": "Question", "name": "После установки SSD компьютер не загружается. Это брак?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Новый накопитель пуст, на нём нет операционной системы. Установите Windows с загрузочной флешки (образ есть на сайте Microsoft) или перенесите систему со старого диска программой для клонирования."}}, {"@type": "Question", "name": "Можно ли восстановить данные после форматирования?", "acceptedAnswer": {"@type": "Answer", "text": "Шансы есть, если после форматирования на диск почти ничего не записывали. Помогают программы посекторного сканирования: R.saver, PhotoRec, Recuva. Важно не сохранять найденные файлы на тот же накопитель. На SSD с включённой командой TRIM вероятность восстановления ниже, чем на жёстких дисках."}}, {"@type": "Question", "name": "Чем SO-DIMM отличается от UDIMM?", "acceptedAnswer": {"@type": "Answer", "text": "SO-DIMM это короткий модуль для ноутбуков, моноблоков и мини-ПК. UDIMM (его же называют DIMM) это длинный модуль для настольных компьютеров. Они разного размера и не взаимозаменяемы. В каталоге память разделена так же: для ноутбука и для персонального компьютера."}}, {"@type": "Question", "name": "Подойдёт ли DDR3 в ноутбук, где стоит DDR3L?", "acceptedAnswer": {"@type": "Answer", "text": "Модули QOPP DDR3 SO-DIMM работают в ноутбуках с памятью DDR3L. Если сомневаетесь в своей модели, напишите в поддержку её точное название, мы проверим."}}, {"@type": "Question", "name": "Как узнать производителя чипов и параметры модуля?", "acceptedAnswer": {"@type": "Answer", "text": "Программа CPU-Z, вкладка SPD: в поле Manufacturer указан производитель чипов, рядом частоты, тайминги и профили XMP для каждого слота."}}, {"@type": "Question", "name": "Станет ли компьютер быстрее, если добавить памяти?", "acceptedAnswer": {"@type": "Answer", "text": "Да, если памяти не хватало: система перестаёт сбрасывать данные на диск, вкладки и программы переключаются без задержек. Если памяти и так достаточно, прирост даст переход на два модуля вместо одного: двухканальный режим заметно ускоряет встроенную графику."}}, {"@type": "Question", "name": "Подойдёт ли карта к моему телефону, планшету или приставке?", "acceptedAnswer": {"@type": "Answer", "text": "Карты QOPP это стандартные microSD, они работают в любом устройстве со слотом microSD: телефонах и планшетах на Android, Nintendo Switch, Steam Deck, камерах, дронах. Ограничение одно: максимальный объём, который поддерживает само устройство, он указан в его характеристиках."}}, {"@type": "Question", "name": "Что означают U3, V30, A1 и A2 на карте?", "acceptedAnswer": {"@type": "Answer", "text": "U3 и V30 это гарантированная минимальная скорость записи 30 МБ/с, она нужна для видео 4K. A1 и A2 это классы для приложений: скорость работы с мелкими файлами, важна для телефона и игровых консолей. A2 быстрее A1."}}, {"@type": "Question", "name": "Флешка не принимает файлы больше 4 ГБ. Почему?", "acceptedAnswer": {"@type": "Answer", "text": "Это ограничение файловой системы FAT32, в которой накопитель поставляется ради совместимости с телевизорами и магнитолами. Переформатируйте его в exFAT или NTFS, заранее сохранив данные: форматирование их удалит."}}, {"@type": "Question", "name": "Работает ли флешка с телефоном на Android?", "acceptedAnswer": {"@type": "Answer", "text": "Да, форматировать её не нужно, телефон увидит накопитель через встроенный файловый менеджер. Для разъёма USB-A нужен переходник OTG, у двусторонней модели с Type-C он не требуется."}}, {"@type": "Question", "name": "Телевизор или магнитола не видит флешку. Что проверить?", "acceptedAnswer": {"@type": "Answer", "text": "Файловую систему: многим телевизорам и магнитолам нужен FAT32, exFAT и NTFS они не читают. Ещё у старых устройств есть предел объёма накопителя, он указан в инструкции."}}, {"@type": "Question", "name": "QOPP это чей бренд? Продукция оригинальная?", "acceptedAnswer": {"@type": "Answer", "text": "QOPP это российский бренд. Продукция выпускается по нашей спецификации и под нашим контролем, гарантийное обслуживание ведём мы сами, в России. Товар у официальных продавцов на маркетплейсах оригинальный."}}, {"@type": "Question", "name": "Где найти серийный номер?", "acceptedAnswer": {"@type": "Answer", "text": "На наклейке самого изделия: у SSD и модулей памяти она на корпусе, у карт и флеш-накопителей номер указан на упаковке. Сохраняйте наклейку и упаковку, номер нужен при обращении по гарантии."}}, {"@type": "Question", "name": "Действует ли гарантия при разгоне памяти?", "acceptedAnswer": {"@type": "Answer", "text": "Включение штатного профиля XMP разгоном не считается. Если модуль вышел из строя из-за ручного разгона с повышением напряжения, это не гарантийный случай. Во всём остальном гарантия действует без оговорок."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Как понять, подойдёт ли память к моему ноутбуку или ПК?", "acceptedAnswer": {"@type": "Answer", "text": "Совпасть должны поколение (DDR3, DDR4 или DDR5) и формат: SO-DIMM для ноутбука, UDIMM для настольного ПК. Поколения физически несовместимы: ключ на плате стоит в разных местах, модуль просто не встанет в чужой слот. Поколение и формат видны в диспетчере задач Windows на вкладке «Производительность» → «Память» или в бесплатной программе CPU-Z. Если частота модуля выше той, что поддерживает устройство, память заработает на частоте устройства. Не уверены? Пройдите подбор за минуту или напишите в поддержку точную модель устройства."}}, {"@type": "Question", "name": "Как понять, подойдёт ли SSD к моему ноутбуку или ПК?", "acceptedAnswer": {"@type": "Answer", "text": "Накопитель 2.5\" встанет в любой ноутбук или ПК с отсеком 2.5\" и портом SATA, его толщина 7 мм. Для M.2 важен тип слота: SATA или NVMe. Разъёмы похожи, но не взаимозаменяемы, тип слота указан в характеристиках ноутбука или материнской платы. NVMe PCI-E 4.0 работает и в слоте PCI-E 3.0: совместимость полная, скорость будет ограничена возможностями слота. Длина наших M.2 80 мм (типоразмер 2280): проверьте, что в устройстве есть место под эту длину."}}, {"@type": "Question", "name": "Какая карта памяти нужна для видеорегистратора, камеры и съёмки 4K?", "acceptedAnswer": {"@type": "Answer", "text": "Класс U3 V30: он гарантирует запись не ниже 30 МБ/с без провалов, этого хватает для 4K. Такой класс у линеек RUSH и RUSH+, они рассчитаны на постоянную циклическую перезапись, как в видеорегистраторе или камере наблюдения. Проверьте максимальный объём карты, который поддерживает устройство, и перед первым использованием отформатируйте карту в нём самом."}}, {"@type": "Question", "name": "Почему память работает не на заявленной частоте?", "acceptedAnswer": {"@type": "Answer", "text": "Частоты выше базовых, например 3600 МГц, и заявленные тайминги включаются профилем XMP в BIOS. Без него плата выставляет стандартные значения, это нормальное поведение. Итоговая частота зависит ещё от процессора и материнской платы: если платформа поддерживает максимум 2400 МГц, модуль на 3200 МГц будет работать на 2400. В ноутбуках профиля XMP обычно нет: память работает на штатной частоте устройства."}}, {"@type": "Question", "name": "Идут ли в комплекте с SSD кабели и крепёжный винт?", "acceptedAnswer": {"@type": "Answer", "text": "Нет, в поставку входит только накопитель: без кабелей, винтов и радиатора. Для 2.5\" в настольном ПК нужны кабель SATA для данных и разъём питания SATA от блока питания, чаще всего оба уже есть в корпусе. При установке в ноутбук кабели не нужны. Винт для M.2 поставляется вместе с материнской платой или ноутбуком и обычно уже стоит в стойке возле слота."}}, {"@type": "Question", "name": "Подойдёт ли SSD для PlayStation 5 и PlayStation 4?", "acceptedAnswer": {"@type": "Answer", "text": "Для PS5 подходят накопители M.2 2280 с интерфейсом PCI-E 4.0. Радиатор обязателен: консоль нагружает диск постоянно, без охлаждения он сбрасывает скорость. Подойдёт односторонний радиатор высотой до 8 мм, в комплект он не входит. Накопители SATA и PCI-E 3.0 для слота PS5 не подходят. В PS4 на место штатного жёсткого диска ставится накопитель 2.5\" SATA. После замены на консоль нужно заново установить системное программное обеспечение с флешки по инструкции Sony."}}, {"@type": "Question", "name": "Можно ли добавить модуль QOPP к памяти другого производителя?", "acceptedAnswer": {"@type": "Answer", "text": "Да, если совпадают поколение и формат. Система подстроится под частоту и тайминги более медленного модуля. Объёмы могут различаться: например, 8 и 16 ГБ дадут 24 ГБ. Для двухканального режима и предсказуемого результата берите два одинаковых модуля или готовый комплект."}}, {"@type": "Question", "name": "Как подключить флешку к телефону на Android или к iPhone?", "acceptedAnswer": {"@type": "Answer", "text": "Android: форматировать накопитель не нужно, телефон увидит его через встроенный файловый менеджер. Для разъёма USB-A нужен переходник OTG, у двусторонней модели с Type-C он не требуется. iPhone 15 и новее, с разъёмом USB-C: накопитель открывается в приложении «Файлы». Для iPhone с разъёмом Lightning нужен адаптер Apple с Lightning на USB для камеры, с обычными переходниками накопитель не определяется. Телефоны читают файловые системы exFAT и FAT32. Накопитель в NTFS телефон не увидит: переформатируйте его на компьютере, заранее сохранив данные."}}, {"@type": "Question", "name": "Компьютер не видит новый SSD. Что делать?", "acceptedAnswer": {"@type": "Answer", "text": "Новый диск нужно инициализировать: правый клик по кнопке «Пуск» → «Управление дисками» → инициализировать диск и создать том. После этого он появится в проводнике. При установке Windows этого делать не нужно: установщик сам видит чистый диск. Если диска нет и в BIOS, проверьте посадку в слоте, кабель и порт, а для M.2 ещё и тип слота: SATA или NVMe. Не помогло? Напишите в поддержку."}}, {"@type": "Question", "name": "Почему доступный объём меньше заявленного?", "acceptedAnswer": {"@type": "Answer", "text": "Производители считают гигабайт как 1 000 000 000 байт, а операционная система как 1 073 741 824. Поэтому накопитель на 256 ГБ система показывает как 238 ГБ, на 1 ТБ как 931 ГБ, а карту на 64 ГБ примерно как 59 ГБ. Это норма для любых накопителей любых брендов."}}, {"@type": "Question", "name": "Какая гарантия на продукцию QOPP и что значит «бессрочная»?", "acceptedAnswer": {"@type": "Answer", "text": "На оперативную память гарантия бессрочная: срок обращения не ограничен по времени. На маркетплейсах в карточке может стоять «50 лет»: это технический формат, площадка не принимает бессрочный срок. На SSD гарантия 5 лет или до исчерпания ресурса записи TBW, на флеш-накопители 5 лет, на карты памяти 10 лет. На ноутбук QBOOK 15: 3 года на процессор, накопитель и память и 1 год на остальные компоненты. Полные условия на странице Гарантия."}}, {"@type": "Question", "name": "Телевизор или магнитола не видит флешку или карту. Что проверить?", "acceptedAnswer": {"@type": "Answer", "text": "Файловую систему: многим телевизорам и магнитолам нужен FAT32, exFAT и NTFS они не читают. Накопители больше 32 ГБ Windows в FAT32 штатно не форматирует: проще сделать это в самом телевизоре или магнитоле, если такая функция есть. Сначала сохраните данные. Ещё у старых устройств есть предел объёма накопителя, он указан в инструкции. И проверьте сам файл: телевизор может не поддерживать формат видео."}}, {"@type": "Question", "name": "QOPP это чей бренд и почему на упаковке указан Китай?", "acceptedAnswer": {"@type": "Answer", "text": "QOPP это российский бренд. Мы разрабатываем спецификации, контролируем качество и сами ведём гарантийное обслуживание и поддержку в России. Микросхемы памяти и контроллеры в мире выпускает небольшое число производителей с площадками в Азии, там же собирается продукция. Поэтому страной изготовления указан Китай."}}, {"@type": "Question", "name": "Какой тип памяти в накопителях QOPP и есть ли DRAM-кэш?", "acceptedAnswer": {"@type": "Answer", "text": "Во всех накопителях стоит память 3D NAND TLC (три бита на ячейку). Все модели безбуферные: отдельной микросхемы DRAM-кэша в них нет. Запись ускоряет SLC-кэширование, а накопители NVMe дополнительно используют технологию HMB. Модель контроллера зависит от линейки и партии. Для установки системы, программ, игр и повседневной работы этого достаточно."}}, {"@type": "Question", "name": "Товар не подошёл или не работает. Что делать?", "acceptedAnswer": {"@type": "Answer", "text": "Если товар не работает, напишите в поддержку: поможем с настройкой, а если случай гарантийный, решим его по гарантии. Сразу назовите модель своего устройства и серийный номер товара. Если товар исправен, но не подошёл к устройству, возврат оформляется там, где вы его покупали, по правилам площадки. Чтобы не ошибиться, до покупки пришлите нам модель устройства: проверим совместимость."}}, {"@type": "Question", "name": "Чем отличаются SATA и NVMe и что выбрать?", "acceptedAnswer": {"@type": "Answer", "text": "SATA ограничен скоростью около 550 МБ/с. В нём работают накопители 2.5\" Q500S и Q600S и модуль M.2 Q600MS. NVMe подключается по шине PCI-E и быстрее в разы: это линейки Q2000MN (PCI-E 3.0), Q4000MN и Q7000MN (PCI-E 4.0), у старшей скорость чтения до 7000 МБ/с. Выбор задаёт устройство. Если в нём есть слот M.2 с поддержкой NVMe, берите NVMe: разница заметна при загрузке системы, запуске игр и копировании больших файлов. Если есть только SATA, подойдёт накопитель 2.5\" или M.2 SATA."}}, {"@type": "Question", "name": "Как отличить M.2 SATA от M.2 NVMe и что будет, если перепутать?", "acceptedAnswer": {"@type": "Answer", "text": "По вырезам на контактах. У M.2 SATA их два (ключи B и M), у NVMe один (ключ M). Наш M.2 SATA это модель Q600MS, все остальные M.2 в каталоге NVMe. Если перепутать, накопитель не определится. Многие современные платы и ноутбуки поддерживают в слоте M.2 только NVMe, а старые только SATA. Что умеет ваш слот, написано в характеристиках устройства."}}, {"@type": "Question", "name": "Нужен ли SSD радиатор в компьютере и можно ли снять наклейку?", "acceptedAnswer": {"@type": "Answer", "text": "Накопителям SATA радиатор не нужен. NVMe нагревается только под нагрузкой, при чтении и записи. При обычной вентиляции корпуса радиатор необязателен, но для PCI-E 4.0 под длительной нагрузкой он желателен. Наклейку под радиатор можно снять, но сохраните её: на ней серийный номер, он понадобится при обращении по гарантии."}}, {"@type": "Question", "name": "На сколько хватит ресурса SSD?", "acceptedAnswer": {"@type": "Answer", "text": "Ресурс записи (TBW) зависит от модели и объёма, полная таблица есть на странице Гарантия. Гарантия действует 5 лет или до исчерпания TBW, смотря что наступит раньше. При домашней нагрузке в 20–30 ГБ записи в день ресурса хватает на срок заметно больше гарантийного."}}, {"@type": "Question", "name": "Можно ли использовать SSD во внешнем боксе?", "acceptedAnswer": {"@type": "Answer", "text": "Работать будет: для накопителя 2.5\" подойдёт бокс или переходник SATA → USB, для M.2 нужен бокс под свой тип, SATA или NVMe. Но это внутренние накопители. Скорость и стабильность через бокс зависят от самого бокса и порта USB, поэтому заявленные характеристики мы гарантируем только при прямом подключении."}}, {"@type": "Question", "name": "Есть ли на SSD Windows и как перенести систему со старого диска?", "acceptedAnswer": {"@type": "Answer", "text": "Накопитель поставляется чистым, операционной системы на нём нет. Windows ставится с загрузочной флешки (образ есть на сайте Microsoft), либо систему переносят со старого диска программой для клонирования. Пока системы на диске нет, компьютер с него не загрузится: это не брак."}}, {"@type": "Question", "name": "Можно ли поставить SSD вместо жёсткого диска или вторым диском?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Накопитель 2.5\" имеет тот же размер и разъём SATA, что и жёсткий диск ноутбука, и ставится на его место. В старых ноутбуках с SATA II он тоже работает, со скоростью интерфейса. В настольном ПК SSD можно добавить вторым диском, если есть свободный порт SATA или слот M.2. В ноутбуке второй диск иногда ставят вместо DVD-привода: для этого нужны отдельные салазки, в комплект они не входят."}}, {"@type": "Question", "name": "Подойдёт ли SSD для видеорегистратора системы наблюдения?", "acceptedAnswer": {"@type": "Answer", "text": "Да, если регистратор рассчитан на накопители 2.5\" SATA: SSD ставится на место жёсткого диска и поддерживает циклическую запись. Для автомобильных регистраторов и камер со слотом microSD нужны карты памяти."}}, {"@type": "Question", "name": "Сколько памяти можно поставить в ноутбук и есть ли в нём свободный слот?", "acceptedAnswer": {"@type": "Answer", "text": "Максимальный объём и число слотов задаёт производитель устройства, они указаны в характеристиках модели. У части ноутбуков память распаяна на плате, а свободный слот один или его нет. Даже в пределах одной модели конфигурации различаются, поэтому смотрите полное название модификации на наклейке снизу. Пришлите его в поддержку, и мы подскажем, что можно установить."}}, {"@type": "Question", "name": "Чем SO-DIMM отличается от UDIMM?", "acceptedAnswer": {"@type": "Answer", "text": "SO-DIMM это короткий модуль для ноутбуков, моноблоков и мини-ПК. UDIMM (его же называют DIMM) это длинный модуль для настольных компьютеров. Они разного размера и не взаимозаменяемы. В каталоге память разделена так же: для ноутбука и для персонального компьютера."}}, {"@type": "Question", "name": "Подойдёт ли DDR3 в ноутбук, где стоит DDR3L?", "acceptedAnswer": {"@type": "Answer", "text": "Модули QOPP DDR3 SO-DIMM работают в ноутбуках с памятью DDR3L. Если сомневаетесь в своей модели, напишите в поддержку её точное название, мы проверим."}}, {"@type": "Question", "name": "Одна планка или комплект из двух: что выбрать?", "acceptedAnswer": {"@type": "Answer", "text": "Два модуля работают в двухканальном режиме: он быстрее одного модуля того же общего объёма, особенно на встроенной графике. Комплекты QOPP (в названии K2) это два одинаковых модуля в одной упаковке. Остальные позиции это одиночные модули. Если в устройстве один слот, берите один модуль нужного объёма."}}, {"@type": "Question", "name": "Как узнать производителя чипов, ранги и тайминги модуля?", "acceptedAnswer": {"@type": "Answer", "text": "В модулях стоят чипы Samsung, SK Hynix или Micron, производитель зависит от партии. Что именно в вашем модуле, покажет бесплатная программа CPU-Z на вкладке SPD: производитель чипов, число рангов, частоты, тайминги и профили XMP для каждого слота."}}, {"@type": "Question", "name": "Станет ли компьютер быстрее, если добавить памяти?", "acceptedAnswer": {"@type": "Answer", "text": "Да, если памяти не хватало: система перестаёт сбрасывать данные на диск, вкладки и программы переключаются без задержек. Проверить просто: откройте диспетчер задач под обычной нагрузкой. Если память занята на 80–90%, добавка даст заметный эффект. Если занята наполовину, скорость ограничивает процессор или диск."}}, {"@type": "Question", "name": "Подойдёт ли память QOPP для MacBook и iMac?", "acceptedAnswer": {"@type": "Answer", "text": "Совместимость с техникой Apple мы не гарантируем: у неё особые требования к модулям, а в современных моделях память распаяна и не меняется. В старых MacBook и iMac на процессорах Intel модули подходящего поколения часто работают, но проверить это заранее нельзя. Если важна уверенность, выбирайте память из списка совместимости Apple."}}, {"@type": "Question", "name": "Действует ли гарантия при разгоне памяти?", "acceptedAnswer": {"@type": "Answer", "text": "Включение штатного профиля XMP разгоном не считается. Если модуль вышел из строя из-за ручного разгона с повышением напряжения, это не гарантийный случай. Во всём остальном гарантия действует без оговорок."}}, {"@type": "Question", "name": "Подойдёт ли карта к телефону, планшету или игровой приставке?", "acceptedAnswer": {"@type": "Answer", "text": "Карты QOPP это стандартные microSD, они работают в любом устройстве со слотом microSD: телефонах и планшетах на Android, Nintendo Switch, Steam Deck, камерах, дронах. Ограничение одно: максимальный объём, который поддерживает само устройство, он указан в его характеристиках. В PlayStation слота для карт памяти нет."}}, {"@type": "Question", "name": "Что означают U3, V30, A1 и A2 на карте?", "acceptedAnswer": {"@type": "Answer", "text": "U3 и V30 это гарантированная минимальная скорость записи 30 МБ/с, она нужна для видео 4K. A1 и A2 это классы для приложений: скорость работы с мелкими файлами, важна для телефона и игровых консолей. A2 быстрее A1."}}, {"@type": "Question", "name": "Чем отличаются линейки BASE, RUSH и RUSH+?", "acceptedAnswer": {"@type": "Answer", "text": "BASE: базовая линейка на 32, 64 и 128 ГБ для телефона и повседневного хранения: фото, музыка, документы. RUSH: класс A1 U3 V30, объёмы от 32 до 256 ГБ. Для видеорегистраторов, камер и съёмки 4K. RUSH+: класс A2 U3 V30, объёмы от 128 ГБ до 1 ТБ. Для телефонов, планшетов и игровых консолей, где важна скорость работы приложений."}}, {"@type": "Question", "name": "Устройство просит отформатировать карту или пишет, что формат не поддерживается. Что делать?", "acceptedAnswer": {"@type": "Answer", "text": "Карты на 32 ГБ поставляются в файловой системе FAT32, карты от 64 ГБ в exFAT. Если устройству нужна другая, отформатируйте карту в его меню. Если устройство не справляется само, отформатируйте карту на компьютере в ту систему, которую оно требует (она указана в инструкции), и повторите. Форматирование удаляет данные: сначала сохраните их."}}, {"@type": "Question", "name": "Камера или регистратор пишет «медленная карта». Что делать?", "acceptedAnswer": {"@type": "Answer", "text": "Сначала сверьте класс: для 4K устройству нужна карта U3 V30, это линейки RUSH и RUSH+. Затем отформатируйте карту в самом устройстве: часто сообщение после этого пропадает. Если карта нужного класса, а сообщение осталось, напишите в поддержку: на карты действует гарантия 10 лет, проверим и заменим."}}, {"@type": "Question", "name": "Карта защищена от записи. Как снять защиту?", "acceptedAnswer": {"@type": "Answer", "text": "Если карта стоит в адаптере SD, проверьте ползунок на его боку: в положении Lock запись запрещена, сдвиньте его в сторону контактов. Если ползунок в порядке, а записать и отформатировать карту не удаётся ни на одном устройстве, это признак неисправности: напишите в поддержку."}}, {"@type": "Question", "name": "Флешка не принимает файлы больше 4 ГБ. Почему?", "acceptedAnswer": {"@type": "Answer", "text": "Это ограничение файловой системы FAT32: её используют ради совместимости с телевизорами и магнитолами. Переформатируйте накопитель в exFAT, заранее сохранив данные: форматирование их удалит. exFAT понимают компьютеры и телефоны. NTFS подойдёт, только если накопитель работает с компьютерами на Windows."}}, {"@type": "Question", "name": "Какие флеш-накопители есть у QOPP и чем они отличаются?", "acceptedAnswer": {"@type": "Answer", "text": "Моделей две, обе с интерфейсом USB 3.2. Первая: металлический накопитель с разъёмом USB-A и кольцом для ключей, объёмы 32, 64 и 128 ГБ. Вторая: двусторонний накопитель с разъёмами USB-A и Type-C, объёмы от 32 до 256 ГБ. Он подключается и к компьютеру, и к телефону без переходника."}}, {"@type": "Question", "name": "Почему скорость копирования ниже заявленной?", "acceptedAnswer": {"@type": "Answer", "text": "Максимальная скорость в характеристиках относится к чтению, запись всегда медленнее: например, двусторонняя модель читает до 140 МБ/с и записывает до 70 МБ/с. Вторая причина это порт. В USB 2.0 (обычно он чёрного цвета) скорость не поднимется выше 30–35 МБ/с, полная доступна в портах USB 3.0 и новее, они чаще синие. Много мелких файлов копируются медленнее одного большого."}}, {"@type": "Question", "name": "Можно ли записывать видео с регистратора или телефона сразу на флешку?", "acceptedAnswer": {"@type": "Answer", "text": "С регистратора: только если он поддерживает запись на внешний USB-накопитель. Большинство регистраторов пишет на карту microSD. С телефона: штатная камера почти всегда сохраняет видео во внутреннюю память, а на флешку файлы переносят после съёмки. Прямую запись на внешний накопитель поддерживают отдельные модели, например iPhone 15 Pro и новее в режиме ProRes."}}, {"@type": "Question", "name": "Для каких задач подходит QBOOK 15 и потянет ли он игры?", "acceptedAnswer": {"@type": "Answer", "text": "QBOOK 15 рассчитан на работу, учёбу и повседневные задачи: документы, браузер, видео, видеосвязь. Нетребовательные игры вроде Minecraft и Roblox идут на встроенной графике, The Sims 4 на низких настройках. Для современных требовательных игр ноутбук не предназначен."}}, {"@type": "Question", "name": "Можно ли заряжать QBOOK 15 через Type-C?", "acceptedAnswer": {"@type": "Answer", "text": "Нет, ноутбук заряжается только от блока питания с круглым штекером, он идёт в комплекте. Если блок нужно заменить, напишите в поддержку: подскажем параметры."}}, {"@type": "Question", "name": "Почему в QBOOK 15 диск показывает меньше заявленного или разбит на части?", "acceptedAnswer": {"@type": "Answer", "text": "Накопитель может быть разделён на два раздела, например системный C: и D: для данных. В сумме они дают заявленный объём. Часть места занимают Windows и программы, а сама система считает гигабайты иначе, чем производители: об этом в ответе про доступный объём."}}, {"@type": "Question", "name": "Обязательно ли входить по отпечатку пальца и в учётную запись Microsoft?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Вместо отпечатка можно настроить вход по паролю или ПИН-коду. Входить в учётную запись Microsoft для работы тоже необязательно."}}, {"@type": "Question", "name": "Как обратиться по гарантии?", "acceptedAnswer": {"@type": "Answer", "text": "Напишите в поддержку, назовите серийный номер и опишите, что случилось. Приложите чек или другой документ с датой покупки. Если его нет, срок гарантии считается от даты изготовления товара. Дальше мы подскажем, как отправить товар: доставку до сервисного центра по гарантийному случаю оплачиваем мы. Перед отправкой сохраните важные данные, при замене они не переносятся."}}, {"@type": "Question", "name": "В каких случаях гарантия не действует?", "acceptedAnswer": {"@type": "Answer", "text": "Гарантия покрывает производственные дефекты при обычном использовании. Она не действует, если товар вскрывали или ремонтировали самостоятельно, если он повреждён механически (изгиб, трещины, следы удара или воды), если наклейка с серийным номером утрачена, а также при повреждении из-за скачков питания, статического электричества или ручного разгона. Полный список на странице Гарантия."}}, {"@type": "Question", "name": "Как проходит замена и сохраняется ли гарантия после неё?", "acceptedAnswer": {"@type": "Answer", "text": "Если дефект производственный, мы ремонтируем товар или меняем его на такой же либо равноценный по характеристикам: точно той же модели на складе может не быть. На заменённый товар действует остаток первоначальной гарантии или 90 дней, смотря что дольше."}}, {"@type": "Question", "name": "Где найти серийный номер?", "acceptedAnswer": {"@type": "Answer", "text": "На наклейке самого изделия: у SSD и модулей памяти она на корпусе, у карт и флеш-накопителей номер указан на упаковке. Сохраняйте наклейку и упаковку, номер нужен при обращении по гарантии."}}, {"@type": "Question", "name": "Где покупать, чтобы товар был оригинальным?", "acceptedAnswer": {"@type": "Answer", "text": "В официальном магазине бренда и в магазинах QOPP на Ozon, Wildberries и Яндекс Маркете: ссылки собраны на странице Где купить. Цены на площадках могут различаться: на них влияют комиссии, акции и логистика самих маркетплейсов. Компаниям и оптовым покупателям сюда: Сотрудничество."}}]}</script>
 
 <footer id="footer" class="site-footer">
   <div class="foot-grid">
@@ -1077,28 +1268,39 @@ if(coopForm){
 
 /* вопросы и ответы: фильтр по теме, живой поиск с подсветкой, прямая ссылка на вопрос */
 {
-  const list=[...document.querySelectorAll('.qa')],inp=document.getElementById('f-q'),cnt=document.getElementById('f-count'),empty=document.getElementById('f-empty'),chips=[...document.querySelectorAll('.chip')];
-  list.forEach(d=>{const q=d.querySelector('.qa-q');d._q=q.textContent;d._t=(q.textContent+' '+d.querySelector('.qa-a').textContent).toLowerCase()});
+  const list=[...document.querySelectorAll('.qa')],groups=[...document.querySelectorAll('.qa-gr')],inp=document.getElementById('f-q'),cnt=document.getElementById('f-count'),empty=document.getElementById('f-empty'),rel=document.getElementById('f-rel'),chips=[...document.querySelectorAll('.chip')];
+  /* в поиске участвуют вопрос, ответ и скрытые слова-синонимы из data-k («оперативка», «флэшка», «плейстейшн») */
+  list.forEach(d=>{const q=d.querySelector('.qa-q');d._q=q.textContent;d._t=(q.textContent+' '+d.querySelector('.qa-a').textContent+' '+(d.dataset.k||'')).toLowerCase().replace(/ё/g,'е')});
   let cat='top';
   const esc=t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
   const plural=n=>{const a=n%10,b=n%100;return a===1&&b!==11?'вопрос':a>=2&&a<=4&&(b<10||b>=20)?'вопроса':'вопросов'};
   function apply(){
-    const v=inp.value.trim().toLowerCase();let n=0;
+    /* запрос делится на слова, в вопросе должны найтись все */
+    const v=inp.value.trim().toLowerCase().replace(/ё/g,'е'),words=v.split(/\s+/).filter(Boolean);let n=0;
+    const mark=words.length?new RegExp(words.map(x=>esc(x).replace(/е/g,'[её]')).join('|'),'gi'):null;
     list.forEach(d=>{
-      const ok=v?d._t.includes(v):(cat==='all'||d.dataset.cat.split(' ').includes(cat));
+      const ok=v?words.every(x=>d._t.includes(x)):(cat==='all'||d.dataset.cat===cat);
       d.hidden=!ok;if(ok)n++;
       const q=d.querySelector('.qa-q');
-      if(v&&ok){q.innerHTML=d._q.replace(new RegExp(esc(v),'gi'),m=>'<mark>'+m+'</mark>')}else q.textContent=d._q;
+      if(v&&ok){q.innerHTML=d._q.replace(mark,m=>'<mark>'+m+'</mark>')}else q.textContent=d._q;
     });
+    groups.forEach(g=>{g.hidden=!!v||cat!=='all'});
     empty.hidden=n>0;
-    cnt.textContent=v?(n?'Нашлось: '+n+' '+plural(n):''):'';
+    cnt.textContent=v?(n?'Нашлось: '+n+' '+plural(n):''):'Всего '+list.length+' '+plural(list.length);
     chips.forEach(c=>{const on=!v&&c.dataset.cat===cat;c.classList.toggle('on',on);c.setAttribute('aria-pressed',on)});
+    /* темы не пересекаются: частые вопросы по выбранной теме показываем ссылками под списком */
+    const more=(!v&&cat!=='top'&&cat!=='all')?list.filter(d=>d.dataset.cat==='top'&&(d.dataset.rel||'').split(' ').includes(cat)):[];
+    rel.textContent='';rel.hidden=!more.length;
+    if(more.length){
+      const h=document.createElement('span');h.className='f-rel-h';h.textContent='Ещё по теме среди частых';rel.appendChild(h);
+      more.forEach(d=>{const a=document.createElement('a');a.href='#'+d.id;a.textContent=d._q;rel.appendChild(a)});
+    }
   }
   inp.addEventListener('input',apply);
   chips.forEach(c=>c.addEventListener('click',()=>{cat=c.dataset.cat;inp.value='';apply()}));
   function fromHash(){
     const d=location.hash&&document.getElementById(location.hash.slice(1));
-    if(d&&d.classList.contains('qa')){cat='all';inp.value='';apply();d.open=true;d.scrollIntoView({block:'center'})}
+    if(d&&d.classList.contains('qa')){cat=d.dataset.cat;inp.value='';apply();d.open=true;d.scrollIntoView({block:'center'})}
     const m=location.hash.match(/^#q=(.+)/);if(m){inp.value=decodeURIComponent(m[1]);apply()}
   }
   addEventListener('hashchange',fromHash);apply();fromHash();
