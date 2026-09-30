@@ -514,15 +514,13 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   background:var(--accent);border:1px solid var(--accent);color:#14161c;transition:background .25s var(--ease),border-color .25s var(--ease)}
 .b-btn:hover,.b-btn:focus-visible{background:#f0c478;border-color:#f0c478}
 @media (max-width:760px){.shop-why{grid-template-columns:1fr}}
-.mp{display:grid;grid-template-columns:minmax(170px,26%) 1fr auto;gap:clamp(14px,3vw,40px);align-items:center;
+.mp{display:grid;grid-template-columns:1fr auto;gap:clamp(14px,3vw,40px);align-items:center;
   padding:clamp(18px,2.6vh,26px) 0;border-top:1px solid var(--hairline)}
 .mp:last-child{border-bottom:1px solid var(--hairline)}
 .mp h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.2vw,26px);letter-spacing:.01em}
-.mp p{color:var(--muted)}
 .mp a.go{display:inline-block;font-weight:600;font-size:15px;padding:12px 24px;border-radius:999px;color:var(--ink);text-decoration:none;
   border:1px solid rgba(20,22,28,.28);transition:color .25s var(--ease),border-color .25s var(--ease)}
 .mp a.go:hover,.mp a.go:focus-visible{color:var(--accent-deep);border-color:var(--accent-deep)}
-@media (max-width:760px){.mp{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -603,7 +601,6 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="section">
     <p class="kicker part">Официальный магазин</p>
     <h2 class="part" id="store-h" data-words>Напрямую у бренда</h2>
-    <p class="lede part">Магазин самого бренда, без посредников между вами и производителем.</p>
     <div class="shop-why">
       <div class="part"><h3>Гарантия напрямую</h3><p>Вопрос по гарантии решаете с нами, а не через площадку.</p></div>
       <div class="part"><h3>Оплата частями</h3><p>Доступен Сплит: покупку можно разделить на несколько платежей.</p></div>
@@ -621,12 +618,11 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="section-head">
     <p class="kicker part">Маркетплейсы</p>
     <h2 class="part">Наши магазины там, где вам привычнее</h2>
-    <p class="lede part">Это официальные магазины QOPP на площадках. Ссылки ниже ведут прямо в них.</p>
   </div>
   <div class="mps">
-    <div class="mp part"><h3>Ozon</h3><p>Магазин QOPP на Ozon.</p><a class="go" href="https://www.ozon.ru/seller/qopp/?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-ozon">Перейти</a></div>
-    <div class="mp part"><h3>Wildberries</h3><p>Магазин QOPP на Wildberries.</p><a class="go" href="https://www.wildberries.ru/seller/346976?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-wb">Перейти</a></div>
-    <div class="mp part"><h3>Яндекс Маркет</h3><p>Магазин QOPP на Яндекс Маркете.</p><a class="go" href="https://market.yandex.ru/business--qopp/57619322?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-market">Перейти</a></div>
+    <div class="mp part"><h3>Ozon</h3><a class="go" href="https://www.ozon.ru/seller/qopp/?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-ozon">Перейти</a></div>
+    <div class="mp part"><h3>Wildberries</h3><a class="go" href="https://www.wildberries.ru/seller/346976?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-wb">Перейти</a></div>
+    <div class="mp part"><h3>Яндекс Маркет</h3><a class="go" href="https://market.yandex.ru/business--qopp/57619322?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-market">Перейти</a></div>
   </div>
 </section>
 
@@ -645,7 +641,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="foot-grid">
     <div class="foot-col">
       <h3>Сотрудничество</h3>
-      <p class="foot-lede">Чтобы узнать цены и условия сотрудничества, оставьте заявку, и мы свяжемся с вами</p>
+      <p class="foot-lede">Подберём цены и условия под ваш формат</p>
       <form class="coop-form" novalidate>
         <input name="name" placeholder="Имя" autocomplete="name" aria-label="Имя">
         <input name="email" type="email" placeholder="E-mail" autocomplete="email" aria-label="E-mail">

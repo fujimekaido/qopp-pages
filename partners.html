@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#f6f6f7">
 <!-- DEPLOY STEP: заменить og:url и og:image на абсолютные адреса живого сайта перед публикацией -->
 <meta property="og:title" content="Сотрудничество. QOPP">
-<meta property="og:description" content="Расскажите о себе в пять коротких шагов, пришлём условия под ваш формат">
+<meta property="og:description" content="Расскажите о себе, и мы подберём условия под ваш формат">
 <meta property="og:url" content="/partners.html">
 <meta property="og:image" content="/assets/about-dark.jpg">
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
@@ -610,7 +610,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="inner">
     <p class="kicker part">Сотрудничество</p>
     <h1 class="part">Давайте работать вместе</h1>
-    <p class="sub part">Оптовикам и розничным сетям, сборщикам ПК, корпоративным заказчикам, селлерам маркетплейсов, блогерам и обзорщикам. <b>Расскажите о себе в пять коротких шагов, и мы пришлём условия под ваш формат.</b></p>
+    <p class="sub part">Оптовикам и розничным сетям, сборщикам ПК, корпоративным заказчикам, селлерам маркетплейсов, блогерам и обзорщикам. <b>Расскажите о себе, и мы подберём условия под ваш формат.</b></p>
   </div>
 </header>
 
@@ -672,7 +672,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 
     <div class="wz-step" data-step="done" hidden>
       <h3 tabindex="-1">Заявка готова. Осталось отправить</h3>
-      <p class="hint">Нажмите кнопку: текст заявки скопируется, откроется чат. Вставьте текст в сообщение и отправьте. Ответим в рабочее время, будни с 9:00 до 19:00 по Москве.</p>
+      <p class="hint">По кнопке текст скопируется: вставьте его в чат. Ответим в будни с 9:00 до 19:00 по Москве.</p>
       <div class="wz-out" id="wz-out"></div>
       <div class="wz-send">
         <button type="button" class="main" id="wz-copy" data-href="https://t.me/qopphelp_bot">Скопировать и открыть Telegram</button>
@@ -693,12 +693,11 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 <section class="section who reveal" id="next" style="padding-top:0">
   <div class="section-head">
     <p class="kicker part">Что дальше</p>
-    <h2 class="part">Три шага после заявки</h2>
+    <h2 class="part">После заявки</h2>
   </div>
   <div class="vows">
-    <div class="vow part"><h3>Заявка</h3><p>Вы рассказываете, кто вы и что вам интересно. Это занимает около минуты.</p></div>
-    <div class="vow part"><h3>Разговор</h3><p>Мы связываемся с вами и уточняем задачу: объёмы, сроки, формат работы.</p></div>
-    <div class="vow part"><h3>Условия</h3><p>Присылаем предложение под ваш формат сотрудничества.</p></div>
+    <div class="vow part"><h3>Разговор</h3><p>Связываемся с вами и уточняем задачу: объёмы, сроки, формат работы.</p></div>
+    <div class="vow part"><h3>Предложение</h3><p>Отправляем его туда, где вам удобнее: на почту или в мессенджер.</p></div>
   </div>
 </section>
 
@@ -708,7 +707,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="foot-grid">
     <div class="foot-col">
       <h3>Сотрудничество</h3>
-      <p class="foot-lede">Чтобы узнать цены и условия сотрудничества, оставьте заявку, и мы свяжемся с вами</p>
+      <p class="foot-lede">Подберём цены и условия под ваш формат</p>
       <form class="coop-form" novalidate>
         <input name="name" placeholder="Имя" autocomplete="name" aria-label="Имя">
         <input name="email" type="email" placeholder="E-mail" autocomplete="email" aria-label="E-mail">
@@ -1033,7 +1032,7 @@ if(coopForm){
   $('wz-back').addEventListener('click',()=>{const o=order();show(o[Math.max(0,o.indexOf(cur)-1)],true)});
   document.querySelectorAll('.wz-fields input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('wz-next').click()}}));
   async function copy(){
-    try{await navigator.clipboard.writeText(text());$('wz-copied').textContent='Текст заявки скопирован. Вставьте его в чат и отправьте.';return true}
+    try{await navigator.clipboard.writeText(text());$('wz-copied').textContent='Текст заявки скопирован.';return true}
     catch(e){$('wz-copied').textContent='Не получилось скопировать автоматически. Выделите текст заявки выше и скопируйте вручную.';return false}
   }
   $('wz-copy').addEventListener('click',async e=>{await copy();window.open(e.currentTarget.dataset.href,'_blank','noopener')});

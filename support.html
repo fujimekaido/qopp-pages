@@ -522,14 +522,14 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .chan:last-child{border-bottom:1px solid var(--hairline)}
 .chan h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.2vw,26px);letter-spacing:.01em}
 .chan p{color:var(--muted)}
-.chan-act{display:flex;gap:10px;align-items:center}
+.chan-act{display:flex;gap:10px;align-items:center;grid-column:3}
 .s-btn{display:inline-block;font-weight:600;font-size:15px;padding:12px 24px;border-radius:999px;background:var(--ink);color:#fff;
   text-decoration:none;border:1px solid var(--ink);cursor:pointer;font-family:var(--body);transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
 .s-btn:hover,.s-btn:focus-visible{background:var(--accent-deep);border-color:var(--accent-deep)}
 .s-btn.ghost{background:transparent;color:var(--ink);border-color:rgba(20,22,28,.28)}
 .s-btn.ghost:hover,.s-btn.ghost:focus-visible{background:transparent;color:var(--accent-deep);border-color:var(--accent-deep)}
 .chan-sub{margin-top:clamp(34px,6vh,56px);margin-bottom:6px;font-weight:700;font-family:var(--display);font-size:clamp(18px,2vw,22px)}
-@media (max-width:760px){.chan{grid-template-columns:1fr}.chan-act{flex-wrap:wrap}}
+@media (max-width:760px){.chan{grid-template-columns:1fr}.chan-act{flex-wrap:wrap;grid-column:auto}}
 
 /* подбор за минуту */
 .pick{position:relative;z-index:1;background:#101216;color:#f4f1ea}
@@ -632,7 +632,6 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="6.5" stroke="#8b9098" stroke-width="1.6"/><path d="m14 14 4.5 4.5" stroke="#8b9098" stroke-width="1.6" stroke-linecap="round"/></svg>
       <input id="s-q" type="search" placeholder="Сначала спросите: не видит диск, XMP, PS5, 4 ГБ, гарантия" autocomplete="off" aria-label="Поиск по вопросам и ответам">
     </form>
-    <p class="s-hint part">Ответ откроется в разделе <a href="faq.html">Вопросы и ответы</a></p>
   </div>
 </header>
 
@@ -643,7 +642,6 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="section-head">
     <p class="kicker part">Написать нам</p>
     <h2 class="part">Три мессенджера, одна поддержка</h2>
-    <p class="lede part">Чтобы ответить быстрее, сразу назовите модель вашего устройства и товар QOPP, о котором вопрос. Фото наклейки с серийным номером ускоряет дело.</p>
   </div>
   <div class="chans">
     <div class="chan part">
@@ -653,12 +651,10 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
     </div>
     <div class="chan part">
       <h3>MAX</h3>
-      <p>Тот же чат поддержки в мессенджере MAX.</p>
       <div class="chan-act"><a class="s-btn" href="https://max.ru/id781604083587_bot" target="_blank" rel="noopener">Написать</a><button class="s-btn ghost" type="button" data-copy="https://max.ru/id781604083587_bot">Скопировать ссылку</button></div>
     </div>
     <div class="chan part">
       <h3>WhatsApp</h3>
-      <p>Если привычнее писать здесь.</p>
       <div class="chan-act"><a class="s-btn" href="https://app.leadteh.ru/w/dxQgp" target="_blank" rel="noopener">Написать</a><button class="s-btn ghost" type="button" data-copy="https://app.leadteh.ru/w/dxQgp">Скопировать ссылку</button></div>
     </div>
   </div>
@@ -667,17 +663,15 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="chans">
     <div class="chan part">
       <h3>MAX</h3>
-      <p>Активация гарантии после покупки, в мессенджере MAX.</p>
       <div class="chan-act"><a class="s-btn" href="https://max.ru/id781604083587_1_bot" target="_blank" rel="noopener">Активировать</a></div>
     </div>
     <div class="chan part">
       <h3>Telegram</h3>
-      <p>Активация гарантии в Telegram.</p>
       <div class="chan-act"><a class="s-btn" href="https://app.leadteh.ru/w/fpq1C" target="_blank" rel="noopener">Активировать</a></div>
     </div>
     <div class="chan part">
       <h3>Условия</h3>
-      <p>Сроки по категориям, что покрывает гарантия и как проходит обращение.</p>
+      <p>Сроки, покрытие и порядок обращения.</p>
       <div class="chan-act"><a class="s-btn ghost" href="warranty.html">Страница гарантии</a></div>
     </div>
   </div>
@@ -688,7 +682,6 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="section">
     <p class="kicker part">Подбор за минуту</p>
     <h2 class="part" id="pick-h" data-words>Подойдёт ли к моему устройству?</h2>
-    <p class="lede part" style="margin-top:14px">Половина всех вопросов в поддержку именно об этом. Два нажатия, и вы на нужной странице с нужным ответом.</p>
 
     <div class="pick-step part" id="pick-1">
       <p class="pick-q">Что вы выбираете</p>
@@ -732,7 +725,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <div class="foot-grid">
     <div class="foot-col">
       <h3>Сотрудничество</h3>
-      <p class="foot-lede">Чтобы узнать цены и условия сотрудничества, оставьте заявку, и мы свяжемся с вами</p>
+      <p class="foot-lede">Подберём цены и условия под ваш формат</p>
       <form class="coop-form" novalidate>
         <input name="name" placeholder="Имя" autocomplete="name" aria-label="Имя">
         <input name="email" type="email" placeholder="E-mail" autocomplete="email" aria-label="E-mail">
@@ -1013,7 +1006,7 @@ if(coopForm){
     catch(e){b.textContent='Не получилось'}
     setTimeout(()=>{b.textContent=t},1600);
   }));
-  /* подбор: только навигация по уже существующим страницам и ответам, без новых технических утверждений */
+  /* подбор: навигация по существующим страницам и ответам; факты в подсказках те же, что в ответах FAQ */
   const TREE={
     ram:{q:'Куда ставим',o:[
       {l:'В ПК',t:'Вам нужна память UDIMM',d:'Это полноразмерные модули для настольных компьютеров. Перед покупкой сверьте поколение (DDR3, DDR4 или DDR5) с вашей материнской платой.',go:['udimm.html','Память для ПК'],faq:['faq.html#ram-fit','Как проверить совместимость']},
@@ -1021,15 +1014,15 @@ if(coopForm){
     ssd:{q:'Куда ставим',o:[
       {l:'ПК или ноутбук со слотом M.2',t:'Вам нужен SSD формата M.2',d:'Проверьте, какой интерфейс поддерживает слот вашего устройства: от этого зависит, какая модель раскроется полностью.',go:['ssd.html','Внутренние SSD'],faq:['faq.html#ssd-fit','Как проверить совместимость']},
       {l:'Вместо жёсткого диска 2,5 дюйма',t:'Вам нужен SSD 2,5 дюйма с интерфейсом SATA',d:'Он ставится на место обычного диска в ноутбуке или ПК, разъём тот же.',go:['ssd-sata.html','SSD SATA Q600S'],faq:['faq.html#ssd-kit','Что идёт в комплекте']},
-      {l:'В PlayStation 5',t:'Для PS5 нужен M.2 2280 с PCI-E 4.0 и радиатор',d:'Накопители SATA и PCI-E 3.0 консоль не примет. Подробности в ответе.',go:['ssd.html','Внутренние SSD'],faq:['faq.html#ssd-heat','SSD и PS5']},
+      {l:'В PlayStation 5',t:'Для PS5 нужен M.2 2280 с PCI-E 4.0 и радиатор',d:'Накопители SATA и PCI-E 3.0 консоль не примет.',go:['ssd.html','Внутренние SSD'],faq:['faq.html#ssd-heat','SSD и PS5']},
       {l:'Во внешний бокс',t:'Бокс должен совпадать с типом накопителя',d:'Для диска 2,5 дюйма подойдёт любой бокс SATA, для M.2 нужен бокс под свой тип: SATA или NVMe.',go:['ssd.html','Внутренние SSD'],faq:['faq.html#ssd-box','SSD во внешнем боксе']}]},
     card:{q:'Для чего карта',o:[
-      {l:'Видеорегистратор или съёмка 4K',t:'Нужна карта с запасом по скорости записи',d:'Для непрерывной записи важен класс скорости. Какой именно, написано в ответе.',go:['microsd.html','Карты памяти'],faq:['faq.html#card-4k','Карта для регистратора и 4K']},
+      {l:'Видеорегистратор или съёмка 4K',t:'Нужна карта с запасом по скорости записи',d:'Для непрерывной записи нужен класс U3 V30: это линейки RUSH и RUSH+.',go:['microsd.html','Карты памяти'],faq:['faq.html#card-4k','Карта для регистратора и 4K']},
       {l:'Телефон, планшет или приставка',t:'Подойдёт любая карта QOPP, смотрите только объём',d:'Это стандартные microSD. Ограничение одно: максимальный объём, который поддерживает само устройство, он указан в его характеристиках.',go:['microsd.html','Карты памяти'],faq:['faq.html#card-phone','Подойдёт ли карта к устройству']}]},
     usb:{q:'Куда будете подключать',o:[
-      {l:'К компьютеру',t:'Выбирайте по разъёму и объёму',d:'Посмотрите, какой разъём свободен на компьютере. Если будете носить файлы больше 4 ГБ, прочитайте короткий ответ про файловую систему.',go:['usb.html','Флеш-накопители'],faq:['faq.html#usb-4gb','Файлы больше 4 ГБ']},
+      {l:'К компьютеру',t:'Выбирайте по разъёму и объёму',d:'Посмотрите, какой разъём свободен на компьютере. Для файлов больше 4 ГБ накопитель форматируют в exFAT.',go:['usb.html','Флеш-накопители'],faq:['faq.html#usb-4gb','Файлы больше 4 ГБ']},
       {l:'К телефону на Android',t:'Работает без форматирования',d:'Для разъёма USB-A понадобится переходник OTG, у двусторонней модели с Type-C он не нужен.',go:['usb.html','Флеш-накопители'],faq:['faq.html#usb-android','Флешка и Android']},
-      {l:'К телевизору или магнитоле',t:'Важны объём и файловая система',d:'Старая техника видит не любые флешки. Что проверить, написано в ответе.',go:['usb.html','Флеш-накопители'],faq:['faq.html#usb-tv','Если техника не видит флешку']}]}
+      {l:'К телевизору или магнитоле',t:'Важны объём и файловая система',d:'Многим телевизорам и магнитолам нужна файловая система FAT32, а у старых есть предел объёма накопителя.',go:['usb.html','Флеш-накопители'],faq:['faq.html#usb-tv','Если техника не видит флешку']}]}
   };
   const s1=document.getElementById('pick-1'),s2=document.getElementById('pick-2'),res=document.getElementById('pick-res');
   const q2=document.getElementById('pick-2q'),o2=document.getElementById('pick-2o');
