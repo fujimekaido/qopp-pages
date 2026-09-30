@@ -686,16 +686,16 @@ const FILMS = [
     mobile: { url:'assets/hero-m6.mp4', poster:'assets/hero-poster-m6.jpg', bytes: 5063565,
               lite:{ url:'assets/hero-m6-lite.mp4', bytes: 1448852 } } },
   /* «Импульс», фильм про оперативную память (собран 30.09.2026): стол, влёт в ПК, импульс бежит к модулям, ПК просыпается,
-     из света проступает настоящий модуль. 24 к/с, 467 кадров. Подписей ТРИ (четвёртая null = скрыта): четыре не проходили
+     из света проступает настоящий модуль. 24 к/с, 468 кадров (версия 2 от 30.09: мост после стекла и импульс по дорожкам). Подписей ТРИ (четвёртая null = скрыта): четыре не проходили
      flick-тест навыка. beats свои; lightFrom: с какой доли шапка переходит на тёмный логотип (кадр уходит в свет);
      класс film-ram на сцене включает подложку под подписями: без неё блики в кадре не проходят аудит читаемости. */
-  { id:'ram', sub:'Скорость, с которой всё оживает', product:'ram.html', lightFrom:0.74,
+  { id:'ram', sub:'Скорость, с которой всё оживает', product:'ram.html', lightFrom:0.75,
     caps:['Пока всё спит','Внутри ждёт память','Один импульс, и система оживает',null],
-    beats:[[0,0.18],[0.22,0.40],[0.44,0.62],null],
-    desktop:{ url:'assets/hero-ram-d4.mp4', poster:'assets/hero-poster-ram-d4.jpg', bytes: 9649863,
-              lite:{ url:'assets/hero-ram-d4-lite.mp4', bytes: 2294382 } },
-    mobile: { url:'assets/hero-ram-m4.mp4', poster:'assets/hero-poster-ram-m4.jpg', bytes: 3301158,
-              lite:{ url:'assets/hero-ram-m4-lite.mp4', bytes: 1053442 } } }
+    beats:[[0,0.18],[0.22,0.40],[0.45,0.66],null],
+    desktop:{ url:'assets/hero-ram-d5.mp4', poster:'assets/hero-poster-ram-d5.jpg', bytes: 10013510,
+              lite:{ url:'assets/hero-ram-d5-lite.mp4', bytes: 2376672 } },
+    mobile: { url:'assets/hero-ram-m5.mp4', poster:'assets/hero-poster-ram-m5.jpg', bytes: 3288736,
+              lite:{ url:'assets/hero-ram-m5-lite.mp4', bytes: 1037369 } } }
 ];
 /* Колода: фильмы идут в случайном порядке, повтор возможен только после того, как показаны все.
    Новая колода не начинается с фильма, которым закончилась прошлая. Память в localStorage; если он недоступен
