@@ -227,6 +227,12 @@ a.mi{cursor:pointer;text-decoration:none}
 .b-left{left:clamp(24px,7vw,110px);top:38%}
 .b-right{right:clamp(24px,7vw,110px);top:38%;text-align:right}
 
+/* подложка под подписями (per-band scrim из scrub-pipeline.md), только у фильма про память: в его кадрах под текстом
+   попадаются блики. Аудит на худшем кадре: без подложки 1.1:1, с ней не ниже 3.5:1. У песка кадр тёмный, там не нужна. */
+.film-ram .band.e-line{isolation:isolate}
+.film-ram .band.e-line::before{content:"";position:absolute;z-index:-1;inset:-90% -60%;pointer-events:none;
+  opacity:calc(.25 + .75*var(--k,1));
+  background:radial-gradient(ellipse 74% 62% at 50% 50%,rgba(5,5,10,.72) 0%,rgba(5,5,10,.6) 46%,rgba(5,5,10,0) 76%)}
 /* вход подписей: проявка. Строка целиком выходит из расфокуса: прозрачность, размытие и подъём на 10px
    идут от той же --k (вперёд проявляет, назад гасит), со сглаживанием smoothstep. Ход длинный: data-ramp у подписей
    0.065 прогресса, это 450-500px колеса, чтобы появление читалось как медленное. Размытие на одном элементе, не по буквам.
@@ -679,14 +685,17 @@ const FILMS = [
               lite:{ url:'assets/hero-d2-lite.mp4', bytes: 2579139 } },
     mobile: { url:'assets/hero-m6.mp4', poster:'assets/hero-poster-m6.jpg', bytes: 5063565,
               lite:{ url:'assets/hero-m6-lite.mp4', bytes: 1448852 } } },
-  /* ЗАГЛУШКА (21.09.2026): собрана из одного клипа влёта в ПК и неподвижного финального кадра, чтобы проверить
-     колоду и загрузку разных фильмов. Подписи черновые. Заменить, когда будут готовы сцены внутри ПК и финал. */
-  { id:'ram', sub:'Скорость, с которой всё оживает', product:'ram.html',
-    caps:['Пока всё спит','Внутри ждёт память','Хватит одного импульса','И система оживает'],
-    desktop:{ url:'assets/hero-ram-d3.mp4', poster:'assets/hero-poster-ram-d1.jpg', bytes: 9709038,
-              lite:{ url:'assets/hero-ram-d3-lite.mp4', bytes: 1656628 } },
-    mobile: { url:'assets/hero-ram-m3.mp4', poster:'assets/hero-poster-ram-m1.jpg', bytes: 2960734,
-              lite:{ url:'assets/hero-ram-m3-lite.mp4', bytes: 842843 } } }
+  /* «Импульс», фильм про оперативную память (собран 30.09.2026): стол, влёт в ПК, импульс бежит к модулям, ПК просыпается,
+     из света проступает настоящий модуль. 24 к/с, 467 кадров. Подписей ТРИ (четвёртая null = скрыта): четыре не проходили
+     flick-тест навыка. beats свои; lightFrom: с какой доли шапка переходит на тёмный логотип (кадр уходит в свет);
+     класс film-ram на сцене включает подложку под подписями: без неё блики в кадре не проходят аудит читаемости. */
+  { id:'ram', sub:'Скорость, с которой всё оживает', product:'ram.html', lightFrom:0.74,
+    caps:['Пока всё спит','Внутри ждёт память','Один импульс, и система оживает',null],
+    beats:[[0,0.18],[0.22,0.40],[0.44,0.62],null],
+    desktop:{ url:'assets/hero-ram-d4.mp4', poster:'assets/hero-poster-ram-d4.jpg', bytes: 9649863,
+              lite:{ url:'assets/hero-ram-d4-lite.mp4', bytes: 2294382 } },
+    mobile: { url:'assets/hero-ram-m4.mp4', poster:'assets/hero-poster-ram-m4.jpg', bytes: 3301158,
+              lite:{ url:'assets/hero-ram-m4-lite.mp4', bytes: 1053442 } } }
 ];
 /* Колода: фильмы идут в случайном порядке, повтор возможен только после того, как показаны все.
    Новая колода не начинается с фильма, которым закончилась прошлая. Память в localStorage; если он недоступен
@@ -711,8 +720,10 @@ function pickFilm(){
 }
 const FILM = pickFilm();
 const SOURCES = { desktop: FILM.desktop, mobile: FILM.mobile };
+document.getElementById('stage').classList.add('film-'+FILM.id);
 document.querySelectorAll('.band.e-line').forEach((band,i)=>{
   if(FILM.caps[i])band.querySelector('.ln').textContent=FILM.caps[i];
+  if(FILM.caps[i]===null){band.dataset.a=2;band.dataset.b=3;band.querySelector('.ln').textContent='';band.setAttribute('aria-hidden','true')} /* у фильма меньше подписей: полоса уезжает за пределы прогресса */
   /* beats: свои доли прокрутки [начало, конец] для подписей; без поля остаются доли из разметки (фильм sand).
      Первая подпись всегда с 0, финал (.b-settle, с 0.83) общий для всех фильмов */
   if(FILM.beats&&FILM.beats[i]){band.dataset.a=FILM.beats[i][0];band.dataset.b=FILM.beats[i][1]}
@@ -1149,7 +1160,7 @@ subToggle('mm-contacts');
 /* ============ шапка над белой зоной ============ */
 let footerInView=false;
 function applyNavLight(){
-  navEl.classList.toggle('light',footerInView||heroProgress()>0.86);
+  navEl.classList.toggle('light',footerInView||heroProgress()>(FILM.lightFrom||0.86));
 }
 const lightZone=document.querySelector('.site-footer');
 if(lightZone){
@@ -1159,15 +1170,18 @@ if(lightZone){
   },{rootMargin:'-70px 0px 0px 0px',threshold:0}).observe(lightZone);
 }
 
-/* ============ форма сотрудничества (пока локальное подтверждение) ============ */
+/* форма в подвале: передаёт имя, почту и телефон в пошаговую форму на partners.html (sessionStorage, не адрес) */
 const coopForm=document.querySelector('.coop-form');
 if(coopForm){
   coopForm.addEventListener('submit',e=>{
     e.preventDefault();
-    coopForm.querySelectorAll('input,button').forEach(el=>el.disabled=true);
-    coopForm.querySelector('.form-done').hidden=false;
+    const v=n=>coopForm.elements[n].value.trim();
+    try{sessionStorage.setItem('qopp-foot-form',JSON.stringify({name:v('name'),email:v('email'),phone:v('phone'),ok:coopForm.querySelector('.agree input').checked}))}catch(err){}
+    location.href='partners.html#form';
+    if(location.pathname.endsWith('partners.html'))location.reload();
   });
 }
+
 
 /* ============ housekeeping ============ */
 addEventListener('resize',()=>{measure();if(scrubOn)onScroll()});
