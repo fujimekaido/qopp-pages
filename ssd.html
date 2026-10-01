@@ -414,15 +414,16 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   .reveal .part{opacity:1;transform:none}
 }
 
-/* ============ интерактив каталога (с 01.10.2026): «Скорость в секундах» и «Сколько влезет» ============
+/* ============ интерактив каталога (с 01.10.2026): «Сколько копируется файл», «Классы скорости» и «Сколько влезет» ============
    Общие стили двух блоков, подставляются в <style> страницы плейсхолдером cfx-css.
-   Разметка: фрагменты race, fits-microsd, fits-usb. Поведение: js:race и js:fits. */
+   Разметка: фрагменты race, classes-microsd, fits-microsd, fits-usb. Поведение: js:race, js:classes и js:fits. */
 .cfx{position:relative;background:#fbfbfc;padding:clamp(56px,9vh,112px) clamp(16px,5vw,72px)}
+.cfx+.cfx{padding-top:0}
 .cfx-in{max-width:980px;margin:0 auto}
 .cfx h2{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:clamp(20px,2.6vw,38px);line-height:1.15;text-align:center}
 .cfx-note{max-width:62ch;margin:clamp(22px,3.4vh,34px) auto 0;font-size:13px;line-height:1.5;color:var(--muted);text-align:center}
 
-/* --- скорость в секундах --- */
+/* --- сколько копируется файл --- */
 .race-pick{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:clamp(22px,3.4vh,34px)}
 .rchip{font-family:var(--body);font-size:14px;font-weight:500;color:var(--muted);background:#fff;border:1px solid #cfd2d7;border-radius:999px;
   padding:0 18px;min-height:44px;cursor:pointer;transition:color .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease)}
@@ -441,11 +442,18 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   color:#6b7078;transition:color .3s var(--ease)}
 .rrow.done .rtime{color:var(--ink)}
 
+/* --- классы скорости карт памяти: строки те же, что у копирования, полоска показывает гарантированный минимум --- */
+.cls .rtime{color:var(--ink);font-weight:500}
+.cls .rtime b{font-weight:600}
+.cls .rtime small{font-size:max(12px,.62em);font-weight:500;margin-left:.35em;color:var(--muted)}
+.cls .rname span{font-variant-numeric:tabular-nums}
+.cls .rbar i{transition:background .3s var(--ease)}
+
 /* --- сколько влезет --- */
 .fits-ctl{margin-top:clamp(24px,4vh,40px);text-align:center}
 .fits-cap{display:block;font-family:var(--display);font-weight:700;font-size:clamp(44px,7vw,96px);line-height:1;letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .fits-range{-webkit-appearance:none;appearance:none;display:block;width:calc(100% - 18px);max-width:640px;height:44px;margin:clamp(12px,2.2vh,22px) auto 0;
-  background:transparent;cursor:pointer;font-size:16px;--p:40%}
+  background:transparent;cursor:pointer;font-size:16px;--p:50%}
 .fits-range::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--ink) var(--p),rgba(20,22,28,.14) var(--p))}
 .fits-range::-moz-range-track{height:4px;border-radius:2px;background:rgba(20,22,28,.14)}
 .fits-range::-moz-range-progress{height:4px;border-radius:2px;background:var(--ink)}
@@ -570,14 +578,26 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
 /* ============ переходы между страницами (с 01.10.2026) ============
    build.py вставляет этот блок перед </head> каждой страницы и в site/404.html, сразу после мобильного.
    Встроенная возможность браузера (View Transitions), без библиотек: страницы сменяются мягким наплывом,
-   а фото товара из полосы каталога переезжает в шапку страницы, на которую ведёт полоса, и обратно.
+   а фото из полосы каталога перелетает в главное фото страницы, на которую ведёт полоса, и обратно.
    Имя qopp-shot по умолчанию носит главное фото страницы; скрипт ниже на время перехода отдаёт его фото в полосе.
+   Полёт: старое фото остаётся плотным и едет на новое место, новое проступает поверх во второй половине пути.
+   У ссылки полосы data-pos задаёт, какую часть широкого фото держать в кадре, пока оно сжимается (где лежит товар),
+   data-next называет главное фото следующей страницы, его подгружаем заранее.
    Где возможности нет (Firefox, старые браузеры), страницы открываются как раньше.
    Откат: убрать строку @view-transition. */
 @view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.34s;animation-timing-function:cubic-bezier(.22,.61,.2,1)}
-::view-transition-group(qopp-shot){animation-duration:.6s;animation-timing-function:cubic-bezier(.22,.61,.2,1)}
-::view-transition-old(qopp-shot),::view-transition-new(qopp-shot){width:100%;height:100%;object-fit:cover;animation-duration:.42s}
+::view-transition-old(root){animation-duration:.3s}
+::view-transition-new(root){animation-duration:.42s}
+::view-transition-group(qopp-shot){animation-duration:.72s;animation-timing-function:cubic-bezier(.4,.05,.15,1)}
+::view-transition-old(qopp-shot),::view-transition-new(qopp-shot){width:100%;height:100%;object-fit:cover;overflow:clip;mix-blend-mode:normal}
+::view-transition-old(qopp-shot){object-position:var(--vt-old-pos,50% 50%)}
+::view-transition-new(qopp-shot){object-position:var(--vt-new-pos,50% 50%)}
+/* пара есть на обеих страницах: старое фото плотное, новое проступает поверх. Если фото только на одной из страниц, оно просто гаснет или проявляется */
+::view-transition-old(qopp-shot):not(:only-child){animation:none;opacity:1}
+::view-transition-new(qopp-shot):not(:only-child){animation:qopp-shot-in .72s cubic-bezier(.4,.05,.15,1) both}
+::view-transition-old(qopp-shot):only-child{animation-duration:.3s}
+::view-transition-new(qopp-shot):only-child{animation-duration:.42s}
+@keyframes qopp-shot-in{0%,42%{opacity:0}100%{opacity:1}}
 .c-hero .shot img,.g-main img{view-transition-name:qopp-shot}
 html.vt-out .c-hero .shot img,html.vt-out .g-main img{view-transition-name:none}
 /* страница, на которую прилетело фото: её шапка видна сразу, без собственного проявления, иначе фото мигнёт */
@@ -590,7 +610,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 /* переходы между страницами: кому отдать имя qopp-shot. Скрипт стоит в head, чтобы успеть до первой отрисовки */
 (function(){
   if(!('onpagereveal' in window))return;
-  var d=document,h=d.documentElement,cur=null;
+  var d=document,h=d.documentElement,cur=null,KEY='qopp-vt-pos';
   function path(u){try{return new URL(u,location.href).pathname.replace(/index\.html$/,'')}catch(e){return ''}}
   function seen(el){if(!el)return false;var r=el.getBoundingClientRect();return r.width>0&&r.bottom>0&&r.top<innerHeight}
   /* фото в полосе каталога, ссылка которой ведёт на страницу p */
@@ -600,24 +620,37 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     for(var i=0;i<as.length;i++)if(path(as[i].href)===p){var im=as[i].querySelector('img');return seen(im)?im:null}
     return null;
   }
+  function pos(img){var a=img&&img.closest('a.strip-link');return (a&&a.dataset.pos)||''}
   function mark(img){
     if(cur){cur.style.viewTransitionName='';var s=cur.closest('.strip');if(s)s.classList.remove('vt-now');cur=null}
     var hero=d.querySelector('.c-hero .shot img,.g-main img');
     h.classList.toggle('vt-out',!!img||!seen(hero));
     if(img){img.style.viewTransitionName='qopp-shot';var s2=img.closest('.strip');if(s2)s2.classList.add('vt-now');cur=img}
   }
+  function save(v){try{sessionStorage.setItem(KEY,v)}catch(e){}}
+  function load(){try{return sessionStorage.getItem(KEY)||''}catch(e){return ''}}
   addEventListener('pageswap',function(e){
     if(!e.viewTransition)return;
-    var a=e.activation;mark(shot(path(a&&a.entry&&a.entry.url)));
+    var a=e.activation,img=shot(path(a&&a.entry&&a.entry.url));
+    mark(img);save(pos(img));
   });
   addEventListener('pagereveal',function(e){
     if(!e.viewTransition)return;
     var n=window.navigation,from=n&&n.activation&&n.activation.from&&n.activation.from.url;
-    mark(shot(path(from||d.referrer)));
+    var img=shot(path(from||d.referrer));
+    mark(img);
+    /* широкое фото полосы держим в кадре той частью, где товар: оно либо улетает (старое), либо прилетает (новое) */
+    h.style.setProperty('--vt-old-pos',load()||'50% 50%');
+    h.style.setProperty('--vt-new-pos',pos(img)||'50% 50%');
+    save('');
     h.classList.add('vt-in');
     var end=function(){mark(null);h.classList.remove('vt-out');setTimeout(function(){h.classList.remove('vt-in')},1500)};
     e.viewTransition.finished.then(end,end);
   });
+  /* главное фото следующей страницы подгружаем заранее, чтобы к прилёту оно уже было готово */
+  addEventListener('load',function(){setTimeout(function(){
+    d.querySelectorAll('a.strip-link[data-next]').forEach(function(a){new Image().src=a.dataset.next});
+  },1200)});
 })();
 </script>
 </head>
@@ -692,7 +725,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     <!-- SATA: Q500S, Q600S, Q600MS -->
     <section class="strip lift reveal" id="sata">
       <h2 class="sr">SATA: модели Q500S, Q600S и Q600MS</h2>
-      <a class="strip-link part" href="ssd-sata.html" aria-label="SSD SATA: подробнее">
+      <a class="strip-link part" href="ssd-sata.html" aria-label="SSD SATA: подробнее" data-pos="-15% 50%" data-next="assets/sata-conf-25.webp">
         <picture><source srcset="assets/ssd-sata.webp" type="image/webp"><img src="assets/ssd-sata.jpg" alt="SSD QOPP SATA: накопитель 2.5 и модуль M2 Q600MS" width="2400" height="656" decoding="async"></picture>
       </a>
       <span class="strip-title st-sata et-title" aria-hidden="true"><svg class="et" viewBox="-90 -20 8951 1040" role="img" aria-label="SATA" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 0)" d="M1127.1 399.1Q1290 399.1 1374.4 456.7Q1458.9 514.2 1458.9 626.3Q1458.9 707 1432 775.8Q1405.1 844.5 1346 894.6Q1287 944.7 1193.6 972.3Q1100.1 1000 967.1 1000H35.9L279.5 742.9H1037.4Q1100.1 742.9 1128.6 722Q1157 701 1157 657.7Q1157 597.9 1062.8 597.9H517.2Q346.8 597.9 267.6 532.1Q188.3 466.4 188.3 357.2Q188.3 281 215.2 216Q242.2 151 301.2 102.4Q360.2 53.8 452.9 26.9Q545.6 0 677.1 0H1545.6L1300.4 260.1H606.9Q544.1 260.1 515.7 278.8Q487.3 297.5 487.3 342.3Q487.3 399.1 583 399.1ZM2824 1000 3057.2 742.9H3306.9Q3353.2 742.9 3401 742.9Q3448.9 742.9 3484.7 745.9Q3468.3 719 3447.4 677.9Q3426.4 636.8 3408.5 600.9L3275.5 336.3L2689.5 1000H2323.3L3124.5 95.7Q3163.4 52.3 3217.2 17.9Q3271 -16.4 3344.2 -16.4Q3414.5 -16.4 3455.6 15.7Q3496.7 47.8 3522.1 95.7L3987 1000ZM6385 0 6136.9 260.1H5781.1L5649.6 1000H5340.2L5470.2 260.1H5000.9L5249 0ZM7591.7 1000 7824.9 742.9H8074.5Q8120.9 742.9 8168.7 742.9Q8216.5 742.9 8252.4 745.9Q8236 719 8215 677.9Q8194.1 636.8 8176.2 600.9L8043.1 336.3L7457.2 1000H7091L7892.2 95.7Q7931 52.3 7984.8 17.9Q8038.7 -16.4 8111.9 -16.4Q8182.2 -16.4 8223.3 15.7Q8264.4 47.8 8289.8 95.7L8754.7 1000Z"/></svg></span>
@@ -734,11 +767,11 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
       </div>
     </section>
 
-    <!-- скорость в секундах: три линейки читают один файл. Скорости из характеристик: Q600S 515, Q2000MN 2800, Q7000MN 7000 МБ/с -->
+    <!-- время копирования: три линейки отдают один и тот же файл. Скорости из характеристик: Q600S 515, Q2000MN 2800, Q7000MN 7000 МБ/с -->
     <section class="cfx race reveal" id="race" aria-labelledby="race-h">
       <div class="cfx-in">
-        <h2 class="part" id="race-h">Скорость в секундах</h2>
-        <div class="race-pick part" role="group" aria-label="Что читаем с накопителя">
+        <h2 class="part" id="race-h">Сколько копируется файл</h2>
+        <div class="race-pick part" role="group" aria-label="Что копируем с накопителя">
           <button class="rchip on" type="button" data-gb="100" aria-pressed="true">Игра<b>100 ГБ</b></button>
           <button class="rchip" type="button" data-gb="20" aria-pressed="false">Фильм в 4K<b>20 ГБ</b></button>
           <button class="rchip" type="button" data-gb="5" aria-pressed="false">1000 фото<b>5 ГБ</b></button>
@@ -760,7 +793,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
             <span class="rtime">14 с</span>
           </div>
         </div>
-        <p class="cfx-note part">Расчёт по максимальной скорости чтения. В жизни время зависит от второго накопителя и самих файлов.</p>
+        <p class="cfx-note part">Копирование с накопителя на максимальной скорости чтения. В жизни время зависит от второго накопителя и самих файлов.</p>
       </div>
     </section>
 
@@ -979,8 +1012,8 @@ toTop.addEventListener('click',()=>{
   scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'});
 });
 
-/* ============ race: скорость в секундах (с 01.10.2026) ============
-   Блок #race на странице «Внутренние SSD»: три линейки читают один и тот же файл, полоски заполняются
+/* ============ race: сколько копируется файл (с 01.10.2026) ============
+   Блок #race на странице «Внутренние SSD»: три линейки отдают один и тот же файл, полоски заполняются
    с настоящей разницей во времени (самая медленная идёт 5 секунд, остальные пропорционально быстрее),
    счётчики показывают расчётное время. Скорости лежат в разметке (data-mbs, МБ/с), размер файла в кнопке (data-gb).
    Без скрипта и при prefers-reduced-motion видны готовые цифры. */

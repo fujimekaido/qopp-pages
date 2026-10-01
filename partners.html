@@ -634,14 +634,26 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
 /* ============ переходы между страницами (с 01.10.2026) ============
    build.py вставляет этот блок перед </head> каждой страницы и в site/404.html, сразу после мобильного.
    Встроенная возможность браузера (View Transitions), без библиотек: страницы сменяются мягким наплывом,
-   а фото товара из полосы каталога переезжает в шапку страницы, на которую ведёт полоса, и обратно.
+   а фото из полосы каталога перелетает в главное фото страницы, на которую ведёт полоса, и обратно.
    Имя qopp-shot по умолчанию носит главное фото страницы; скрипт ниже на время перехода отдаёт его фото в полосе.
+   Полёт: старое фото остаётся плотным и едет на новое место, новое проступает поверх во второй половине пути.
+   У ссылки полосы data-pos задаёт, какую часть широкого фото держать в кадре, пока оно сжимается (где лежит товар),
+   data-next называет главное фото следующей страницы, его подгружаем заранее.
    Где возможности нет (Firefox, старые браузеры), страницы открываются как раньше.
    Откат: убрать строку @view-transition. */
 @view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.34s;animation-timing-function:cubic-bezier(.22,.61,.2,1)}
-::view-transition-group(qopp-shot){animation-duration:.6s;animation-timing-function:cubic-bezier(.22,.61,.2,1)}
-::view-transition-old(qopp-shot),::view-transition-new(qopp-shot){width:100%;height:100%;object-fit:cover;animation-duration:.42s}
+::view-transition-old(root){animation-duration:.3s}
+::view-transition-new(root){animation-duration:.42s}
+::view-transition-group(qopp-shot){animation-duration:.72s;animation-timing-function:cubic-bezier(.4,.05,.15,1)}
+::view-transition-old(qopp-shot),::view-transition-new(qopp-shot){width:100%;height:100%;object-fit:cover;overflow:clip;mix-blend-mode:normal}
+::view-transition-old(qopp-shot){object-position:var(--vt-old-pos,50% 50%)}
+::view-transition-new(qopp-shot){object-position:var(--vt-new-pos,50% 50%)}
+/* пара есть на обеих страницах: старое фото плотное, новое проступает поверх. Если фото только на одной из страниц, оно просто гаснет или проявляется */
+::view-transition-old(qopp-shot):not(:only-child){animation:none;opacity:1}
+::view-transition-new(qopp-shot):not(:only-child){animation:qopp-shot-in .72s cubic-bezier(.4,.05,.15,1) both}
+::view-transition-old(qopp-shot):only-child{animation-duration:.3s}
+::view-transition-new(qopp-shot):only-child{animation-duration:.42s}
+@keyframes qopp-shot-in{0%,42%{opacity:0}100%{opacity:1}}
 .c-hero .shot img,.g-main img{view-transition-name:qopp-shot}
 html.vt-out .c-hero .shot img,html.vt-out .g-main img{view-transition-name:none}
 /* страница, на которую прилетело фото: её шапка видна сразу, без собственного проявления, иначе фото мигнёт */
@@ -654,7 +666,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 /* переходы между страницами: кому отдать имя qopp-shot. Скрипт стоит в head, чтобы успеть до первой отрисовки */
 (function(){
   if(!('onpagereveal' in window))return;
-  var d=document,h=d.documentElement,cur=null;
+  var d=document,h=d.documentElement,cur=null,KEY='qopp-vt-pos';
   function path(u){try{return new URL(u,location.href).pathname.replace(/index\.html$/,'')}catch(e){return ''}}
   function seen(el){if(!el)return false;var r=el.getBoundingClientRect();return r.width>0&&r.bottom>0&&r.top<innerHeight}
   /* фото в полосе каталога, ссылка которой ведёт на страницу p */
@@ -664,24 +676,37 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     for(var i=0;i<as.length;i++)if(path(as[i].href)===p){var im=as[i].querySelector('img');return seen(im)?im:null}
     return null;
   }
+  function pos(img){var a=img&&img.closest('a.strip-link');return (a&&a.dataset.pos)||''}
   function mark(img){
     if(cur){cur.style.viewTransitionName='';var s=cur.closest('.strip');if(s)s.classList.remove('vt-now');cur=null}
     var hero=d.querySelector('.c-hero .shot img,.g-main img');
     h.classList.toggle('vt-out',!!img||!seen(hero));
     if(img){img.style.viewTransitionName='qopp-shot';var s2=img.closest('.strip');if(s2)s2.classList.add('vt-now');cur=img}
   }
+  function save(v){try{sessionStorage.setItem(KEY,v)}catch(e){}}
+  function load(){try{return sessionStorage.getItem(KEY)||''}catch(e){return ''}}
   addEventListener('pageswap',function(e){
     if(!e.viewTransition)return;
-    var a=e.activation;mark(shot(path(a&&a.entry&&a.entry.url)));
+    var a=e.activation,img=shot(path(a&&a.entry&&a.entry.url));
+    mark(img);save(pos(img));
   });
   addEventListener('pagereveal',function(e){
     if(!e.viewTransition)return;
     var n=window.navigation,from=n&&n.activation&&n.activation.from&&n.activation.from.url;
-    mark(shot(path(from||d.referrer)));
+    var img=shot(path(from||d.referrer));
+    mark(img);
+    /* широкое фото полосы держим в кадре той частью, где товар: оно либо улетает (старое), либо прилетает (новое) */
+    h.style.setProperty('--vt-old-pos',load()||'50% 50%');
+    h.style.setProperty('--vt-new-pos',pos(img)||'50% 50%');
+    save('');
     h.classList.add('vt-in');
     var end=function(){mark(null);h.classList.remove('vt-out');setTimeout(function(){h.classList.remove('vt-in')},1500)};
     e.viewTransition.finished.then(end,end);
   });
+  /* главное фото следующей страницы подгружаем заранее, чтобы к прилёту оно уже было готово */
+  addEventListener('load',function(){setTimeout(function(){
+    d.querySelectorAll('a.strip-link[data-next]').forEach(function(a){new Image().src=a.dataset.next});
+  },1200)});
 })();
 </script>
 </head>

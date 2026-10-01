@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Карты памяти. QOPP</title>
-<meta name="description" content="Карты памяти microSD QOPP: линейки BASE, RUSH и RUSH+. Объёмы от 32 ГБ до 1 ТБ, гарантия до 10 лет.">
+<meta name="description" content="Карты памяти microSD QOPP: линейки BASE, RUSH и RUSH+. Объёмы от 32 до 512 ГБ, гарантия до 10 лет.">
 <meta name="theme-color" content="#f6f6f7">
 <!-- DEPLOY STEP: заменить og:url и og:image на абсолютные адреса живого сайта перед публикацией -->
 <meta property="og:title" content="Карты памяти. QOPP">
@@ -414,15 +414,16 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   .reveal .part{opacity:1;transform:none}
 }
 
-/* ============ интерактив каталога (с 01.10.2026): «Скорость в секундах» и «Сколько влезет» ============
+/* ============ интерактив каталога (с 01.10.2026): «Сколько копируется файл», «Классы скорости» и «Сколько влезет» ============
    Общие стили двух блоков, подставляются в <style> страницы плейсхолдером cfx-css.
-   Разметка: фрагменты race, fits-microsd, fits-usb. Поведение: js:race и js:fits. */
+   Разметка: фрагменты race, classes-microsd, fits-microsd, fits-usb. Поведение: js:race, js:classes и js:fits. */
 .cfx{position:relative;background:#fbfbfc;padding:clamp(56px,9vh,112px) clamp(16px,5vw,72px)}
+.cfx+.cfx{padding-top:0}
 .cfx-in{max-width:980px;margin:0 auto}
 .cfx h2{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:clamp(20px,2.6vw,38px);line-height:1.15;text-align:center}
 .cfx-note{max-width:62ch;margin:clamp(22px,3.4vh,34px) auto 0;font-size:13px;line-height:1.5;color:var(--muted);text-align:center}
 
-/* --- скорость в секундах --- */
+/* --- сколько копируется файл --- */
 .race-pick{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:clamp(22px,3.4vh,34px)}
 .rchip{font-family:var(--body);font-size:14px;font-weight:500;color:var(--muted);background:#fff;border:1px solid #cfd2d7;border-radius:999px;
   padding:0 18px;min-height:44px;cursor:pointer;transition:color .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease)}
@@ -441,11 +442,18 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   color:#6b7078;transition:color .3s var(--ease)}
 .rrow.done .rtime{color:var(--ink)}
 
+/* --- классы скорости карт памяти: строки те же, что у копирования, полоска показывает гарантированный минимум --- */
+.cls .rtime{color:var(--ink);font-weight:500}
+.cls .rtime b{font-weight:600}
+.cls .rtime small{font-size:max(12px,.62em);font-weight:500;margin-left:.35em;color:var(--muted)}
+.cls .rname span{font-variant-numeric:tabular-nums}
+.cls .rbar i{transition:background .3s var(--ease)}
+
 /* --- сколько влезет --- */
 .fits-ctl{margin-top:clamp(24px,4vh,40px);text-align:center}
 .fits-cap{display:block;font-family:var(--display);font-weight:700;font-size:clamp(44px,7vw,96px);line-height:1;letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .fits-range{-webkit-appearance:none;appearance:none;display:block;width:calc(100% - 18px);max-width:640px;height:44px;margin:clamp(12px,2.2vh,22px) auto 0;
-  background:transparent;cursor:pointer;font-size:16px;--p:40%}
+  background:transparent;cursor:pointer;font-size:16px;--p:50%}
 .fits-range::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--ink) var(--p),rgba(20,22,28,.14) var(--p))}
 .fits-range::-moz-range-track{height:4px;border-radius:2px;background:rgba(20,22,28,.14)}
 .fits-range::-moz-range-progress{height:4px;border-radius:2px;background:var(--ink)}
@@ -570,14 +578,26 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
 /* ============ переходы между страницами (с 01.10.2026) ============
    build.py вставляет этот блок перед </head> каждой страницы и в site/404.html, сразу после мобильного.
    Встроенная возможность браузера (View Transitions), без библиотек: страницы сменяются мягким наплывом,
-   а фото товара из полосы каталога переезжает в шапку страницы, на которую ведёт полоса, и обратно.
+   а фото из полосы каталога перелетает в главное фото страницы, на которую ведёт полоса, и обратно.
    Имя qopp-shot по умолчанию носит главное фото страницы; скрипт ниже на время перехода отдаёт его фото в полосе.
+   Полёт: старое фото остаётся плотным и едет на новое место, новое проступает поверх во второй половине пути.
+   У ссылки полосы data-pos задаёт, какую часть широкого фото держать в кадре, пока оно сжимается (где лежит товар),
+   data-next называет главное фото следующей страницы, его подгружаем заранее.
    Где возможности нет (Firefox, старые браузеры), страницы открываются как раньше.
    Откат: убрать строку @view-transition. */
 @view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.34s;animation-timing-function:cubic-bezier(.22,.61,.2,1)}
-::view-transition-group(qopp-shot){animation-duration:.6s;animation-timing-function:cubic-bezier(.22,.61,.2,1)}
-::view-transition-old(qopp-shot),::view-transition-new(qopp-shot){width:100%;height:100%;object-fit:cover;animation-duration:.42s}
+::view-transition-old(root){animation-duration:.3s}
+::view-transition-new(root){animation-duration:.42s}
+::view-transition-group(qopp-shot){animation-duration:.72s;animation-timing-function:cubic-bezier(.4,.05,.15,1)}
+::view-transition-old(qopp-shot),::view-transition-new(qopp-shot){width:100%;height:100%;object-fit:cover;overflow:clip;mix-blend-mode:normal}
+::view-transition-old(qopp-shot){object-position:var(--vt-old-pos,50% 50%)}
+::view-transition-new(qopp-shot){object-position:var(--vt-new-pos,50% 50%)}
+/* пара есть на обеих страницах: старое фото плотное, новое проступает поверх. Если фото только на одной из страниц, оно просто гаснет или проявляется */
+::view-transition-old(qopp-shot):not(:only-child){animation:none;opacity:1}
+::view-transition-new(qopp-shot):not(:only-child){animation:qopp-shot-in .72s cubic-bezier(.4,.05,.15,1) both}
+::view-transition-old(qopp-shot):only-child{animation-duration:.3s}
+::view-transition-new(qopp-shot):only-child{animation-duration:.42s}
+@keyframes qopp-shot-in{0%,42%{opacity:0}100%{opacity:1}}
 .c-hero .shot img,.g-main img{view-transition-name:qopp-shot}
 html.vt-out .c-hero .shot img,html.vt-out .g-main img{view-transition-name:none}
 /* страница, на которую прилетело фото: её шапка видна сразу, без собственного проявления, иначе фото мигнёт */
@@ -590,7 +610,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 /* переходы между страницами: кому отдать имя qopp-shot. Скрипт стоит в head, чтобы успеть до первой отрисовки */
 (function(){
   if(!('onpagereveal' in window))return;
-  var d=document,h=d.documentElement,cur=null;
+  var d=document,h=d.documentElement,cur=null,KEY='qopp-vt-pos';
   function path(u){try{return new URL(u,location.href).pathname.replace(/index\.html$/,'')}catch(e){return ''}}
   function seen(el){if(!el)return false;var r=el.getBoundingClientRect();return r.width>0&&r.bottom>0&&r.top<innerHeight}
   /* фото в полосе каталога, ссылка которой ведёт на страницу p */
@@ -600,24 +620,37 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     for(var i=0;i<as.length;i++)if(path(as[i].href)===p){var im=as[i].querySelector('img');return seen(im)?im:null}
     return null;
   }
+  function pos(img){var a=img&&img.closest('a.strip-link');return (a&&a.dataset.pos)||''}
   function mark(img){
     if(cur){cur.style.viewTransitionName='';var s=cur.closest('.strip');if(s)s.classList.remove('vt-now');cur=null}
     var hero=d.querySelector('.c-hero .shot img,.g-main img');
     h.classList.toggle('vt-out',!!img||!seen(hero));
     if(img){img.style.viewTransitionName='qopp-shot';var s2=img.closest('.strip');if(s2)s2.classList.add('vt-now');cur=img}
   }
+  function save(v){try{sessionStorage.setItem(KEY,v)}catch(e){}}
+  function load(){try{return sessionStorage.getItem(KEY)||''}catch(e){return ''}}
   addEventListener('pageswap',function(e){
     if(!e.viewTransition)return;
-    var a=e.activation;mark(shot(path(a&&a.entry&&a.entry.url)));
+    var a=e.activation,img=shot(path(a&&a.entry&&a.entry.url));
+    mark(img);save(pos(img));
   });
   addEventListener('pagereveal',function(e){
     if(!e.viewTransition)return;
     var n=window.navigation,from=n&&n.activation&&n.activation.from&&n.activation.from.url;
-    mark(shot(path(from||d.referrer)));
+    var img=shot(path(from||d.referrer));
+    mark(img);
+    /* широкое фото полосы держим в кадре той частью, где товар: оно либо улетает (старое), либо прилетает (новое) */
+    h.style.setProperty('--vt-old-pos',load()||'50% 50%');
+    h.style.setProperty('--vt-new-pos',pos(img)||'50% 50%');
+    save('');
     h.classList.add('vt-in');
     var end=function(){mark(null);h.classList.remove('vt-out');setTimeout(function(){h.classList.remove('vt-in')},1500)};
     e.viewTransition.finished.then(end,end);
   });
+  /* главное фото следующей страницы подгружаем заранее, чтобы к прилёту оно уже было готово */
+  addEventListener('load',function(){setTimeout(function(){
+    d.querySelectorAll('a.strip-link[data-next]').forEach(function(a){new Image().src=a.dataset.next});
+  },1200)});
 })();
 </script>
 </head>
@@ -721,7 +754,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 
     <!-- RUSH+ -->
     <section class="strip reveal" id="rushplus">
-      <h2 class="sr">RUSH+: объёмы 128, 256, 512 ГБ и 1 ТБ</h2>
+      <h2 class="sr">RUSH+: объёмы 128, 256 и 512 ГБ</h2>
       <span class="strip-link part">
         <picture><source srcset="assets/microsd-rushplus.webp" type="image/webp"><img src="assets/microsd-rushplus.jpg" alt="Карта microSD QOPP RUSH+ 512 ГБ, A2 V30 U3, и адаптер SD" width="2400" height="655" loading="lazy" decoding="async"></picture>
       </span>
@@ -734,14 +767,44 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
       </div>
     </section>
 
+    <!-- классы скорости: что значит маркировка на карте. BASE A1 U1 V10, RUSH A1 U3 V30, RUSH+ A2 U3 V30.
+         Числа из стандарта SD: V10 и U1 от 10 МБ/с записи, V30 и U3 от 30 МБ/с; A1 от 1500 операций чтения и 500 записи в секунду, A2 от 4000 и 2000 -->
+    <section class="cfx cls reveal" id="classes" aria-labelledby="cls-h">
+      <div class="cfx-in">
+        <h2 class="part" id="cls-h">Классы скорости</h2>
+        <div class="race-pick part" role="group" aria-label="Для чего нужна карта">
+          <button class="rchip on" type="button" data-k="v" aria-pressed="true">Запись видео<b>V и U</b></button>
+          <button class="rchip" type="button" data-k="a" aria-pressed="false">Приложения и игры<b>A</b></button>
+        </div>
+        <div class="race-rows part">
+          <div class="rrow" data-v="10" data-a="1500">
+            <a class="rname" href="#base"><b>BASE</b><span data-v="V10 и U1: видео Full HD" data-a="A1">V10 и U1: видео Full HD</span></a>
+            <div class="rbar" aria-hidden="true"><i></i></div>
+            <span class="rtime">от <b>10</b><small>МБ/с</small></span>
+          </div>
+          <div class="rrow fast" data-v="30" data-a="1500">
+            <a class="rname" href="#rush"><b>RUSH</b><span data-v="V30 и U3: видео 4K" data-a="A1">V30 и U3: видео 4K</span></a>
+            <div class="rbar" aria-hidden="true"><i></i></div>
+            <span class="rtime">от <b>30</b><small>МБ/с</small></span>
+          </div>
+          <div class="rrow fast" data-v="30" data-a="4000">
+            <a class="rname" href="#rushplus"><b>RUSH+</b><span data-v="V30 и U3: видео 4K" data-a="A2">V30 и U3: видео 4K</span></a>
+            <div class="rbar" aria-hidden="true"><i></i></div>
+            <span class="rtime">от <b>30</b><small>МБ/с</small></span>
+          </div>
+        </div>
+        <p class="cfx-note part" data-v="Классы V и U: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков." data-a="Класс A: сколько операций чтения в секунду карта выдерживает, когда с неё запускают приложения и игры. При записи у A1 от 500 операций, у A2 от 2000.">Классы V и U: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков.</p>
+      </div>
+    </section>
+
     <!-- сколько влезет: объёмы всех линеек карт. Расчёт: 4K около 20 ГБ в час, Full HD около 7 ГБ в час, снимок 5 МБ -->
-    <section class="cfx fits reveal" id="fits" aria-labelledby="fits-h" data-caps="32,64,128,256,512,1000">
+    <section class="cfx fits reveal" id="fits" aria-labelledby="fits-h" data-caps="32,64,128,256,512">
       <div class="cfx-in">
         <h2 class="part" id="fits-h">Сколько влезет</h2>
         <div class="fits-ctl part">
           <output class="fits-cap" for="fits-range">128 ГБ</output>
-          <input class="fits-range" id="fits-range" type="range" min="0" max="5" step="1" value="2" aria-label="Объём карты памяти" aria-valuetext="128 ГБ">
-          <div class="fits-ticks" aria-hidden="true"><span>32</span><span>64</span><span class="on">128</span><span>256</span><span>512</span><span>1 ТБ</span></div>
+          <input class="fits-range" id="fits-range" type="range" min="0" max="4" step="1" value="2" aria-label="Объём карты памяти" aria-valuetext="128 ГБ">
+          <div class="fits-ticks" aria-hidden="true"><span>32</span><span>64</span><span class="on">128</span><span>256</span><span>512</span></div>
         </div>
         <dl class="fits-nums part">
           <div data-mb="20000" data-frac><dt>видео 4K</dt><dd><b>6,4</b><small>ч</small></dd></div>
@@ -751,7 +814,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
         <p class="fits-lines part">В линейках
           <a href="#base" data-caps="32,64,128">BASE</a>
           <a href="#rush" data-caps="32,64,128,256">RUSH</a>
-          <a href="#rushplus" data-caps="128,256,512,1000">RUSH+</a>
+          <a href="#rushplus" data-caps="128,256,512">RUSH+</a>
         </p>
         <p class="cfx-note part">Примерно: видео 4K занимает около 20 ГБ в час, Full HD около 7 ГБ в час, снимок 5 МБ.</p>
       </div>
@@ -1010,6 +1073,44 @@ toTop.addEventListener('click',()=>{
     range.addEventListener('input',()=>set(+range.value));
     ticks.forEach((t,k)=>t.addEventListener('click',()=>{range.value=k;set(k)}));
     set(+range.value,true);
+  }
+}
+
+/* ============ classes: классы скорости карт памяти (с 01.10.2026) ============
+   Блок #classes на странице карт памяти: кнопки переключают, что сравниваем (запись видео или приложения),
+   полоски растут до гарантированного минимума своей линейки, число досчитывается, золотом выделены самые быстрые.
+   Значения лежат в разметке: data-v (МБ/с записи) и data-a (операций чтения в секунду) у строк,
+   тексты подписей в data-v и data-a у самих подписей. */
+{
+  const sec=document.getElementById('classes');
+  if(sec){
+    const rows=[...sec.querySelectorAll('.rrow')].map(el=>({el,bar:el.querySelector('.rbar i'),num:el.querySelector('.rtime b'),unit:el.querySelector('.rtime small'),sub:el.querySelector('.rname span'),cur:0}));
+    const chips=[...sec.querySelectorAll('.rchip')],note=sec.querySelector('.cfx-note');
+    const UNIT={v:'МБ/с',a:'операций/с'};
+    let k='v',raf=0,played=false;
+    const paint=(r,v,max)=>{r.bar.style.transform='scaleX('+(v/max).toFixed(4)+')';r.num.textContent=Math.round(v)};
+    function run(instant){
+      cancelAnimationFrame(raf);
+      const to=rows.map(r=>+r.el.dataset[k]),max=Math.max(...to),t0=performance.now();
+      rows.forEach((r,i)=>{r.sub.textContent=r.sub.dataset[k];r.unit.textContent=UNIT[k];r.el.classList.toggle('fast',to[i]===max)});
+      note.textContent=note.dataset[k];
+      if(instant||reduced.matches){rows.forEach((r,i)=>paint(r,to[i],max));return}
+      const step=now=>{
+        const p=Math.min(1,(now-t0)/900),e=1-Math.pow(1-p,3);
+        rows.forEach((r,i)=>paint(r,to[i]*e,max));
+        if(p<1)raf=requestAnimationFrame(step);
+      };
+      rows.forEach(r=>paint(r,0,max));raf=requestAnimationFrame(step);
+    }
+    chips.forEach(c=>c.addEventListener('click',()=>{
+      chips.forEach(x=>{const on=x===c;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+      k=c.dataset.k;played=true;run();
+    }));
+    if(reduced.matches)run(true);
+    else{
+      rows.forEach(r=>paint(r,0,1));
+      new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting&&!played){played=true;ob.disconnect();run()}}),{threshold:.5}).observe(sec.querySelector('.race-rows'));
+    }
   }
 }
 
