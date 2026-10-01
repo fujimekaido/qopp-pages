@@ -730,6 +730,26 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   },1200)});
 })();
 </script>
+<script>
+/* Яндекс.Метрика, счётчик 93282686 (владелец дал код 01.10.2026; счётчик настроен на qopp.ru и стоит на старом сайте).
+   build.py вставляет этот блок перед </head> каждой страницы и в site/404.html.
+   Счётчик включается только на боевом домене qopp.ru: с тестового адреса на GitHub Pages визиты не отправляем,
+   чтобы наши проверки не смешивались со статистикой действующего сайта. После переезда на домен заработает сам.
+   window.QOPP_YM нужен целям: клики по элементам с data-goal уходят как reachGoal (сейчас это магазины на «Где купить»).
+   Строку noscript из кода Метрики не ставим: ей место в body, а доля посетителей без скриптов ничтожна. */
+(function(){
+  var ID=93282686;
+  if(!/(^|\.)qopp\.ru$/.test(location.hostname))return;
+  window.QOPP_YM=ID;
+  (function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+  })(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
+  ym(ID,'init',{clickmap:true,referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+})();
+</script>
 </head>
 <body>
 <a class="skip" href="#main">К содержанию</a>
