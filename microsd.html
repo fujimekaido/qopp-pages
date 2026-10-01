@@ -771,6 +771,29 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
       </div>
     </section>
 
+    <!-- сколько влезет: объёмы всех линеек карт. Расчёт: 4K около 20 ГБ в час, Full HD около 7 ГБ в час, снимок 5 МБ -->
+    <section class="cfx fits reveal" id="fits" aria-labelledby="fits-h" data-caps="32,64,128,256,512">
+      <div class="cfx-in">
+        <h2 class="part" id="fits-h">Сколько влезет</h2>
+        <div class="fits-ctl part">
+          <output class="fits-cap" for="fits-range">128 ГБ</output>
+          <input class="fits-range" id="fits-range" type="range" min="0" max="4" step="1" value="2" aria-label="Объём карты памяти" aria-valuetext="128 ГБ">
+          <div class="fits-ticks" aria-hidden="true"><span>32</span><span>64</span><span class="on">128</span><span>256</span><span>512</span></div>
+        </div>
+        <dl class="fits-nums part">
+          <div data-mb="20000" data-frac><dt>видео 4K</dt><dd><b>6,4</b><small>ч</small></dd></div>
+          <div data-mb="7000" data-frac><dt>видео Full HD</dt><dd><b>18</b><small>ч</small></dd></div>
+          <div data-mb="5"><dt>фото</dt><dd><b>25 600</b></dd></div>
+        </dl>
+        <p class="fits-lines part">В линейках
+          <a href="#base" data-caps="32,64,128">BASE</a>
+          <a href="#rush" data-caps="32,64,128,256">RUSH</a>
+          <a href="#rushplus" data-caps="128,256,512">RUSH+</a>
+        </p>
+        <p class="cfx-note part">Примерно: видео 4K занимает около 20 ГБ в час, Full HD около 7 ГБ в час, снимок 5 МБ.</p>
+      </div>
+    </section>
+
     <!-- классы скорости: что значит маркировка на карте. BASE U1 и Class 10 (класса A нет), RUSH A1 U3 V30, RUSH+ A2 U3 V30. Подтверждено владельцем 01.10.2026.
          Числа из стандарта SD: U1 и Class 10 от 10 МБ/с записи, V30 и U3 от 30 МБ/с; A1 от 1500 операций чтения и 500 записи в секунду, A2 от 4000 и 2000 -->
     <section class="cfx cls reveal" id="classes" aria-labelledby="cls-h">
@@ -798,29 +821,6 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
           </div>
         </div>
         <p class="cfx-note part" data-v="Классы U, V и Class 10: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков." data-a="Класс A: сколько операций чтения в секунду карта выдерживает, когда с неё запускают приложения и игры. При записи у A1 от 500 операций, у A2 от 2000.">Классы U, V и Class 10: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков.</p>
-      </div>
-    </section>
-
-    <!-- сколько влезет: объёмы всех линеек карт. Расчёт: 4K около 20 ГБ в час, Full HD около 7 ГБ в час, снимок 5 МБ -->
-    <section class="cfx fits reveal" id="fits" aria-labelledby="fits-h" data-caps="32,64,128,256,512">
-      <div class="cfx-in">
-        <h2 class="part" id="fits-h">Сколько влезет</h2>
-        <div class="fits-ctl part">
-          <output class="fits-cap" for="fits-range">128 ГБ</output>
-          <input class="fits-range" id="fits-range" type="range" min="0" max="4" step="1" value="2" aria-label="Объём карты памяти" aria-valuetext="128 ГБ">
-          <div class="fits-ticks" aria-hidden="true"><span>32</span><span>64</span><span class="on">128</span><span>256</span><span>512</span></div>
-        </div>
-        <dl class="fits-nums part">
-          <div data-mb="20000" data-frac><dt>видео 4K</dt><dd><b>6,4</b><small>ч</small></dd></div>
-          <div data-mb="7000" data-frac><dt>видео Full HD</dt><dd><b>18</b><small>ч</small></dd></div>
-          <div data-mb="5"><dt>фото</dt><dd><b>25 600</b></dd></div>
-        </dl>
-        <p class="fits-lines part">В линейках
-          <a href="#base" data-caps="32,64,128">BASE</a>
-          <a href="#rush" data-caps="32,64,128,256">RUSH</a>
-          <a href="#rushplus" data-caps="128,256,512">RUSH+</a>
-        </p>
-        <p class="cfx-note part">Примерно: видео 4K занимает около 20 ГБ в час, Full HD около 7 ГБ в час, снимок 5 МБ.</p>
       </div>
     </section>
 
