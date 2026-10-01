@@ -229,6 +229,30 @@ a.mi{cursor:pointer;text-decoration:none}
 @media (max-width:860px){
   .ds-photo{width:100%;opacity:.35;-webkit-mask-image:none;mask-image:none}
 }
+/* цвет подсветки модулей (с 01.10.2026): слой сплошного цвета в режиме color по маске свечения, см. js:rgb */
+.ds-tint{
+  position:absolute;right:0;top:0;height:100%;width:60%;pointer-events:none;
+  background:hsl(var(--hue,200),100%,55%);mix-blend-mode:color;opacity:0;transition:opacity .45s var(--ease);
+  -webkit-mask:url(assets/ram-warranty-glow.webp) center/cover no-repeat;mask:url(assets/ram-warranty-glow.webp) center/cover no-repeat;
+}
+.ds-tint.on{opacity:1}
+.ds-hue{position:absolute;z-index:2;right:clamp(20px,3vw,44px);bottom:clamp(16px,3vh,30px);display:flex;align-items:center;gap:12px}
+.ds-hue button{flex:none;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer;display:grid;place-items:center}
+.ds-hue button::before{content:"";width:22px;height:22px;border-radius:50%;
+  background:conic-gradient(#ff3b30,#ffcc00,#34c759,#32ade6,#5856d6,#ff2d55,#ff3b30);
+  box-shadow:0 0 0 2px #0b0a08,0 0 0 3px rgba(242,240,234,.35);transition:box-shadow .3s var(--ease)}
+.ds-hue button.on::before{box-shadow:0 0 0 2px #0b0a08,0 0 0 4px #f2f0ea}
+.ds-hue input{-webkit-appearance:none;appearance:none;width:clamp(150px,16vw,220px);height:44px;margin:0;background:transparent;cursor:pointer}
+.ds-hue input::-webkit-slider-runnable-track{height:6px;border-radius:3px;
+  background:linear-gradient(to right,hsl(0,100%,55%),hsl(60,100%,55%),hsl(120,100%,55%),hsl(180,100%,55%),hsl(240,100%,55%),hsl(300,100%,55%),hsl(360,100%,55%))}
+.ds-hue input::-moz-range-track{height:6px;border-radius:3px;
+  background:linear-gradient(to right,hsl(0,100%,55%),hsl(60,100%,55%),hsl(120,100%,55%),hsl(180,100%,55%),hsl(240,100%,55%),hsl(300,100%,55%),hsl(360,100%,55%))}
+.ds-hue input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;margin-top:-7px;border-radius:50%;
+  background:hsl(var(--hue,200),100%,55%);border:3px solid #f2f0ea;box-shadow:0 2px 10px rgba(0,0,0,.6)}
+.ds-hue input::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:hsl(var(--hue,200),100%,55%);border:3px solid #f2f0ea;box-shadow:0 2px 10px rgba(0,0,0,.6)}
+.ds-hue input:focus-visible{outline:none}
+.ds-hue input:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--accent)}
+@media (max-width:860px){.ds-tint,.ds-hue{display:none}}
 
 /* ============ layout ============ */
 main{position:relative;z-index:1}
@@ -720,6 +744,61 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   .pbar-name span{font-size:12px;overflow:hidden;text-overflow:ellipsis}
 }
 </style>
+<link rel="expect" href="#top" blocking="render">
+<style id="motion">
+/* ============ переходы между страницами (с 01.10.2026) ============
+   build.py вставляет этот блок перед </head> каждой страницы и в site/404.html, сразу после мобильного.
+   Встроенная возможность браузера (View Transitions), без библиотек: страницы сменяются мягким наплывом,
+   а фото товара из полосы каталога переезжает в шапку страницы, на которую ведёт полоса, и обратно.
+   Имя qopp-shot по умолчанию носит главное фото страницы; скрипт ниже на время перехода отдаёт его фото в полосе.
+   Где возможности нет (Firefox, старые браузеры), страницы открываются как раньше.
+   Откат: убрать строку @view-transition. */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.34s;animation-timing-function:cubic-bezier(.22,.61,.2,1)}
+::view-transition-group(qopp-shot){animation-duration:.6s;animation-timing-function:cubic-bezier(.22,.61,.2,1)}
+::view-transition-old(qopp-shot),::view-transition-new(qopp-shot){width:100%;height:100%;object-fit:cover;animation-duration:.42s}
+.c-hero .shot img,.g-main img{view-transition-name:qopp-shot}
+html.vt-out .c-hero .shot img,html.vt-out .g-main img{view-transition-name:none}
+/* страница, на которую прилетело фото: её шапка видна сразу, без собственного проявления, иначе фото мигнёт */
+html.vt-in .c-hero.reveal .part,html.vt-in .conf.reveal .part,html.vt-in .strip.vt-now .part{opacity:1!important;transition:none!important}
+html.vt-in .g-main img.swap{opacity:1}
+html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,html.vt-in .strip.vt-now .part{transform:none!important}
+@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}
+</style>
+<script>
+/* переходы между страницами: кому отдать имя qopp-shot. Скрипт стоит в head, чтобы успеть до первой отрисовки */
+(function(){
+  if(!('onpagereveal' in window))return;
+  var d=document,h=d.documentElement,cur=null;
+  function path(u){try{return new URL(u,location.href).pathname.replace(/index\.html$/,'')}catch(e){return ''}}
+  function seen(el){if(!el)return false;var r=el.getBoundingClientRect();return r.width>0&&r.bottom>0&&r.top<innerHeight}
+  /* фото в полосе каталога, ссылка которой ведёт на страницу p */
+  function shot(p){
+    if(!p||p===path(location.href))return null;
+    var as=d.querySelectorAll('a.strip-link[href]');
+    for(var i=0;i<as.length;i++)if(path(as[i].href)===p){var im=as[i].querySelector('img');return seen(im)?im:null}
+    return null;
+  }
+  function mark(img){
+    if(cur){cur.style.viewTransitionName='';var s=cur.closest('.strip');if(s)s.classList.remove('vt-now');cur=null}
+    var hero=d.querySelector('.c-hero .shot img,.g-main img');
+    h.classList.toggle('vt-out',!!img||!seen(hero));
+    if(img){img.style.viewTransitionName='qopp-shot';var s2=img.closest('.strip');if(s2)s2.classList.add('vt-now');cur=img}
+  }
+  addEventListener('pageswap',function(e){
+    if(!e.viewTransition)return;
+    var a=e.activation;mark(shot(path(a&&a.entry&&a.entry.url)));
+  });
+  addEventListener('pagereveal',function(e){
+    if(!e.viewTransition)return;
+    var n=window.navigation,from=n&&n.activation&&n.activation.from&&n.activation.from.url;
+    mark(shot(path(from||d.referrer)));
+    h.classList.add('vt-in');
+    var end=function(){mark(null);h.classList.remove('vt-out');setTimeout(function(){h.classList.remove('vt-in')},1500)};
+    e.viewTransition.finished.then(end,end);
+  });
+})();
+</script>
 </head>
 <body>
 <a class="skip" href="#main">К содержанию</a>
@@ -789,9 +868,14 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
 <!-- тёмная вставка с SSD -->
 <section class="dark-strip reveal" aria-label="Гарантия как обещание">
   <picture><source srcset="assets/ram-warranty.webp" type="image/webp"><img class="ds-photo" src="assets/ram-warranty.jpg" alt="" width="2000" height="804" loading="lazy" aria-hidden="true" decoding="async"></picture>
+  <span class="ds-tint" aria-hidden="true"></span>
   <div class="inner">
     <h2 class="part">Гарантия: наше обещание, которое мы всегда выполняем</h2>
     <p class="part">Если что-то случилось, вопрос решаем мы: здесь, в России, быстро и профессионально.</p>
+  </div>
+  <div class="ds-hue">
+    <button class="on" type="button" aria-pressed="true" aria-label="Подсветка как на фото: радуга"></button>
+    <input type="range" min="0" max="360" step="1" value="200" aria-label="Цвет подсветки модулей на фото">
   </div>
 </section>
 
@@ -1345,6 +1429,21 @@ addEventListener('scroll',()=>{
 toTop.addEventListener('click',()=>{
   scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'});
 });
+
+/* ============ rgb: цвет подсветки модулей на фото (с 01.10.2026) ============
+   Тёмная вставка страницы гарантии: поверх фото лежит слой .ds-tint сплошного цвета в режиме наложения color,
+   по маске свечения (assets/ram-warranty-glow, делает САЙТ РЕФЫ/rgb_mask.py). Ползунок задаёт оттенок,
+   круглая кнопка возвращает радугу, как на исходном фото. */
+{
+  const tint=document.querySelector('.ds-tint'),box=document.querySelector('.ds-hue');
+  if(tint&&box){
+    const r=box.querySelector('input'),back=box.querySelector('button');
+    const paint=()=>{tint.style.setProperty('--hue',r.value);box.style.setProperty('--hue',r.value);tint.classList.add('on');back.classList.remove('on');back.setAttribute('aria-pressed','false')};
+    r.addEventListener('input',paint);
+    r.addEventListener('pointerdown',paint);
+    back.addEventListener('click',()=>{tint.classList.remove('on');back.classList.add('on');back.setAttribute('aria-pressed','true')});
+  }
+}
 
 /* ============ fx: интерактив текстовых страниц (с 22 сентября 2026) ============
    Пять приёмов, стили внедряет сам скрипт, разметке нужны только атрибуты:
