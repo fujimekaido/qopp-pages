@@ -445,6 +445,10 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 /* --- классы скорости карт памяти: строки те же, что у копирования, полоска показывает гарантированный минимум --- */
 .cls .rtime{color:var(--ink);font-weight:500}
 .cls .rtime b{font-weight:600}
+@media (min-width:641px){.cls .rrow{grid-template-columns:minmax(170px,210px) 1fr 190px}}
+.cls .rn{display:none;font-size:14px;font-weight:500;color:var(--muted)}
+.cls .rrow.none .rv{display:none}
+.cls .rrow.none .rn{display:inline}
 .cls .rtime small{font-size:max(12px,.62em);font-weight:500;margin-left:.35em;color:var(--muted)}
 .cls .rname span{font-variant-numeric:tabular-nums}
 .cls .rbar i{transition:background .3s var(--ease)}
@@ -767,33 +771,33 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
       </div>
     </section>
 
-    <!-- классы скорости: что значит маркировка на карте. BASE A1 U1 V10, RUSH A1 U3 V30, RUSH+ A2 U3 V30.
-         Числа из стандарта SD: V10 и U1 от 10 МБ/с записи, V30 и U3 от 30 МБ/с; A1 от 1500 операций чтения и 500 записи в секунду, A2 от 4000 и 2000 -->
+    <!-- классы скорости: что значит маркировка на карте. BASE U1 и Class 10 (класса A нет), RUSH A1 U3 V30, RUSH+ A2 U3 V30. Подтверждено владельцем 01.10.2026.
+         Числа из стандарта SD: U1 и Class 10 от 10 МБ/с записи, V30 и U3 от 30 МБ/с; A1 от 1500 операций чтения и 500 записи в секунду, A2 от 4000 и 2000 -->
     <section class="cfx cls reveal" id="classes" aria-labelledby="cls-h">
       <div class="cfx-in">
         <h2 class="part" id="cls-h">Классы скорости</h2>
         <div class="race-pick part" role="group" aria-label="Для чего нужна карта">
-          <button class="rchip on" type="button" data-k="v" aria-pressed="true">Запись видео<b>V и U</b></button>
+          <button class="rchip on" type="button" data-k="v" aria-pressed="true">Запись видео<b>U и V</b></button>
           <button class="rchip" type="button" data-k="a" aria-pressed="false">Приложения и игры<b>A</b></button>
         </div>
         <div class="race-rows part">
-          <div class="rrow" data-v="10" data-a="1500">
-            <a class="rname" href="#base"><b>BASE</b><span data-v="V10 и U1: видео Full HD" data-a="A1">V10 и U1: видео Full HD</span></a>
+          <div class="rrow" data-v="10" data-a="0">
+            <a class="rname" href="#base"><b>BASE</b><span data-v="U1 и Class 10: видео Full HD" data-a="Фото, музыка, документы">U1 и Class 10: видео Full HD</span></a>
             <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime">от <b>10</b><small>МБ/с</small></span>
+            <span class="rtime"><span class="rv">от <b>10</b><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
           </div>
           <div class="rrow fast" data-v="30" data-a="1500">
-            <a class="rname" href="#rush"><b>RUSH</b><span data-v="V30 и U3: видео 4K" data-a="A1">V30 и U3: видео 4K</span></a>
+            <a class="rname" href="#rush"><b>RUSH</b><span data-v="U3 и V30: видео 4K" data-a="A1">U3 и V30: видео 4K</span></a>
             <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime">от <b>30</b><small>МБ/с</small></span>
+            <span class="rtime"><span class="rv">от <b>30</b><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
           </div>
           <div class="rrow fast" data-v="30" data-a="4000">
-            <a class="rname" href="#rushplus"><b>RUSH+</b><span data-v="V30 и U3: видео 4K" data-a="A2">V30 и U3: видео 4K</span></a>
+            <a class="rname" href="#rushplus"><b>RUSH+</b><span data-v="U3 и V30: видео 4K" data-a="A2">U3 и V30: видео 4K</span></a>
             <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime">от <b>30</b><small>МБ/с</small></span>
+            <span class="rtime"><span class="rv">от <b>30</b><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
           </div>
         </div>
-        <p class="cfx-note part" data-v="Классы V и U: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков." data-a="Класс A: сколько операций чтения в секунду карта выдерживает, когда с неё запускают приложения и игры. При записи у A1 от 500 операций, у A2 от 2000.">Классы V и U: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков.</p>
+        <p class="cfx-note part" data-v="Классы U, V и Class 10: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков." data-a="Класс A: сколько операций чтения в секунду карта выдерживает, когда с неё запускают приложения и игры. При записи у A1 от 500 операций, у A2 от 2000.">Классы U, V и Class 10: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков.</p>
       </div>
     </section>
 
@@ -1080,7 +1084,7 @@ toTop.addEventListener('click',()=>{
    Блок #classes на странице карт памяти: кнопки переключают, что сравниваем (запись видео или приложения),
    полоски растут до гарантированного минимума своей линейки, число досчитывается, золотом выделены самые быстрые.
    Значения лежат в разметке: data-v (МБ/с записи) и data-a (операций чтения в секунду) у строк,
-   тексты подписей в data-v и data-a у самих подписей. */
+   тексты подписей в data-v и data-a у самих подписей. Ноль значит, что класса у линейки нет: вместо числа показываем .rn. */
 {
   const sec=document.getElementById('classes');
   if(sec){
@@ -1092,7 +1096,7 @@ toTop.addEventListener('click',()=>{
     function run(instant){
       cancelAnimationFrame(raf);
       const to=rows.map(r=>+r.el.dataset[k]),max=Math.max(...to),t0=performance.now();
-      rows.forEach((r,i)=>{r.sub.textContent=r.sub.dataset[k];r.unit.textContent=UNIT[k];r.el.classList.toggle('fast',to[i]===max)});
+      rows.forEach((r,i)=>{r.sub.textContent=r.sub.dataset[k];r.unit.textContent=UNIT[k];r.el.classList.toggle('fast',to[i]===max);r.el.classList.toggle('none',!to[i])});
       note.textContent=note.dataset[k];
       if(instant||reduced.matches){rows.forEach((r,i)=>paint(r,to[i],max));return}
       const step=now=>{

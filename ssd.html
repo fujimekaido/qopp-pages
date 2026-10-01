@@ -445,6 +445,10 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 /* --- классы скорости карт памяти: строки те же, что у копирования, полоска показывает гарантированный минимум --- */
 .cls .rtime{color:var(--ink);font-weight:500}
 .cls .rtime b{font-weight:600}
+@media (min-width:641px){.cls .rrow{grid-template-columns:minmax(170px,210px) 1fr 190px}}
+.cls .rn{display:none;font-size:14px;font-weight:500;color:var(--muted)}
+.cls .rrow.none .rv{display:none}
+.cls .rrow.none .rn{display:inline}
 .cls .rtime small{font-size:max(12px,.62em);font-weight:500;margin-left:.35em;color:var(--muted)}
 .cls .rname span{font-variant-numeric:tabular-nums}
 .cls .rbar i{transition:background .3s var(--ease)}
