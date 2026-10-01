@@ -542,6 +542,77 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .wz-send a:hover,.wz-send a:focus-visible{color:var(--accent-deep);border-color:var(--accent-deep)}
 .wz-note{margin-top:14px;font-size:14px;color:var(--muted)}
 </style>
+<style id="mobile-fix">
+/* ============ мобильная версия: общие правки для всех страниц (01.10.2026) ============
+   build.py вставляет этот блок перед </head> каждой страницы и в site/404.html, поэтому он сильнее стилей страницы.
+   Правила: зона нажатия не меньше 44 px, поля ввода от 16 px (иначе iOS увеличивает страницу при фокусе),
+   текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
+   Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
+@media (max-width:860px){
+  /* --- каталог по макету адаптива: заголовок над фото, фото крупнее, кнопки под фото --- */
+  .strip{display:flex;flex-direction:column}
+  .strip .strip-title,.strip .strip-cap{position:static;order:-1;transform:none;width:auto;text-align:left;align-items:flex-start;padding:26px 16px 14px}
+  .strip .strip-title{font-size:20px}
+  .strip .et,.strip .cap-big .et{height:20px;margin:0}
+  .strip .strip-cap{font-size:12px;gap:7px}
+  .strip .cap-big{margin-top:6px;font-size:1em}
+  .strip .st-nb .sub{font-size:12px;margin-top:8px}
+  .strip .st-u2.et-title{align-items:flex-start;gap:8px}
+  .strip img{height:max(176px,46vw);object-fit:cover;object-position:50% 50%}
+  .strip#sata img{object-position:75% 50%}
+  .strip#nvme3 img,.strip#base img{object-position:100% 50%}
+  .strip#nvme4 img{object-position:85% 50%}
+  .strip#udimm img{object-position:10% 50%}
+  .strip#sodimm img{object-position:18% 50%}
+  .strip#rush img{object-position:56% 50%}
+  .strip#rushplus img,.strip#usb31 img,.strip#usb32c img{object-position:0% 50%}
+  .strip .strip-acts,.strip.lift .strip-acts{position:static;width:auto;margin:0;padding:14px 16px 26px;gap:10px;justify-content:flex-start}
+  .strip-acts .pbtn{flex:1 1 auto;max-width:240px;min-height:46px;padding:0 14px;font-size:13px;letter-spacing:.05em;gap:8px;border-radius:13px}
+  .strip-acts .pbtn svg{width:14px;height:12px}
+  .strip-acts .pbtn[aria-disabled="true"]{opacity:.5}
+}
+@media (max-width:1024px){
+  /* --- шапка --- */
+  .menu-pill .mi{display:inline-flex;align-items:center;min-height:44px}
+  nav .logo{display:flex;align-items:center;min-height:44px}
+  .menu-btn{min-height:44px}
+  /* --- подвал --- */
+  .coop-form input:not([type=checkbox]){font-size:16px;min-height:48px;padding:12px 14px;max-width:none}
+  .foot-btn{font-size:16px;min-height:48px;max-width:none}
+  .agree{min-height:44px;font-size:13.5px}
+  .foot-col .fl{padding:11px 0}
+  a.fl::after{bottom:8px}
+  .foot-legal{font-size:13px;color:#5b6068}
+  .foot-legal a{padding:14px 0;margin:-14px 0}
+  /* --- читаемость мелкого текста на светлом фоне --- */
+  :root{--silver:#6b7078}
+  .kicker,.fl.current,.note b,.final .promise{color:#8f6414}
+  table th{font-size:12px!important}
+  /* --- кнопки и переключатели --- */
+  .chip{min-height:44px}
+  .pick-again,.wz-back{min-height:44px;padding-left:4px;padding-right:4px}
+  .wz-agree{min-height:44px;align-items:center}
+  .wz-agree input{margin-top:0}
+  .road-top .pbtn,.acts .pbtn{font-size:12px;letter-spacing:.03em;padding-left:12px;padding-right:12px}
+  .err-nav b{font-size:12px!important}
+  .err-nav a{display:inline-flex;align-items:center;min-height:44px}
+}
+@media (max-width:900px){
+  /* --- страница товара: подписи обзора и панель --- */
+  .t-kick{font-size:12px;letter-spacing:.3em}
+  .t-sub,.t-cap,.bar-lab{font-size:12px}
+  .t-line{font-size:14px;line-height:1.6}
+  .t-num small{font-size:12px}
+  .bar{height:26px;font-size:12px}
+  .lab,.quick dt{font-size:12px}
+  .soon{font-size:12.5px}
+  .tab{display:inline-flex;align-items:center;min-height:44px;font-size:13px}
+  .opt{min-height:44px}
+  .pbar .pbtn{min-height:44px;font-size:12px}
+  .spec-note{font-size:13px}
+  .pbar-name span{font-size:12px;overflow:hidden;text-overflow:ellipsis}
+}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">К содержанию</a>
@@ -721,7 +792,6 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       <h3>Продукция</h3>
       <a class="fl" href="notebooks.html">Ноутбуки</a>
       <a class="fl" href="ram.html">Оперативная память</a>
-      <span class="fl">Внешние SSD</span>
       <a class="fl" href="ssd.html">Внутренние SSD</a>
       <a class="fl" href="microsd.html">Карты памяти</a>
       <a class="fl" href="usb.html">Флеш-накопители</a>

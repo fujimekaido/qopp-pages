@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Где купить. QOPP</title>
-<meta name="description" content="Где купить технику QOPP: официальный магазин бренда с гарантией напрямую и оплатой частями, а также Ozon, Wildberries и Яндекс Маркет.">
+<meta name="description" content="Где купить технику QOPP: официальный магазин бренда с гарантией напрямую и оплатой частями, а также Ozon, Яндекс Маркет и Wildberries.">
 <meta name="theme-color" content="#f6f6f7">
 <!-- DEPLOY STEP: заменить og:url и og:image на абсолютные адреса живого сайта перед публикацией -->
 <meta property="og:title" content="Где купить. QOPP">
 <meta property="og:description" content="Официальный магазин QOPP и маркетплейсы">
 <meta property="og:url" content="/buy.html">
-<meta property="og:image" content="/assets/about-dark.jpg">
+<meta property="og:image" content="/assets/buy-hero.jpg">
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -498,29 +498,96 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   .q-mark .spark{display:none}
 }
 
-/* ============ где купить ============ */
-.shop{position:relative;z-index:1;background:#101216;color:#f4f1ea}
-.shop .section{padding-top:clamp(70px,10vh,110px);padding-bottom:clamp(70px,10vh,110px)}
-.shop .kicker{color:var(--accent)}
-.shop h2{font-family:var(--display);font-weight:700;font-size:clamp(27px,3.6vw,44px);line-height:1.18;margin-top:14px;max-width:20ch}
-.shop .lede{color:#a9adb5;max-width:56ch;margin-top:14px}
-.shop-why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,44px);margin-top:clamp(30px,5vh,50px);
-  border-top:1px solid rgba(244,241,234,.16);padding-top:clamp(22px,4vh,34px)}
-.shop-why h3{font-family:var(--display);font-weight:700;font-size:clamp(18px,2vw,23px)}
-.shop-why p{color:#a9adb5;margin-top:10px}
-.shop-go{margin-top:clamp(30px,5vh,48px);display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-.shop-go small{color:#8b9098;font-size:13px}
-.b-btn{display:inline-block;font-weight:600;font-size:16px;padding:15px 32px;border-radius:999px;text-decoration:none;font-family:var(--body);
-  background:var(--accent);border:1px solid var(--accent);color:#14161c;transition:background .25s var(--ease),border-color .25s var(--ease)}
-.b-btn:hover,.b-btn:focus-visible{background:#f0c478;border-color:#f0c478}
-@media (max-width:760px){.shop-why{grid-template-columns:1fr}}
-.mp{display:grid;grid-template-columns:1fr auto;gap:clamp(14px,3vw,40px);align-items:center;
-  padding:clamp(18px,2.6vh,26px) 0;border-top:1px solid var(--hairline)}
-.mp:last-child{border-bottom:1px solid var(--hairline)}
-.mp h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.2vw,26px);letter-spacing:.01em}
-.mp a.go{display:inline-block;font-weight:600;font-size:15px;padding:12px 24px;border-radius:999px;color:var(--ink);text-decoration:none;
-  border:1px solid rgba(20,22,28,.28);transition:color .25s var(--ease),border-color .25s var(--ease)}
-.mp a.go:hover,.mp a.go:focus-visible{color:var(--accent-deep);border-color:var(--accent-deep)}
+/* ============ где купить: по референсу дизайнера ============ */
+.b-top{padding-top:clamp(64px,6.4vw,92px);background:#fff}
+.b-photo{margin:0;line-height:0}
+.b-photo img{display:block;width:100%;height:clamp(250px,42.6vw,700px);object-fit:cover;object-position:54% 46%}
+.b-body{position:relative;z-index:1;background:#fff;text-align:center;padding:clamp(40px,6.4vh,76px) clamp(16px,4vw,56px) clamp(60px,10vh,120px)}
+.b-lede{max-width:60ch;margin:0 auto;font-size:clamp(16px,1.45vw,20px);line-height:1.5;color:#2b2e35}
+.b-body h1{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:clamp(26px,3.3vw,46px);line-height:1.1;margin-top:clamp(28px,4.6vh,48px)}
+.shops{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;max-width:1160px;margin:clamp(30px,5vh,52px) auto 0;text-align:left}
+.shop-card{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:96px;padding:14px 16px 14px 22px;
+  background:#fff;border:1px solid #8f939b;border-radius:2px;box-shadow:3px 3px 0 rgba(20,22,28,.07);
+  color:var(--ink);text-decoration:none;transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.shop-card:hover,.shop-card:focus-visible{border-color:var(--accent-deep);box-shadow:3px 3px 0 rgba(184,134,59,.28)}
+.shop-card b{display:block;font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:.02em;line-height:1.2}
+.shop-card small{display:block;margin-top:6px;font-size:13px;line-height:1.35;color:var(--muted)}
+.shop-ic{flex:none;width:76px;height:76px;display:block}
+.shop-ic.q{width:60px;height:60px;margin:8px;border-radius:50%;background:#14161c;display:grid;place-items:center;box-shadow:0 6px 14px rgba(20,22,28,.22)}
+.shop-ic.q img{width:24px;height:auto;display:block}
+@media (max-width:1040px){.shops{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.shops{grid-template-columns:1fr;gap:10px}.shop-card{min-height:88px}.b-photo img{object-position:56% 46%}}
+</style>
+<style id="mobile-fix">
+/* ============ мобильная версия: общие правки для всех страниц (01.10.2026) ============
+   build.py вставляет этот блок перед </head> каждой страницы и в site/404.html, поэтому он сильнее стилей страницы.
+   Правила: зона нажатия не меньше 44 px, поля ввода от 16 px (иначе iOS увеличивает страницу при фокусе),
+   текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
+   Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
+@media (max-width:860px){
+  /* --- каталог по макету адаптива: заголовок над фото, фото крупнее, кнопки под фото --- */
+  .strip{display:flex;flex-direction:column}
+  .strip .strip-title,.strip .strip-cap{position:static;order:-1;transform:none;width:auto;text-align:left;align-items:flex-start;padding:26px 16px 14px}
+  .strip .strip-title{font-size:20px}
+  .strip .et,.strip .cap-big .et{height:20px;margin:0}
+  .strip .strip-cap{font-size:12px;gap:7px}
+  .strip .cap-big{margin-top:6px;font-size:1em}
+  .strip .st-nb .sub{font-size:12px;margin-top:8px}
+  .strip .st-u2.et-title{align-items:flex-start;gap:8px}
+  .strip img{height:max(176px,46vw);object-fit:cover;object-position:50% 50%}
+  .strip#sata img{object-position:75% 50%}
+  .strip#nvme3 img,.strip#base img{object-position:100% 50%}
+  .strip#nvme4 img{object-position:85% 50%}
+  .strip#udimm img{object-position:10% 50%}
+  .strip#sodimm img{object-position:18% 50%}
+  .strip#rush img{object-position:56% 50%}
+  .strip#rushplus img,.strip#usb31 img,.strip#usb32c img{object-position:0% 50%}
+  .strip .strip-acts,.strip.lift .strip-acts{position:static;width:auto;margin:0;padding:14px 16px 26px;gap:10px;justify-content:flex-start}
+  .strip-acts .pbtn{flex:1 1 auto;max-width:240px;min-height:46px;padding:0 14px;font-size:13px;letter-spacing:.05em;gap:8px;border-radius:13px}
+  .strip-acts .pbtn svg{width:14px;height:12px}
+  .strip-acts .pbtn[aria-disabled="true"]{opacity:.5}
+}
+@media (max-width:1024px){
+  /* --- шапка --- */
+  .menu-pill .mi{display:inline-flex;align-items:center;min-height:44px}
+  nav .logo{display:flex;align-items:center;min-height:44px}
+  .menu-btn{min-height:44px}
+  /* --- подвал --- */
+  .coop-form input:not([type=checkbox]){font-size:16px;min-height:48px;padding:12px 14px;max-width:none}
+  .foot-btn{font-size:16px;min-height:48px;max-width:none}
+  .agree{min-height:44px;font-size:13.5px}
+  .foot-col .fl{padding:11px 0}
+  a.fl::after{bottom:8px}
+  .foot-legal{font-size:13px;color:#5b6068}
+  .foot-legal a{padding:14px 0;margin:-14px 0}
+  /* --- читаемость мелкого текста на светлом фоне --- */
+  :root{--silver:#6b7078}
+  .kicker,.fl.current,.note b,.final .promise{color:#8f6414}
+  table th{font-size:12px!important}
+  /* --- кнопки и переключатели --- */
+  .chip{min-height:44px}
+  .pick-again,.wz-back{min-height:44px;padding-left:4px;padding-right:4px}
+  .wz-agree{min-height:44px;align-items:center}
+  .wz-agree input{margin-top:0}
+  .road-top .pbtn,.acts .pbtn{font-size:12px;letter-spacing:.03em;padding-left:12px;padding-right:12px}
+  .err-nav b{font-size:12px!important}
+  .err-nav a{display:inline-flex;align-items:center;min-height:44px}
+}
+@media (max-width:900px){
+  /* --- страница товара: подписи обзора и панель --- */
+  .t-kick{font-size:12px;letter-spacing:.3em}
+  .t-sub,.t-cap,.bar-lab{font-size:12px}
+  .t-line{font-size:14px;line-height:1.6}
+  .t-num small{font-size:12px}
+  .bar{height:26px;font-size:12px}
+  .lab,.quick dt{font-size:12px}
+  .soon{font-size:12.5px}
+  .tab{display:inline-flex;align-items:center;min-height:44px;font-size:13px}
+  .opt{min-height:44px}
+  .pbar .pbtn{min-height:44px;font-size:12px}
+  .spec-note{font-size:13px}
+  .pbar-name span{font-size:12px;overflow:hidden;text-overflow:ellipsis}
+}
 </style>
 </head>
 <body>
@@ -581,58 +648,25 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   <a class="mi" href="about.html">О компании</a>
 </div>
 
-<header class="a-hero reveal">
-  <svg class="q-mark" viewBox="0 0 360 400" aria-hidden="true">
-    <circle class="ring" cx="150" cy="150" r="119"/>
-    <circle class="spark" cx="150" cy="150" r="119"/>
-    <path class="tail" d="M254 233 L318 361 L185 292 Z"/>
-  </svg>
-  <div class="inner">
-    <p class="kicker part">Где купить</p>
-    <h1 class="part">Покупайте у&nbsp;бренда</h1>
-    <p class="sub part">Технику QOPP мы продаём сами: в официальном магазине бренда и в наших магазинах на маркетплейсах. <b>Так вы точно получаете оригинал и гарантию.</b></p>
-  </div>
-</header>
+<div class="b-top">
+  <figure class="b-photo">
+    <picture>
+      <source type="image/webp" srcset="assets/buy-hero-1200.webp 1200w, assets/buy-hero.webp 2400w" sizes="100vw">
+      <img src="assets/buy-hero.jpg" alt="" width="2400" height="1022" fetchpriority="high" decoding="async">
+    </picture>
+  </figure>
+</div>
 
 <main id="main" tabindex="-1">
-
-<!-- официальный магазин -->
-<section class="shop reveal" id="store" aria-labelledby="store-h">
-  <div class="section">
-    <p class="kicker part">Официальный магазин</p>
-    <h2 class="part" id="store-h" data-words>Напрямую у бренда</h2>
-    <div class="shop-why">
-      <div class="part"><h3>Гарантия напрямую</h3><p>Вопрос по гарантии решаете с нами, а не через площадку.</p></div>
-      <div class="part"><h3>Оплата частями</h3><p>Доступен Сплит: покупку можно разделить на несколько платежей.</p></div>
-      <div class="part"><h3>Подлинность</h3><p>Товар приходит от самого бренда.</p></div>
-    </div>
-    <div class="shop-go part">
-      <a class="b-btn" href="https://qopp.pro/?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-kit">Перейти в магазин</a>
-      <small>qopp.pro</small>
-    </div>
+<section class="b-body" id="shops">
+  <p class="b-lede">Весь ассортимент QOPP есть в официальном магазине бренда и в наших магазинах на маркетплейсах</p>
+  <h1>Где купить</h1>
+  <div class="shops">
+    <a class="shop-card" href="https://qopp.pro/?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-kit"><span><b>Магазин QOPP</b><small>Гарантия напрямую, оплата частями</small></span><span class="shop-ic q"><img src="assets/logo-mark.png" alt="" width="126" height="170"></span></a>
+    <a class="shop-card" href="https://www.ozon.ru/seller/qopp/?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-ozon"><span><b>Ozon</b></span><picture class="shop-ic"><source type="image/webp" srcset="assets/buy-ozon.webp"><img class="shop-ic" src="assets/buy-ozon.png" alt="Ozon" width="76" height="76" loading="lazy" decoding="async"></picture></a>
+    <a class="shop-card" href="https://market.yandex.ru/business--qopp/57619322?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-market"><span><b>Яндекс Маркет</b></span><picture class="shop-ic"><source type="image/webp" srcset="assets/buy-market.webp"><img class="shop-ic" src="assets/buy-market.png" alt="Яндекс Маркет" width="76" height="76" loading="lazy" decoding="async"></picture></a>
+    <a class="shop-card" href="https://www.wildberries.ru/seller/346976?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-wb"><span><b>Wildberries</b></span><picture class="shop-ic"><source type="image/webp" srcset="assets/buy-wb.webp"><img class="shop-ic" src="assets/buy-wb.png" alt="Wildberries" width="76" height="76" loading="lazy" decoding="async"></picture></a>
   </div>
-</section>
-
-<!-- маркетплейсы -->
-<section class="section reveal" id="marketplaces">
-  <div class="section-head">
-    <p class="kicker part">Маркетплейсы</p>
-    <h2 class="part">Наши магазины там, где вам привычнее</h2>
-  </div>
-  <div class="mps">
-    <div class="mp part"><h3>Ozon</h3><a class="go" href="https://www.ozon.ru/seller/qopp/?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-ozon">Перейти</a></div>
-    <div class="mp part"><h3>Wildberries</h3><a class="go" href="https://www.wildberries.ru/seller/346976?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-wb">Перейти</a></div>
-    <div class="mp part"><h3>Яндекс Маркет</h3><a class="go" href="https://market.yandex.ru/business--qopp/57619322?utm_source=qopp-site&utm_medium=referral&utm_campaign=where-to-buy" target="_blank" rel="noopener" data-goal="buy-market">Перейти</a></div>
-  </div>
-</section>
-
-<!-- перед покупкой -->
-<section class="section who reveal" id="before-buy" style="padding-top:0">
-  <div class="section-head">
-    <p class="kicker part">Перед покупкой</p>
-    <h2 class="part">Не уверены, что подойдёт?</h2>
-  </div>
-  <p class="part">Подберите память или накопитель под своё устройство за минуту на странице <a href="support.html#pick" style="color:inherit;text-underline-offset:3px">поддержки</a> или загляните в <a href="faq.html" style="color:inherit;text-underline-offset:3px">вопросы и ответы</a>. Про сроки и условия гарантии мы рассказали <a href="warranty.html" style="color:inherit;text-underline-offset:3px">отдельно</a>.</p>
 </section>
 
 </main>
@@ -655,7 +689,6 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
       <h3>Продукция</h3>
       <a class="fl" href="notebooks.html">Ноутбуки</a>
       <a class="fl" href="ram.html">Оперативная память</a>
-      <span class="fl">Внешние SSD</span>
       <a class="fl" href="ssd.html">Внутренние SSD</a>
       <a class="fl" href="microsd.html">Карты памяти</a>
       <a class="fl" href="usb.html">Флеш-накопители</a>
