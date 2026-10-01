@@ -164,6 +164,22 @@ a{color:inherit}
    Правила: зона нажатия не меньше 44 px, поля ввода от 16 px (иначе iOS увеличивает страницу при фокусе),
    текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
    Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
+/* --- логотип в шапке: белый над тёмным, чёрный над светлым, на всех ширинах (01.10.2026) ---
+   Основной способ, без скрипта: картинка логотипа прозрачна (остаётся для размера и alt), поверх лежит слой с маской
+   по форме логотипа. Слой берёт то, что под ним, обесцвечивает, инвертирует и доводит контраст до предела:
+   над светлым выходит чёрный, над тёмным белый, по каждой точке отдельно (на границе блоков логотип делится пополам).
+   Размытие перед порогом убирает рябь на фотографиях. Запасной способ для старых браузеров: js:logo-tone ставит nav.on-dark. */
+.logo img{transition:filter .3s ease}
+nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) and ((mask-image:url(x)) or (-webkit-mask-image:url(x))){
+  nav .logo{position:relative}
+  nav .logo img{opacity:0}
+  nav .logo::after{content:"";position:absolute;inset:0;pointer-events:none;transition:opacity .35s ease;
+    -webkit-mask:url(assets/logo.png) center/100% 100% no-repeat;mask:url(assets/logo.png) center/100% 100% no-repeat;
+    -webkit-backdrop-filter:blur(6px) grayscale(1) invert(1) contrast(100);backdrop-filter:blur(6px) grayscale(1) invert(1) contrast(100)}
+  nav.logo-hide .logo{opacity:1}
+  nav.logo-hide .logo::after{opacity:0}
+}
 @media (max-width:860px){
   /* --- каталог по макету адаптива: заголовок над фото, фото крупнее, кнопки под фото --- */
   .strip{display:flex;flex-direction:column}
