@@ -11,6 +11,8 @@
 <meta property="og:url" content="https://qopp.ru/legal.html">
 <link rel="canonical" href="https://qopp.ru/legal.html">
 <meta property="og:image" content="https://qopp.ru/assets/about-dark.jpg">
+<meta name="color-scheme" content="only light">
+<meta name="darkreader-lock">
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/MontserratQOPP-b-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -505,11 +507,6 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
    Правила: зона нажатия не меньше 44 px, поля ввода от 16 px (иначе iOS увеличивает страницу при фокусе),
    текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
    Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
-/* --- логотип в шапке: белый над тёмным, чёрный над светлым, на всех ширинах (01.10.2026) ---
-   Основной способ, без скрипта: картинка логотипа прозрачна (остаётся для размера и alt), поверх лежит слой с маской
-   по форме логотипа. Слой берёт то, что под ним, обесцвечивает, инвертирует и доводит контраст до предела:
-   над светлым выходит чёрный, над тёмным белый, по каждой точке отдельно (на границе блоков логотип делится пополам).
-   Размытие перед порогом убирает рябь на фотографиях. Запасной способ для старых браузеров: js:logo-tone ставит nav.on-dark. */
 /* --- ссылки на документы в подвале и в галочке согласия (с 05.10.2026) --- */
 .foot-legal a{color:inherit;text-decoration:none}
 .foot-legal a:hover,.foot-legal a:focus-visible{color:#14161c;text-decoration:underline;text-underline-offset:3px}
@@ -517,21 +514,37 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .agree a:hover{color:#14161c}
 /* --- неактивные «Узнать больше» в каталоге спрятаны, пока у линеек нет своих страниц (решение владельца 05.10.2026) --- */
 .strip-acts .pbtn[aria-disabled="true"]{display:none}
+/* --- логотип в шапке: белый над тёмным, чёрный над светлым, на всех ширинах (01.10.2026) ---
+   Основной способ, без скрипта: картинка логотипа прозрачна (остаётся для размера и alt), поверх лежит слой с маской
+   по форме логотипа. Слой берёт то, что под ним, обесцвечивает, инвертирует и доводит контраст до предела:
+   над светлым выходит чёрный, над тёмным белый, по каждой точке отдельно (на границе блоков логотип делится пополам).
+   Размытие перед порогом убирает рябь на фотографиях. Запасной способ для старых браузеров: js:logo-tone ставит nav.on-dark. */
+/* Маска вписывается в блок логотипа с сохранением пропорций (contain): на телефоне блок выше самой картинки
+   (зона нажатия 44 px), и при растягивании на весь блок логотип выходил вытянутым вверх (замечание владельца 05.10.2026). */
 .logo img{transition:filter .3s ease}
 nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
 @supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) and ((mask-image:url(x)) or (-webkit-mask-image:url(x))){
   nav .logo{position:relative}
   nav .logo img{opacity:0}
   nav .logo::after{content:"";position:absolute;inset:0;pointer-events:none;transition:opacity .35s ease;
-    -webkit-mask:url(assets/logo.png) center/100% 100% no-repeat;mask:url(assets/logo.png) center/100% 100% no-repeat;
+    -webkit-mask:url(assets/logo.png) center/contain no-repeat;mask:url(assets/logo.png) center/contain no-repeat;
     -webkit-backdrop-filter:blur(6px) grayscale(1) invert(1) contrast(100);backdrop-filter:blur(6px) grayscale(1) invert(1) contrast(100)}
   nav.logo-hide .logo{opacity:1}
   nav.logo-hide .logo::after{opacity:0}
 }
 @media (max-width:860px){
-  /* --- каталог по макету адаптива: заголовок над фото, фото крупнее, кнопки под фото --- */
+  /* --- каталог по макету адаптива: заголовок над фото, фото крупнее, кнопки под фото ---
+     Без цветных стыков (замечание владельца 05.10.2026): зоны заголовка и кнопок одного цвета с шапкой каталога,
+     а верх и низ фото мягко уходят в этот цвет. Полоса читается как одно целое, как на большом экране. */
+  /* буква Q в шапке текстовых страниц: на телефоне видна целиком, справа под кнопкой меню */
+  .q-mark{top:58px!important;right:-5%!important;transform:none!important;width:50vw!important;opacity:.9!important}
+  .c-hero,.strips,.strip,.cfx{background:#fbfbfc}
+  .strip .strip-link{position:relative;display:block}
+  .strip .strip-link::before,.strip .strip-link::after{content:"";position:absolute;left:0;right:0;height:20%;pointer-events:none;z-index:1}
+  .strip .strip-link::before{top:-1px;background:linear-gradient(#fbfbfc,rgba(251,251,252,0))}
+  .strip .strip-link::after{bottom:-1px;background:linear-gradient(rgba(251,251,252,0),#fbfbfc)}
   .strip{display:flex;flex-direction:column}
-  .strip .strip-title,.strip .strip-cap{position:static;order:-1;transform:none;width:auto;text-align:left;align-items:flex-start;padding:26px 16px 14px}
+  .strip .strip-title,.strip .strip-cap{position:static;order:-1;transform:none;width:auto;text-align:left;align-items:flex-start;padding:22px 16px 6px}
   .strip .strip-title{font-size:20px}
   .strip .et,.strip .cap-big .et{height:20px;margin:0}
   .strip .strip-cap{font-size:12px;gap:7px}
@@ -546,11 +559,16 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   .strip#sodimm img{object-position:18% 50%}
   .strip#rush img{object-position:56% 50%}
   .strip#rushplus img,.strip#usb31 img,.strip#usb32c img{object-position:0% 50%}
-  .strip .strip-acts,.strip.lift .strip-acts{position:static;width:auto;margin:0;padding:14px 16px 26px;gap:10px;justify-content:flex-start}
+  .strip .strip-acts,.strip.lift .strip-acts{position:static;width:auto;margin:0;padding:4px 16px 22px;gap:10px;justify-content:flex-start}
   .strip-acts .pbtn{flex:1 1 auto;max-width:240px;min-height:46px;padding:0 14px;font-size:13px;letter-spacing:.05em;gap:8px;border-radius:13px}
   .strip-acts .pbtn svg{width:14px;height:12px}
   .strip-acts .pbtn[aria-disabled="true"]{opacity:.5}
 }
+/* --- мобильное меню: «Оперативная память» раскрывается по нажатию (с 05.10.2026) --- */
+.mm-more{display:flex!important;align-items:center;justify-content:space-between}
+.mm-more::after{content:"›";font-size:20px;line-height:1;opacity:.7;transition:transform .25s ease}
+.mm-more.open::after{transform:rotate(90deg)}
+.mm-sub2 .mm-si2{padding-left:58px}
 @media (max-width:1024px){
   /* --- шапка --- */
   .menu-pill .mi{display:inline-flex;align-items:center;min-height:44px}
@@ -593,6 +611,16 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   .pbar-name span{font-size:12px;overflow:hidden;text-overflow:ellipsis}
 }
 </style>
+<script>
+/* мобильное меню: вложенный пункт (.mm-more) раскрывает список под собой */
+document.addEventListener('click',function(e){
+  var t=e.target.closest&&e.target.closest('.mm-more');if(!t)return;
+  var s=t.nextElementSibling,open=s.hidden;s.hidden=!open;t.classList.toggle('open',open);t.setAttribute('aria-expanded',open);
+});
+document.addEventListener('keydown',function(e){
+  if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('mm-more')){e.preventDefault();e.target.click()}
+});
+</script>
 <link rel="expect" href="#top" blocking="render">
 <style id="motion">
 /* ============ переходы между страницами (с 01.10.2026) ============
@@ -786,9 +814,11 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   <a class="mi" id="mm-catalog">Каталог</a>
   <div class="mm-sub" hidden>
     <a class="mm-si" href="ssd.html">Внутренние SSD</a>
-    <a class="mm-si" href="ram.html">Оперативная память</a>
-    <a class="mm-si mm-si2" href="udimm.html">Для персонального компьютера</a>
-    <a class="mm-si mm-si2" href="sodimm.html">Для ноутбука</a>
+    <a class="mm-si mm-more" role="button" tabindex="0" aria-expanded="false">Оперативная память</a>
+    <div class="mm-sub2" hidden>
+      <a class="mm-si mm-si2" href="udimm.html">Для персонального компьютера</a>
+      <a class="mm-si mm-si2" href="sodimm.html">Для ноутбука</a>
+    </div>
     <a class="mm-si" href="microsd.html">Карты памяти</a>
     <a class="mm-si" href="usb.html">Флеш-накопители</a>
     <a class="mm-si" href="notebooks.html">Ноутбуки</a>
@@ -1048,9 +1078,11 @@ toTop.addEventListener('click',()=>{
 });
 
 /* ============ fx: интерактив текстовых страниц (с 22 сентября 2026) ============
-   Пять приёмов, стили внедряет сам скрипт, разметке нужны только атрибуты:
+   Приёмы, стили внедряет сам скрипт, разметке нужны только атрибуты:
+   0. Буква Q в шапке страницы (svg.q-mark): фирменная Q из логотипа, по кольцу бежит золотой импульс и уходит в хвост,
+      внутри медленно вращаются деления; прокрутка разгоняет импульс. С 05.10.2026, вместо простой крутящейся дуги.
    1. Кнопка «наверх» становится буквой Q: кольцо дорисовывается по мере чтения, в конце загорается хвост.
-   2. Параллакс: [data-par] едет внутри своей рамки; [data-ghost="СЛОВО"] на секции даёт контурное слово позади, оно плывёт вбок.
+   2. Параллакс: [data-par] едет внутри своей рамки. Контурные слова на фоне (data-ghost) убраны 05.10.2026 по решению владельца.
    3. [data-words] и .pull: ключевая фраза наливается по словам, пока проходит середину экрана. Одна на страницу.
    4. Строки .vow, .chan, .mp, .pillar: золотая линия дорисовывается слева направо при наведении (родня ссылкам подвала).
    5. Если на странице три и больше section[data-ch], справа появляется указатель глав.
@@ -1076,11 +1108,20 @@ toTop.addEventListener('click',()=>{
 }
 .fx-par-wrap{overflow:hidden}
 .dark-strip .ds-photo[data-par]{height:124%;top:-12%;will-change:transform}
-[data-ghost]{position:relative;isolation:isolate}
-.fx-ghost{position:absolute;z-index:-1;left:0;top:clamp(20px,6vh,70px);white-space:nowrap;pointer-events:none;user-select:none;
-  font-family:var(--display,'Montserrat',sans-serif);font-weight:800;font-size:clamp(84px,17vw,250px);line-height:1;letter-spacing:.02em;
-  color:transparent;-webkit-text-stroke:1px rgba(20,22,28,.09);will-change:transform}
-.fx-ghost.on-dark{-webkit-text-stroke-color:rgba(244,241,234,.1)}
+/* буква Q в шапке: тело (кольцо и хвост из логотипа), деления, золотой импульс с шлейфом, вспышка хвоста */
+.q-mark.q2 .q2-body{opacity:0;animation:q2in 1.2s cubic-bezier(.22,.61,.2,1) .2s forwards}
+.q2-ring{fill:none;stroke:#14161c;stroke-width:52;opacity:.08}
+.q2-tail{fill:#14161c;opacity:.08}
+.q2-cells{fill:none;stroke:#14161c;stroke-width:30;stroke-dasharray:3 12.577;opacity:.09;transform-origin:150px 150px;animation:q2back 90s linear infinite}
+.q2-orbit{transform-origin:150px 150px;opacity:0;animation:q2spin 7s linear 1s infinite,q2show .8s ease 1s forwards}
+.q2-orbit circle{fill:none;stroke:#e3a94f;stroke-width:52}
+.q2-glow{fill:#e3a94f;opacity:0;animation:q2flash 7s linear 1s infinite}
+@keyframes q2in{to{opacity:1}}
+@keyframes q2show{to{opacity:1}}
+@keyframes q2spin{from{transform:rotate(-20deg)}to{transform:rotate(340deg)}}
+@keyframes q2back{to{transform:rotate(-360deg)}}
+@keyframes q2flash{0%{opacity:.95}16%{opacity:0}97%{opacity:0}100%{opacity:.95}}
+@media (prefers-reduced-motion:reduce){.q-mark.q2 .q2-body{opacity:1}.q2-orbit,.q2-glow{display:none}}
 .fx-w{transition:opacity .25s linear}
 .fx-ch{position:fixed;z-index:57;left:auto;right:clamp(14px,1.6vw,26px);top:50%;bottom:auto;width:auto;transform:translateY(-50%);display:none;flex-direction:column;align-items:stretch;gap:2px;
   opacity:0;pointer-events:none;transition:opacity .4s ease}
@@ -1099,6 +1140,26 @@ toTop.addEventListener('click',()=>{
 `;
   document.head.appendChild(st);
 
+  /* ---- 0. буква Q в шапке страницы ----
+     Геометрия хвоста взята из вектора логотипа (те же доли кольца, что в шрифте Montserrat QOPP).
+     Импульс: три дуги одной головой, каждая длиннее и прозрачнее предыдущей. Старт анимации выставлен так,
+     что голова проходит основание хвоста в начале цикла, в этот момент хвост вспыхивает. */
+  const qm=document.querySelector('svg.q-mark');
+  let qAn=[],qV=0,qRaf=0,qY=scrollY;
+  if(qm){
+    const arc=(len,op)=>'<circle cx="150" cy="150" r="119" stroke-dasharray="'+len+' '+(747.7-len).toFixed(1)+'" stroke-dashoffset="'+(len-150)+'" opacity="'+op+'"/>';
+    const tail='M260.9 246.2 L309.2 336.3 L214 281.5 L205 262 L246 236 Z';
+    qm.classList.add('q2');
+    qm.innerHTML='<g class="q2-body"><circle class="q2-ring" cx="150" cy="150" r="119"/><path class="q2-tail" d="'+tail+'"/><circle class="q2-cells" cx="150" cy="150" r="119"/></g>'+
+      '<path class="q2-glow" d="'+tail+'"/><g class="q2-orbit">'+arc(150,.16)+arc(104,.3)+arc(58,.95)+'</g>';
+    if(!RM.matches&&qm.getAnimations){
+      setTimeout(()=>{try{qAn=qm.getAnimations({subtree:true}).filter(a=>/q2spin|q2flash|q2back/.test(a.animationName))}catch(e){}},1200);
+      /* прокрутка разгоняет импульс, потом он сам возвращается к обычному ходу */
+      const spin=()=>{qRaf=0;const r=1+qV;qAn.forEach(a=>{a.playbackRate=r});qV*=.93;if(qV>.03)qRaf=requestAnimationFrame(spin);else{qV=0;qAn.forEach(a=>{a.playbackRate=1})}};
+      addEventListener('scroll',()=>{const y=scrollY;qV=Math.min(7,qV+Math.abs(y-qY)/60);qY=y;if(!qRaf&&qAn.length)qRaf=requestAnimationFrame(spin)},{passive:true});
+    }
+  }
+
   /* ---- 1. Q вокруг кнопки «наверх» ---- */
   const tt=document.getElementById('to-top');
   let qP=null,qS=null;const LEN=2*Math.PI*27;
@@ -1111,11 +1172,6 @@ toTop.addEventListener('click',()=>{
 
   /* ---- 2. параллакс ---- */
   const pars=[...document.querySelectorAll('[data-par]')].map(el=>({el,box:el.closest('section,header')||el.parentElement,amp:parseFloat(el.dataset.par)||9,live:false}));
-  const ghosts=[...document.querySelectorAll('[data-ghost]')].map(sec=>{
-    const g=document.createElement('div');g.className='fx-ghost';g.textContent=sec.dataset.ghost;g.setAttribute('aria-hidden','true');
-    if(sec.dataset.ghostDark!==undefined)g.classList.add('on-dark');
-    sec.style.overflow='hidden';sec.prepend(g);return {el:g,box:sec,live:false};
-  });
 
   /* ---- 3. фраза по словам ---- */
   const phrases=RM.matches?[]:[...document.querySelectorAll('[data-words],.pull')].slice(0,2).map(el=>{
@@ -1140,7 +1196,7 @@ toTop.addEventListener('click',()=>{
 
   /* видимость: считаем только то, что на экране */
   const io=new IntersectionObserver(es=>es.forEach(e=>{const o=e.target.__fx;if(o)o.live=e.isIntersecting}),{rootMargin:'20% 0px'});
-  [...pars,...ghosts].forEach(o=>{o.box.__fx=o;io.observe(o.box)});
+  pars.forEach(o=>{o.box.__fx=o;io.observe(o.box)});
   phrases.forEach(o=>{o.el.__fx=o;io.observe(o.el)});
 
   let raf=0;
@@ -1151,8 +1207,6 @@ toTop.addEventListener('click',()=>{
     if(!RM.matches){
       for(const o of pars){if(!o.live)continue;const r=o.box.getBoundingClientRect();const k=clamp((r.top+r.height/2-vh/2)/(vh/2+r.height/2),-1,1);
         o.el.style.transform='translate3d(0,'+(k*o.amp*(small?.5:1)).toFixed(2)+'%,0)'}
-      for(const o of ghosts){if(!o.live)continue;const r=o.box.getBoundingClientRect();const k=clamp((vh-r.top)/(vh+r.height),0,1);
-        o.el.style.transform='translate3d('+((6-k*(small?14:26))).toFixed(2)+'%,0,0)'}
     }
     for(const o of phrases){if(!o.live)continue;const r=o.el.getBoundingClientRect();const k=clamp((vh*.88-r.top)/(vh*.42),0,1),n=o.spans.length;
       o.spans.forEach((s,i)=>{s.style.opacity=(0.2+0.8*clamp(k*(n+3)-i,0,1)/1).toFixed(2)})}

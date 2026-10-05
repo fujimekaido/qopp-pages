@@ -11,6 +11,8 @@
 <meta property="og:url" content="https://qopp.ru/microsd.html">
 <link rel="canonical" href="https://qopp.ru/microsd.html">
 <meta property="og:image" content="https://qopp.ru/assets/microsd-hero.png">
+<meta name="color-scheme" content="only light">
+<meta name="darkreader-lock">
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/MontserratQOPP-b-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -497,11 +499,6 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
    Правила: зона нажатия не меньше 44 px, поля ввода от 16 px (иначе iOS увеличивает страницу при фокусе),
    текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
    Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
-/* --- логотип в шапке: белый над тёмным, чёрный над светлым, на всех ширинах (01.10.2026) ---
-   Основной способ, без скрипта: картинка логотипа прозрачна (остаётся для размера и alt), поверх лежит слой с маской
-   по форме логотипа. Слой берёт то, что под ним, обесцвечивает, инвертирует и доводит контраст до предела:
-   над светлым выходит чёрный, над тёмным белый, по каждой точке отдельно (на границе блоков логотип делится пополам).
-   Размытие перед порогом убирает рябь на фотографиях. Запасной способ для старых браузеров: js:logo-tone ставит nav.on-dark. */
 /* --- ссылки на документы в подвале и в галочке согласия (с 05.10.2026) --- */
 .foot-legal a{color:inherit;text-decoration:none}
 .foot-legal a:hover,.foot-legal a:focus-visible{color:#14161c;text-decoration:underline;text-underline-offset:3px}
@@ -509,21 +506,37 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .agree a:hover{color:#14161c}
 /* --- неактивные «Узнать больше» в каталоге спрятаны, пока у линеек нет своих страниц (решение владельца 05.10.2026) --- */
 .strip-acts .pbtn[aria-disabled="true"]{display:none}
+/* --- логотип в шапке: белый над тёмным, чёрный над светлым, на всех ширинах (01.10.2026) ---
+   Основной способ, без скрипта: картинка логотипа прозрачна (остаётся для размера и alt), поверх лежит слой с маской
+   по форме логотипа. Слой берёт то, что под ним, обесцвечивает, инвертирует и доводит контраст до предела:
+   над светлым выходит чёрный, над тёмным белый, по каждой точке отдельно (на границе блоков логотип делится пополам).
+   Размытие перед порогом убирает рябь на фотографиях. Запасной способ для старых браузеров: js:logo-tone ставит nav.on-dark. */
+/* Маска вписывается в блок логотипа с сохранением пропорций (contain): на телефоне блок выше самой картинки
+   (зона нажатия 44 px), и при растягивании на весь блок логотип выходил вытянутым вверх (замечание владельца 05.10.2026). */
 .logo img{transition:filter .3s ease}
 nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
 @supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) and ((mask-image:url(x)) or (-webkit-mask-image:url(x))){
   nav .logo{position:relative}
   nav .logo img{opacity:0}
   nav .logo::after{content:"";position:absolute;inset:0;pointer-events:none;transition:opacity .35s ease;
-    -webkit-mask:url(assets/logo.png) center/100% 100% no-repeat;mask:url(assets/logo.png) center/100% 100% no-repeat;
+    -webkit-mask:url(assets/logo.png) center/contain no-repeat;mask:url(assets/logo.png) center/contain no-repeat;
     -webkit-backdrop-filter:blur(6px) grayscale(1) invert(1) contrast(100);backdrop-filter:blur(6px) grayscale(1) invert(1) contrast(100)}
   nav.logo-hide .logo{opacity:1}
   nav.logo-hide .logo::after{opacity:0}
 }
 @media (max-width:860px){
-  /* --- каталог по макету адаптива: заголовок над фото, фото крупнее, кнопки под фото --- */
+  /* --- каталог по макету адаптива: заголовок над фото, фото крупнее, кнопки под фото ---
+     Без цветных стыков (замечание владельца 05.10.2026): зоны заголовка и кнопок одного цвета с шапкой каталога,
+     а верх и низ фото мягко уходят в этот цвет. Полоса читается как одно целое, как на большом экране. */
+  /* буква Q в шапке текстовых страниц: на телефоне видна целиком, справа под кнопкой меню */
+  .q-mark{top:58px!important;right:-5%!important;transform:none!important;width:50vw!important;opacity:.9!important}
+  .c-hero,.strips,.strip,.cfx{background:#fbfbfc}
+  .strip .strip-link{position:relative;display:block}
+  .strip .strip-link::before,.strip .strip-link::after{content:"";position:absolute;left:0;right:0;height:20%;pointer-events:none;z-index:1}
+  .strip .strip-link::before{top:-1px;background:linear-gradient(#fbfbfc,rgba(251,251,252,0))}
+  .strip .strip-link::after{bottom:-1px;background:linear-gradient(rgba(251,251,252,0),#fbfbfc)}
   .strip{display:flex;flex-direction:column}
-  .strip .strip-title,.strip .strip-cap{position:static;order:-1;transform:none;width:auto;text-align:left;align-items:flex-start;padding:26px 16px 14px}
+  .strip .strip-title,.strip .strip-cap{position:static;order:-1;transform:none;width:auto;text-align:left;align-items:flex-start;padding:22px 16px 6px}
   .strip .strip-title{font-size:20px}
   .strip .et,.strip .cap-big .et{height:20px;margin:0}
   .strip .strip-cap{font-size:12px;gap:7px}
@@ -538,11 +551,16 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   .strip#sodimm img{object-position:18% 50%}
   .strip#rush img{object-position:56% 50%}
   .strip#rushplus img,.strip#usb31 img,.strip#usb32c img{object-position:0% 50%}
-  .strip .strip-acts,.strip.lift .strip-acts{position:static;width:auto;margin:0;padding:14px 16px 26px;gap:10px;justify-content:flex-start}
+  .strip .strip-acts,.strip.lift .strip-acts{position:static;width:auto;margin:0;padding:4px 16px 22px;gap:10px;justify-content:flex-start}
   .strip-acts .pbtn{flex:1 1 auto;max-width:240px;min-height:46px;padding:0 14px;font-size:13px;letter-spacing:.05em;gap:8px;border-radius:13px}
   .strip-acts .pbtn svg{width:14px;height:12px}
   .strip-acts .pbtn[aria-disabled="true"]{opacity:.5}
 }
+/* --- мобильное меню: «Оперативная память» раскрывается по нажатию (с 05.10.2026) --- */
+.mm-more{display:flex!important;align-items:center;justify-content:space-between}
+.mm-more::after{content:"›";font-size:20px;line-height:1;opacity:.7;transition:transform .25s ease}
+.mm-more.open::after{transform:rotate(90deg)}
+.mm-sub2 .mm-si2{padding-left:58px}
 @media (max-width:1024px){
   /* --- шапка --- */
   .menu-pill .mi{display:inline-flex;align-items:center;min-height:44px}
@@ -585,6 +603,16 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   .pbar-name span{font-size:12px;overflow:hidden;text-overflow:ellipsis}
 }
 </style>
+<script>
+/* мобильное меню: вложенный пункт (.mm-more) раскрывает список под собой */
+document.addEventListener('click',function(e){
+  var t=e.target.closest&&e.target.closest('.mm-more');if(!t)return;
+  var s=t.nextElementSibling,open=s.hidden;s.hidden=!open;t.classList.toggle('open',open);t.setAttribute('aria-expanded',open);
+});
+document.addEventListener('keydown',function(e){
+  if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('mm-more')){e.preventDefault();e.target.click()}
+});
+</script>
 <link rel="expect" href="#top" blocking="render">
 <style id="motion">
 /* ============ переходы между страницами (с 01.10.2026) ============
@@ -778,9 +806,11 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   <a class="mi" id="mm-catalog">Каталог</a>
   <div class="mm-sub" hidden>
     <a class="mm-si" href="ssd.html">Внутренние SSD</a>
-    <a class="mm-si" href="ram.html">Оперативная память</a>
-    <a class="mm-si mm-si2" href="udimm.html">Для персонального компьютера</a>
-    <a class="mm-si mm-si2" href="sodimm.html">Для ноутбука</a>
+    <a class="mm-si mm-more" role="button" tabindex="0" aria-expanded="false">Оперативная память</a>
+    <div class="mm-sub2" hidden>
+      <a class="mm-si mm-si2" href="udimm.html">Для персонального компьютера</a>
+      <a class="mm-si mm-si2" href="sodimm.html">Для ноутбука</a>
+    </div>
     <a class="mm-si" href="microsd.html" aria-current="page">Карты памяти</a>
     <a class="mm-si" href="usb.html">Флеш-накопители</a>
     <a class="mm-si" href="notebooks.html">Ноутбуки</a>
