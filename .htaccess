@@ -1,0 +1,30 @@
+# QOPP: настройки для хостинга на Apache (Reg.ru). Файл лежит в site/ и правится руками, build.py его не трогает.
+# На GitHub Pages он не действует.
+
+# своя страница «не найдено» (на GitHub Pages она подхватывается сама, здесь её нужно назвать)
+ErrorDocument 404 /404.html
+
+AddDefaultCharset UTF-8
+Options -Indexes
+
+# Переход на https и адрес без www. ВКЛЮЧАТЬ ТОЛЬКО ПОСЛЕ установки SSL-сертификата на домен,
+# иначе сайт перестанет открываться. Чтобы включить, уберите решётки в начале шести строк ниже.
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTPS} !=on [OR]
+#   RewriteCond %{HTTP_HOST} ^www\. [NC]
+#   RewriteRule ^ https://qopp.ru%{REQUEST_URI} [R=301,L]
+# </IfModule>
+
+# Страницы браузер проверяет каждый раз (выкладка видна сразу), картинки держит сутки, видео и шрифты месяц:
+# у нового фильма всегда новое имя файла, а картинку иногда заменяют под тем же именем
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 0 seconds"
+  ExpiresByType image/webp "access plus 1 day"
+  ExpiresByType image/jpeg "access plus 1 day"
+  ExpiresByType image/png "access plus 1 day"
+  ExpiresByType image/svg+xml "access plus 1 day"
+  ExpiresByType video/mp4 "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 30 days"
+</IfModule>
