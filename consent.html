@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Внутренние SSD. QOPP</title>
-<meta name="description" content="Внутренние SSD QOPP: SATA 2.5 и M2, NVMe PCI-E 3.0 и PCI-E 4.0. Линейки Q500S, Q600S, Q600MS, Q2000MN, Q4000MN и Q7000MN.">
+<title>Согласие на обработку персональных данных. QOPP</title>
+<meta name="description" content="Текст согласия на обработку персональных данных, которое посетитель даёт в формах сайта QOPP.">
 <meta name="theme-color" content="#f6f6f7">
-<meta property="og:title" content="Внутренние SSD. QOPP">
-<meta property="og:description" content="SATA, PCI-E 3.0 и PCI-E 4.0: вся линейка внутренних накопителей QOPP">
-<meta property="og:url" content="https://qopp.ru/ssd.html">
-<link rel="canonical" href="https://qopp.ru/ssd.html">
-<meta property="og:image" content="https://qopp.ru/assets/ssd-hero.png">
+<meta property="og:title" content="Согласие на обработку персональных данных. QOPP">
+<meta property="og:description" content="Текст согласия на обработку персональных данных, которое посетитель даёт в формах сайта QOPP.">
+<meta property="og:url" content="https://qopp.ru/consent.html">
+<link rel="canonical" href="https://qopp.ru/consent.html">
+<meta property="og:image" content="https://qopp.ru/assets/about-dark.jpg">
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -24,7 +24,6 @@ img,video,canvas,picture{-webkit-user-drag:none;user-select:none;-webkit-user-se
 (()=>{const M='img,video,canvas,picture,.poster';
 addEventListener('contextmenu',e=>{if(e.target.closest&&e.target.closest(M))e.preventDefault()});
 addEventListener('dragstart',e=>{if(e.target.closest&&e.target.closest(M))e.preventDefault()});})();</script>
-<link rel="preload" as="image" href="assets/ssd-hero.webp" type="image/webp" fetchpriority="high">
 <style>
 /* фирменный Montserrat, свой хостинг: переменный шрифт Google, все веса 100-900, прямой и курсив */
 @font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-var-latin.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
@@ -50,7 +49,6 @@ addEventListener('dragstart',e=>{if(e.target.closest&&e.target.closest(M))e.prev
   --display:'Montserrat',sans-serif;
   --body:'Montserrat',sans-serif;
   --mono:'Montserrat',sans-serif;
-  --display-lat:'Michroma','Montserrat',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 /* alt-текст не мелькает, пока картинка грузится; для дикторов и поиска он остаётся */
@@ -66,7 +64,7 @@ body{
 }
 body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused!important}
 
-/* ============ environment layer: светлая пыль ============ */
+/* ============ environment layer ============ */
 .env{position:fixed;inset:0;z-index:0;pointer-events:none}
 .env .dust{
   position:absolute;inset:-20%;
@@ -148,7 +146,6 @@ nav.logo-hide .logo{opacity:0;transform:translateY(-10px);pointer-events:none}
 .cd-si:hover{background:#f4f4f6;color:#14161c}
 .cd-si.current{color:#b8863b}
 .mm-si2{padding-left:58px;font-size:14.5px;color:#5b6068}
-.cd-item.current{color:var(--accent-deep)}
 @media (min-width:721px) and (hover:hover){.cat-drop{display:flex}}
 .mm-sub{background:#f6f6f7}
 .mm-si{display:block;padding:14px 24px 14px 40px;font-size:15.5px;font-weight:500;color:#3c4046;cursor:pointer;text-decoration:none}
@@ -181,79 +178,189 @@ nav.solid .menu-pill{background:rgba(255,255,255,.82);box-shadow:0 8px 30px rgba
 a.mi{cursor:pointer;text-decoration:none}
 .mi.active{color:var(--ink);background:var(--accent-muted)}
 
-/* ============ вертикальная подпись хиро: по макету дизайнера ============ */
-/* ось на левом крае логотипа, читается снизу вверх, линия над текстом, низ на 6% выше низа хиро */
-.side-label{
-  position:absolute;left:clamp(20px,4vw,56px);bottom:6%;z-index:5;
-  transform:rotate(180deg);
-  writing-mode:vertical-rl;
-  font-family:var(--mono);font-size:clamp(12px,1.02vw,15px);font-weight:600;
-  letter-spacing:.22em;text-transform:uppercase;line-height:1.6;
-  color:var(--ink);white-space:nowrap;
-  display:flex;align-items:center;gap:clamp(14px,1.8vw,26px);
-}
-.side-label::after{content:"";width:1px;height:clamp(60px,7.6vw,110px);background:var(--ink);opacity:.45}
-/* под шапкой подпись гаснет (класс under ставит js:side-label) */
-.reveal.in .side-label.part.under{opacity:0;transition:opacity .35s var(--ease)}
-/* reveal не должен снимать поворот подписи */
-.reveal .side-label.part{transform:rotate(180deg) translateY(-22px)}
-.reveal.in .side-label.part{transform:rotate(180deg)}
-@media (max-width:860px){
-  .side-label{position:static;transform:none;writing-mode:horizontal-tb;letter-spacing:.22em;justify-content:center;padding:10px 0 8px;font-size:12px}
-  .side-label::after{display:none}
-  .reveal .side-label.part,.reveal.in .side-label.part{transform:none}
-}
-
-/* ============ hero: полоса во всю ширину, встык с SATA ============ */
-.c-hero{
+/* ============ hero ============ */
+.a-hero{
   position:relative;z-index:1;
-  padding:84px 0 0;
-  background:#fbfbfc;
+  min-height:86vh;min-height:86svh;
+  display:flex;align-items:center;
+  padding:clamp(110px,16vh,170px) clamp(20px,6vw,80px) clamp(50px,8vh,90px);
+  background:linear-gradient(180deg,#fbfbfc 0%,var(--canvas) 100%);
+  overflow:hidden;
 }
-.c-hero .shot{width:100%}
+.a-hero .inner{position:relative;max-width:1160px;margin:0 auto;width:100%}
+.kicker{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-deep)}
+.a-hero h1{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(38px,6.4vw,88px);letter-spacing:.01em;line-height:1.04;
+  margin-top:20px;max-width:12ch;
+}
+.a-hero .sub{
+  color:var(--muted);font-size:clamp(15px,1.7vw,19px);
+  margin-top:26px;max-width:52ch;
+}
+.a-hero .sub b{color:var(--ink);font-weight:600}
+/* фирменная Q: рисуется при загрузке */
+.q-mark{
+  position:absolute;right:-2%;top:50%;transform:translateY(-52%);
+  width:clamp(260px,34vw,520px);height:auto;pointer-events:none;
+}
+.q-mark .ring{
+  fill:none;stroke:var(--ink);stroke-width:52;opacity:.08;
+  stroke-dasharray:748;stroke-dashoffset:748;
+  animation:qdraw 2.2s var(--ease) .3s forwards;
+}
+.q-mark .tail{fill:var(--ink);opacity:0;animation:qtail .8s var(--ease) 2s forwards}
+.q-mark .spark{
+  fill:none;stroke:var(--accent);stroke-width:52;opacity:.9;
+  stroke-dasharray:64 684;stroke-dashoffset:748;
+  animation:qspark 7s linear 2.6s infinite;
+}
+@keyframes qdraw{to{stroke-dashoffset:0}}
+@keyframes qtail{to{opacity:.08}}
+@keyframes qspark{from{stroke-dashoffset:816}to{stroke-dashoffset:0}}
 
-/* ============ изображения ============ */
-.shot{position:relative;display:block}
-.shot img{width:100%;height:auto;display:block}
+/* ============ layout ============ */
+main{position:relative;z-index:1}
+.section{max-width:1160px;margin:0 auto;padding:clamp(70px,10vh,120px) clamp(20px,4vw,56px)}
+.section-head{max-width:680px;margin-bottom:clamp(28px,5vh,46px)}
+.section-head h2{font-family:var(--display);font-weight:700;font-size:clamp(27px,3.6vw,44px);letter-spacing:.01em;margin-top:14px;line-height:1.18}
+.section-head .lede{color:var(--muted);margin-top:14px}
 
-/* ============ полосы секций: встык, картинка и есть кнопка ============ */
-.strips{display:flex;flex-direction:column}
-.strip{position:relative;width:100%;overflow:hidden}
-.strip img{width:100%;height:auto;display:block}
-.strip-link{display:block}
-.strip-acts{
-  position:absolute;left:0;right:0;bottom:5.5%;z-index:2;
-  display:flex;gap:10px;justify-content:center;width:max-content;margin:0 auto;
+/* reveal */
+.reveal .part{opacity:0;transform:translateY(22px)}
+.reveal.in .part{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in .part:nth-child(2){transition-delay:.09s}
+.reveal.in .part:nth-child(3){transition-delay:.18s}
+.reveal.in .part:nth-child(4){transition-delay:.27s}
+.reveal.in .part:nth-child(5){transition-delay:.36s}
+.reveal.in .part:nth-child(6){transition-delay:.45s}
+.reveal.done .part,.reveal.done .part:nth-child(2),.reveal.done .part:nth-child(3),.reveal.done .part:nth-child(4),.reveal.done .part:nth-child(5),.reveal.done .part:nth-child(6){transition-delay:0s}
+
+/* ============ кто мы ============ */
+.who p{color:var(--muted);max-width:72ch}
+.who p b{color:var(--ink);font-weight:600}
+.who p+p{margin-top:16px}
+.who p:first-of-type{color:var(--ink);font-size:clamp(17px,2vw,21px);line-height:1.6}
+/* врезка: вес и воздух вместо цветной полоски у края */
+.pull{
+  margin-top:40px;max-width:22ch;
+  font-family:var(--display);font-weight:700;font-size:clamp(21px,2.9vw,34px);line-height:1.28;
 }
-.strip.lift .strip-acts{bottom:7%}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-/* заголовки поверх чистых фото-полос, в стиле макета */
-.strip-title{
-  position:absolute;z-index:2;pointer-events:none;
-  font-family:var(--display-lat);font-weight:400;color:var(--ink);
-  letter-spacing:.2em;line-height:1;font-size:clamp(15px,3.2vw,72px);
+.pull::after{content:"";display:block;width:52px;height:2px;background:var(--ink);margin-top:20px}
+
+/* ============ три обещания ============ */
+.vows{display:flex;flex-direction:column}
+.vow{
+  display:grid;grid-template-columns:minmax(160px,26%) 1fr;
+  gap:clamp(14px,3vw,40px);align-items:center;
+  padding:clamp(18px,2.6vh,28px) 0;border-top:1px solid var(--hairline);
 }
-.st-sata{top:12%;right:4%}
-.st-n3{top:32%;left:4.2%}
-.st-n4{top:28%;left:4.2%}
-/* кириллические заголовки полос: капс, Montserrat 500, по толщине штриха как Michroma у латинских */
-.st-all{top:8%;left:0;right:0;text-align:center;font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:clamp(16px,3vw,66px)}
-.ff-info{display:none!important;
-  position:absolute;left:0;right:0;bottom:19%;z-index:2;pointer-events:none;
-  display:flex;gap:10px;justify-content:center;width:max-content;margin:0 auto;
+.vow:last-child{border-bottom:1px solid var(--hairline)}
+
+.vow h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,3vw,38px);line-height:1.05;letter-spacing:.01em}
+.vow p{color:var(--muted);font-size:16px;line-height:1.55;max-width:56ch}
+
+/* ============ тёмная полоса ============ */
+.dark-strip{
+  position:relative;z-index:1;overflow:hidden;
+  background:#0b0a08;
+  padding:clamp(90px,16vh,180px) clamp(20px,6vw,80px);
 }
-.ff-tag{
-  font-family:var(--mono);font-size:clamp(7px,.85vw,13px);font-weight:600;letter-spacing:.22em;
-  color:var(--muted);background:rgba(255,255,255,.55);border:1px solid var(--hairline);
-  border-radius:6px;padding:.45em 2.4em;
+.ds-photo{
+  position:absolute;right:0;top:0;height:100%;width:64%;
+  object-fit:cover;object-position:center;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 38%);
+  mask-image:linear-gradient(to right,transparent,#000 38%);
 }
-/* латинские заголовки: контуры Ethnocentric в SVG (см. САЙТ РЕФЫ/Ethnocentric/make_titles.py), высота = высота прописной в макете */
-.et{display:block;height:clamp(9px,2.32vw,52px);width:auto;overflow:visible}
-.et-title{line-height:0;letter-spacing:0;font-size:0}
-.cap-big .et{height:clamp(8px,1.53vw,34px);margin:0 auto}
-.st-u2.et-title{display:flex;flex-direction:column;align-items:center;gap:clamp(4px,.74vw,17px);width:auto}
-.st-ddr .et{margin:0 auto}
-.cap-line{white-space:nowrap}
+.dark-strip .inner{position:relative;max-width:1160px;margin:0 auto}
+@media (max-width:860px){
+  .ds-photo{width:100%;opacity:.42;-webkit-mask-image:none;mask-image:none}
+}
+.dark-strip .kicker{color:var(--accent)}
+.dark-strip h2{
+  font-family:var(--display);font-weight:700;color:#f2f0ea;
+  font-size:clamp(24px,3.4vw,42px);line-height:1.22;margin-top:14px;max-width:20ch;
+  text-shadow:0 2px 18px rgba(0,0,0,.6);
+}
+.dark-strip p{color:rgba(242,240,234,.75);margin-top:14px;max-width:44ch;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+
+/* ============ философия ============ */
+.philo{background:#fff}
+.philo-q{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(26px,4.2vw,54px);line-height:1.12;letter-spacing:.01em;max-width:16ch;
+}
+.philo-q em{font-style:normal;color:var(--accent-deep)}
+.philo .note{color:var(--muted);margin-top:18px;max-width:64ch}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:clamp(30px,5vh,46px)}
+.pillar{border-top:2px solid var(--ink);padding-top:18px}
+.pillar h3{font-family:var(--display);font-weight:700;font-size:19px}
+.pillar p{color:var(--muted);font-size:15px;margin-top:10px}
+
+/* ============ ценности ============ */
+.val-group{margin-top:clamp(26px,4vh,40px)}
+.val-group>h3{
+  font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--silver);padding-bottom:12px;border-bottom:1px solid var(--hairline);margin-bottom:16px;
+}
+.vals{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.val{
+  background:#fff;border:1px solid var(--hairline);border-radius:18px;
+  padding:clamp(22px,2.6vw,32px);
+  transition:border-color .35s var(--ease);
+}
+/* движение внутри карточки, а не карточки целиком */
+.val:hover{border-color:rgba(20,22,28,.34)}
+.val h3{transition:transform .35s var(--ease)}
+.val:hover h3{transform:translateX(6px)}
+.val .tag{transition:color .35s var(--ease)}
+.val:hover .tag{color:var(--ink)}
+.val h3{font-family:var(--display);font-weight:700;font-size:20px;margin-top:10px}
+.val p{color:var(--muted);font-size:14.5px;margin-top:10px}
+
+/* ============ цифры ============ */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--hairline);border-radius:18px;overflow:hidden}
+.stat{padding:clamp(20px,2.4vw,30px)}
+.stat+.stat{box-shadow:inset 1px 0 0 var(--hairline)}
+.stat .num{font-family:var(--display);font-weight:800;color:var(--accent-deep);font-size:clamp(24px,2.6vw,34px);line-height:1.1}
+.stat .lbl{font-weight:600;margin-top:8px;font-size:15px}
+.stat .fine{color:var(--muted);font-size:13.5px;margin-top:6px}
+
+/* ============ доказательства ============ */
+.proofs{columns:2;column-gap:clamp(30px,5vw,74px)}
+.proof{break-inside:avoid;padding:0 0 clamp(16px,2.4vh,24px)}
+.proof h3{font-family:var(--display);font-weight:700;font-size:16.5px;letter-spacing:.01em}
+.proof h3::after{content:"";display:block;width:26px;height:2px;background:var(--ink);margin:9px 0 10px}
+.proof p{color:var(--muted);font-size:14.5px}
+
+/* ============ люди ============ */
+.people{
+  position:relative;overflow:hidden;
+  background:#14161c;color:#f2f0ea;border:1px solid rgba(165,171,183,.2);border-radius:22px;
+  padding:clamp(30px,4.5vw,54px);
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center;
+}
+.people::after{
+  content:"";position:absolute;right:-6%;top:50%;transform:translateY(-50%);
+  width:min(46%,420px);aspect-ratio:1;pointer-events:none;
+  background:radial-gradient(circle at 50% 50%,rgba(227,169,79,.16),transparent 62%);
+}
+.people>*{position:relative;z-index:2}
+.people h2{font-family:var(--display);font-weight:700;font-size:clamp(24px,3vw,36px);line-height:1.2}
+.people .lede{color:#a5abb7;margin-top:14px}
+.teams{list-style:none}
+.teams li{display:flex;gap:16px;align-items:baseline;padding:14px 0}
+.teams li+li{border-top:1px solid rgba(165,171,183,.2)}
+.teams .where{flex:none;width:110px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.teams p{color:#a5abb7;font-size:15px}
+.one-rule{margin-top:20px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+
+/* ============ финал ============ */
+.final{text-align:center}
+.final h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,52px);line-height:1.12}
+.final .lede{color:var(--muted);margin-top:16px;max-width:52ch;margin-left:auto;margin-right:auto}
+.final .promise{margin-top:26px;font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep)}
+.act-row{display:flex;gap:12px;justify-content:center;margin-top:30px;flex-wrap:wrap}
 /* ============ кнопки: графит под стеклом, золотая обводка ============ */
 /* ============ кнопки: жидкое стекло, графит и синий ============ */
 .pbtn{
@@ -332,43 +439,10 @@ a.mi{cursor:pointer;text-decoration:none}
     inset 0 0 28px rgba(227,169,79,.16),
     0 16px 34px rgba(227,169,79,.28);
 }
-/* покупка: заливка фирменным золотом #b8863b, как kicker на «О компании» */
-.pbtn-buy{
-  color:#14161c;
-  border-color:rgba(255,226,170,.55);
-  background:
-    linear-gradient(168deg,rgba(214,166,88,.92),rgba(184,134,59,.96) 64%),
-    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.4),transparent 58%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.5),
-    inset 0 -1px 0 rgba(90,60,14,.5),
-    inset 0 0 26px rgba(255,255,255,.1),
-    0 10px 26px rgba(184,134,59,.3);
-}
-.pbtn-buy:hover{
-  border-color:rgba(255,236,196,.85);
-  background:
-    linear-gradient(168deg,rgba(226,180,104,.96),rgba(196,146,70,.98) 64%),
-    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.48),transparent 58%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.58),
-    inset 0 -1px 0 rgba(90,60,14,.55),
-    inset 0 0 30px rgba(255,255,255,.14),
-    0 16px 36px rgba(184,134,59,.42);
-}
 .pbtn[aria-disabled="true"]{cursor:default}
 @media (prefers-reduced-motion: reduce){.pbtn::before{display:none}}
 
-/* ============ reveal ============ */
-.reveal .part{opacity:0;transform:translateY(22px)}
-.reveal.in .part{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.reveal.in .part:nth-child(2){transition-delay:.09s}
-.reveal.in .part:nth-child(3){transition-delay:.18s}
-.reveal.in .part:nth-child(4){transition-delay:.27s}
-.reveal.in .part:nth-child(5){transition-delay:.36s}
-.reveal.done .part,.reveal.done .part:nth-child(2),.reveal.done .part:nth-child(3),.reveal.done .part:nth-child(4),.reveal.done .part:nth-child(5){transition-delay:0s}
-
-/* ============ подвал, как на главной ============ */
+/* ============ подвал ============ */
 .site-footer{background:var(--canvas);color:var(--ink);position:relative;z-index:2;padding:clamp(40px,7vh,84px) clamp(20px,5vw,72px) 28px;border-top:1px solid var(--hairline)}
 .foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:clamp(28px,5vw,80px);max-width:1200px;margin:0 auto}
 .foot-col h3{font-size:15px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;margin-bottom:18px}
@@ -393,11 +467,17 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 
 /* ============ mobile ============ */
 @media (max-width:860px){
-  .c-hero{padding-top:64px}
-  /* кнопки остаются на картинке, совсем компактные */
-  .strip-acts{gap:5px;bottom:5%}
-  .pbtn{font-size:9px;padding:4px 10px;gap:4px;border-radius:4px}
-  .pbtn svg{width:9px;height:8px}
+  .pillars,.vals{grid-template-columns:1fr}
+  .proofs{columns:1}
+  .vow{grid-template-columns:1fr;gap:8px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat+.stat{box-shadow:none}
+  .stat:nth-child(n+2){box-shadow:inset 0 1px 0 var(--hairline)}
+  .stat:nth-child(even){box-shadow:inset 1px 0 0 var(--hairline),inset 0 1px 0 var(--hairline)}
+  .people{grid-template-columns:1fr}
+  .q-mark{right:-16%;top:24%;width:60vw;opacity:.7}
+  .a-hero{min-height:auto}
+  .a-hero h1{max-width:none}
 }
 @media (max-width:720px){
   nav{padding:12px 16px}
@@ -406,89 +486,33 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   .menu-btn{display:flex}
   .m-menu{display:flex}
   .foot-grid{grid-template-columns:1fr;gap:34px}
-  .act-row .pbtn{flex:1;justify-content:center}
+  .stats{grid-template-columns:1fr}
+  .stat:nth-child(even){box-shadow:inset 0 1px 0 var(--hairline)}
 }
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important;transition-delay:0s!important}
   .reveal .part{opacity:1;transform:none}
+  .q-mark .ring{stroke-dashoffset:0}
+  .q-mark .tail{opacity:.08}
+  .q-mark .spark{display:none}
 }
 
-/* ============ интерактив каталога (с 01.10.2026): «Сколько копируется файл», «Классы скорости» и «Сколько влезет» ============
-   Общие стили двух блоков, подставляются в <style> страницы плейсхолдером cfx-css.
-   Разметка: фрагменты race, classes-microsd, fits-microsd, fits-usb. Поведение: js:race, js:classes и js:fits. */
-.cfx{position:relative;background:#fbfbfc;padding:clamp(56px,9vh,112px) clamp(16px,5vw,72px)}
-.cfx+.cfx{padding-top:0}
-.cfx-in{max-width:980px;margin:0 auto}
-.cfx h2{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:clamp(20px,2.6vw,38px);line-height:1.15;text-align:center}
-.cfx-note{max-width:62ch;margin:clamp(22px,3.4vh,34px) auto 0;font-size:13px;line-height:1.5;color:var(--muted);text-align:center}
-
-/* --- сколько копируется файл --- */
-.race-pick{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:clamp(22px,3.4vh,34px)}
-.rchip{font-family:var(--body);font-size:14px;font-weight:500;color:var(--muted);background:#fff;border:1px solid #cfd2d7;border-radius:999px;
-  padding:0 18px;min-height:44px;cursor:pointer;transition:color .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease)}
-.rchip b{font-weight:600;margin-left:6px}
-.rchip:hover{color:var(--ink);border-color:#8f939b}
-.rchip.on{color:#fff;background:var(--ink);border-color:var(--ink)}
-.race-rows{display:grid;gap:clamp(14px,2.2vh,22px);margin-top:clamp(28px,4.6vh,48px)}
-.rrow{display:grid;grid-template-columns:minmax(170px,210px) 1fr minmax(120px,auto);align-items:center;gap:clamp(12px,2vw,28px)}
-.rname{display:flex;flex-direction:column;justify-content:center;min-height:44px;color:inherit;text-decoration:none}
-.rname b{font-family:var(--display-lat);font-weight:400;font-size:clamp(15px,1.5vw,20px);letter-spacing:.14em;line-height:1.1}
-.rname span{margin-top:5px;font-size:13px;color:var(--muted)}
-.rbar{height:10px;border-radius:999px;background:rgba(20,22,28,.08);overflow:hidden}
-.rbar i{display:block;height:100%;border-radius:inherit;background:var(--ink);transform-origin:left center}
-.rrow.fast .rbar i{background:var(--accent-deep)}
-.rtime{font-family:var(--display);font-weight:600;font-size:clamp(17px,1.7vw,22px);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;
-  color:#6b7078;transition:color .3s var(--ease)}
-.rrow.done .rtime{color:var(--ink)}
-
-/* --- классы скорости карт памяти: строки те же, что у копирования, полоска показывает гарантированный минимум --- */
-.cls .rtime{color:var(--ink);font-weight:500}
-.cls .rtime b{font-weight:600}
-@media (min-width:641px){.cls .rrow{grid-template-columns:minmax(170px,210px) 1fr 190px}}
-.cls .rn{display:none;font-size:14px;font-weight:500;color:var(--muted)}
-.cls .rrow.none .rv{display:none}
-.cls .rrow.none .rn{display:inline}
-.cls .rtime small{font-size:max(12px,.62em);font-weight:500;margin-left:.35em;color:var(--muted)}
-.cls .rname span{font-variant-numeric:tabular-nums}
-.cls .rbar i{transition:background .3s var(--ease)}
-
-/* --- сколько влезет --- */
-.fits-ctl{margin-top:clamp(24px,4vh,40px);text-align:center}
-.fits-cap{display:block;font-family:var(--display);font-weight:700;font-size:clamp(44px,7vw,96px);line-height:1;letter-spacing:.02em;font-variant-numeric:tabular-nums}
-.fits-range{-webkit-appearance:none;appearance:none;display:block;width:calc(100% - 18px);max-width:640px;height:44px;margin:clamp(12px,2.2vh,22px) auto 0;
-  background:transparent;cursor:pointer;font-size:16px;--p:50%}
-.fits-range::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--ink) var(--p),rgba(20,22,28,.14) var(--p))}
-.fits-range::-moz-range-track{height:4px;border-radius:2px;background:rgba(20,22,28,.14)}
-.fits-range::-moz-range-progress{height:4px;border-radius:2px;background:var(--ink)}
-.fits-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;margin-top:-11px;border-radius:50%;background:var(--ink);
-  border:4px solid #fbfbfc;box-shadow:0 0 0 1px var(--ink),0 6px 14px rgba(20,22,28,.22);transition:transform .25s var(--ease)}
-.fits-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);border:4px solid #fbfbfc;box-shadow:0 0 0 1px var(--ink),0 6px 14px rgba(20,22,28,.22)}
-.fits-range:hover::-webkit-slider-thumb,.fits-range:active::-webkit-slider-thumb{transform:scale(1.12)}
-.fits-range:focus-visible{outline:none}
-.fits-range:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 2px var(--accent-deep),0 6px 14px rgba(20,22,28,.22)}
-.fits-range:focus-visible::-moz-range-thumb{box-shadow:0 0 0 2px var(--accent-deep),0 6px 14px rgba(20,22,28,.22)}
-.fits-ticks{display:flex;justify-content:space-between;width:100%;max-width:658px;margin:0 auto}
-.fits-ticks span{flex:0 0 44px;padding:4px 0 10px;text-align:center;font-size:13px;color:var(--muted);cursor:pointer;white-space:nowrap;transition:color .3s var(--ease)}
-.fits-ticks span.on{color:var(--ink);font-weight:600}
-.fits-nums{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(22px,3.6vh,40px);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
-.fits-nums>div{display:flex;flex-direction:column-reverse;justify-content:center;padding:clamp(18px,3vh,30px) 8px;text-align:center}
-.fits-nums>div+div{border-left:1px solid var(--hairline)}
-.fits-nums dd{font-family:var(--display);font-weight:600;font-size:clamp(22px,3.4vw,44px);line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
-.fits-nums dd small{font-size:max(12px,.5em);font-weight:600;margin-left:.3em}
-.fits-nums dt{margin-top:8px;font-size:13px;line-height:1.3;color:var(--muted)}
-.fits-lines{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0 6px;margin-top:clamp(14px,2.4vh,24px);font-size:14px;color:var(--muted)}
-.fits-lines a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-family:var(--display-lat);font-size:14px;letter-spacing:.14em;color:var(--ink);
-  text-decoration:none;transition:opacity .3s var(--ease)}
-.fits-lines a.off{opacity:.26}
-@media (hover:hover){.fits-lines a:not(.off):hover,.rname:hover b{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}}
-@media (max-width:640px){
-  .rrow{grid-template-columns:1fr auto;gap:6px 12px}
-  .rbar{grid-column:1/-1;grid-row:2}
-  .fits-nums dd{font-size:clamp(19px,5.6vw,26px)}
-  .fits-nums dt{font-size:12px}
-  .fits-ticks span{font-size:12px}
-}
+/* ============ юридические документы: спокойная колонка текста, без проявления (секции слишком длинные для него) ============ */
+.doc{max-width:860px;margin:0 auto;padding:clamp(34px,6vh,70px) clamp(20px,4vw,56px) clamp(70px,10vh,120px)}
+.doc h2{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.2vw,24px);line-height:1.25;margin:clamp(34px,5vh,52px) 0 14px}
+.doc h2:first-child{margin-top:0}
+.doc p{color:#3c4046;font-size:16px;line-height:1.65}
+.doc p+p,.doc ul+p,.doc p+ul{margin-top:12px}
+.doc ul{list-style:none;color:#3c4046;font-size:16px;line-height:1.6}
+.doc li{position:relative;padding-left:22px}
+.doc li+li{margin-top:7px}
+.doc li::before{content:"";position:absolute;left:2px;top:.72em;width:9px;height:1.5px;background:var(--accent-deep)}
+.doc a,.doc-link{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.doc a:hover,.doc-link:hover{color:var(--accent-deep)}
+.doc-link{font:inherit;background:none;border:0;padding:0;cursor:pointer}
+.doc-also{margin-top:clamp(34px,5vh,52px);padding-top:20px;border-top:1px solid var(--hairline);display:flex;flex-wrap:wrap;gap:6px 26px;font-size:15px}
+.doc-also a{display:inline-flex;align-items:center;min-height:44px}
 </style>
 <style id="mobile-fix">
 /* ============ мобильная версия: общие правки для всех страниц (01.10.2026) ============
@@ -745,7 +769,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     <img src="assets/logo.png" alt="QOPP. На главную" width="384" height="152">
   </a>
   <div class="menu-pill">
-    <a class="mi active" id="mi-catalog">Каталог</a>
+    <a class="mi" id="mi-catalog">Каталог</a>
     <a class="mi" href="warranty.html">Гарантия</a>
     <a class="mi" id="mi-contacts">Контакты</a>
     <a class="mi" href="about.html">О компании</a>
@@ -755,7 +779,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   </button>
 </nav>
 <div class="cat-drop" id="cat-drop" aria-label="Категории каталога">
-  <a class="cd-item current" href="ssd.html" aria-current="page">Внутренние SSD</a>
+  <a class="cd-item" href="ssd.html">Внутренние SSD</a>
   <a class="cd-item" href="ram.html">Оперативная память</a>
   <div class="cd-sub">
     <a class="cd-si" href="udimm.html">Для персонального компьютера</a>
@@ -776,7 +800,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 <div class="m-menu" id="m-menu">
   <a class="mi" id="mm-catalog">Каталог</a>
   <div class="mm-sub" hidden>
-    <a class="mm-si" href="ssd.html" aria-current="page">Внутренние SSD</a>
+    <a class="mm-si" href="ssd.html">Внутренние SSD</a>
     <a class="mm-si" href="ram.html">Оперативная память</a>
     <a class="mm-si mm-si2" href="udimm.html">Для персонального компьютера</a>
     <a class="mm-si mm-si2" href="sodimm.html">Для ноутбука</a>
@@ -794,107 +818,47 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   <a class="mi" href="about.html">О компании</a>
 </div>
 
-<header class="c-hero reveal" id="top">
-  <h1 class="side-label part">Внутренние SSD</h1>
-  <figure class="shot part" aria-label="Внутренние SSD QOPP">
-    <picture><source srcset="assets/ssd-hero.webp" type="image/webp"><img src="assets/ssd-hero.png" alt="Внутренние SSD QOPP: накопитель 2.5 и модуль M2" width="2000" height="752" fetchpriority="high" decoding="async"></picture>
-  </figure>
+<header class="a-hero reveal">
+  <svg class="q-mark" viewBox="0 0 360 400" aria-hidden="true">
+    <circle class="ring" cx="150" cy="150" r="119"/>
+    <circle class="spark" cx="150" cy="150" r="119"/>
+    <path class="tail" d="M254 233 L318 361 L185 292 Z"/>
+  </svg>
+  <div class="inner">
+    <p class="kicker part">Правовая информация</p>
+    <h1 class="part">Согласие на обработку персональных данных</h1>
+  </div>
 </header>
 
 <main id="main" tabindex="-1">
-  <div class="strips">
+<article class="doc">
+  <p>Я, субъект персональных данных, проставляя отметку «Согласен на обработку персональных данных» в форме на сайте qopp.ru (далее «Сайт») и отправляя эту форму, свободно, своей волей и в своём интересе даю согласие на обработку моих персональных данных. Оператор: Индивидуальный предприниматель Веселов Даниил Игоревич (ОГРНИП 319784700003072, ИНН 781604083587), зарегистрированный по адресу: 192238, г. Санкт-Петербург, вн.тер.г. муниципальный округ №72, ул. Бухарестская, д. 94, к.4, литера А, кв. 220 (далее «Оператор»).</p>
+  <h2>1. Какие данные</h2>
+  <ul>
+    <li>имя;</li>
+    <li>адрес электронной почты;</li>
+    <li>номер телефона или контакт в мессенджере, если я их указал;</li>
+    <li>наименование компании, город и ИНН, если я их указал;</li>
+    <li>сведения, которые я сам сообщаю в тексте заявки или обращения.</li>
+  </ul>
+  <h2>2. Для чего</h2>
+  <ul>
+    <li>рассмотрение моей заявки на сотрудничество или обращения;</li>
+    <li>связь со мной по указанным контактам;</li>
+    <li>подготовка и направление коммерческого предложения либо ответа на обращение.</li>
+  </ul>
+  <h2>3. Что Оператор делает с данными</h2>
+  <p>Сбор, запись, систематизация, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передача (предоставление, доступ) лицам, указанным в пункте 5.3 Политики обработки персональных данных, блокирование, удаление и уничтожение. Обработка ведётся с использованием средств автоматизации и без них.</p>
+  <h2>4. Срок действия</h2>
+  <p>Согласие действует до достижения целей обработки либо до его отзыва.</p>
+  <h2>5. Как отозвать согласие</h2>
+  <p>Направить письмо на электронную почту <a href="mailto:info@qopp.ru">info@qopp.ru</a> с пометкой «Отзыв согласия на обработку ПД». Оператор прекратит обработку в сроки, установленные Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
+  <h2>6. Что не входит в это согласие</h2>
+  <p>Согласие не распространяется на получение рекламных и новостных рассылок: на них запрашивается отдельное согласие. Использование аналитических файлов cookie подтверждается отдельно, в уведомлении о cookie.</p>
+  <p>Порядок обработки и защиты данных описан в <a href="policy.html">Политике обработки персональных данных</a>.</p>
+  <div class="doc-also" role="navigation" aria-label="Другие документы"><a href="policy.html">Политика обработки персональных данных</a><a href="offer.html">Публичная оферта</a><a href="legal.html">Использование материалов</a></div>
+</article>
 
-    <!-- SATA: Q500S, Q600S, Q600MS -->
-    <section class="strip lift reveal" id="sata">
-      <h2 class="sr">SATA: модели Q500S, Q600S и Q600MS</h2>
-      <a class="strip-link part" href="ssd-sata.html" aria-label="SSD SATA: подробнее" data-pos="-15% 50%" data-next="assets/sata-conf-25.webp">
-        <picture><source srcset="assets/ssd-sata.webp" type="image/webp"><img src="assets/ssd-sata.jpg" alt="SSD QOPP SATA: накопитель 2.5 и модуль M2 Q600MS" width="2400" height="656" decoding="async"></picture>
-      </a>
-      <span class="strip-title st-sata et-title" aria-hidden="true"><svg class="et" viewBox="-90 -20 8951 1040" role="img" aria-label="SATA" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 0)" d="M1127.1 399.1Q1290 399.1 1374.4 456.7Q1458.9 514.2 1458.9 626.3Q1458.9 707 1432 775.8Q1405.1 844.5 1346 894.6Q1287 944.7 1193.6 972.3Q1100.1 1000 967.1 1000H35.9L279.5 742.9H1037.4Q1100.1 742.9 1128.6 722Q1157 701 1157 657.7Q1157 597.9 1062.8 597.9H517.2Q346.8 597.9 267.6 532.1Q188.3 466.4 188.3 357.2Q188.3 281 215.2 216Q242.2 151 301.2 102.4Q360.2 53.8 452.9 26.9Q545.6 0 677.1 0H1545.6L1300.4 260.1H606.9Q544.1 260.1 515.7 278.8Q487.3 297.5 487.3 342.3Q487.3 399.1 583 399.1ZM2824 1000 3057.2 742.9H3306.9Q3353.2 742.9 3401 742.9Q3448.9 742.9 3484.7 745.9Q3468.3 719 3447.4 677.9Q3426.4 636.8 3408.5 600.9L3275.5 336.3L2689.5 1000H2323.3L3124.5 95.7Q3163.4 52.3 3217.2 17.9Q3271 -16.4 3344.2 -16.4Q3414.5 -16.4 3455.6 15.7Q3496.7 47.8 3522.1 95.7L3987 1000ZM6385 0 6136.9 260.1H5781.1L5649.6 1000H5340.2L5470.2 260.1H5000.9L5249 0ZM7591.7 1000 7824.9 742.9H8074.5Q8120.9 742.9 8168.7 742.9Q8216.5 742.9 8252.4 745.9Q8236 719 8215 677.9Q8194.1 636.8 8176.2 600.9L8043.1 336.3L7457.2 1000H7091L7892.2 95.7Q7931 52.3 7984.8 17.9Q8038.7 -16.4 8111.9 -16.4Q8182.2 -16.4 8223.3 15.7Q8264.4 47.8 8289.8 95.7L8754.7 1000Z"/></svg></span>
-          <div class="strip-acts part">
-        <a class="pbtn" href="ssd-sata.html">Узнать больше
-          <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a class="pbtn pbtn-buy" href="buy.html">Купить</a>
-      </div>
-    </section>
-
-    <!-- PCI-E 3.0: Q2000MN -->
-    <section class="strip reveal" id="nvme3">
-      <h2 class="sr">PCI-E 3.0: модель Q2000MN</h2>
-      <span class="strip-link part">
-        <picture><source srcset="assets/ssd-nvme3.webp" type="image/webp"><img src="assets/ssd-nvme3.jpg" alt="QOPP Q2000MN, SSD M2 NVMe PCI-E 3.0" width="2400" height="810" loading="lazy" decoding="async"></picture>
-      </span>
-      <span class="strip-title st-n3 et-title" aria-hidden="true"><svg class="et" viewBox="-90 -20 16242 1040" role="img" aria-label="PCI-E 3.0" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 0)" d="M1530.6 321.4Q1530.6 414.1 1491 491.8Q1451.4 569.5 1378.9 625.6Q1306.4 681.6 1201.8 713Q1097.2 744.4 967.1 744.4H443.9L399.1 1000H91.2L180.9 488.8H1041.9Q1122.6 488.8 1168.9 451.4Q1215.2 414.1 1215.2 355.8Q1215.2 312.4 1181.6 286.2Q1148 260.1 1082.2 260.1H221.2L472.3 0H1100.1Q1204.8 0 1284.8 23.2Q1364.7 46.3 1419.3 88.9Q1473.8 131.5 1502.2 190.6Q1530.6 249.6 1530.6 321.4ZM3755.3 742.9 3511.6 1000H3009.4Q2892.8 1000 2796.4 966.4Q2700 932.7 2632 873.7Q2564 814.6 2526.6 733.9Q2489.2 653.2 2489.2 559Q2489.2 436.5 2544.5 333.3Q2599.8 230.2 2694 156.2Q2788.2 82.2 2915.2 41.1Q3042.3 0 3185.8 0H3886.8L3641.7 260.1H3139.4Q3070.7 260.1 3008.7 281Q2946.6 301.9 2900.3 339.3Q2853.9 376.7 2827 426.8Q2800.1 476.8 2800.1 536.6Q2800.1 583 2818.8 621.1Q2837.5 659.2 2871.1 686.1Q2904.8 713 2951.1 728Q2997.4 742.9 3054.2 742.9ZM4999.4 1000H4689.9L4867.8 0H5175.7ZM6744.2 397.6 6558.8 590.4H6059.6L6244.9 397.6ZM8828.3 742.9 8583.2 1000H7620.6L7798.4 0H8955.4L8708.7 260.1H8061.5L8040.6 379.7H8831.3L8616.1 606.9H8000.2L7976.3 742.9ZM11356.8 742.9H12041.4Q12098.2 742.9 12125.2 722Q12152.1 701 12152.1 662.2Q12152.1 605.4 12065.4 605.4H11466L11664.8 391.6H12108.7Q12147.6 391.6 12177.5 374.4Q12207.4 357.2 12207.4 312.4Q12207.4 282.5 12184.2 271.3Q12161 260.1 12131.1 260.1H11294.1L11539.2 0H12165.5Q12328.4 0 12420.4 59Q12512.3 118.1 12512.3 234.7Q12512.3 288.5 12496.6 330.3Q12480.9 372.2 12455.5 403.6Q12430.1 435 12398.7 455.2Q12367.3 475.3 12334.4 485.8Q12388.2 502.2 12423.4 548.6Q12458.5 594.9 12458.5 668.2Q12458.5 729.4 12439.8 788.5Q12421.1 847.5 12369.5 894.6Q12318 941.7 12228.3 970.9Q12138.6 1000 11995.1 1000H11114.7ZM13412.6 895.4Q13412.6 856.5 13429 825.1Q13445.5 793.7 13472.4 772Q13499.3 750.4 13534.4 738.4Q13569.5 726.5 13608.4 726.5Q13671.2 726.5 13713 759.3Q13754.9 792.2 13754.9 850.5Q13754.9 889.4 13738.4 920.8Q13722 952.2 13695.1 973.1Q13668.2 994 13632.3 1005.2Q13596.4 1016.4 13557.6 1016.4Q13494.8 1016.4 13453.7 984.3Q13412.6 952.2 13412.6 895.4ZM15541.6 -16.4Q15821.1 -16.4 15960.1 83Q16099.1 182.4 16099.1 394.6Q16099.1 707 15916 861.7Q15732.9 1016.4 15359.2 1016.4Q15078.2 1016.4 14938.4 916.3Q14798.7 816.1 14798.7 603.9Q14798.7 293 14981.8 138.3Q15164.9 -16.4 15541.6 -16.4ZM15404 756.4Q15589.4 756.4 15690.3 673.4Q15791.2 590.4 15791.2 427.5Q15791.2 370.7 15774 334.8Q15756.8 299 15720.2 278.8Q15683.6 258.6 15627.5 251.1Q15571.5 243.6 15493.7 243.6Q15308.4 243.6 15207.5 325.9Q15106.6 408.1 15106.6 571Q15106.6 627.8 15123.8 664.4Q15141 701 15177.6 721.2Q15214.2 741.4 15270.3 748.9Q15326.3 756.4 15404 756.4Z"/></svg></span>
-      <div class="strip-acts part">
-        <span class="pbtn" aria-disabled="true">Узнать больше
-          <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <a class="pbtn pbtn-buy" href="buy.html">Купить</a>
-      </div>
-    </section>
-
-    <!-- PCI-E 4.0: Q4000MN, Q7000MN -->
-    <section class="strip reveal" id="nvme4">
-      <h2 class="sr">PCI-E 4.0: модели Q4000MN и Q7000MN</h2>
-      <span class="strip-link part">
-        <picture><source srcset="assets/ssd-nvme4.webp" type="image/webp"><img src="assets/ssd-nvme4.jpg" alt="QOPP Q7000MN, SSD M2 NVMe PCI-E 4.0" width="2400" height="656" loading="lazy" decoding="async"></picture>
-      </span>
-      <span class="strip-title st-n4 et-title" aria-hidden="true"><svg class="et" viewBox="-90 -20 16315 1040" role="img" aria-label="PCI-E 4.0" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path transform="translate(0 0)" d="M1530.6 321.4Q1530.6 414.1 1491 491.8Q1451.4 569.5 1378.9 625.6Q1306.4 681.6 1201.8 713Q1097.2 744.4 967.1 744.4H443.9L399.1 1000H91.2L180.9 488.8H1041.9Q1122.6 488.8 1168.9 451.4Q1215.2 414.1 1215.2 355.8Q1215.2 312.4 1181.6 286.2Q1148 260.1 1082.2 260.1H221.2L472.3 0H1100.1Q1204.8 0 1284.8 23.2Q1364.7 46.3 1419.3 88.9Q1473.8 131.5 1502.2 190.6Q1530.6 249.6 1530.6 321.4ZM3755.3 742.9 3511.6 1000H3009.4Q2892.8 1000 2796.4 966.4Q2700 932.7 2632 873.7Q2564 814.6 2526.6 733.9Q2489.2 653.2 2489.2 559Q2489.2 436.5 2544.5 333.3Q2599.8 230.2 2694 156.2Q2788.2 82.2 2915.2 41.1Q3042.3 0 3185.8 0H3886.8L3641.7 260.1H3139.4Q3070.7 260.1 3008.7 281Q2946.6 301.9 2900.3 339.3Q2853.9 376.7 2827 426.8Q2800.1 476.8 2800.1 536.6Q2800.1 583 2818.8 621.1Q2837.5 659.2 2871.1 686.1Q2904.8 713 2951.1 728Q2997.4 742.9 3054.2 742.9ZM4999.4 1000H4689.9L4867.8 0H5175.7ZM6744.2 397.6 6558.8 590.4H6059.6L6244.9 397.6ZM8828.3 742.9 8583.2 1000H7620.6L7798.4 0H8955.4L8708.7 260.1H8061.5L8040.6 379.7H8831.3L8616.1 606.9H8000.2L7976.3 742.9ZM11315 880.4Q11252.2 880.4 11220.1 846Q11187.9 811.7 11187.9 763.8Q11187.9 729.4 11208.1 693.6Q11228.3 657.7 11274.6 623.3L12099.7 37.4Q12143.1 7.5 12183.4 -4.5Q12223.8 -16.4 12250.7 -16.4Q12309 -16.4 12350.1 15.7Q12391.2 47.8 12391.2 121.1Q12391.2 146.5 12386.7 170.4L12304.5 635.3H12591.5L12367.3 880.4H12262.7L12241.7 1000H11945.8L11966.7 880.4ZM12037 485.8Q12044.4 441 12050.4 411.1Q12056.4 381.2 12063.9 355.8Q12042.9 375.2 12012.3 398.4Q11981.7 421.5 11938.3 451.4L11812.7 539.6Q11764.9 574 11728.3 598.7Q11691.7 623.3 11661.8 641.3Q11691.7 638.3 11733.5 636.8Q11775.4 635.3 11830.7 635.3H12010.1ZM13485.8 895.4Q13485.8 856.5 13502.3 825.1Q13518.7 793.7 13545.6 772Q13572.5 750.4 13607.6 738.4Q13642.8 726.5 13681.6 726.5Q13744.4 726.5 13786.3 759.3Q13828.1 792.2 13828.1 850.5Q13828.1 889.4 13811.7 920.8Q13795.2 952.2 13768.3 973.1Q13741.4 994 13705.6 1005.2Q13669.7 1016.4 13630.8 1016.4Q13568 1016.4 13526.9 984.3Q13485.8 952.2 13485.8 895.4ZM15614.8 -16.4Q15894.3 -16.4 16033.3 83Q16172.4 182.4 16172.4 394.6Q16172.4 707 15989.2 861.7Q15806.1 1016.4 15432.4 1016.4Q15151.4 1016.4 15011.7 916.3Q14871.9 816.1 14871.9 603.9Q14871.9 293 15055 138.3Q15238.1 -16.4 15614.8 -16.4ZM15477.3 756.4Q15662.6 756.4 15763.5 673.4Q15864.4 590.4 15864.4 427.5Q15864.4 370.7 15847.2 334.8Q15830 299 15793.4 278.8Q15756.8 258.6 15700.8 251.1Q15644.7 243.6 15567 243.6Q15381.6 243.6 15280.7 325.9Q15179.8 408.1 15179.8 571Q15179.8 627.8 15197 664.4Q15214.2 701 15250.8 721.2Q15287.4 741.4 15343.5 748.9Q15399.6 756.4 15477.3 756.4Z"/></svg></span>
-      <div class="strip-acts part">
-        <span class="pbtn" aria-disabled="true">Узнать больше
-          <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <a class="pbtn pbtn-buy" href="buy.html">Купить</a>
-      </div>
-    </section>
-
-    <!-- время копирования: три линейки отдают один и тот же файл. Старшая скорость чтения в линейке, данные владельца 05.10.2026: Q600S 560, Q2000MN 3100, Q7000MN 7000 МБ/с -->
-    <section class="cfx race reveal" id="race" aria-labelledby="race-h">
-      <div class="cfx-in">
-        <h2 class="part" id="race-h">Сколько копируется файл</h2>
-        <div class="race-pick part" role="group" aria-label="Что копируем с накопителя">
-          <button class="rchip on" type="button" data-gb="100" aria-pressed="true">Игра<b>100 ГБ</b></button>
-          <button class="rchip" type="button" data-gb="20" aria-pressed="false">Фильм в 4K<b>20 ГБ</b></button>
-          <button class="rchip" type="button" data-gb="5" aria-pressed="false">1000 фото<b>5 ГБ</b></button>
-        </div>
-        <div class="race-rows part">
-          <div class="rrow" data-mbs="560">
-            <a class="rname" href="#sata"><b>SATA</b><span>Q600S, до 560 МБ/с</span></a>
-            <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime">2 мин 59 с</span>
-          </div>
-          <div class="rrow" data-mbs="3100">
-            <a class="rname" href="#nvme3"><b>PCI-E 3.0</b><span>Q2000MN, до 3100 МБ/с</span></a>
-            <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime">32 с</span>
-          </div>
-          <div class="rrow fast" data-mbs="7000">
-            <a class="rname" href="#nvme4"><b>PCI-E 4.0</b><span>Q7000MN, до 7000 МБ/с</span></a>
-            <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime">14 с</span>
-          </div>
-        </div>
-        <p class="cfx-note part">Копирование с накопителя на максимальной скорости чтения. В жизни время зависит от второго накопителя и самих файлов.</p>
-      </div>
-    </section>
-
-    <!-- все модели -->
-    <section class="strip reveal" id="all">
-      <h2 class="sr">Все модели внутренних SSD</h2>
-      <span class="strip-link part">
-        <picture><source srcset="assets/ssd-all.webp" type="image/webp"><img src="assets/ssd-all.jpg" alt="Линейка внутренних SSD QOPP" width="2400" height="656" loading="lazy" decoding="async"></picture>
-      </span>
-      <span class="strip-title st-all" aria-hidden="true">Все модели</span>
-      <div class="strip-acts part">
-        <span class="pbtn" aria-disabled="true">Узнать больше
-          <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <a class="pbtn pbtn-buy" href="buy.html">Купить</a>
-      </div>
-    </section>
-
-  </div>
 </main>
 
 <footer id="footer" class="site-footer">
@@ -914,7 +878,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
       <h3>Продукция</h3>
       <a class="fl" href="notebooks.html">Ноутбуки</a>
       <a class="fl" href="ram.html">Оперативная память</a>
-      <a class="fl current" href="ssd.html" aria-current="page">Внутренние SSD</a>
+      <a class="fl" href="ssd.html">Внутренние SSD</a>
       <a class="fl" href="microsd.html">Карты памяти</a>
       <a class="fl" href="usb.html">Флеш-накопители</a>
     </div>
@@ -1016,25 +980,16 @@ addEventListener('scroll',()=>{
   }
 }
 
-/* подпись хиро гаснет, когда её верх уходит под шапку, и возвращается при обратной прокрутке */
-{
-  const lab=document.querySelector('.side-label');
-  if(lab&&matchMedia('(min-width:861px)').matches){
-    const check=()=>{lab.classList.toggle('under',lab.getBoundingClientRect().top<navEl.offsetHeight)};
-    addEventListener('scroll',check,{passive:true});check();
-  }
-}
-
-/* появление секций, как на главной */
+/* появление секций */
 const io=new IntersectionObserver(es=>{
   es.forEach(en=>{
     if(en.isIntersecting){
       en.target.classList.add('in');
-      setTimeout(()=>en.target.classList.add('done'),1200);
+      setTimeout(()=>en.target.classList.add('done'),1400);
       io.unobserve(en.target);
     }
   });
-},{threshold:0.18});
+},{threshold:0.16});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 if(reduced.matches)document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in','done'));
 reduced.addEventListener('change',e=>{
@@ -1094,92 +1049,124 @@ toTop.addEventListener('click',()=>{
   scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'});
 });
 
-/* ============ race: сколько копируется файл (с 01.10.2026) ============
-   Блок #race на странице «Внутренние SSD»: три линейки отдают один и тот же файл, полоски заполняются
-   с настоящей разницей во времени (самая медленная идёт 5 секунд, остальные пропорционально быстрее),
-   счётчики показывают расчётное время. Скорости лежат в разметке (data-mbs, МБ/с), размер файла в кнопке (data-gb).
-   Без скрипта и при prefers-reduced-motion видны готовые цифры. */
-{
-  const sec=document.getElementById('race');
-  if(sec){
-    const rows=[...sec.querySelectorAll('.rrow')].map(el=>({el,mbs:+el.dataset.mbs,bar:el.querySelector('.rbar i'),out:el.querySelector('.rtime')}));
-    const chips=[...sec.querySelectorAll('.rchip')];
-    const T=5000;let gb=+((chips.find(c=>c.classList.contains('on'))||chips[0]).dataset.gb),raf=0,played=false;
-    const fmt=s=>{
-      if(s<10)return s.toFixed(1).replace('.',',')+' с';
-      if(s<60)return Math.round(s)+' с';
-      let m=Math.floor(s/60),r=Math.round(s-m*60);if(r===60){m++;r=0}
-      return m+' мин '+r+' с';
-    };
-    const paint=real=>rows.forEach(r=>{
-      const t=gb*1000/r.mbs,f=real==null?1:Math.min(1,real/t);
-      r.bar.style.transform='scaleX('+f.toFixed(4)+')';
-      r.out.textContent=fmt(real==null?t:Math.min(real,t));
-      r.el.classList.toggle('done',f>=1);
-    });
-    function run(){
-      cancelAnimationFrame(raf);
-      if(reduced.matches){paint(null);return}
-      const max=Math.max(...rows.map(r=>gb*1000/r.mbs)),t0=performance.now();
-      const step=now=>{
-        const p=Math.min(1,(now-t0)/T);
-        paint(p>=1?null:p*max);
-        if(p<1)raf=requestAnimationFrame(step);
-      };
-      paint(0);raf=requestAnimationFrame(step);
-    }
-    chips.forEach(c=>c.addEventListener('click',()=>{
-      chips.forEach(x=>{const on=x===c;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
-      gb=+c.dataset.gb;played=true;run();
-    }));
-    if(!reduced.matches){
-      paint(0);
-      new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting&&!played){played=true;ob.disconnect();run()}}),{threshold:.5}).observe(sec.querySelector('.race-rows'));
-    }
-  }
-}
-
-/* ============ tilt: фото отзывается на указатель (с 01.10.2026) ============
-   Каталог: главное фото чуть поворачивается за мышью, фото в полосах сдвигается навстречу, как вид из окна.
-   Страница товара: фото в галерее поворачивается. Только transform, только устройства с мышью,
-   при prefers-reduced-motion выключено. Откат: убрать со страницы плейсхолдер js:tilt. */
+/* ============ fx: интерактив текстовых страниц (с 22 сентября 2026) ============
+   Пять приёмов, стили внедряет сам скрипт, разметке нужны только атрибуты:
+   1. Кнопка «наверх» становится буквой Q: кольцо дорисовывается по мере чтения, в конце загорается хвост.
+   2. Параллакс: [data-par] едет внутри своей рамки; [data-ghost="СЛОВО"] на секции даёт контурное слово позади, оно плывёт вбок.
+   3. [data-words] и .pull: ключевая фраза наливается по словам, пока проходит середину экрана. Одна на страницу.
+   4. Строки .vow, .chan, .mp, .pillar: золотая линия дорисовывается слева направо при наведении (родня ссылкам подвала).
+   5. Если на странице три и больше section[data-ch], справа появляется указатель глав.
+   Двигаются только transform и opacity. При prefers-reduced-motion приёмы 2 и 3 выключены. Откат: убрать со страницы плейсхолдер js:fx (стоит сразу после js:to-top). */
 (()=>{
-  if(!matchMedia('(hover:hover) and (pointer:fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const RM=matchMedia('(prefers-reduced-motion: reduce)');
+  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
   const st=document.createElement('style');
-  st.textContent='.c-hero .shot{overflow:hidden}';
+  st.textContent=`
+.to-top{overflow:visible}
+.fx-q{position:absolute;left:-5px;top:-5px;width:74px;height:82px;pointer-events:none;overflow:visible}
+.fx-q circle{fill:none;stroke-width:3}
+.fx-q .t{stroke:rgba(20,22,28,.1)}
+.fx-q .p{stroke:#b8863b;stroke-linecap:round;transition:stroke-dashoffset .15s linear}
+.fx-q path{fill:rgba(20,22,28,.14);transition:fill .5s ease}
+.fx-q.full path{fill:#b8863b}
+@media (hover:hover){
+  .vow,.chan,.mp,.pillar{position:relative;transition:padding-left .45s cubic-bezier(.22,.61,.2,1)}
+  .vow::before,.chan::before,.mp::before,.pillar::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:#b8863b;
+    transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.22,.61,.2,1);pointer-events:none}
+  .vow:hover,.chan:hover,.mp:hover{padding-left:10px}
+  .vow:hover::before,.chan:hover::before,.mp:hover::before,.pillar:hover::before{transform:scaleX(1)}
+}
+.fx-par-wrap{overflow:hidden}
+.dark-strip .ds-photo[data-par]{height:124%;top:-12%;will-change:transform}
+[data-ghost]{position:relative;isolation:isolate}
+.fx-ghost{position:absolute;z-index:-1;left:0;top:clamp(20px,6vh,70px);white-space:nowrap;pointer-events:none;user-select:none;
+  font-family:var(--display,'Montserrat',sans-serif);font-weight:800;font-size:clamp(84px,17vw,250px);line-height:1;letter-spacing:.02em;
+  color:transparent;-webkit-text-stroke:1px rgba(20,22,28,.09);will-change:transform}
+.fx-ghost.on-dark{-webkit-text-stroke-color:rgba(244,241,234,.1)}
+.fx-w{transition:opacity .25s linear}
+.fx-ch{position:fixed;z-index:57;left:auto;right:clamp(14px,1.6vw,26px);top:50%;bottom:auto;width:auto;transform:translateY(-50%);display:none;flex-direction:column;align-items:stretch;gap:2px;
+  opacity:0;pointer-events:none;transition:opacity .4s ease}
+.fx-ch.show{opacity:1;pointer-events:auto}
+@media (min-width:1400px){.fx-ch{display:flex}}
+.fx-ch button{position:relative;display:block;width:34px;height:22px;padding:0;background:none;border:0;cursor:pointer;
+  font-family:var(--body,'Montserrat',sans-serif);font-size:12px;font-weight:600;letter-spacing:.06em;color:#5b6068}
+.fx-ch button span{position:absolute;right:42px;top:50%;transform:translate(6px,-50%);opacity:0;pointer-events:none;white-space:nowrap;
+  transition:opacity .3s ease,transform .3s ease;background:rgba(246,246,247,.9);padding:3px 8px;border-radius:6px}
+.fx-ch button i{position:absolute;right:0;top:10px;display:block;height:2px;width:14px;background:rgba(20,22,28,.28);
+  transition:width .35s cubic-bezier(.22,.61,.2,1),background .3s ease}
+.fx-ch button:hover span,.fx-ch button:focus-visible span,.fx-ch button[aria-current="true"] span{opacity:1;transform:translate(0,-50%)}
+.fx-ch button:hover i{width:22px}
+.fx-ch button[aria-current="true"]{color:#14161c}
+.fx-ch button[aria-current="true"] i{width:28px;background:#b8863b}
+`;
   document.head.appendChild(st);
-  const items=[];let raf=0;
-  const go=()=>{if(!raf)raf=requestAnimationFrame(frame)};
-  function add(box,img,o){
-    if(!box||!img)return;
-    const it={img,o,x:0,y:0,k:0,tx:0,ty:0,tk:0};items.push(it);
-    box.addEventListener('pointermove',e=>{
-      if(e.pointerType!=='mouse')return;
-      const r=box.getBoundingClientRect();
-      it.tx=((e.clientX-r.left)/r.width-.5)*2;it.ty=((e.clientY-r.top)/r.height-.5)*2;it.tk=1;go();
+
+  /* ---- 1. Q вокруг кнопки «наверх» ---- */
+  const tt=document.getElementById('to-top');
+  let qP=null,qS=null;const LEN=2*Math.PI*27;
+  if(tt){
+    const NS='http://www.w3.org/2000/svg',svg=document.createElementNS(NS,'svg');
+    svg.setAttribute('class','fx-q');svg.setAttribute('viewBox','0 0 74 82');svg.setAttribute('aria-hidden','true');
+    svg.innerHTML='<circle class="t" cx="29" cy="29" r="27"/><circle class="p" cx="29" cy="29" r="27" transform="rotate(-90 29 29)" stroke-dasharray="'+LEN.toFixed(1)+'" stroke-dashoffset="'+LEN.toFixed(1)+'"/><path d="M52.6 47.8 L67.1 76.9 L36.9 61.2 Z"/>';
+    tt.appendChild(svg);qS=svg;qP=svg.querySelector('.p');
+  }
+
+  /* ---- 2. параллакс ---- */
+  const pars=[...document.querySelectorAll('[data-par]')].map(el=>({el,box:el.closest('section,header')||el.parentElement,amp:parseFloat(el.dataset.par)||9,live:false}));
+  const ghosts=[...document.querySelectorAll('[data-ghost]')].map(sec=>{
+    const g=document.createElement('div');g.className='fx-ghost';g.textContent=sec.dataset.ghost;g.setAttribute('aria-hidden','true');
+    if(sec.dataset.ghostDark!==undefined)g.classList.add('on-dark');
+    sec.style.overflow='hidden';sec.prepend(g);return {el:g,box:sec,live:false};
+  });
+
+  /* ---- 3. фраза по словам ---- */
+  const phrases=RM.matches?[]:[...document.querySelectorAll('[data-words],.pull')].slice(0,2).map(el=>{
+    const words=el.textContent.trim().split(/\s+/);el.setAttribute('aria-label',words.join(' '));el.textContent='';
+    const spans=words.map((w,i)=>{const s=document.createElement('span');s.className='fx-w';s.setAttribute('aria-hidden','true');
+      s.textContent=w+(i<words.length-1?' ':'');el.appendChild(s);return s});
+    return {el,spans,live:false};
+  });
+
+  /* ---- 5. указатель глав ---- */
+  const chSecs=[...document.querySelectorAll('section[data-ch]')];let chNav=null,chs=[];
+  if(chSecs.length>2){
+    /* div, а не nav: шапка сайта стилизована селектором по тегу nav, указатель унаследовал бы её раскладку (так и было, вставал по центру) */
+    chNav=document.createElement('div');chNav.className='fx-ch';chNav.setAttribute('role','navigation');chNav.setAttribute('aria-label','Разделы страницы');
+    chs=chSecs.map(sec=>{
+      const b=document.createElement('button');b.type='button';b.innerHTML='<span></span><i></i>';b.firstChild.textContent=sec.dataset.ch;
+      b.addEventListener('click',()=>{const y=sec.getBoundingClientRect().top+scrollY-Math.min(110,innerHeight*.14);scrollTo({top:y,behavior:RM.matches?'auto':'smooth'})});
+      chNav.appendChild(b);return {sec,b};
     });
-    box.addEventListener('pointerleave',()=>{it.tx=it.ty=it.tk=0;go()});
+    document.body.appendChild(chNav);
   }
+
+  /* видимость: считаем только то, что на экране */
+  const io=new IntersectionObserver(es=>es.forEach(e=>{const o=e.target.__fx;if(o)o.live=e.isIntersecting}),{rootMargin:'20% 0px'});
+  [...pars,...ghosts].forEach(o=>{o.box.__fx=o;io.observe(o.box)});
+  phrases.forEach(o=>{o.el.__fx=o;io.observe(o.el)});
+
+  let raf=0;
   function frame(){
-    raf=0;let busy=false;
-    for(const it of items){
-      it.x+=(it.tx-it.x)*.085;it.y+=(it.ty-it.y)*.085;it.k+=(it.tk-it.k)*.085;
-      if(Math.abs(it.tx-it.x)+Math.abs(it.ty-it.y)+Math.abs(it.tk-it.k)>.002)busy=true;
-      else{it.x=it.tx;it.y=it.ty;it.k=it.tk}
-      const o=it.o,z=(1+o.zoom*it.k).toFixed(4);
-      if(it.k<.002&&!it.tk){it.img.style.transform='';it.img.style.willChange='';continue}
-      it.img.style.willChange='transform';
-      it.img.style.transform=o.rot
-        ?'perspective('+o.p+'px) rotateX('+(-it.y*o.rot*.7*it.k).toFixed(3)+'deg) rotateY('+(it.x*o.rot*it.k).toFixed(3)+'deg) scale('+z+')'
-        :'translate3d('+(-it.x*o.shift*it.k).toFixed(2)+'px,'+(-it.y*o.shift*.5*it.k).toFixed(2)+'px,0) scale('+z+')';
+    raf=0;const vh=innerHeight,max=document.documentElement.scrollHeight-vh,pr=max>0?clamp(scrollY/max,0,1):0;
+    if(qP){qP.setAttribute('stroke-dashoffset',(LEN*(1-pr)).toFixed(1));qS.classList.toggle('full',pr>0.985)}
+    const small=innerWidth<861;
+    if(!RM.matches){
+      for(const o of pars){if(!o.live)continue;const r=o.box.getBoundingClientRect();const k=clamp((r.top+r.height/2-vh/2)/(vh/2+r.height/2),-1,1);
+        o.el.style.transform='translate3d(0,'+(k*o.amp*(small?.5:1)).toFixed(2)+'%,0)'}
+      for(const o of ghosts){if(!o.live)continue;const r=o.box.getBoundingClientRect();const k=clamp((vh-r.top)/(vh+r.height),0,1);
+        o.el.style.transform='translate3d('+((6-k*(small?14:26))).toFixed(2)+'%,0,0)'}
     }
-    if(busy)go();
+    for(const o of phrases){if(!o.live)continue;const r=o.el.getBoundingClientRect();const k=clamp((vh*.88-r.top)/(vh*.42),0,1),n=o.spans.length;
+      o.spans.forEach((s,i)=>{s.style.opacity=(0.2+0.8*clamp(k*(n+3)-i,0,1)/1).toFixed(2)})}
+    if(chNav){
+      chNav.classList.toggle('show',scrollY>vh*.6&&scrollY<max-vh*.35);
+      let cur=chs[0];for(const c of chs){if(c.sec.getBoundingClientRect().top<=vh*.4)cur=c}
+      chs.forEach(c=>c.b.setAttribute('aria-current',c===cur?'true':'false'));
+    }
   }
-  const hero=document.querySelector('.c-hero .shot');
-  if(hero)add(hero,hero.querySelector('img'),{rot:2.2,p:1400,zoom:.04});
-  const gm=document.querySelector('.g-main');
-  if(gm)add(gm,gm.querySelector('img'),{rot:4,p:1000,zoom:.07});
-  document.querySelectorAll('.strips .strip').forEach(s=>add(s,s.querySelector('.strip-link img'),{shift:12,zoom:.03}));
+  const req=()=>{if(!raf)raf=requestAnimationFrame(frame)};
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);
+  setTimeout(frame,60);frame();
 })();
 /* форма в подвале: передаёт имя и почту в пошаговую форму на partners.html (sessionStorage, не адрес) */
 const coopForm=document.querySelector('.coop-form');
@@ -1192,6 +1179,11 @@ if(coopForm){
     if(location.pathname.endsWith('partners.html'))location.reload();
   });
 }
+
+/* пауза анимаций на скрытой вкладке */
+document.addEventListener('visibilitychange',()=>{
+  document.body.classList.toggle('paused',document.hidden);
+});
 </script>
 </body>
 </html>

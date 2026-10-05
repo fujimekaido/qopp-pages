@@ -6,11 +6,11 @@
 <title>Сотрудничество. QOPP</title>
 <meta name="description" content="Сотрудничество с QOPP: опт, розничные сети, сборщики ПК, корпоративные закупки, селлеры маркетплейсов, блогеры и обзорщики. Оставьте заявку за минуту.">
 <meta name="theme-color" content="#f6f6f7">
-<!-- DEPLOY STEP: заменить og:url и og:image на абсолютные адреса живого сайта перед публикацией -->
 <meta property="og:title" content="Сотрудничество. QOPP">
 <meta property="og:description" content="Расскажите о себе, и мы подберём условия под ваш формат">
-<meta property="og:url" content="/partners.html">
-<meta property="og:image" content="/assets/about-dark.jpg">
+<meta property="og:url" content="https://qopp.ru/partners.html">
+<link rel="canonical" href="https://qopp.ru/partners.html">
+<meta property="og:image" content="https://qopp.ru/assets/about-dark.jpg">
 <link rel="preload" href="assets/fonts/Montserrat-var-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -541,6 +541,11 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .wz-send .main:hover,.wz-send .main:focus-visible{background:var(--accent-deep);border-color:var(--accent-deep)}
 .wz-send a:hover,.wz-send a:focus-visible{color:var(--accent-deep);border-color:var(--accent-deep)}
 .wz-note{margin-top:14px;font-size:14px;color:var(--muted)}
+.wz-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.wz-agree a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.wz-agree a:hover{color:var(--accent-deep)}
+.wz-send .main{text-decoration:none}
+.wz-next[disabled]{opacity:.6;cursor:default}
 </style>
 <style id="mobile-fix">
 /* ============ мобильная версия: общие правки для всех страниц (01.10.2026) ============
@@ -553,6 +558,13 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
    по форме логотипа. Слой берёт то, что под ним, обесцвечивает, инвертирует и доводит контраст до предела:
    над светлым выходит чёрный, над тёмным белый, по каждой точке отдельно (на границе блоков логотип делится пополам).
    Размытие перед порогом убирает рябь на фотографиях. Запасной способ для старых браузеров: js:logo-tone ставит nav.on-dark. */
+/* --- ссылки на документы в подвале и в галочке согласия (с 05.10.2026) --- */
+.foot-legal a{color:inherit;text-decoration:none}
+.foot-legal a:hover,.foot-legal a:focus-visible{color:#14161c;text-decoration:underline;text-underline-offset:3px}
+.agree a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.agree a:hover{color:#14161c}
+/* --- неактивные «Узнать больше» в каталоге спрятаны, пока у линеек нет своих страниц (решение владельца 05.10.2026) --- */
+.strip-acts .pbtn[aria-disabled="true"]{display:none}
 .logo img{transition:filter .3s ease}
 nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
 @supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) and ((mask-image:url(x)) or (-webkit-mask-image:url(x))){
@@ -709,24 +721,75 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   },1200)});
 })();
 </script>
+<style id="ck-style">
+/* ============ уведомление о cookie (с 05.10.2026) ============
+   Небольшая стеклянная плашка внизу слева, в стиле капсулы меню. Две кнопки: «Хорошо» включает Яндекс.Метрику,
+   «Только необходимые» оставляет сайт без аналитики. Выбор хранится в localStorage (ключ qopp-cookie: all или min).
+   Вернуть плашку: кнопка с атрибутом data-cookie-reset (стоит в политике, раздел про cookie). */
+.ck{position:fixed;z-index:90;left:clamp(12px,2vw,28px);bottom:clamp(12px,2vw,28px);width:min(430px,calc(100vw - 24px));
+  padding:18px 20px 16px;border-radius:20px;background:rgba(255,255,255,.86);border:1px solid rgba(20,22,28,.1);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:0 18px 50px rgba(20,22,28,.16);color:#14161c;font-family:'Montserrat',sans-serif;
+  opacity:0;transform:translateY(14px);transition:opacity .45s cubic-bezier(.22,.61,.2,1),transform .45s cubic-bezier(.22,.61,.2,1)}
+.ck.in{opacity:1;transform:none}
+.ck b{display:block;font-size:16px;font-weight:700;line-height:1.3}
+.ck p{margin-top:6px;font-size:14px;line-height:1.5;color:#5b6068}
+.ck p a{color:#14161c;text-decoration:underline;text-underline-offset:3px}
+.ck-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.ck-acts button{font-family:inherit;font-size:14px;font-weight:600;min-height:44px;padding:0 20px;border-radius:999px;cursor:pointer;
+  border:1px solid #14161c;background:#14161c;color:#fff;transition:background .3s ease,color .3s ease,border-color .3s ease}
+.ck-acts button:hover{background:#b8863b;border-color:#b8863b}
+.ck-acts button.ghost{background:transparent;color:#14161c;border-color:#b9bcc2}
+.ck-acts button.ghost:hover{background:transparent;border-color:#14161c;color:#14161c}
+@media (prefers-reduced-motion:reduce){.ck{transition:none}}
+</style>
 <script>
 /* Яндекс.Метрика, счётчик 93282686 (владелец дал код 01.10.2026; счётчик настроен на qopp.ru и стоит на старом сайте).
    build.py вставляет этот блок перед </head> каждой страницы и в site/404.html.
-   Счётчик включается только на боевом домене qopp.ru: с тестового адреса на GitHub Pages визиты не отправляем,
-   чтобы наши проверки не смешивались со статистикой действующего сайта. После переезда на домен заработает сам.
+   Счётчик включается при двух условиях сразу:
+   1) посетитель нажал «Хорошо» в уведомлении о cookie (решение владельца 05.10.2026: делаем по закону, без согласия не считаем);
+   2) сайт открыт на боевом домене qopp.ru: с тестового адреса на GitHub Pages визиты не отправляем,
+      чтобы наши проверки не смешивались со статистикой действующего сайта.
    window.QOPP_YM нужен целям: клики по элементам с data-goal уходят как reachGoal (сейчас это магазины на «Где купить»).
-   Строку noscript из кода Метрики не ставим: ей место в body, а доля посетителей без скриптов ничтожна. */
+   Строку noscript из кода Метрики не ставим: без скриптов нет и согласия. */
 (function(){
-  var ID=93282686;
-  if(!/(^|\.)qopp\.ru$/.test(location.hostname))return;
-  window.QOPP_YM=ID;
-  (function(m,e,t,r,i,k,a){
-    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-  })(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
-  ym(ID,'init',{clickmap:true,referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  var ID=93282686,KEY='qopp-cookie',d=document;
+  function get(){try{return localStorage.getItem(KEY)}catch(e){return null}}
+  function set(v){try{localStorage.setItem(KEY,v)}catch(e){}}
+  function metrika(){
+    if(window.QOPP_YM||!/(^|\.)qopp\.ru$/.test(location.hostname))return;
+    window.QOPP_YM=ID;
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
+    ym(ID,'init',{clickmap:true,referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  }
+  function ask(){
+    if(d.querySelector('.ck'))return;
+    var box=d.createElement('div');box.className='ck';box.setAttribute('role','region');box.setAttribute('aria-label','Файлы cookie');
+    box.innerHTML='<b>Память это наша работа</b><p>Сайт тоже кое-что запоминает: файлы cookie для статистики посещений. <a href="policy.html#cookie">Подробнее</a></p>'+
+      '<div class="ck-acts"><button type="button" data-v="all">Хорошо</button><button type="button" class="ghost" data-v="min">Только необходимые</button></div>';
+    d.body.appendChild(box);
+    box.addEventListener('click',function(e){
+      var b=e.target.closest('button[data-v]');if(!b)return;
+      set(b.dataset.v);if(b.dataset.v==='all')metrika();
+      box.classList.remove('in');setTimeout(function(){box.remove()},500);
+    });
+    requestAnimationFrame(function(){requestAnimationFrame(function(){box.classList.add('in')})});
+  }
+  if(get()==='all')metrika();
+  function ready(){
+    if(!get())setTimeout(ask,900);
+    d.addEventListener('click',function(e){
+      var r=e.target.closest('[data-cookie-reset]');if(!r)return;
+      try{localStorage.removeItem(KEY)}catch(x){}
+      ask();
+    });
+  }
+  if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',ready);else ready();
 })();
 </script>
 </head>
@@ -851,22 +914,24 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
       <h3 tabindex="-1">Как с вами связаться?</h3>
       <div class="wz-fields two">
         <div><label for="wz-name">Имя</label><input id="wz-name" autocomplete="name"></div>
-        <div><label for="wz-phone">Телефон или мессенджер</label><input id="wz-phone" autocomplete="tel"></div>
-        <div><label for="wz-email">E-mail</label><input id="wz-email" type="email" autocomplete="email"></div>
+        <div><label for="wz-email">E-mail</label><input id="wz-email" type="email" inputmode="email" autocomplete="email"></div>
+        <div><label for="wz-phone">Телефон или мессенджер, если так удобнее</label><input id="wz-phone" autocomplete="tel"></div>
       </div>
-      <label class="wz-agree"><input type="checkbox" id="wz-ok"> <span>Согласен на обработку персональных данных</span></label>
+      <div class="wz-hp" aria-hidden="true"><label for="wz-site">Сайт</label><input id="wz-site" tabindex="-1" autocomplete="off"></div>
+      <label class="wz-agree"><input type="checkbox" id="wz-ok"> <span>Согласен на <a href="consent.html" target="_blank" rel="noopener">обработку персональных данных</a> по <a href="policy.html" target="_blank" rel="noopener">политике QOPP</a></span></label>
     </div>
 
     <div class="wz-step" data-step="done" hidden>
-      <h3 tabindex="-1">Заявка готова. Осталось отправить</h3>
-      <p class="hint">По кнопке текст скопируется: вставьте его в чат. Ответим в будни с 9:00 до 19:00 по Москве.</p>
-      <div class="wz-out" id="wz-out"></div>
-      <div class="wz-send">
-        <button type="button" class="main" id="wz-copy" data-href="https://t.me/qopphelp_bot">Скопировать и открыть Telegram</button>
-        <a href="https://max.ru/id781604083587_bot" target="_blank" rel="noopener" data-copy-first>MAX</a>
-        <a href="https://app.leadteh.ru/w/dxQgp" target="_blank" rel="noopener" data-copy-first>WhatsApp</a>
+      <h3 tabindex="-1" id="wz-done-h">Заявка отправлена</h3>
+      <p class="hint" id="wz-done-p">Ответим на вашу почту в будни с 9:00 до 19:00 по Москве.</p>
+      <div id="wz-fail" hidden>
+        <div class="wz-out" id="wz-out"></div>
+        <div class="wz-send">
+          <a class="main" id="wz-mail" href="mailto:info@qopp.ru">Открыть в почте</a>
+          <button type="button" id="wz-copy">Скопировать текст</button>
+        </div>
+        <p class="wz-note" id="wz-copied" aria-live="polite"></p>
       </div>
-      <p class="wz-note" id="wz-copied" aria-live="polite"></p>
     </div>
 
     <p class="wz-err" id="wz-err" role="alert"></p>
@@ -883,8 +948,8 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     <h2 class="part">После заявки</h2>
   </div>
   <div class="vows">
-    <div class="vow part"><h3>Разговор</h3><p>Связываемся с вами и уточняем задачу: объёмы, сроки, формат работы.</p></div>
-    <div class="vow part"><h3>Предложение</h3><p>Отправляем его туда, где вам удобнее: на почту или в мессенджер.</p></div>
+    <div class="vow part"><h3>Разговор</h3><p>Отвечаем на вашу почту и уточняем задачу: объёмы, сроки, формат работы.</p></div>
+    <div class="vow part"><h3>Предложение</h3><p>Присылаем его письмом.</p></div>
   </div>
 </section>
 
@@ -898,9 +963,8 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
       <form class="coop-form" novalidate>
         <input name="name" placeholder="Имя" autocomplete="name" aria-label="Имя">
         <input name="email" type="email" placeholder="E-mail" autocomplete="email" aria-label="E-mail">
-        <input name="phone" type="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel" aria-label="Телефон">
         <button class="foot-btn" type="submit">Продолжить</button>
-        <label class="agree"><input type="checkbox" checked> Согласен на обработку личных данных</label>
+        <label class="agree"><input type="checkbox"> <span>Согласен на <a href="consent.html">обработку персональных данных</a></span></label>
         <p class="form-done" hidden>Заявка принята, мы свяжемся с вами</p>
       </form>
     </div>
@@ -921,8 +985,9 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     </div>
   </div>
   <div class="foot-legal">
-    <span>Политика обработки персональных данных</span>
-    <span>Согласие на обработку персональных данных</span>
+    <a href="policy.html">Политика обработки персональных данных</a>
+    <a href="consent.html">Согласие на обработку персональных данных</a>
+    <a href="offer.html">Публичная оферта</a>
     <a href="legal.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px">© QOPP 2026. Все права защищены</a>
   </div>
 </footer>
@@ -1197,13 +1262,13 @@ toTop.addEventListener('click',()=>{
   addEventListener('scroll',req,{passive:true});addEventListener('resize',req);
   setTimeout(frame,60);frame();
 })();
-/* форма в подвале: передаёт имя, почту и телефон в пошаговую форму на partners.html (sessionStorage, не адрес) */
+/* форма в подвале: передаёт имя и почту в пошаговую форму на partners.html (sessionStorage, не адрес) */
 const coopForm=document.querySelector('.coop-form');
 if(coopForm){
   coopForm.addEventListener('submit',e=>{
     e.preventDefault();
     const v=n=>coopForm.elements[n].value.trim();
-    try{sessionStorage.setItem('qopp-foot-form',JSON.stringify({name:v('name'),email:v('email'),phone:v('phone'),ok:coopForm.querySelector('.agree input').checked}))}catch(err){}
+    try{sessionStorage.setItem('qopp-foot-form',JSON.stringify({name:v('name'),email:v('email'),ok:coopForm.querySelector('.agree input').checked}))}catch(err){}
     location.href='partners.html#form';
     if(location.pathname.endsWith('partners.html'))location.reload();
   });
@@ -1223,7 +1288,7 @@ if(coopForm){
   const KEY='qopp-partner-draft';
   let st={who:'',detail:'',cats:[],company:'',city:'',inn:'',name:'',phone:'',email:'',ok:false};
   try{Object.assign(st,JSON.parse(sessionStorage.getItem(KEY)||'{}'))}catch(e){}
-  /* короткая форма в подвале любой страницы передаёт сюда имя, почту и телефон (через sessionStorage, не через адрес) */
+  /* короткая форма в подвале любой страницы передаёт сюда имя и почту (через sessionStorage, не через адрес) */
   try{const f=JSON.parse(sessionStorage.getItem('qopp-foot-form')||'null');if(f){Object.assign(st,f);sessionStorage.removeItem('qopp-foot-form')}}catch(e){}
   const $=id=>document.getElementById(id), steps=[...document.querySelectorAll('.wz-step')];
   const order=()=>['who','detail','cats'].concat(st.who==='blog'?[]:['company'],['contact','done']);
@@ -1244,10 +1309,9 @@ if(coopForm){
     $('wz-fill').style.width=(id==='done'?100:Math.round(i/n*100))+'%';
     $('wz-n').textContent=id==='done'?'Готово':'Шаг '+(i+1)+' из '+n;
     $('wz-back').hidden=i===0;$('wz-next').hidden=id==='done';
-    $('wz-next').textContent=o[i+1]==='done'?'Собрать заявку':'Далее';
+    $('wz-next').textContent=o[i+1]==='done'?'Отправить заявку':'Далее';
     $('wz-err').textContent='';
     if(id==='detail'){const d=DETAIL[st.who];$('wz-dq').textContent=d[0];$('wz-dl').textContent=d[1];$('wz-detail').placeholder=d[2];$('wz-dh').textContent=''}
-    if(id==='done')$('wz-out').textContent=text();
     if(focus){const h=steps.find(s=>s.dataset.step===id).querySelector('h3');h.focus({preventScroll:true});$('wz').scrollIntoView({block:'start',behavior:'smooth'})}
   }
   function check(){
@@ -1259,8 +1323,8 @@ if(coopForm){
     if(cur==='contact'){
       st.name=v('wz-name');st.phone=v('wz-phone');st.email=v('wz-email');st.ok=$('wz-ok').checked;
       if(!st.name)return 'Как к вам обращаться?';
-      if(!st.phone&&!st.email)return 'Оставьте телефон, мессенджер или e-mail';
-      if(st.email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(st.email))return 'Проверьте e-mail';
+      if(!st.email)return 'Оставьте e-mail: ответим письмом';
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(st.email))return 'Проверьте e-mail';
       if(!st.ok)return 'Нужно согласие на обработку персональных данных';
     }
     return '';
@@ -1274,15 +1338,39 @@ if(coopForm){
   catBox.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
     const v=b.dataset.v,i=st.cats.indexOf(v);i<0?st.cats.push(v):st.cats.splice(i,1);save();press(catBox,x=>st.cats.includes(x.dataset.v));$('wz-err').textContent='';
   }));
-  $('wz-next').addEventListener('click',()=>{const e=check();if(e){$('wz-err').textContent=e;return}save();const o=order();show(o[o.indexOf(cur)+1],true)});
+  /* отправка: запрос на send.php, тот пересылает заявку письмом на корпоративную почту. Не вышло: предлагаем письмо из своей почты */
+  const T0=Date.now();
+  async function send(){
+    const b=$('wz-next');b.disabled=true;b.textContent='Отправляем';
+    let ok=false;
+    try{
+      const r=await fetch('send.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        who:WHO[st.who],detail:st.detail,cats:st.cats.join(', '),company:st.who==='blog'?'':st.company,city:st.city,inn:st.inn,
+        name:st.name,email:st.email,phone:st.phone,ok:st.ok,site:$('wz-site').value,ms:Date.now()-T0,page:location.pathname})});
+      ok=r.ok&&(await r.json()).ok===true;
+    }catch(e){}
+    b.disabled=false;
+    $('wz-fail').hidden=ok;
+    if(ok){
+      $('wz-done-h').textContent='Заявка отправлена';
+      $('wz-done-p').textContent='Ответим на '+st.email+' в будни с 9:00 до 19:00 по Москве.';
+      try{sessionStorage.removeItem(KEY)}catch(e){}
+    }else{
+      $('wz-done-h').textContent='Не получилось отправить с сайта';
+      $('wz-done-p').textContent='Заявка собрана. Отправьте её письмом на info@qopp.ru: текст подставится сам.';
+      $('wz-out').textContent=text();
+      $('wz-mail').href='mailto:info@qopp.ru?subject='+encodeURIComponent('Заявка на сотрудничество')+'&body='+encodeURIComponent(text());
+    }
+    show('done',true);
+  }
+  $('wz-next').addEventListener('click',()=>{const e=check();if(e){$('wz-err').textContent=e;return}save();const o=order(),nx=o[o.indexOf(cur)+1];if(nx==='done')send();else show(nx,true)});
   $('wz-back').addEventListener('click',()=>{const o=order();show(o[Math.max(0,o.indexOf(cur)-1)],true)});
   document.querySelectorAll('.wz-fields input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('wz-next').click()}}));
   async function copy(){
     try{await navigator.clipboard.writeText(text());$('wz-copied').textContent='Текст заявки скопирован.';return true}
     catch(e){$('wz-copied').textContent='Не получилось скопировать автоматически. Выделите текст заявки выше и скопируйте вручную.';return false}
   }
-  $('wz-copy').addEventListener('click',async e=>{await copy();window.open(e.currentTarget.dataset.href,'_blank','noopener')});
-  document.querySelectorAll('[data-copy-first]').forEach(l=>l.addEventListener('click',()=>{copy()}));
+  $('wz-copy').addEventListener('click',()=>{copy()});
   /* пришли из формы в подвале: контакты уже есть, начинаем с первого шага, они подставятся в конце */
   show('who',false);
 }
