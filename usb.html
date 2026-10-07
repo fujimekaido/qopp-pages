@@ -416,7 +416,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   .reveal .part{opacity:1;transform:none}
 }
 
-/* ============ интерактив каталога (с 01.10.2026): «Сколько копируется файл», «Классы скорости» и «Сколько влезет» ============
+/* ============ интерактив каталога (с 01.10.2026): «Сколько копируется файл», «Классы скорости» и «Что поместится» ============
    Общие стили двух блоков, подставляются в <style> страницы плейсхолдером cfx-css.
    Разметка: фрагменты race, classes-microsd, fits-microsd, fits-usb. Поведение: js:race, js:classes и js:fits. */
 .cfx{position:relative;background:#fbfbfc;padding:clamp(56px,9vh,112px) clamp(16px,5vw,72px)}
@@ -877,14 +877,14 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
       </div>
     </section>
 
-    <!-- сколько влезет: объёмы флешек 32, 64 и 128 ГБ. Расчёт: Full HD около 7 ГБ в час, снимок 5 МБ, трек 8 МБ -->
-    <section class="cfx fits reveal" id="fits" aria-labelledby="fits-h" data-caps="32,64,128">
+    <!-- что поместится: объёмы флешек 32, 64, 128 и 256 ГБ (256 добавил владелец 07.10.2026). Расчёт: Full HD около 7 ГБ в час, снимок 5 МБ, трек 8 МБ -->
+    <section class="cfx fits reveal" id="fits" aria-labelledby="fits-h" data-caps="32,64,128,256">
       <div class="cfx-in">
-        <h2 class="part" id="fits-h">Сколько влезет</h2>
+        <h2 class="part" id="fits-h">Что поместится</h2>
         <div class="fits-ctl part">
           <output class="fits-cap" for="fits-range">64 ГБ</output>
-          <input class="fits-range" id="fits-range" type="range" min="0" max="2" step="1" value="1" aria-label="Объём флеш-накопителя" aria-valuetext="64 ГБ">
-          <div class="fits-ticks" aria-hidden="true"><span>32</span><span class="on">64</span><span>128</span></div>
+          <input class="fits-range" id="fits-range" type="range" min="0" max="3" step="1" value="1" aria-label="Объём флеш-накопителя" aria-valuetext="64 ГБ">
+          <div class="fits-ticks" aria-hidden="true"><span>32</span><span class="on">64</span><span>128</span><span>256</span></div>
         </div>
         <dl class="fits-nums part">
           <div data-mb="7000" data-frac><dt>видео Full HD</dt><dd><b>9,1</b><small>ч</small></dd></div>
@@ -1113,7 +1113,7 @@ toTop.addEventListener('click',()=>{
   scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'});
 });
 
-/* ============ fits: сколько влезет (с 01.10.2026) ============
+/* ============ fits: что поместится (с 01.10.2026, до 07.10.2026 блок назывался «Сколько влезет») ============
    Блок #fits на страницах карт памяти и флешек: ползунок объёма, цифры пересчитываются на лету.
    Объёмы лежат в data-caps секции (ГБ), размер единицы в data-mb у каждой цифры (МБ; у часов видео это МБ в час),
    линейки с их объёмами в data-caps у ссылок. Гигабайт считаем как 1000 МБ, как на упаковке. */
