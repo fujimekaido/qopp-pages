@@ -204,7 +204,7 @@ a.mi{cursor:pointer;text-decoration:none}
 .a-hero .sub b{color:var(--ink);font-weight:600}
 /* фирменная Q: рисуется при загрузке */
 .q-mark{
-  position:absolute;right:-2%;top:50%;transform:translateY(-52%);
+  position:absolute;right:clamp(20px,4vw,56px);top:50%;transform:translateY(-52%); /* хвост буквы Q целиком в кадре: отступ как у логотипа шапки (07.10.2026) */
   width:clamp(260px,34vw,520px);height:auto;pointer-events:none;
 }
 .q-mark .ring{
