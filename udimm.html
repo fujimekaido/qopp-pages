@@ -509,6 +509,13 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .fit-buy{background:var(--ink);border-color:var(--ink);color:#fff}
 .fit-buy:hover,.fit-buy:focus-visible{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
 
+/* --- для чего подойдёт QBOOK 15 (notebooks): вердикт по задаче --- */
+.use-v span{display:none}
+.use-card[data-v="yes"] .use-v span[data-v="yes"],.use-card[data-v="part"] .use-v span[data-v="part"],.use-card[data-v="no"] .use-v span[data-v="no"]{display:inline}
+.use-card[data-v="yes"] .use-v{color:var(--accent-deep)}
+.use-card[data-v="no"] .use-v{color:var(--muted)}
+.use-card[data-v="part"] .fit-gen{font-size:clamp(28px,3.6vw,44px)}
+
 /* --- какая память в вашем устройстве (ram): два формата в одном масштабе --- */
 .ff-stage{display:flex;align-items:flex-end;justify-content:center;gap:clamp(14px,3vw,40px);margin:clamp(28px,4.6vh,48px) auto 0;max-width:980px}
 .ff-mod{display:block;color:inherit;text-decoration:none;transition:opacity .35s var(--ease),transform .35s var(--ease)}
