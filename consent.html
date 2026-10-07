@@ -555,7 +555,7 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   /* буква Q в шапке текстовых страниц: целиком в кадре справа под кнопкой меню, хвост не срезан краем экрана;
      текст хиро начинается под ней, а не поверх (замечание владельца 07.10.2026: «хвостик заезжает») */
   .q-mark{top:64px!important;right:16px!important;transform:none!important;width:40vw!important;opacity:.9!important}
-  .a-hero:has(.q-mark){padding-top:calc(82px + 44.5vw)}
+  .a-hero:has(.q-mark){padding-top:calc(80px + 41vw)}
   /* хиро текстовых страниц: меньше пустого места сверху и снизу, кикер крупнее (замечание владельца 07.10.2026) */
   .a-hero,.w-hero{min-height:0;padding-top:104px;padding-bottom:36px}
   .kicker{font-size:13px;letter-spacing:.2em}
@@ -863,10 +863,9 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 </div>
 
 <header class="a-hero reveal">
-  <svg class="q-mark" viewBox="0 0 360 400" aria-hidden="true">
-    <circle class="ring" cx="150" cy="150" r="119"/>
-    <circle class="spark" cx="150" cy="150" r="119"/>
-    <path class="tail" d="M254 233 L318 361 L185 292 Z"/>
+  <svg class="q-mark" viewBox="0 0 804 816" aria-hidden="true">
+    <!-- контур Q из шрифта Montserrat QOPP Bold; без скрипта стоит тихой буквой, js:fx добавляет импульс и деления -->
+    <path d="M536 697Q466 724 383 724Q274 724 186.5 677Q99 630 49.5 547.5Q0 465 0 362Q0 259 49.5 176.5Q99 94 186.5 47Q274 0 383 0Q492 0 579 47Q666 94 716 176.5Q766 259 766 362Q766 465 716 547Q704 567 690 585L804 816ZM602 362Q602 297 573.5 246Q545 195 495 166.5Q445 138 383 138Q321 138 271 166.5Q221 195 192.5 246Q164 297 164 362Q164 427 192.5 478Q221 529 271 557.5Q321 586 383 586Q445 586 495 557.5Q545 529 573.5 478Q602 427 602 362Z" fill="#14161c" opacity=".08"/>
   </svg>
   <div class="inner">
     <p class="kicker part">Правовая информация</p>
@@ -1098,9 +1097,12 @@ toTop.addEventListener('click',()=>{
 
 /* ============ fx: интерактив текстовых страниц (с 22 сентября 2026) ============
    Приёмы, стили внедряет сам скрипт, разметке нужны только атрибуты:
-   0. Буква Q в шапке страницы (svg.q-mark): фирменная Q из логотипа, по кольцу бежит золотой импульс и уходит в хвост,
-      внутри медленно вращаются деления; прокрутка разгоняет импульс. С 05.10.2026, вместо простой крутящейся дуги.
-   1. Кнопка «наверх» становится буквой Q: кольцо дорисовывается по мере чтения, в конце загорается хвост.
+   0. Буква Q в шапке страницы (svg.q-mark): контур буквы Q из шрифта Montserrat QOPP (Bold, тот же, что отдан дизайнеру),
+      по кольцу бежит золотой импульс и уходит в хвост, внутри кольца медленно плывут деления; прокрутка разгоняет импульс.
+      Импульс и деления обрезаны по контуру буквы (clipPath), вспышка хвоста это сама буква за пределами кольца (mask):
+      ничего не выходит за букву и не заезжает внутрь кольца (замечание владельца 07.10.2026). До этого: кольцо и хвост
+      рисовались отдельно (05.10.2026), ещё раньше простая крутящаяся дуга.
+   1. Кнопка «наверх» становится той же буквой Q: кольцо наливается золотом по мере чтения, в конце загорается хвост.
    2. Параллакс: [data-par] едет внутри своей рамки. Контурные слова на фоне (data-ghost) убраны 05.10.2026 по решению владельца.
    3. [data-words] и .pull: ключевая фраза наливается по словам, пока проходит середину экрана. Одна на страницу.
    4. Строки .vow, .chan, .mp, .pillar: золотая линия дорисовывается слева направо при наведении (родня ссылкам подвала).
@@ -1112,12 +1114,12 @@ toTop.addEventListener('click',()=>{
   const st=document.createElement('style');
   st.textContent=`
 .to-top{overflow:visible}
-.fx-q{position:absolute;left:-5px;top:-5px;width:74px;height:82px;pointer-events:none;overflow:visible}
-.fx-q circle{fill:none;stroke-width:3}
-.fx-q .t{stroke:rgba(20,22,28,.1)}
-.fx-q .p{stroke:#b8863b;stroke-linecap:round;transition:stroke-dashoffset .15s linear}
-.fx-q path{fill:rgba(20,22,28,.14);transition:fill .5s ease}
-.fx-q.full path{fill:#b8863b}
+/* кнопка «наверх»: контур Q из шрифта вокруг кнопки, кольцо наливается золотом по мере чтения, хвост загорается в конце */
+.fx-q{position:absolute;left:-6px;top:-4px;width:65px;height:66px;pointer-events:none;overflow:visible}
+.fx-q .g{fill:rgba(20,22,28,.1)}
+.fx-q .p{fill:none;stroke:#b8863b;stroke-width:170;transition:stroke-dashoffset .15s linear}
+.fx-q .tl{fill:#b8863b;opacity:0;transition:opacity .5s ease}
+.fx-q.full .tl{opacity:1}
 @media (hover:hover){
   .vow,.chan,.mp,.pillar{position:relative;transition:padding-left .45s cubic-bezier(.22,.61,.2,1)}
   .vow::before,.chan::before,.mp::before,.pillar::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:#b8863b;
@@ -1127,18 +1129,18 @@ toTop.addEventListener('click',()=>{
 }
 .fx-par-wrap{overflow:hidden}
 .dark-strip .ds-photo[data-par]{height:124%;top:-12%;will-change:transform}
-/* буква Q в шапке: тело (кольцо и хвост из логотипа), деления, золотой импульс с шлейфом, вспышка хвоста */
+/* буква Q в шапке: тело (контур из шрифта), деления, золотой импульс со шлейфом, вспышка хвоста.
+   Ход импульса и делений задан смещением штриха по эллипсу середины кольца (pathLength=1000), без вращения. */
 .q-mark.q2 .q2-body{opacity:0;animation:q2in 1.2s cubic-bezier(.22,.61,.2,1) .2s forwards}
-.q2-ring{fill:none;stroke:#14161c;stroke-width:52;opacity:.08}
-.q2-tail{fill:#14161c;opacity:.08}
-.q2-cells{fill:none;stroke:#14161c;stroke-width:30;stroke-dasharray:3 12.577;opacity:.09;transform-origin:150px 150px;animation:q2back 90s linear infinite}
-.q2-orbit{transform-origin:150px 150px;opacity:0;animation:q2spin 7s linear 1s infinite,q2show .8s ease 1s forwards}
-.q2-orbit circle{fill:none;stroke:#e3a94f;stroke-width:52}
+.q2-glyph{fill:#14161c;opacity:.08}
+.q2-cells{fill:none;stroke:#14161c;stroke-width:64;stroke-dasharray:4 16.83;opacity:.1;animation:q2back 120s linear infinite}
+.q2-orbit{opacity:0;animation:q2show .8s ease 1s forwards}
+.q2-orbit ellipse{fill:none;stroke:#e3a94f;stroke-width:180;animation:q2run 7s linear 1s infinite}
 .q2-glow{fill:#e3a94f;opacity:0;animation:q2flash 7s linear 1s infinite}
 @keyframes q2in{to{opacity:1}}
 @keyframes q2show{to{opacity:1}}
-@keyframes q2spin{from{transform:rotate(-20deg)}to{transform:rotate(340deg)}}
-@keyframes q2back{to{transform:rotate(-360deg)}}
+@keyframes q2run{from{stroke-dashoffset:var(--o)}to{stroke-dashoffset:calc(var(--o) - 1000)}}
+@keyframes q2back{to{stroke-dashoffset:1000}}
 @keyframes q2flash{0%{opacity:.95}16%{opacity:0}97%{opacity:0}100%{opacity:.95}}
 @media (prefers-reduced-motion:reduce){.q-mark.q2 .q2-body{opacity:1}.q2-orbit,.q2-glow{display:none}}
 .fx-w{transition:opacity .25s linear}
@@ -1160,19 +1162,25 @@ toTop.addEventListener('click',()=>{
   document.head.appendChild(st);
 
   /* ---- 0. буква Q в шапке страницы ----
-     Геометрия хвоста взята из вектора логотипа (те же доли кольца, что в шрифте Montserrat QOPP).
-     Импульс: три дуги одной головой, каждая длиннее и прозрачнее предыдущей. Старт анимации выставлен так,
-     что голова проходит основание хвоста в начале цикла, в этот момент хвост вспыхивает. */
+     QD: контур буквы Q из MontserratQOPP-Bold.ttf (fontTools, y перевёрнут, viewBox 0 0 804 816). Кольцо буквы почти круг:
+     центр (383,362), внешние полуоси 383×362, просвет 219×224, середина кольца 301×293. Хвост выходит из кольца под 47°.
+     Импульс: три дуги одной головой, каждая длиннее и прозрачнее предыдущей, ход от хвоста по часовой; в начале цикла
+     голова стоит на основании хвоста, и хвост вспыхивает. Длины в тысячных периметра (pathLength=1000). */
+  const QD='M536 697Q466 724 383 724Q274 724 186.5 677Q99 630 49.5 547.5Q0 465 0 362Q0 259 49.5 176.5Q99 94 186.5 47Q274 0 383 0Q492 0 579 47Q666 94 716 176.5Q766 259 766 362Q766 465 716 547Q704 567 690 585L804 816ZM602 362Q602 297 573.5 246Q545 195 495 166.5Q445 138 383 138Q321 138 271 166.5Q221 195 192.5 246Q164 297 164 362Q164 427 192.5 478Q221 529 271 557.5Q321 586 383 586Q445 586 495 557.5Q545 529 573.5 478Q602 427 602 362Z',QCX=383,QCY=362,QRX=301,QRY=293,QTAIL=47;
   const qm=document.querySelector('svg.q-mark');
   let qAn=[],qV=0,qRaf=0,qY=scrollY;
   if(qm){
-    const arc=(len,op)=>'<circle cx="150" cy="150" r="119" stroke-dasharray="'+len+' '+(747.7-len).toFixed(1)+'" stroke-dashoffset="'+(len-150)+'" opacity="'+op+'"/>';
-    const tail='M260.9 246.2 L309.2 336.3 L214 281.5 L205 262 L246 236 Z';
+    const arc=(len,op)=>{const start=1000*QTAIL/360-len;
+      return '<ellipse cx="'+QCX+'" cy="'+QCY+'" rx="'+QRX+'" ry="'+QRY+'" pathLength="1000" stroke-dasharray="'+len+' '+(1000-len)+'" style="--o:'+(-start).toFixed(1)+'" opacity="'+op+'"/>'};
+    qm.setAttribute('viewBox','0 0 804 816');
     qm.classList.add('q2');
-    qm.innerHTML='<g class="q2-body"><circle class="q2-ring" cx="150" cy="150" r="119"/><path class="q2-tail" d="'+tail+'"/><circle class="q2-cells" cx="150" cy="150" r="119"/></g>'+
-      '<path class="q2-glow" d="'+tail+'"/><g class="q2-orbit">'+arc(150,.16)+arc(104,.3)+arc(58,.95)+'</g>';
+    qm.innerHTML='<defs><clipPath id="q2c"><path d="'+QD+'"/></clipPath>'+
+      '<mask id="q2m"><rect width="804" height="816" fill="#fff"/><ellipse cx="'+QCX+'" cy="'+QCY+'" rx="386" ry="365" fill="#000"/></mask></defs>'+
+      '<g class="q2-body"><path class="q2-glyph" d="'+QD+'"/><g clip-path="url(#q2c)"><ellipse class="q2-cells" cx="'+QCX+'" cy="'+QCY+'" rx="'+QRX+'" ry="'+QRY+'" pathLength="1000"/></g></g>'+
+      '<path class="q2-glow" d="'+QD+'" mask="url(#q2m)"/>'+
+      '<g clip-path="url(#q2c)"><g class="q2-orbit">'+arc(200,.16)+arc(140,.3)+arc(78,.95)+'</g></g>';
     if(!RM.matches&&qm.getAnimations){
-      setTimeout(()=>{try{qAn=qm.getAnimations({subtree:true}).filter(a=>/q2spin|q2flash|q2back/.test(a.animationName))}catch(e){}},1200);
+      setTimeout(()=>{try{qAn=qm.getAnimations({subtree:true}).filter(a=>/q2run|q2flash|q2back/.test(a.animationName))}catch(e){}},1200);
       /* прокрутка разгоняет импульс, потом он сам возвращается к обычному ходу */
       const spin=()=>{qRaf=0;const r=1+qV;qAn.forEach(a=>{a.playbackRate=r});qV*=.93;if(qV>.03)qRaf=requestAnimationFrame(spin);else{qV=0;qAn.forEach(a=>{a.playbackRate=1})}};
       addEventListener('scroll',()=>{const y=scrollY;qV=Math.min(7,qV+Math.abs(y-qY)/60);qY=y;if(!qRaf&&qAn.length)qRaf=requestAnimationFrame(spin)},{passive:true});
@@ -1181,11 +1189,13 @@ toTop.addEventListener('click',()=>{
 
   /* ---- 1. Q вокруг кнопки «наверх» ---- */
   const tt=document.getElementById('to-top');
-  let qP=null,qS=null;const LEN=2*Math.PI*27;
+  let qP=null,qS=null;const LEN=1000;
   if(tt){
     const NS='http://www.w3.org/2000/svg',svg=document.createElementNS(NS,'svg');
-    svg.setAttribute('class','fx-q');svg.setAttribute('viewBox','0 0 74 82');svg.setAttribute('aria-hidden','true');
-    svg.innerHTML='<circle class="t" cx="29" cy="29" r="27"/><circle class="p" cx="29" cy="29" r="27" transform="rotate(-90 29 29)" stroke-dasharray="'+LEN.toFixed(1)+'" stroke-dashoffset="'+LEN.toFixed(1)+'"/><path d="M52.6 47.8 L67.1 76.9 L36.9 61.2 Z"/>';
+    svg.setAttribute('class','fx-q');svg.setAttribute('viewBox','0 0 804 816');svg.setAttribute('aria-hidden','true');
+    svg.innerHTML='<defs><clipPath id="fxc"><path d="'+QD+'"/></clipPath><mask id="fxm"><rect width="804" height="816" fill="#fff"/><ellipse cx="'+QCX+'" cy="'+QCY+'" rx="386" ry="365" fill="#000"/></mask></defs>'+
+      '<path class="g" d="'+QD+'"/><g clip-path="url(#fxc)"><ellipse class="p" cx="'+QCX+'" cy="'+QCY+'" rx="'+QRX+'" ry="'+QRY+'" pathLength="1000" transform="rotate(-90 '+QCX+' '+QCY+')" stroke-dasharray="1000" stroke-dashoffset="1000"/></g>'+
+      '<path class="tl" d="'+QD+'" mask="url(#fxm)"/>';
     tt.appendChild(svg);qS=svg;qP=svg.querySelector('.p');
   }
 
