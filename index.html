@@ -54,6 +54,12 @@ addEventListener('dragstart',e=>{if(e.target.closest&&e.target.closest(M))e.prev
   --display:'Montserrat',sans-serif;
   --body:'Montserrat',sans-serif;
   --mono:'Montserrat',sans-serif;
+  /* токены белого мира для блока «Сколько копируется файл» (общие стили cfx-css со страницей SSD) */
+  --ink:#14161c;
+  --muted:#5b6068;
+  --silver:#8b9098;
+  --accent-deep:#b8863b;
+  --display-lat:'Montserrat',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 /* alt-текст не мелькает, пока картинка грузится; для дикторов и поиска он остаётся */
@@ -428,17 +434,20 @@ main{position:relative;z-index:2;background:var(--canvas)}
   font-size:clamp(14px,1.35vw,19px);letter-spacing:.2em;text-transform:uppercase;
 }
 .utp-card p{color:#a5abb7;font-size:clamp(13px,1.05vw,15px);line-height:1.55;margin-top:14px;max-width:30ch}
+/* картинка в явной рамке с object-fit: проценты высоты у карточки с aspect-ratio Safari на iPhone не считал,
+   орёл и планета вылезали за карточку, а текст казался мелким (замечание владельца 07.10.2026) */
 .utp-card img{
-  width:auto;max-width:78%;height:auto;max-height:46%;
-  margin:auto auto 4% ;display:block;object-fit:contain;
+  width:78%;height:clamp(120px,15vw,230px);
+  margin:auto auto 4%;display:block;object-fit:contain;object-position:center bottom;
 }
-.utp-card.wide img{max-width:92%}
+.utp-card.wide img{width:92%}
 @media (max-width:860px){
   .utp{padding-bottom:clamp(90px,13vh,140px)}
   .utp-row{grid-template-columns:1fr;gap:clamp(16px,3vh,26px);max-width:460px}
-  .utp-card{aspect-ratio:1.2}
-  .utp-card p{max-width:none}
-  .utp-card img{max-height:52%}
+  .utp-card{aspect-ratio:auto;padding:26px 24px 24px}
+  .utp-card h3{font-size:16px}
+  .utp-card p{max-width:none;font-size:14.5px;line-height:1.5}
+  .utp-card img{width:72%;height:clamp(150px,42vw,200px);margin-top:26px}
 }
 @media (prefers-reduced-motion: reduce){.utp-card{-webkit-box-reflect:none}}
 .dawn{height:26vh;background:linear-gradient(180deg,#cab29c 0%,#e2d5c6 45%,#f0ebe3 75%,#f6f6f7 100%)}
@@ -500,6 +509,91 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   .band{display:none}
   .static-copy{display:flex}
 }
+
+/* ============ «Сколько копируется файл» на главной (с 07.10.2026, просьба владельца) ============
+   Тот же блок, что на странице SSD (фрагмент race, стили cfx-css, поведение js:race), стоит сразу после финала фильма.
+   Фон подобран к началу блока доверия, чтобы оба читались одной светлой площадкой. */
+
+/* ============ интерактив каталога (с 01.10.2026): «Сколько копируется файл», «Классы скорости» и «Сколько влезет» ============
+   Общие стили двух блоков, подставляются в <style> страницы плейсхолдером cfx-css.
+   Разметка: фрагменты race, classes-microsd, fits-microsd, fits-usb. Поведение: js:race, js:classes и js:fits. */
+.cfx{position:relative;background:#fbfbfc;padding:clamp(56px,9vh,112px) clamp(16px,5vw,72px)}
+.cfx+.cfx{padding-top:0}
+.cfx-in{max-width:980px;margin:0 auto}
+.cfx h2{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:clamp(20px,2.6vw,38px);line-height:1.15;text-align:center}
+.cfx-note{max-width:62ch;margin:clamp(22px,3.4vh,34px) auto 0;font-size:13px;line-height:1.5;color:var(--muted);text-align:center}
+
+/* --- сколько копируется файл --- */
+.race-pick{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:clamp(22px,3.4vh,34px)}
+.rchip{font-family:var(--body);font-size:14px;font-weight:500;color:var(--muted);background:#fff;border:1px solid #cfd2d7;border-radius:999px;
+  padding:0 18px;min-height:44px;cursor:pointer;transition:color .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease)}
+.rchip b{font-weight:600;margin-left:6px}
+.rchip:hover{color:var(--ink);border-color:#8f939b}
+.rchip.on{color:#fff;background:var(--ink);border-color:var(--ink)}
+.race-rows{display:grid;gap:clamp(14px,2.2vh,22px);margin-top:clamp(28px,4.6vh,48px)}
+.rrow{display:grid;grid-template-columns:minmax(170px,210px) 1fr minmax(120px,auto);align-items:center;gap:clamp(12px,2vw,28px)}
+.rname{display:flex;flex-direction:column;justify-content:center;min-height:44px;color:inherit;text-decoration:none}
+.rname b{font-family:var(--display-lat);font-weight:400;font-size:clamp(15px,1.5vw,20px);letter-spacing:.14em;line-height:1.1}
+.rname span{margin-top:5px;font-size:13px;color:var(--muted)}
+.rbar{height:10px;border-radius:999px;background:rgba(20,22,28,.08);overflow:hidden}
+.rbar i{display:block;height:100%;border-radius:inherit;background:var(--ink);transform-origin:left center}
+.rrow.fast .rbar i{background:var(--accent-deep)}
+.rtime{font-family:var(--display);font-weight:600;font-size:clamp(17px,1.7vw,22px);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;
+  color:#6b7078;transition:color .3s var(--ease)}
+.rrow.done .rtime{color:var(--ink)}
+
+/* --- классы скорости карт памяти: строки те же, что у копирования, полоска показывает гарантированный минимум --- */
+.cls .rtime{color:var(--ink);font-weight:500}
+.cls .rtime b{font-weight:600}
+@media (min-width:641px){.cls .rrow{grid-template-columns:minmax(170px,210px) 1fr 190px}}
+.cls .rn{display:none;font-size:14px;font-weight:500;color:var(--muted)}
+.cls .rrow.none .rv{display:none}
+.cls .rrow.none .rn{display:inline}
+.cls .rtime small{font-size:max(12px,.62em);font-weight:500;margin-left:.35em;color:var(--muted)}
+.cls .rname span{font-variant-numeric:tabular-nums}
+.cls .rbar i{transition:background .3s var(--ease)}
+
+/* --- сколько влезет --- */
+.fits-ctl{margin-top:clamp(24px,4vh,40px);text-align:center}
+.fits-cap{display:block;font-family:var(--display);font-weight:700;font-size:clamp(44px,7vw,96px);line-height:1;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.fits-range{-webkit-appearance:none;appearance:none;display:block;width:calc(100% - 18px);max-width:640px;height:44px;margin:clamp(12px,2.2vh,22px) auto 0;
+  background:transparent;cursor:pointer;font-size:16px;--p:50%}
+.fits-range::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--ink) var(--p),rgba(20,22,28,.14) var(--p))}
+.fits-range::-moz-range-track{height:4px;border-radius:2px;background:rgba(20,22,28,.14)}
+.fits-range::-moz-range-progress{height:4px;border-radius:2px;background:var(--ink)}
+.fits-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;margin-top:-11px;border-radius:50%;background:var(--ink);
+  border:4px solid #fbfbfc;box-shadow:0 0 0 1px var(--ink),0 6px 14px rgba(20,22,28,.22);transition:transform .25s var(--ease)}
+.fits-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);border:4px solid #fbfbfc;box-shadow:0 0 0 1px var(--ink),0 6px 14px rgba(20,22,28,.22)}
+.fits-range:hover::-webkit-slider-thumb,.fits-range:active::-webkit-slider-thumb{transform:scale(1.12)}
+.fits-range:focus-visible{outline:none}
+.fits-range:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 2px var(--accent-deep),0 6px 14px rgba(20,22,28,.22)}
+.fits-range:focus-visible::-moz-range-thumb{box-shadow:0 0 0 2px var(--accent-deep),0 6px 14px rgba(20,22,28,.22)}
+.fits-ticks{display:flex;justify-content:space-between;width:100%;max-width:658px;margin:0 auto}
+.fits-ticks span{flex:0 0 44px;padding:4px 0 10px;text-align:center;font-size:13px;color:var(--muted);cursor:pointer;white-space:nowrap;transition:color .3s var(--ease)}
+.fits-ticks span.on{color:var(--ink);font-weight:600}
+.fits-nums{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(22px,3.6vh,40px);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+.fits-nums>div{display:flex;flex-direction:column-reverse;justify-content:center;padding:clamp(18px,3vh,30px) 8px;text-align:center}
+.fits-nums>div+div{border-left:1px solid var(--hairline)}
+.fits-nums dd{font-family:var(--display);font-weight:600;font-size:clamp(22px,3.4vw,44px);line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
+.fits-nums dd small{font-size:max(12px,.5em);font-weight:600;margin-left:.3em}
+.fits-nums dt{margin-top:8px;font-size:13px;line-height:1.3;color:var(--muted)}
+.fits-lines{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0 6px;margin-top:clamp(14px,2.4vh,24px);font-size:14px;color:var(--muted)}
+.fits-lines a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-family:var(--display-lat);font-size:14px;letter-spacing:.14em;color:var(--ink);
+  text-decoration:none;transition:opacity .3s var(--ease)}
+.fits-lines a.off{opacity:.26}
+@media (hover:hover){.fits-lines a:not(.off):hover,.rname:hover b{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}}
+@media (max-width:640px){
+  .rrow{grid-template-columns:1fr auto;gap:6px 12px}
+  .rbar{grid-column:1/-1;grid-row:2}
+  .fits-nums dd{font-size:clamp(19px,5.6vw,26px)}
+  .fits-nums dt{font-size:12px}
+  .fits-ticks span{font-size:12px}
+}
+
+.cfx{background:#efe6da}
+.cfx .rchip{background:rgba(255,255,255,.72)}
+.cfx .rchip.on{background:var(--ink)}
+.cfx .rbar{background:rgba(20,22,28,.1)}
 </style>
 <style id="mobile-fix">
 /* ============ мобильная версия: общие правки для всех страниц (01.10.2026) ============
@@ -536,8 +630,20 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   /* --- каталог по макету адаптива: заголовок над фото, фото крупнее, кнопки под фото ---
      Без цветных стыков (замечание владельца 05.10.2026): зоны заголовка и кнопок одного цвета с шапкой каталога,
      а верх и низ фото мягко уходят в этот цвет. Полоса читается как одно целое, как на большом экране. */
-  /* буква Q в шапке текстовых страниц: на телефоне видна целиком, справа под кнопкой меню */
-  .q-mark{top:58px!important;right:-5%!important;transform:none!important;width:50vw!important;opacity:.9!important}
+  /* буква Q в шапке текстовых страниц: целиком в кадре справа под кнопкой меню, хвост не срезан краем экрана;
+     текст хиро начинается под ней, а не поверх (замечание владельца 07.10.2026: «хвостик заезжает») */
+  .q-mark{top:64px!important;right:16px!important;transform:none!important;width:40vw!important;opacity:.9!important}
+  .a-hero:has(.q-mark){padding-top:calc(82px + 44.5vw)}
+  /* хиро текстовых страниц: меньше пустого места сверху и снизу, кикер крупнее (замечание владельца 07.10.2026) */
+  .a-hero,.w-hero{min-height:0;padding-top:104px;padding-bottom:36px}
+  .kicker{font-size:13px;letter-spacing:.2em}
+  /* кнопка «наверх»: хвост буквы Q вокруг неё не выходит за край экрана */
+  .to-top{right:26px;bottom:32px}
+  /* одна кнопка на полосе каталога (владелец 07.10.2026): если у линейки есть своя страница, остаётся «Узнать больше»,
+     иначе «Купить»; кнопка по центру, как в макете адаптива */
+  .strip-acts a.pbtn:not(.pbtn-buy)~.pbtn-buy{display:none}
+  /* тёмные фото полос (udimm: DDR5 и «Все модели») не растворяются в светлый фон, край чёткий */
+  .strip.dark .strip-link::before,.strip.dark .strip-link::after{display:none}
   .c-hero,.strips,.strip,.cfx{background:#fbfbfc}
   .strip .strip-link{position:relative;display:block}
   .strip .strip-link::before,.strip .strip-link::after{content:"";position:absolute;left:0;right:0;height:20%;pointer-events:none;z-index:1}
@@ -556,10 +662,11 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   .strip#nvme3 img,.strip#base img{object-position:100% 50%}
   .strip#nvme4 img{object-position:85% 50%}
   .strip#udimm img{object-position:10% 50%}
+  .strip#ddr5 img,.strip.dark#all img{object-position:50% 50%}
   .strip#sodimm img{object-position:18% 50%}
   .strip#rush img{object-position:56% 50%}
   .strip#rushplus img,.strip#usb31 img,.strip#usb32c img{object-position:0% 50%}
-  .strip .strip-acts,.strip.lift .strip-acts{position:static;width:auto;margin:0;padding:4px 16px 22px;gap:10px;justify-content:flex-start}
+  .strip .strip-acts,.strip.lift .strip-acts{position:static;width:auto;margin:0;padding:4px 16px 22px;gap:10px;justify-content:center}
   .strip-acts .pbtn{flex:1 1 auto;max-width:240px;min-height:46px;padding:0 14px;font-size:13px;letter-spacing:.05em;gap:8px;border-radius:13px}
   .strip-acts .pbtn svg{width:14px;height:12px}
   .strip-acts .pbtn[aria-disabled="true"]{opacity:.5}
@@ -882,6 +989,38 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 </header>
 
 <main id="main" tabindex="-1">
+    <!-- время копирования: три линейки отдают один и тот же файл. Старшая скорость чтения в линейке, данные владельца 05.10.2026: Q600S 560, Q2000MN 3100, Q7000MN 7000 МБ/с.
+         Блок стоит на странице SSD и на главной (с 07.10.2026, просьба владельца), поэтому ссылки строк ведут на ssd.html с якорем -->
+    <section class="cfx race reveal" id="race" aria-labelledby="race-h">
+      <div class="cfx-in">
+        <h2 class="part" id="race-h">Сколько копируется файл</h2>
+        <div class="race-pick part" role="group" aria-label="Что копируем с накопителя">
+          <button class="rchip on" type="button" data-gb="100" aria-pressed="true">Игра<b>100 ГБ</b></button>
+          <button class="rchip" type="button" data-gb="20" aria-pressed="false">Фильм в 4K<b>20 ГБ</b></button>
+          <button class="rchip" type="button" data-gb="5" aria-pressed="false">1000 фото<b>5 ГБ</b></button>
+        </div>
+        <div class="race-rows part">
+          <div class="rrow" data-mbs="560">
+            <a class="rname" href="ssd.html#sata"><b>SATA</b><span>Q600S, до 560 МБ/с</span></a>
+            <div class="rbar" aria-hidden="true"><i></i></div>
+            <span class="rtime">2 мин 59 с</span>
+          </div>
+          <div class="rrow" data-mbs="3100">
+            <a class="rname" href="ssd.html#nvme3"><b>PCI-E 3.0</b><span>Q2000MN, до 3100 МБ/с</span></a>
+            <div class="rbar" aria-hidden="true"><i></i></div>
+            <span class="rtime">32 с</span>
+          </div>
+          <div class="rrow fast" data-mbs="7000">
+            <a class="rname" href="ssd.html#nvme4"><b>PCI-E 4.0</b><span>Q7000MN, до 7000 МБ/с</span></a>
+            <div class="rbar" aria-hidden="true"><i></i></div>
+            <span class="rtime">14 с</span>
+          </div>
+        </div>
+        <p class="cfx-note part">Копирование с накопителя на максимальной скорости чтения. В жизни время зависит от второго накопителя и самих файлов.</p>
+      </div>
+    </section>
+
+
 </main>
 
 <section class="utp" aria-label="Почему QOPP">
@@ -1022,13 +1161,16 @@ const cue = document.getElementById('cue');
 const hero = document.querySelector('.hero');
 const navEl = document.querySelector('nav');
 
-/* логотип: прячется при прокрутке вниз, возвращается при первом движении вверх */
+/* логотип: прячется при прокрутке вниз, возвращается при первом движении вверх.
+   На телефоне (до 860px) возвращается только у самого верха страницы: иначе он выныривал поверх полей формы
+   и на границе тёмного и светлого блока менял цвет на глазах (замечание владельца 07.10.2026). */
 {
   let lastY=scrollY;
+  const narrow=matchMedia('(max-width:860px)');
   addEventListener('scroll',()=>{
     const y=scrollY;
-    if(y<=80||y<lastY)navEl.classList.remove('logo-hide');
-    else if(y>lastY)navEl.classList.add('logo-hide');
+    if(y<=80||(y<lastY&&!narrow.matches))navEl.classList.remove('logo-hide');
+    else navEl.classList.add('logo-hide');
     lastY=y;
   },{passive:true});
 }
@@ -1516,6 +1658,55 @@ if(coopForm){
     location.href='partners.html#form';
     if(location.pathname.endsWith('partners.html'))location.reload();
   });
+}
+
+
+/* ============ race: сколько копируется файл (с 01.10.2026) ============
+   Блок #race: три линейки отдают один и тот же файл, полоски заполняются с настоящей разницей во времени,
+   счётчики показывают расчётное время. Скорости лежат в разметке (data-mbs, МБ/с), размер файла в кнопке (data-gb).
+   С 07.10.2026 (замечание владельца «игра на 100 ГБ залетала быстрее фильма на 20 ГБ»): цифры стоят сразу и не
+   бегут, а длительность заполнения зависит от размера файла: 100 ГБ идут 5 секунд, файл меньше заполняется быстрее.
+   Стоит на странице SSD и на главной (там вместо `reduced` из js:vars своя проверка reduced motion).
+   Без скрипта и при prefers-reduced-motion видны готовые цифры. */
+{
+  const sec=document.getElementById('race');
+  if(sec){
+    const rm=typeof reduced!=='undefined'?reduced:matchMedia('(prefers-reduced-motion: reduce)');
+    const rows=[...sec.querySelectorAll('.rrow')].map(el=>({el,mbs:+el.dataset.mbs,bar:el.querySelector('.rbar i'),out:el.querySelector('.rtime')}));
+    const chips=[...sec.querySelectorAll('.rchip')];
+    const T=5000,TMIN=900,GB0=100;let gb=+((chips.find(c=>c.classList.contains('on'))||chips[0]).dataset.gb),raf=0,played=false;
+    const fmt=s=>{
+      if(s<10)return s.toFixed(1).replace('.',',')+' с';
+      if(s<60)return Math.round(s)+' с';
+      let m=Math.floor(s/60),r=Math.round(s-m*60);if(r===60){m++;r=0}
+      return m+' мин '+r+' с';
+    };
+    const paint=real=>rows.forEach(r=>{
+      const t=gb*1000/r.mbs,f=real==null?1:Math.min(1,real/t);
+      r.bar.style.transform='scaleX('+f.toFixed(4)+')';
+      r.out.textContent=fmt(t);
+      r.el.classList.toggle('done',f>=1);
+    });
+    function run(){
+      cancelAnimationFrame(raf);
+      if(rm.matches){paint(null);return}
+      const max=Math.max(...rows.map(r=>gb*1000/r.mbs)),dur=Math.max(TMIN,T*gb/GB0),t0=performance.now();
+      const step=now=>{
+        const p=Math.min(1,(now-t0)/dur);
+        paint(p>=1?null:p*max);
+        if(p<1)raf=requestAnimationFrame(step);
+      };
+      paint(0);raf=requestAnimationFrame(step);
+    }
+    chips.forEach(c=>c.addEventListener('click',()=>{
+      chips.forEach(x=>{const on=x===c;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+      gb=+c.dataset.gb;played=true;run();
+    }));
+    if(!rm.matches){
+      paint(0);
+      new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting&&!played){played=true;ob.disconnect();run()}}),{threshold:.5}).observe(sec.querySelector('.race-rows'));
+    }
+  }
 }
 
 

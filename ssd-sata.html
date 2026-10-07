@@ -560,8 +560,20 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   /* --- каталог по макету адаптива: заголовок над фото, фото крупнее, кнопки под фото ---
      Без цветных стыков (замечание владельца 05.10.2026): зоны заголовка и кнопок одного цвета с шапкой каталога,
      а верх и низ фото мягко уходят в этот цвет. Полоса читается как одно целое, как на большом экране. */
-  /* буква Q в шапке текстовых страниц: на телефоне видна целиком, справа под кнопкой меню */
-  .q-mark{top:58px!important;right:-5%!important;transform:none!important;width:50vw!important;opacity:.9!important}
+  /* буква Q в шапке текстовых страниц: целиком в кадре справа под кнопкой меню, хвост не срезан краем экрана;
+     текст хиро начинается под ней, а не поверх (замечание владельца 07.10.2026: «хвостик заезжает») */
+  .q-mark{top:64px!important;right:16px!important;transform:none!important;width:40vw!important;opacity:.9!important}
+  .a-hero:has(.q-mark){padding-top:calc(82px + 44.5vw)}
+  /* хиро текстовых страниц: меньше пустого места сверху и снизу, кикер крупнее (замечание владельца 07.10.2026) */
+  .a-hero,.w-hero{min-height:0;padding-top:104px;padding-bottom:36px}
+  .kicker{font-size:13px;letter-spacing:.2em}
+  /* кнопка «наверх»: хвост буквы Q вокруг неё не выходит за край экрана */
+  .to-top{right:26px;bottom:32px}
+  /* одна кнопка на полосе каталога (владелец 07.10.2026): если у линейки есть своя страница, остаётся «Узнать больше»,
+     иначе «Купить»; кнопка по центру, как в макете адаптива */
+  .strip-acts a.pbtn:not(.pbtn-buy)~.pbtn-buy{display:none}
+  /* тёмные фото полос (udimm: DDR5 и «Все модели») не растворяются в светлый фон, край чёткий */
+  .strip.dark .strip-link::before,.strip.dark .strip-link::after{display:none}
   .c-hero,.strips,.strip,.cfx{background:#fbfbfc}
   .strip .strip-link{position:relative;display:block}
   .strip .strip-link::before,.strip .strip-link::after{content:"";position:absolute;left:0;right:0;height:20%;pointer-events:none;z-index:1}
@@ -580,10 +592,11 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   .strip#nvme3 img,.strip#base img{object-position:100% 50%}
   .strip#nvme4 img{object-position:85% 50%}
   .strip#udimm img{object-position:10% 50%}
+  .strip#ddr5 img,.strip.dark#all img{object-position:50% 50%}
   .strip#sodimm img{object-position:18% 50%}
   .strip#rush img{object-position:56% 50%}
   .strip#rushplus img,.strip#usb31 img,.strip#usb32c img{object-position:0% 50%}
-  .strip .strip-acts,.strip.lift .strip-acts{position:static;width:auto;margin:0;padding:4px 16px 22px;gap:10px;justify-content:flex-start}
+  .strip .strip-acts,.strip.lift .strip-acts{position:static;width:auto;margin:0;padding:4px 16px 22px;gap:10px;justify-content:center}
   .strip-acts .pbtn{flex:1 1 auto;max-width:240px;min-height:46px;padding:0 14px;font-size:13px;letter-spacing:.05em;gap:8px;border-radius:13px}
   .strip-acts .pbtn svg{width:14px;height:12px}
   .strip-acts .pbtn[aria-disabled="true"]{opacity:.5}
