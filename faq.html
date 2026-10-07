@@ -636,6 +636,10 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   .strip#nvme4 img{object-position:85% 50%}
   .strip#udimm img{object-position:10% 50%}
   .strip#ddr5 img,.strip.dark#all img{object-position:50% 50%}
+  /* мобильные кадры от дизайнера (с 07.10.2026, review/Мобильная версия): у полос с классом mimg свой вытянутый кадр
+     через <source media>, он показывается целиком, без обрезки по высоте; у тёмных кадров «Все модели» (mdark) растворение в фон отключено */
+  .strip.mimg img{height:auto;object-fit:fill;object-position:50% 50%}
+  .strip.mdark .strip-link::before,.strip.mdark .strip-link::after{display:none}
   .strip#sodimm img{object-position:18% 50%}
   .strip#rush img{object-position:56% 50%}
   .strip#rushplus img,.strip#usb31 img,.strip#usb32c img{object-position:0% 50%}
