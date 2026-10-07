@@ -417,6 +417,121 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   *,*::before,*::after{animation:none!important;transition:none!important;transition-delay:0s!important}
   .reveal .part{opacity:1;transform:none}
 }
+
+/* ============ интерактив каталога (с 01.10.2026): «Сколько копируется файл», «Классы скорости» и «Что поместится» ============
+   Общие стили двух блоков, подставляются в <style> страницы плейсхолдером cfx-css.
+   Разметка: фрагменты race, classes-microsd, fits-microsd, fits-usb. Поведение: js:race, js:classes и js:fits. */
+.cfx{position:relative;background:#fbfbfc;padding:clamp(56px,9vh,112px) clamp(16px,5vw,72px)}
+.cfx+.cfx{padding-top:0}
+.cfx-in{max-width:980px;margin:0 auto}
+.cfx h2{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:clamp(20px,2.6vw,38px);line-height:1.15;text-align:center}
+.cfx-note{max-width:62ch;margin:clamp(22px,3.4vh,34px) auto 0;font-size:13px;line-height:1.5;color:var(--muted);text-align:center}
+
+/* --- сколько копируется файл --- */
+.race-pick{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:clamp(22px,3.4vh,34px)}
+.rchip{font-family:var(--body);font-size:14px;font-weight:500;color:var(--muted);background:#fff;border:1px solid #cfd2d7;border-radius:999px;
+  padding:0 18px;min-height:44px;cursor:pointer;transition:color .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease)}
+.rchip b{font-weight:600;margin-left:6px}
+.rchip:hover{color:var(--ink);border-color:#8f939b}
+.rchip.on{color:#fff;background:var(--ink);border-color:var(--ink)}
+.race-rows{display:grid;gap:clamp(14px,2.2vh,22px);margin-top:clamp(28px,4.6vh,48px)}
+.rrow{display:grid;grid-template-columns:minmax(170px,210px) 1fr minmax(120px,auto);align-items:center;gap:clamp(12px,2vw,28px)}
+.rname{display:flex;flex-direction:column;justify-content:center;min-height:44px;color:inherit;text-decoration:none}
+.rname b{font-family:var(--display-lat);font-weight:400;font-size:clamp(15px,1.5vw,20px);letter-spacing:.14em;line-height:1.1}
+.rname span{margin-top:5px;font-size:13px;color:var(--muted)}
+.rbar{height:10px;border-radius:999px;background:rgba(20,22,28,.08);overflow:hidden}
+.rbar i{display:block;height:100%;border-radius:inherit;background:var(--ink);transform-origin:left center}
+.rrow.fast .rbar i{background:var(--accent-deep)}
+.rtime{font-family:var(--display);font-weight:600;font-size:clamp(17px,1.7vw,22px);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;
+  color:#6b7078;transition:color .3s var(--ease)}
+.rrow.done .rtime{color:var(--ink)}
+
+/* --- классы скорости карт памяти: строки те же, что у копирования, полоска показывает гарантированный минимум --- */
+.cls .rtime{color:var(--ink);font-weight:500}
+.cls .rtime b{font-weight:600}
+@media (min-width:641px){.cls .rrow{grid-template-columns:minmax(170px,210px) 1fr 190px}}
+.cls .rn{display:none;font-size:14px;font-weight:500;color:var(--muted)}
+.cls .rrow.none .rv{display:none}
+.cls .rrow.none .rn{display:inline}
+.cls .rtime small{font-size:max(12px,.62em);font-weight:500;margin-left:.35em;color:var(--muted)}
+.cls .rname span{font-variant-numeric:tabular-nums}
+.cls .rbar i{transition:background .3s var(--ease)}
+
+/* --- сколько влезет --- */
+.fits-ctl{margin-top:clamp(24px,4vh,40px);text-align:center}
+.fits-cap{display:block;font-family:var(--display);font-weight:700;font-size:clamp(44px,7vw,96px);line-height:1;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.fits-range{-webkit-appearance:none;appearance:none;display:block;width:calc(100% - 18px);max-width:640px;height:44px;margin:clamp(12px,2.2vh,22px) auto 0;
+  background:transparent;cursor:pointer;font-size:16px;--p:50%}
+.fits-range::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--ink) var(--p),rgba(20,22,28,.14) var(--p))}
+.fits-range::-moz-range-track{height:4px;border-radius:2px;background:rgba(20,22,28,.14)}
+.fits-range::-moz-range-progress{height:4px;border-radius:2px;background:var(--ink)}
+.fits-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;margin-top:-11px;border-radius:50%;background:var(--ink);
+  border:4px solid #fbfbfc;box-shadow:0 0 0 1px var(--ink),0 6px 14px rgba(20,22,28,.22);transition:transform .25s var(--ease)}
+.fits-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);border:4px solid #fbfbfc;box-shadow:0 0 0 1px var(--ink),0 6px 14px rgba(20,22,28,.22)}
+.fits-range:hover::-webkit-slider-thumb,.fits-range:active::-webkit-slider-thumb{transform:scale(1.12)}
+.fits-range:focus-visible{outline:none}
+.fits-range:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 2px var(--accent-deep),0 6px 14px rgba(20,22,28,.22)}
+.fits-range:focus-visible::-moz-range-thumb{box-shadow:0 0 0 2px var(--accent-deep),0 6px 14px rgba(20,22,28,.22)}
+.fits-ticks{display:flex;justify-content:space-between;width:100%;max-width:658px;margin:0 auto}
+.fits-ticks span{flex:0 0 44px;padding:4px 0 10px;text-align:center;font-size:13px;color:var(--muted);cursor:pointer;white-space:nowrap;transition:color .3s var(--ease)}
+.fits-ticks span.on{color:var(--ink);font-weight:600}
+.fits-nums{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(22px,3.6vh,40px);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+.fits-nums>div{display:flex;flex-direction:column-reverse;justify-content:center;padding:clamp(18px,3vh,30px) 8px;text-align:center}
+.fits-nums>div+div{border-left:1px solid var(--hairline)}
+.fits-nums dd{font-family:var(--display);font-weight:600;font-size:clamp(22px,3.4vw,44px);line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
+.fits-nums dd small{font-size:max(12px,.5em);font-weight:600;margin-left:.3em}
+.fits-nums dt{margin-top:8px;font-size:13px;line-height:1.3;color:var(--muted)}
+.fits-lines{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0 6px;margin-top:clamp(14px,2.4vh,24px);font-size:14px;color:var(--muted)}
+.fits-lines a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-family:var(--display-lat);font-size:14px;letter-spacing:.14em;color:var(--ink);
+  text-decoration:none;transition:opacity .3s var(--ease)}
+.fits-lines a.off{opacity:.26}
+@media (hover:hover){.fits-lines a:not(.off):hover,.rname:hover b{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}}
+/* --- подойдёт ли к моему компьютеру / ноутбуку (udimm, sodimm) --- */
+.fit-q{margin-top:clamp(22px,3.4vh,34px);text-align:center;font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-deep)}
+.fit-pick{margin-top:14px;max-width:760px;margin-left:auto;margin-right:auto}
+.fit-res{margin-top:clamp(24px,4vh,40px)}
+.fit-note{max-width:62ch;margin:0 auto clamp(16px,2.6vh,24px);text-align:center;font-size:15px;line-height:1.55;color:var(--ink)}
+.fit-cards{display:grid;gap:14px;max-width:560px;margin:0 auto}
+.fit-cards.two{grid-template-columns:1fr 1fr;max-width:860px}
+.fit-card{background:#fff;border:1px solid var(--hairline);border-radius:18px;padding:clamp(20px,3vw,30px) clamp(20px,3vw,32px);box-shadow:0 10px 34px rgba(20,22,28,.05)}
+.fit-gen{font-family:var(--display);font-weight:800;font-size:clamp(34px,4.6vw,56px);line-height:1;letter-spacing:.01em}
+.fit-gen small{display:block;margin-top:8px;font-family:var(--display-lat);font-weight:400;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.fit-how .fit-gen{font-size:clamp(24px,3vw,34px)}
+.fit-how .fit-gen small{font-family:var(--body);letter-spacing:.2em}
+.fit-lines{margin-top:14px;font-size:15px;line-height:1.55;color:var(--muted)}
+.fit-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.fit-go{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;font-size:14px;font-weight:600;color:var(--ink);
+  border:1px solid rgba(20,22,28,.28);text-decoration:none;transition:color .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease)}
+.fit-go:hover,.fit-go:focus-visible{color:var(--accent-deep);border-color:var(--accent-deep)}
+.fit-buy{background:var(--ink);border-color:var(--ink);color:#fff}
+.fit-buy:hover,.fit-buy:focus-visible{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
+
+/* --- какая память в вашем устройстве (ram): два формата в одном масштабе --- */
+.ff-stage{display:flex;align-items:flex-end;justify-content:center;gap:clamp(14px,3vw,40px);margin:clamp(28px,4.6vh,48px) auto 0;max-width:980px}
+.ff-mod{display:block;color:inherit;text-decoration:none;transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.ff-mod{flex:0 0 61%}
+.ff-mod.ff-s{flex:0 0 31.8%}
+.ff-mod img{display:block;width:100%;height:auto}
+.ff-cap{display:block;margin-top:14px;font-size:13px;line-height:1.45;color:var(--muted)}
+.ff-cap b{display:block;font-family:var(--display-lat);font-weight:400;font-size:clamp(14px,1.5vw,19px);letter-spacing:.14em;color:var(--ink);margin-bottom:4px}
+.ff-cap i{display:block;font-style:normal;font-variant-numeric:tabular-nums;color:var(--silver)}
+.ff-stage.picked .ff-mod{opacity:.3}
+.ff-stage.picked .ff-mod.on{opacity:1}
+.ff-stage.picked .ff-mod.on .ff-cap b{color:var(--accent-deep)}
+@media (hover:hover){.ff-mod:hover{transform:translateY(-4px)}.ff-mod:hover .ff-cap b{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}}
+.ff-note{max-width:60ch;margin:clamp(18px,3vh,28px) auto 0;text-align:center;font-size:15px;line-height:1.55;color:var(--ink)}
+@media (max-width:640px){
+  .fit-cards.two{grid-template-columns:1fr}
+  .ff-stage{flex-direction:column;align-items:flex-start;gap:22px}
+  .ff-mod{flex:none;width:100%}
+  .ff-mod.ff-s{width:52.2%}
+  .rrow{grid-template-columns:1fr auto;gap:6px 12px}
+  .rbar{grid-column:1/-1;grid-row:2}
+  .fits-nums dd{font-size:clamp(19px,5.6vw,26px)}
+  .fits-nums dt{font-size:12px}
+  .fits-ticks span{font-size:12px}
+}
+
 </style>
 <style id="mobile-fix">
 /* ============ мобильная версия: общие правки для всех страниц (01.10.2026) ============
@@ -494,9 +609,11 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   .strip-acts .pbtn svg{width:14px;height:12px}
   .strip-acts .pbtn[aria-disabled="true"]{opacity:.5}
 }
-/* --- мобильное меню: «Оперативная память» раскрывается по нажатию (с 05.10.2026) --- */
-.mm-more{display:flex!important;align-items:center;justify-content:space-between}
-.mm-more::after{content:"›";font-size:20px;line-height:1;opacity:.7;transition:transform .25s ease}
+/* --- мобильное меню: «Оперативная память» это ссылка на свою страницу, стрелка рядом раскрывает подпункты (с 07.10.2026; с 05.10 раскрывалась вся строка) --- */
+.mm-row{display:flex;align-items:stretch}
+.mm-row .mm-si{flex:1 1 auto;border-top:1px solid rgba(20,22,28,.05)}
+.mm-more{flex:none;width:52px;min-height:44px;padding:0;border:0;border-top:1px solid rgba(20,22,28,.05);background:none;cursor:pointer;color:#3c4046;display:flex;align-items:center;justify-content:center}
+.mm-more::after{content:"›";font-size:22px;line-height:1;opacity:.7;transition:transform .25s ease}
 .mm-more.open::after{transform:rotate(90deg)}
 .mm-sub2 .mm-si2{padding-left:58px}
 @media (max-width:1024px){
@@ -545,11 +662,9 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
 /* мобильное меню: вложенный пункт (.mm-more) раскрывает список под собой */
 document.addEventListener('click',function(e){
   var t=e.target.closest&&e.target.closest('.mm-more');if(!t)return;
-  var s=t.nextElementSibling,open=s.hidden;s.hidden=!open;t.classList.toggle('open',open);t.setAttribute('aria-expanded',open);
+  var row=t.closest('.mm-row')||t,s=row.nextElementSibling,open=s.hidden;s.hidden=!open;t.classList.toggle('open',open);t.setAttribute('aria-expanded',open);
 });
-document.addEventListener('keydown',function(e){
-  if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('mm-more')){e.preventDefault();e.target.click()}
-});
+
 </script>
 <link rel="expect" href="#top" blocking="render">
 <style id="motion">
@@ -744,7 +859,11 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   <a class="mi" id="mm-catalog">Каталог</a>
   <div class="mm-sub" hidden>
     <a class="mm-si" href="ssd.html">Внутренние SSD</a>
-    <a class="mm-si mm-more" role="button" tabindex="0" aria-expanded="false">Оперативная память</a>
+    <!-- «Оперативная память» снова ссылка на свою страницу (владелец 07.10.2026: с телефона на неё было не попасть), подпункты раскрывает стрелка рядом -->
+    <div class="mm-row">
+      <a class="mm-si" href="ram.html">Оперативная память</a>
+      <button class="mm-more" type="button" aria-expanded="false" aria-label="Подпункты раздела «Оперативная память»"></button>
+    </div>
     <div class="mm-sub2" hidden>
       <a class="mm-si mm-si2" href="udimm.html">Для персонального компьютера</a>
       <a class="mm-si mm-si2" href="sodimm.html" aria-current="page">Для ноутбука</a>
@@ -815,6 +934,50 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
           <svg width="14" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
         <a class="pbtn pbtn-buy" href="buy.html">Купить</a>
+      </div>
+    </section>
+
+    <!-- подойдёт ли к моему ноутбуку (с 07.10.2026, по просьбе владельца): поколение процессора → поколение DDR.
+         Факты о платформах стандартные; про DDR3L повторён ответ поддержки из FAQ. Поведение: js:fit, стили: cfx-css -->
+    <section class="cfx fit reveal" id="fit" aria-labelledby="fit-h">
+      <div class="cfx-in">
+        <h2 class="part" id="fit-h">Подойдёт ли к моему ноутбуку</h2>
+        <p class="fit-q part">Какой в нём процессор</p>
+        <div class="race-pick fit-pick part" role="group" aria-label="Процессор ноутбука">
+          <button class="rchip" type="button" data-gen="ddr3" aria-pressed="false" data-note="Ноутбуки 2011–2012 годов работают с DDR3 на 1,5 В.">Intel Core 2–3 поколения</button>
+          <button class="rchip" type="button" data-gen="ddr3" aria-pressed="false" data-note="Ноутбуки 2013–2015 годов используют DDR3L на 1,35 В: модули QOPP DDR3 SO-DIMM в них работают.">Intel Core 4–5 поколения</button>
+          <button class="rchip" type="button" data-gen="ddr4" aria-pressed="false" data-note="Все поколения с 6 по 11 (2015–2021) работают с DDR4 SO-DIMM.">Intel Core 6–11 поколения</button>
+          <button class="rchip" type="button" data-gen="ddr4 ddr5" aria-pressed="false" data-note="В 2022–2023 годах производители ставили и DDR4, и DDR5, у разных моделей по-разному. Смотрите характеристики своей модели или наклейку модуля, который уже стоит.">Intel Core 12–13 поколения</button>
+          <button class="rchip" type="button" data-gen="ddr5" aria-pressed="false" data-note="Только DDR5. В тонких моделях память часто распаяна на плате (LPDDR5x): тогда слота SO-DIMM нет и заменить её нельзя.">Intel Core 14 пок. и Core Ultra</button>
+          <button class="rchip" type="button" data-gen="ddr4" aria-pressed="false" data-note="Мобильные Ryzen 2000–5000: DDR4 SO-DIMM. У части тонких моделей память распаяна, проверьте, есть ли слот.">AMD Ryzen 2000–5000</button>
+          <button class="rchip" type="button" data-gen="ddr5" aria-pressed="false" data-note="Мобильные Ryzen 6000–8000: DDR5 SO-DIMM. В тонких моделях бывает распаянная LPDDR5 без слота.">AMD Ryzen 6000–8000</button>
+          <button class="rchip" type="button" data-gen="how" aria-pressed="false">Не знаю</button>
+        </div>
+        <div class="fit-res part" aria-live="polite">
+          <p class="fit-note" id="fit-note" hidden></p>
+          <div class="fit-cards">
+            <article class="fit-card" data-gen="ddr3" hidden>
+              <p class="fit-gen">DDR3<small>SO-DIMM</small></p>
+              <p class="fit-lines">Линейка QOPP: ST-S R3</p>
+              <p class="fit-acts"><a class="fit-go" href="#ddr3">Смотреть DDR3</a><a class="fit-go fit-buy" href="buy.html">Купить</a></p>
+            </article>
+            <article class="fit-card" data-gen="ddr4" hidden>
+              <p class="fit-gen">DDR4<small>SO-DIMM</small></p>
+              <p class="fit-lines">Линейка QOPP: ST-S R4</p>
+              <p class="fit-acts"><a class="fit-go" href="#ddr4">Смотреть DDR4</a><a class="fit-go fit-buy" href="buy.html">Купить</a></p>
+            </article>
+            <article class="fit-card" data-gen="ddr5" hidden>
+              <p class="fit-gen">DDR5<small>SO-DIMM</small></p>
+              <p class="fit-lines">Линейка QOPP: QS556</p>
+              <p class="fit-acts"><a class="fit-go" href="#ddr5">Смотреть DDR5</a><a class="fit-go fit-buy" href="buy.html">Купить</a></p>
+            </article>
+            <article class="fit-card fit-how" data-gen="how">
+              <p class="fit-gen">Как узнать<small>за минуту</small></p>
+              <p class="fit-lines">Диспетчер задач Windows, вкладка «Производительность» → «Память»: в правом верхнем углу написано DDR4 или DDR5. Подробнее покажет бесплатная CPU-Z на вкладке Memory. Если в характеристиках ноутбука стоит LPDDR или «память распаяна», слота для модуля нет.</p>
+            </article>
+          </div>
+        </div>
+        <p class="cfx-note part">Поколения не взаимозаменяемы: ключ на контактах у DDR3, DDR4 и DDR5 в разных местах, модуль другого поколения в слот не встанет.</p>
       </div>
     </section>
 
@@ -1078,6 +1241,24 @@ toTop.addEventListener('click',()=>{
   if(gm)add(gm,gm.querySelector('img'),{rot:4,p:1000,zoom:.07});
   document.querySelectorAll('.strips .strip').forEach(s=>add(s,s.querySelector('.strip-link img'),{shift:12,zoom:.03}));
 })();
+
+/* ============ fit: подойдёт ли к моему компьютеру / ноутбуку (с 07.10.2026) ============
+   Блок #fit на страницах UDIMM и SO-DIMM: кнопка платформы несёт поколение (data-gen, может быть два через пробел
+   или «how» для подсказки) и пояснение (data-note). Показываем карточки нужных поколений и пояснение. */
+{
+  const sec=document.getElementById('fit');
+  if(sec){
+    const chips=[...sec.querySelectorAll('.rchip')],cards=[...sec.querySelectorAll('.fit-card')],note=sec.querySelector('.fit-note'),box=sec.querySelector('.fit-cards');
+    const pick=c=>{
+      chips.forEach(x=>{const on=x===c;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+      const gens=c.dataset.gen.split(' ');
+      cards.forEach(k=>{k.hidden=!gens.includes(k.dataset.gen)});
+      box.classList.toggle('two',gens.length>1);
+      const t=c.dataset.note||'';note.textContent=t;note.hidden=!t;
+    };
+    chips.forEach(c=>c.addEventListener('click',()=>pick(c)));
+  }
+}
 /* форма в подвале: передаёт имя и почту в пошаговую форму на partners.html (sessionStorage, не адрес) */
 const coopForm=document.querySelector('.coop-form');
 if(coopForm){
