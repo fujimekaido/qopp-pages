@@ -277,7 +277,13 @@ main{position:relative;z-index:1}
 }
 .dark-strip .inner{position:relative;max-width:1160px;margin:0 auto}
 @media (max-width:860px){
-  .ds-photo{width:100%;opacity:.42;-webkit-mask-image:none;mask-image:none}
+  /* на телефоне фото отдельной полосой над текстом, товар виден целиком (владелец 08.10.2026: текст закрывал SSD);
+     кадр обрезан к правой части, где накопитель, низ растворяется в тёмный фон; параллакс из fx.js здесь выключен */
+  .dark-strip{display:flex;flex-direction:column;padding:0 20px clamp(48px,8vh,70px)}
+  .dark-strip picture{display:block;margin:0 -20px}
+  .dark-strip .ds-photo[data-par],.ds-photo{position:static;width:100%;height:72vw!important;top:auto!important;object-position:75% 50%;opacity:1;transform:none!important;
+    -webkit-mask-image:linear-gradient(to bottom,#000 62%,transparent);mask-image:linear-gradient(to bottom,#000 62%,transparent)}
+  .dark-strip .inner{margin-top:-6vw}
 }
 .dark-strip .kicker{color:var(--accent)}
 .dark-strip h2{
@@ -544,6 +550,11 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .wz-send .main:hover,.wz-send .main:focus-visible{background:var(--accent-deep);border-color:var(--accent-deep)}
 .wz-send a:hover,.wz-send a:focus-visible{color:var(--accent-deep);border-color:var(--accent-deep)}
 .wz-note{margin-top:14px;font-size:14px;color:var(--muted)}
+.wz-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.wz-agree a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.wz-agree a:hover{color:var(--accent-deep)}
+.wz-send .main{text-decoration:none}
+.wz-next[disabled]{opacity:.6;cursor:default}
 .wz-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .wz-agree a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .wz-agree a:hover{color:var(--accent-deep)}
@@ -1015,7 +1026,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     <h2 class="part">После заявки</h2>
   </div>
   <div class="vows">
-    <div class="vow part"><h3>Разговор</h3><p>Отвечаем на вашу почту и уточняем задачу: объёмы, сроки, формат работы.</p></div>
+    <div class="vow part"><h3>Разговор</h3><p>Связываемся с вами и отправляем предложение.</p></div>
     <div class="vow part"><h3>Предложение</h3><p>Присылаем его письмом.</p></div>
   </div>
 </section>
