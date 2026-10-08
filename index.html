@@ -422,33 +422,37 @@ main{position:relative;z-index:2;background:var(--canvas)}
   display:flex;flex-direction:column;
   aspect-ratio:.78;border-radius:20px;
   padding:clamp(24px,2.6vw,34px);
-  background:
-    radial-gradient(120% 80% at 50% 92%,rgba(126,158,196,.22),transparent 62%),
-    linear-gradient(168deg,#1c1f26 0%,#0c0e12 62%);
-  border:1px solid rgba(165,171,183,.16);
-  box-shadow:0 26px 60px rgba(20,22,28,.22);
+  /* светлая тема карточек: песочный сверху уходит в белый снизу, это два фона главной (решение владельца 08.10.2026) */
+  background:linear-gradient(180deg,#efe6da 0%,#fbfbfc 100%);
+  border:1px solid rgba(20,22,28,.08);
+  box-shadow:0 26px 60px rgba(20,22,28,.12);
   -webkit-box-reflect:below 3px linear-gradient(transparent 64%,rgba(255,255,255,.34));
 }
 .utp-card h3{
-  font-family:var(--display);font-weight:600;color:#f2f0ea;
+  font-family:var(--display);font-weight:600;color:var(--ink);
   font-size:clamp(14px,1.35vw,19px);letter-spacing:.2em;text-transform:uppercase;
 }
-.utp-card p{color:#a5abb7;font-size:clamp(13px,1.05vw,15px);line-height:1.55;margin-top:14px;max-width:30ch}
+.utp-card p{color:var(--muted);font-size:clamp(13px,1.05vw,15px);line-height:1.55;margin-top:14px;max-width:30ch}
 /* картинка в явной рамке с object-fit: проценты высоты у карточки с aspect-ratio Safari на iPhone не считал,
    орёл и планета вылезали за карточку, а текст казался мелким (замечание владельца 07.10.2026) */
 .utp-card img{
   width:78%;height:clamp(120px,15vw,230px);
-  margin:auto auto 4%;display:block;object-fit:contain;object-position:center bottom;
+  margin:0 auto 4%;display:block;object-fit:contain;object-position:center bottom;
+  /* картинки рисовались серебром под тёмный фон; на светлом они притемняются до графита, блики и форма сохраняются */
+  filter:brightness(.4) contrast(1.05);
 }
+/* картинка прижата к низу карточки: обёртка picture и есть флекс-элемент, margin-top:auto на самом img не работал,
+   и в отражении под карточкой было пусто */
+.utp-card picture{margin-top:auto}
 .utp-card.wide img{width:92%}
 @media (max-width:860px){
-  /* карточки полосами во всю ширину экрана: без боковых полей и скруглений, зазоры между ними остаются
-     (замечание владельца 08.10.2026) */
+  /* карточки полосами во всю ширину экрана встык: без боковых полей, скруглений, обводки и зазоров,
+     полосы разделяет сам градиент (решение владельца 08.10.2026) */
   .utp{padding-left:0;padding-right:0;padding-bottom:clamp(125px,16vh,160px)} /* низ: отражение под последней полосой гаснет до границы секции */
   .utp-head{padding:0 20px}
-  .utp-row{grid-template-columns:1fr;gap:clamp(16px,3vh,26px);max-width:none}
-  .utp-card{aspect-ratio:auto;padding:26px 24px 24px;border-radius:0;border-left:0;border-right:0}
-  /* отражение под полосой в узком зазоре обрезалось до серой планки, оставлено только под последней;
+  .utp-row{grid-template-columns:1fr;gap:0;max-width:none}
+  .utp-card{aspect-ratio:auto;padding:26px 24px 24px;border-radius:0;border:0;box-shadow:none}
+  /* отражение оставлено только под последней полосой, под остальными его закрывала бы следующая;
      «none» Chromium не принимает (CSS.supports даёт false), поэтому отражение гасится прозрачной маской */
   .utp-card:not(:last-child){-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
   .utp-card h3{font-size:16px}
