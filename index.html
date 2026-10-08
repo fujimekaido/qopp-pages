@@ -442,14 +442,20 @@ main{position:relative;z-index:2;background:var(--canvas)}
 }
 .utp-card.wide img{width:92%}
 @media (max-width:860px){
-  .utp{padding-bottom:clamp(90px,13vh,140px)}
-  .utp-row{grid-template-columns:1fr;gap:clamp(16px,3vh,26px);max-width:460px}
-  .utp-card{aspect-ratio:auto;padding:26px 24px 24px}
+  /* карточки полосами во всю ширину экрана: без боковых полей и скруглений, зазоры между ними остаются
+     (замечание владельца 08.10.2026) */
+  .utp{padding-left:0;padding-right:0;padding-bottom:clamp(125px,16vh,160px)} /* низ: отражение под последней полосой гаснет до границы секции */
+  .utp-head{padding:0 20px}
+  .utp-row{grid-template-columns:1fr;gap:clamp(16px,3vh,26px);max-width:none}
+  .utp-card{aspect-ratio:auto;padding:26px 24px 24px;border-radius:0;border-left:0;border-right:0}
+  /* отражение под полосой в узком зазоре обрезалось до серой планки, оставлено только под последней;
+     «none» Chromium не принимает (CSS.supports даёт false), поэтому отражение гасится прозрачной маской */
+  .utp-card:not(:last-child){-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
   .utp-card h3{font-size:16px}
   .utp-card p{max-width:none;font-size:14.5px;line-height:1.5}
   .utp-card img{width:72%;height:clamp(150px,42vw,200px);margin-top:26px}
 }
-@media (prefers-reduced-motion: reduce){.utp-card{-webkit-box-reflect:none}}
+@media (prefers-reduced-motion: reduce){.utp-card{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}}
 .dawn{height:26vh;background:linear-gradient(180deg,#cab29c 0%,#e2d5c6 45%,#f0ebe3 75%,#f6f6f7 100%)}
 .site-footer{background:#f6f6f7;color:#14161c;position:relative;z-index:2;padding:clamp(40px,7vh,84px) clamp(20px,5vw,72px) 28px}
 .foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:clamp(28px,5vw,80px);max-width:1200px;margin:0 auto}
