@@ -405,14 +405,23 @@ main{position:relative;z-index:2;background:var(--canvas)}
   padding:clamp(70px,11vh,130px) clamp(20px,5vw,64px) clamp(150px,21vh,260px);
 }
 .utp-head{max-width:1180px;margin:0 auto clamp(34px,5vh,56px);text-align:center}
-.utp-head p{
-  font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
-  color:#b8863b;
-}
-.utp-mark{display:none}
+.utp-head p{display:none} /* кикер «Почему QOPP» заменён надписью QOPP из обсидиана (владелец, 09.10.2026) */
+/* надпись QOPP из обсидиана (src/partials/utp-mark.html): картинка владельца из Genspark и слой золотого блика,
+   который js/utp-mark.js двигает по прокрутке. Маска по прозрачности картинки стоит на контейнере, а не на слое блика:
+   иначе слой становится своим контекстом наложения, и mix-blend-mode полосы смешивается с пустотой, а не с бликами стекла */
+.utp-mark{display:block;position:relative;width:min(74%,360px);margin:0 auto;
+  -webkit-mask-image:url(assets/qopp-obsidian-mask.png);mask-image:url(assets/qopp-obsidian-mask.png);
+  -webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.utp-mark img{display:block;width:100%;height:auto}
+.om-wrap{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.om-band{position:absolute;left:50%;top:50%;width:26%;height:340%;
+  background:linear-gradient(90deg,rgba(184,134,59,0) 0,rgba(184,134,59,.55) 28%,#e3c27a 50%,rgba(184,134,59,.55) 72%,rgba(184,134,59,0) 100%);
+  mix-blend-mode:screen;opacity:.92;
+  transform:translate(calc(-50% + var(--x,0px)),-50%) rotate(45deg);will-change:transform}
+/* заголовок капсом, Montserrat light, песочно-золотой как кикеры на других страницах (владелец, 09.10.2026) */
 .utp-head h2{
-  font-family:var(--display);font-weight:800;color:#14161c;
-  font-size:clamp(26px,3.4vw,44px);letter-spacing:.01em;line-height:1.14;margin-top:14px;
+  font-family:var(--display);font-weight:300;color:#b8863b;text-transform:uppercase;
+  font-size:clamp(18px,2vw,26px);letter-spacing:.14em;line-height:1.3;margin-top:clamp(18px,2.4vw,30px);
 }
 .utp-row{
   max-width:1180px;margin:0 auto;
@@ -445,25 +454,12 @@ main{position:relative;z-index:2;background:var(--canvas)}
 }
 .utp-card.wide img{width:92%}
 @media (max-width:860px){
-  /* телефон (решение владельца 08.10.2026): вместо кикера «Почему QOPP» надпись QOPP из обсидиана (рендер из Genspark)
-     с золотым бликом по прокрутке (src/partials/utp-mark.html + js/utp-mark.js), заголовок остаётся; карточки полосами во всю ширину встык,
+  /* телефон (решение владельца 08.10.2026): карточки полосами во всю ширину встык,
      текст и картинки по центру, поля срезаны, на стыках тонкая линия золотого песка, разгорающаяся из центра к краям */
   .utp{padding-left:0;padding-right:0;padding-bottom:0} /* после последней полосы сразу идёт песочная секция .dawn (владелец, 09.10.2026) */
   .utp-head{padding:0 20px;margin-bottom:clamp(24px,4vh,36px)}
-  .utp-head p{display:none}
-  /* маска по прозрачности картинки стоит на общем контейнере, а не на слое блика: иначе слой становится своим
-     контекстом наложения, и mix-blend-mode полосы смешивается с пустотой, а не с бликами стекла (проверка 09.10.2026) */
-  .utp-mark{display:block;position:relative;width:74%;margin:0 auto;
-    -webkit-mask-image:url(assets/qopp-obsidian-mask.png);mask-image:url(assets/qopp-obsidian-mask.png);
-    -webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
-  .utp-mark img{display:block;width:100%;height:auto}
-  /* блик: внутри слоя золотая полоса под 45°, сдвиг --x ведёт js/utp-mark.js */
-  .om-wrap{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-  .om-band{position:absolute;left:50%;top:50%;width:26%;height:340%;
-    background:linear-gradient(90deg,rgba(184,134,59,0) 0,rgba(184,134,59,.55) 28%,#e3c27a 50%,rgba(184,134,59,.55) 72%,rgba(184,134,59,0) 100%);
-    mix-blend-mode:screen;opacity:.92;
-    transform:translate(calc(-50% + var(--x,0px)),-50%) rotate(45deg);will-change:transform}
-  .utp-head h2{margin-top:22px;font-size:24px}
+  .utp-mark{width:74%}
+  .utp-head h2{margin-top:22px;font-size:19px}
   .utp-row{grid-template-columns:1fr;gap:0;max-width:none}
   .utp-card{aspect-ratio:auto;padding:20px 20px 18px;border-radius:0;border:0;text-align:center}
   .utp-card h3{font-size:15px}
@@ -1849,17 +1845,17 @@ if(coopForm){
 
 
 /* ============ utp-mark: золотой блик по надписи QOPP на телефоне (с 08.10.2026) ============
-   Надпись «QOPP» над полосами «Почему QOPP» видна только на телефоне (на десктопе display:none). Блик едет по буквам
+   Надпись «QOPP» над карточками «Почему QOPP» (с 09.10.2026 и на десктопе). Блик едет по буквам
    слева направо под 45°, пока надпись проходит экран: положение полосы привязано к прокрутке, а не к таймеру,
    как блик по SSD в фильме на главной. Полоса .om-band лежит в .om-wrap с маской по прозрачности картинки,
    её сдвиг задаётся переменной --x: от «целиком слева от букв» до «целиком справа».
-   Прокрутку слушаем только пока надпись рядом с экраном и только на телефоне (IntersectionObserver + media query),
+   Прокрутку слушаем только пока надпись рядом с экраном (IntersectionObserver),
    «Уменьшить движение» проверяется на каждом шаге, одинаковые значения не перезаписываются (проверка 09.10.2026). */
 {
   const mark=document.querySelector('.utp-mark');
   const band=mark&&mark.querySelector('.om-band');
   if(band){
-    const rm=matchMedia('(prefers-reduced-motion: reduce)'),mq=matchMedia('(max-width:860px)');
+    const rm=matchMedia('(prefers-reduced-motion: reduce)');
     const clamp01=v=>Math.min(1,Math.max(0,v));
     let tick=false,half=0,last='',on=false;
     /* половина пути полосы: половина ширины надписи плюс половина ширины повёрнутой полосы */
@@ -1867,7 +1863,6 @@ if(coopForm){
     const set=v=>{if(v!==last){last=v;band.style.setProperty('--x',v)}};
     const place=()=>{
       tick=false;
-      if(!mq.matches)return;
       if(rm.matches){set('0px');return}
       if(!half)measure();
       const r=mark.getBoundingClientRect(),vh=innerHeight;
@@ -1883,9 +1878,8 @@ if(coopForm){
       (want?addEventListener:removeEventListener)('scroll',onScroll,{passive:true});
       if(want)place();
     };
-    new IntersectionObserver(es=>bind(es[0].isIntersecting&&mq.matches),{rootMargin:'200px 0px'}).observe(mark);
+    new IntersectionObserver(es=>bind(es[0].isIntersecting),{rootMargin:'200px 0px'}).observe(mark);
     addEventListener('resize',()=>{half=0;onScroll()});
-    mq.addEventListener('change',()=>{half=0;if(!mq.matches)bind(false);else onScroll()});
     rm.addEventListener('change',onScroll);
   }
 }
