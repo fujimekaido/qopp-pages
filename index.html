@@ -475,6 +475,15 @@ main{position:relative;z-index:2;background:var(--canvas)}
     background:radial-gradient(50% 100% at 50% 0,rgba(240,217,162,.42),rgba(184,134,59,.12) 55%,transparent 80%);
     transform:scaleX(.1);opacity:0;animation:utp-seam 5.6s ease-in-out infinite}
   .utp-card:nth-child(3)::before,.utp-card:nth-child(3)::after{animation-delay:1.9s}
+  /* такая же линия под последней полосой (владелец, 09.10.2026): псевдоэлементы карточки заняты верхним стыком,
+     поэтому она висит на .utp-row; свечение направлено вверх, внутрь полосы */
+  .utp-row{position:relative}
+  .utp-row::before,.utp-row::after{content:"";position:absolute;bottom:0;pointer-events:none;z-index:2;
+    transform:scaleX(.1);opacity:0;animation:utp-seam 5.6s ease-in-out 3.8s infinite}
+  .utp-row::before{left:0;right:0;height:1px;
+    background:linear-gradient(90deg,rgba(184,134,59,0) 0,#b8863b 22%,#f0d9a2 50%,#b8863b 78%,rgba(184,134,59,0) 100%)}
+  .utp-row::after{left:8%;right:8%;height:18px;
+    background:radial-gradient(50% 100% at 50% 100%,rgba(240,217,162,.42),rgba(184,134,59,.12) 55%,transparent 80%)}
   /* отражений под полосами на телефоне нет (владелец, 09.10.2026);
      «none» Chromium не принимает (CSS.supports даёт false), поэтому отражение гасится прозрачной маской */
   .utp-card{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
@@ -487,7 +496,7 @@ main{position:relative;z-index:2;background:var(--canvas)}
 }
 @media (prefers-reduced-motion: reduce){
   .utp-card{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
-  .utp-card+.utp-card::before,.utp-card+.utp-card::after{animation:none;transform:none;opacity:.6}
+  .utp-card+.utp-card::before,.utp-card+.utp-card::after,.utp-row::before,.utp-row::after{animation:none;transform:none;opacity:.6}
 }
 .dawn{height:26vh;background:linear-gradient(180deg,#cab29c 0%,#e2d5c6 45%,#f0ebe3 75%,#f6f6f7 100%)}
 .site-footer{background:#f6f6f7;color:#14161c;position:relative;z-index:2;padding:clamp(40px,7vh,84px) clamp(20px,5vw,72px) 28px}
