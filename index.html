@@ -451,12 +451,14 @@ main{position:relative;z-index:2;background:var(--canvas)}
   .utp{padding-left:0;padding-right:0;padding-bottom:0} /* после последней полосы сразу идёт песочная секция .dawn (владелец, 09.10.2026) */
   .utp-head{padding:0 20px;margin-bottom:clamp(24px,4vh,36px)}
   .utp-head p{display:none}
-  .utp-mark{display:block;position:relative;width:74%;margin:0 auto}
-  .utp-mark img{display:block;width:100%;height:auto}
-  /* блик: слой с маской по прозрачности картинки, внутри золотая полоса под 45°, сдвиг --x ведёт js/utp-mark.js */
-  .om-wrap{position:absolute;inset:0;overflow:hidden;pointer-events:none;
+  /* маска по прозрачности картинки стоит на общем контейнере, а не на слое блика: иначе слой становится своим
+     контекстом наложения, и mix-blend-mode полосы смешивается с пустотой, а не с бликами стекла (проверка 09.10.2026) */
+  .utp-mark{display:block;position:relative;width:74%;margin:0 auto;
     -webkit-mask-image:url(assets/qopp-obsidian-mask.png);mask-image:url(assets/qopp-obsidian-mask.png);
     -webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+  .utp-mark img{display:block;width:100%;height:auto}
+  /* блик: внутри слоя золотая полоса под 45°, сдвиг --x ведёт js/utp-mark.js */
+  .om-wrap{position:absolute;inset:0;overflow:hidden;pointer-events:none}
   .om-band{position:absolute;left:50%;top:50%;width:26%;height:340%;
     background:linear-gradient(90deg,rgba(184,134,59,0) 0,rgba(184,134,59,.55) 28%,#e3c27a 50%,rgba(184,134,59,.55) 72%,rgba(184,134,59,0) 100%);
     mix-blend-mode:screen;opacity:.92;
@@ -467,21 +469,22 @@ main{position:relative;z-index:2;background:var(--canvas)}
   .utp-card h3{font-size:15px}
   .utp-card p{max-width:none;font-size:14.5px;line-height:1.5;margin:10px auto 0}
   .utp-card img{width:70%;height:clamp(110px,34vw,150px);margin:14px auto 0}
-  /* стык полос: линия цвета золотого песка, растёт из центра к краям и гаснет, как рассвет над горизонтом;
-     второй стык запаздывает, чтобы не мигали хором */
-  .utp-card+.utp-card::before,.utp-card+.utp-card::after{content:"";position:absolute;top:0;pointer-events:none;z-index:2}
-  .utp-card+.utp-card::before{left:0;right:0;height:1px;
+  /* линии цвета золотого песка над каждой полосой (и над первой, владелец 09.10.2026) и под последней:
+     растут из центра к краям и гаснут, как рассвет над горизонтом; задержки разведены, чтобы не мигали хором */
+  .utp-card::before,.utp-card::after{content:"";position:absolute;top:0;pointer-events:none;z-index:2}
+  .utp-card::before{left:0;right:0;height:1px;
     background:linear-gradient(90deg,rgba(184,134,59,0) 0,#b8863b 22%,#f0d9a2 50%,#b8863b 78%,rgba(184,134,59,0) 100%);
     transform:scaleX(.1);opacity:0;animation:utp-seam 5.6s ease-in-out infinite}
-  .utp-card+.utp-card::after{left:8%;right:8%;height:18px;
+  .utp-card::after{left:8%;right:8%;height:18px;
     background:radial-gradient(50% 100% at 50% 0,rgba(240,217,162,.42),rgba(184,134,59,.12) 55%,transparent 80%);
     transform:scaleX(.1);opacity:0;animation:utp-seam 5.6s ease-in-out infinite}
-  .utp-card:nth-child(3)::before,.utp-card:nth-child(3)::after{animation-delay:1.9s}
-  /* такая же линия под последней полосой (владелец, 09.10.2026): псевдоэлементы карточки заняты верхним стыком,
+  .utp-card:nth-child(2)::before,.utp-card:nth-child(2)::after{animation-delay:1.4s}
+  .utp-card:nth-child(3)::before,.utp-card:nth-child(3)::after{animation-delay:2.8s}
+  /* линия под последней полосой: псевдоэлементы карточки заняты верхней линией,
      поэтому она висит на .utp-row; свечение направлено вверх, внутрь полосы */
   .utp-row{position:relative}
   .utp-row::before,.utp-row::after{content:"";position:absolute;bottom:0;pointer-events:none;z-index:2;
-    transform:scaleX(.1);opacity:0;animation:utp-seam 5.6s ease-in-out 3.8s infinite}
+    transform:scaleX(.1);opacity:0;animation:utp-seam 5.6s ease-in-out 4.2s infinite}
   .utp-row::before{left:0;right:0;height:1px;
     background:linear-gradient(90deg,rgba(184,134,59,0) 0,#b8863b 22%,#f0d9a2 50%,#b8863b 78%,rgba(184,134,59,0) 100%)}
   .utp-row::after{left:8%;right:8%;height:18px;
@@ -493,10 +496,13 @@ main{position:relative;z-index:2;background:var(--canvas)}
   52%{transform:scaleX(1);opacity:.95}
   100%{transform:scaleX(1);opacity:0}
 }
-@media (prefers-reduced-motion: reduce){
-  /* «none» Chromium не принимает (CSS.supports даёт false), поэтому отражение гасится прозрачной маской */
+@media (prefers-reduced-motion: reduce) and (min-width:861px){
+  /* «none» Chromium не принимает (CSS.supports даёт false), поэтому отражение гасится прозрачной маской; только десктоп,
+     на телефоне отражения нет вовсе */
   .utp-card{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
-  .utp-card+.utp-card::before,.utp-card+.utp-card::after,.utp-row::before,.utp-row::after{animation:none;transform:none;opacity:.6}
+}
+@media (prefers-reduced-motion: reduce){
+  .utp-card::before,.utp-card::after,.utp-row::before,.utp-row::after{animation:none;transform:none;opacity:.6}
 }
 .dawn{height:26vh;background:linear-gradient(180deg,#cab29c 0%,#e2d5c6 45%,#f0ebe3 75%,#f6f6f7 100%)}
 .site-footer{background:#f6f6f7;color:#14161c;position:relative;z-index:2;padding:clamp(40px,7vh,84px) clamp(20px,5vw,72px) 28px}
@@ -1147,7 +1153,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   <div class="utp-head">
     <div class="utp-mark"><!-- Надпись QOPP из обсидиана для телефона (09.10.2026): рендер владельца из Genspark по вордмарку из нашего шрифта
      (исходник review/Для Genspark/QOPP_obsidian_3000px_transparent.png, здесь обрезан до букв и ужат до 1200px).
-     Поверх картинки .om-wrap с маской по её прозрачности (assets/qopp-obsidian-mask.png), внутри полоса блика .om-band:
+     Маска по её прозрачности (assets/qopp-obsidian-mask.png) стоит на .utp-mark, поверх картинки слой .om-wrap с полосой блика .om-band:
      золотой градиент под 45°, js/utp-mark.js двигает её по прокрутке через переменную --x. Стили в index.html, блок ≤860px. -->
 <picture class="om-img">
   <source type="image/webp" srcset="assets/qopp-obsidian.webp">
