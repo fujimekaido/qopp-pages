@@ -456,8 +456,11 @@ main{position:relative;z-index:2;background:var(--canvas)}
 @media (max-width:860px){
   /* телефон (решение владельца 08.10.2026): карточки полосами во всю ширину встык,
      текст и картинки по центру, поля срезаны, на стыках тонкая линия золотого песка, разгорающаяся из центра к краям */
-  .utp{padding-left:0;padding-right:0;padding-bottom:0} /* после последней полосы сразу идёт песочная секция .dawn (владелец, 09.10.2026) */
-  .utp-head{padding:0 20px;margin-bottom:clamp(24px,4vh,36px)}
+  /* верх секции до первой полосы градиентом от белого к песочному (владелец, 09.10.2026): градиент лежит на .utp-head,
+     поэтому верхний отступ секции перенесён в неё; после последней полосы сразу идёт песочная секция .dawn */
+  .utp{padding:0;background:#efe6da}
+  .utp-head{padding:clamp(70px,11vh,130px) 20px clamp(24px,4vh,36px);margin-bottom:0;
+    background:linear-gradient(180deg,#fbfbfc 0%,#efe6da 100%)}
   .utp-mark{width:74%}
   .utp-head h2{margin-top:22px;font-size:19px}
   .utp-row{grid-template-columns:1fr;gap:0;max-width:none}
@@ -1153,7 +1156,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
      золотой градиент под 45°, js/utp-mark.js двигает её по прокрутке через переменную --x. Стили в index.html, блок ≤860px. -->
 <picture class="om-img">
   <source type="image/webp" srcset="assets/qopp-obsidian.webp">
-  <img src="assets/qopp-obsidian.png" alt="" width="1200" height="353" loading="lazy" decoding="async">
+  <img src="assets/qopp-obsidian.png" alt="" width="1200" height="353" decoding="async">
 </picture>
 <div class="om-wrap" aria-hidden="true"><div class="om-band"></div></div>
 </div>
