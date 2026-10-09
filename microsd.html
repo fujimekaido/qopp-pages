@@ -642,12 +642,13 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
 .mm-more::after{content:"›";font-size:22px;line-height:1;opacity:.7;transition:transform .25s ease}
 .mm-more.open::after{transform:rotate(90deg)}
 .mm-sub2 .mm-si2{padding-left:58px}
-/* подсветка пункта меню белым овалом той же формы, что окантовка (владелец, 09.10.2026): на десктопе при наведении,
-   фокусе и на текущей странице; в мобильном меню панель и так белая, поэтому овал обозначен мягкой тенью
-   при нажатии и на текущем пункте */
-.menu-pill .mi:hover,.menu-pill .mi:focus-visible,.menu-pill .mi.active{background:#fff;color:#14161c}
+/* подсветка пункта меню чёрным овалом той же формы, что окантовка, текст в нём белый (владелец, 09.10.2026):
+   на десктопе при наведении, фокусе и на текущей странице, сама окантовка не меняется;
+   в мобильном меню так же выделяется нажатый и текущий пункт */
+.menu-pill .mi:hover,.menu-pill .mi:focus-visible,.menu-pill .mi.active{background:#14161c;color:#fff}
 .m-menu .mi:active,.m-menu .mi:focus-visible,.m-menu a.mi[aria-current],.m-menu .mm-si:active,.m-menu .mm-si[aria-current]{
-  background:#fff;color:#14161c;border-radius:999px;box-shadow:0 2px 14px rgba(20,22,28,.16);position:relative;z-index:1}
+  background:#14161c;color:#fff;border-radius:999px;position:relative;z-index:1}
+.m-menu .mi:active::after,.m-menu a.mi[aria-current]::after,.m-menu .mm-si:active::after,.m-menu .mm-si[aria-current]::after{color:rgba(255,255,255,.75)}
 @media (max-width:1024px){
   /* --- шапка --- */
   .menu-pill .mi{display:inline-flex;align-items:center;min-height:44px}
