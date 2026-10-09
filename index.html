@@ -428,8 +428,10 @@ main{position:relative;z-index:2;background:var(--canvas)}
     linear-gradient(168deg,#1c1f26 0%,#0c0e12 62%);
   border:1px solid rgba(165,171,183,.16);
   box-shadow:0 26px 60px rgba(20,22,28,.22);
-  -webkit-box-reflect:below 3px linear-gradient(transparent 64%,rgba(255,255,255,.34));
 }
+/* отражение под карточками только на десктопе: на телефоне (полосы встык) его нет, и свойство не задаётся вовсе,
+   иначе даже прозрачная маска держит слой с фильтром при анимации швов (проверка 09.10.2026) */
+@media (min-width:861px){.utp-card{-webkit-box-reflect:below 3px linear-gradient(transparent 64%,rgba(255,255,255,.34))}}
 .utp-card h3{
   font-family:var(--display);font-weight:600;color:#f2f0ea;
   font-size:clamp(14px,1.35vw,19px);letter-spacing:.2em;text-transform:uppercase;
@@ -484,9 +486,6 @@ main{position:relative;z-index:2;background:var(--canvas)}
     background:linear-gradient(90deg,rgba(184,134,59,0) 0,#b8863b 22%,#f0d9a2 50%,#b8863b 78%,rgba(184,134,59,0) 100%)}
   .utp-row::after{left:8%;right:8%;height:18px;
     background:radial-gradient(50% 100% at 50% 100%,rgba(240,217,162,.42),rgba(184,134,59,.12) 55%,transparent 80%)}
-  /* отражений под полосами на телефоне нет (владелец, 09.10.2026);
-     «none» Chromium не принимает (CSS.supports даёт false), поэтому отражение гасится прозрачной маской */
-  .utp-card{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
 }
 @keyframes utp-seam{
   0%{transform:scaleX(.1);opacity:0}
@@ -495,6 +494,7 @@ main{position:relative;z-index:2;background:var(--canvas)}
   100%{transform:scaleX(1);opacity:0}
 }
 @media (prefers-reduced-motion: reduce){
+  /* «none» Chromium не принимает (CSS.supports даёт false), поэтому отражение гасится прозрачной маской */
   .utp-card{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
   .utp-card+.utp-card::before,.utp-card+.utp-card::after,.utp-row::before,.utp-row::after{animation:none;transform:none;opacity:.6}
 }
@@ -1846,35 +1846,41 @@ if(coopForm){
    Надпись «QOPP» над полосами «Почему QOPP» видна только на телефоне (на десктопе display:none). Блик едет по буквам
    слева направо под 45°, пока надпись проходит экран: положение полосы привязано к прокрутке, а не к таймеру,
    как блик по SSD в фильме на главной. Полоса .om-band лежит в .om-wrap с маской по прозрачности картинки,
-   её сдвиг задаётся переменной --x: от «целиком слева от букв» до «целиком справа». */
+   её сдвиг задаётся переменной --x: от «целиком слева от букв» до «целиком справа».
+   Прокрутку слушаем только пока надпись рядом с экраном и только на телефоне (IntersectionObserver + media query),
+   «Уменьшить движение» проверяется на каждом шаге, одинаковые значения не перезаписываются (проверка 09.10.2026). */
 {
   const mark=document.querySelector('.utp-mark');
   const band=mark&&mark.querySelector('.om-band');
   if(band){
-    const rm=typeof reduced!=='undefined'?reduced:matchMedia('(prefers-reduced-motion: reduce)');
+    const rm=matchMedia('(prefers-reduced-motion: reduce)'),mq=matchMedia('(max-width:860px)');
     const clamp01=v=>Math.min(1,Math.max(0,v));
-    let tick=false,half=0;
+    let tick=false,half=0,last='',on=false;
     /* половина пути полосы: половина ширины надписи плюс половина ширины повёрнутой полосы */
     const measure=()=>{half=(mark.getBoundingClientRect().width+band.getBoundingClientRect().width)/2};
+    const set=v=>{if(v!==last){last=v;band.style.setProperty('--x',v)}};
     const place=()=>{
       tick=false;
-      if(!mark.offsetParent)return;
+      if(!mq.matches)return;
+      if(rm.matches){set('0px');return}
       if(!half)measure();
       const r=mark.getBoundingClientRect(),vh=innerHeight;
       /* p: 0, когда верх надписи показался снизу экрана; 1, когда низ ушёл за верх экрана */
       const p=clamp01((vh-r.top)/(vh+r.height));
       /* блик проходит буквы, пока надпись идёт по средней части экрана */
       const t=clamp01((p-.12)/.62);
-      band.style.setProperty('--x',((t*2-1)*half).toFixed(1)+'px');
+      set(Math.round((t*2-1)*half)+'px');
     };
-    if(rm.matches){
-      band.style.setProperty('--x','0px');
-    }else{
-      const onScroll=()=>{if(!tick){tick=true;requestAnimationFrame(place)}};
-      addEventListener('scroll',onScroll,{passive:true});
-      addEventListener('resize',()=>{half=0;onScroll()});
-      place();
-    }
+    const onScroll=()=>{if(!tick){tick=true;requestAnimationFrame(place)}};
+    const bind=want=>{
+      if(want===on)return;on=want;
+      (want?addEventListener:removeEventListener)('scroll',onScroll,{passive:true});
+      if(want)place();
+    };
+    new IntersectionObserver(es=>bind(es[0].isIntersecting&&mq.matches),{rootMargin:'200px 0px'}).observe(mark);
+    addEventListener('resize',()=>{half=0;onScroll()});
+    mq.addEventListener('change',()=>{half=0;if(!mq.matches)bind(false);else onScroll()});
+    rm.addEventListener('change',onScroll);
   }
 }
 
