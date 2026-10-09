@@ -592,7 +592,11 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .rname span{margin-top:5px;font-size:13px;color:var(--muted)}
 .rbar{height:10px;border-radius:999px;background:rgba(20,22,28,.08);overflow:hidden}
 .rbar i{display:block;height:100%;border-radius:inherit;background:var(--ink);transform-origin:left center}
-.rrow.fast .rbar i{background:#2c83f5} /* голубой, как кнопки «Купить» (владелец, 09.10.2026) */
+/* полосы по возрастанию скорости: светло-серая у самой медленной, графит у средней, чёрная у самой быстрой,
+   чтобы быстрая выделялась (владелец, 09.10.2026); строки в .race-rows всегда идут от медленной к быстрой */
+.race-rows .rrow:nth-child(1) .rbar i{background:#b9bcc3}
+.race-rows .rrow:nth-child(2) .rbar i{background:var(--muted)}
+.race-rows .rrow:nth-child(3) .rbar i{background:var(--ink)}
 .rtime{font-family:var(--display);font-weight:600;font-size:clamp(17px,1.7vw,22px);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;
   color:#6b7078;transition:color .3s var(--ease)}
 .rrow.done .rtime{color:var(--ink)}
