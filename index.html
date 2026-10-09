@@ -409,6 +409,7 @@ main{position:relative;z-index:2;background:var(--canvas)}
   font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
   color:#b8863b;
 }
+.utp-mark{display:none}
 .utp-head h2{
   font-family:var(--display);font-weight:800;color:#14161c;
   font-size:clamp(26px,3.4vw,44px);letter-spacing:.01em;line-height:1.14;margin-top:14px;
@@ -442,20 +443,52 @@ main{position:relative;z-index:2;background:var(--canvas)}
 }
 .utp-card.wide img{width:92%}
 @media (max-width:860px){
-  /* карточки полосами во всю ширину экрана: без боковых полей и скруглений, зазоры между ними остаются
-     (замечание владельца 08.10.2026) */
+  /* телефон (решение владельца 08.10.2026): вместо кикера «Почему QOPP» надпись QOPP из обсидиана (рендер из Genspark)
+     с золотым бликом по прокрутке (src/partials/utp-mark.html + js/utp-mark.js), заголовок остаётся; карточки полосами во всю ширину встык,
+     текст и картинки по центру, поля срезаны, на стыках тонкая линия золотого песка, разгорающаяся из центра к краям */
   .utp{padding-left:0;padding-right:0;padding-bottom:clamp(125px,16vh,160px)} /* низ: отражение под последней полосой гаснет до границы секции */
-  .utp-head{padding:0 20px}
-  .utp-row{grid-template-columns:1fr;gap:clamp(16px,3vh,26px);max-width:none}
-  .utp-card{aspect-ratio:auto;padding:26px 24px 24px;border-radius:0;border-left:0;border-right:0}
-  /* отражение под полосой в узком зазоре обрезалось до серой планки, оставлено только под последней;
+  .utp-head{padding:0 20px;margin-bottom:clamp(24px,4vh,36px)}
+  .utp-head p{display:none}
+  .utp-mark{display:block;position:relative;width:74%;margin:0 auto}
+  .utp-mark img{display:block;width:100%;height:auto}
+  /* блик: слой с маской по прозрачности картинки, внутри золотая полоса под 45°, сдвиг --x ведёт js/utp-mark.js */
+  .om-wrap{position:absolute;inset:0;overflow:hidden;pointer-events:none;
+    -webkit-mask-image:url(assets/qopp-obsidian-mask.png);mask-image:url(assets/qopp-obsidian-mask.png);
+    -webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+  .om-band{position:absolute;left:50%;top:50%;width:26%;height:340%;
+    background:linear-gradient(90deg,rgba(184,134,59,0) 0,rgba(184,134,59,.55) 28%,#e3c27a 50%,rgba(184,134,59,.55) 72%,rgba(184,134,59,0) 100%);
+    mix-blend-mode:screen;opacity:.92;
+    transform:translate(calc(-50% + var(--x,0px)),-50%) rotate(45deg);will-change:transform}
+  .utp-head h2{margin-top:22px;font-size:24px}
+  .utp-row{grid-template-columns:1fr;gap:0;max-width:none}
+  .utp-card{aspect-ratio:auto;padding:20px 20px 18px;border-radius:0;border:0;text-align:center}
+  .utp-card h3{font-size:15px}
+  .utp-card p{max-width:none;font-size:14.5px;line-height:1.5;margin:10px auto 0}
+  .utp-card img{width:70%;height:clamp(110px,34vw,150px);margin:14px auto 0}
+  /* стык полос: линия цвета золотого песка, растёт из центра к краям и гаснет, как рассвет над горизонтом;
+     второй стык запаздывает, чтобы не мигали хором */
+  .utp-card+.utp-card::before,.utp-card+.utp-card::after{content:"";position:absolute;top:0;pointer-events:none;z-index:2}
+  .utp-card+.utp-card::before{left:0;right:0;height:1px;
+    background:linear-gradient(90deg,rgba(184,134,59,0) 0,#b8863b 22%,#f0d9a2 50%,#b8863b 78%,rgba(184,134,59,0) 100%);
+    transform:scaleX(.1);opacity:0;animation:utp-seam 5.6s ease-in-out infinite}
+  .utp-card+.utp-card::after{left:8%;right:8%;height:18px;
+    background:radial-gradient(50% 100% at 50% 0,rgba(240,217,162,.42),rgba(184,134,59,.12) 55%,transparent 80%);
+    transform:scaleX(.1);opacity:0;animation:utp-seam 5.6s ease-in-out infinite}
+  .utp-card:nth-child(3)::before,.utp-card:nth-child(3)::after{animation-delay:1.9s}
+  /* отражение оставлено только под последней полосой;
      «none» Chromium не принимает (CSS.supports даёт false), поэтому отражение гасится прозрачной маской */
   .utp-card:not(:last-child){-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
-  .utp-card h3{font-size:16px}
-  .utp-card p{max-width:none;font-size:14.5px;line-height:1.5}
-  .utp-card img{width:72%;height:clamp(150px,42vw,200px);margin-top:26px}
 }
-@media (prefers-reduced-motion: reduce){.utp-card{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}}
+@keyframes utp-seam{
+  0%{transform:scaleX(.1);opacity:0}
+  16%{opacity:1}
+  52%{transform:scaleX(1);opacity:.95}
+  100%{transform:scaleX(1);opacity:0}
+}
+@media (prefers-reduced-motion: reduce){
+  .utp-card{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
+  .utp-card+.utp-card::before,.utp-card+.utp-card::after{animation:none;transform:none;opacity:.6}
+}
 .dawn{height:26vh;background:linear-gradient(180deg,#cab29c 0%,#e2d5c6 45%,#f0ebe3 75%,#f6f6f7 100%)}
 .site-footer{background:#f6f6f7;color:#14161c;position:relative;z-index:2;padding:clamp(40px,7vh,84px) clamp(20px,5vw,72px) 28px}
 .foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:clamp(28px,5vw,80px);max-width:1200px;margin:0 auto}
@@ -1103,6 +1136,16 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 
 <section class="utp" aria-label="Почему QOPP">
   <div class="utp-head">
+    <div class="utp-mark"><!-- Надпись QOPP из обсидиана для телефона (09.10.2026): рендер владельца из Genspark по вордмарку из нашего шрифта
+     (исходник review/Для Genspark/QOPP_obsidian_3000px_transparent.png, здесь обрезан до букв и ужат до 1200px).
+     Поверх картинки .om-wrap с маской по её прозрачности (assets/qopp-obsidian-mask.png), внутри полоса блика .om-band:
+     золотой градиент под 45°, js/utp-mark.js двигает её по прокрутке через переменную --x. Стили в index.html, блок ≤860px. -->
+<picture class="om-img">
+  <source type="image/webp" srcset="assets/qopp-obsidian.webp">
+  <img src="assets/qopp-obsidian.png" alt="" width="1200" height="353" loading="lazy" decoding="async">
+</picture>
+<div class="om-wrap" aria-hidden="true"><div class="om-band"></div></div>
+</div>
     <p>Почему QOPP</p>
     <h2>Качество по умолчанию</h2>
   </div>
@@ -1785,6 +1828,43 @@ if(coopForm){
     if(!rm.matches){
       paint(0);
       new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting&&!played){played=true;ob.disconnect();run()}}),{threshold:.5}).observe(sec.querySelector('.race-rows'));
+    }
+  }
+}
+
+
+/* ============ utp-mark: золотой блик по надписи QOPP на телефоне (с 08.10.2026) ============
+   Надпись «QOPP» над полосами «Почему QOPP» видна только на телефоне (на десктопе display:none). Блик едет по буквам
+   слева направо под 45°, пока надпись проходит экран: положение полосы привязано к прокрутке, а не к таймеру,
+   как блик по SSD в фильме на главной. Полоса .om-band лежит в .om-wrap с маской по прозрачности картинки,
+   её сдвиг задаётся переменной --x: от «целиком слева от букв» до «целиком справа». */
+{
+  const mark=document.querySelector('.utp-mark');
+  const band=mark&&mark.querySelector('.om-band');
+  if(band){
+    const rm=typeof reduced!=='undefined'?reduced:matchMedia('(prefers-reduced-motion: reduce)');
+    const clamp01=v=>Math.min(1,Math.max(0,v));
+    let tick=false,half=0;
+    /* половина пути полосы: половина ширины надписи плюс половина ширины повёрнутой полосы */
+    const measure=()=>{half=(mark.getBoundingClientRect().width+band.getBoundingClientRect().width)/2};
+    const place=()=>{
+      tick=false;
+      if(!mark.offsetParent)return;
+      if(!half)measure();
+      const r=mark.getBoundingClientRect(),vh=innerHeight;
+      /* p: 0, когда верх надписи показался снизу экрана; 1, когда низ ушёл за верх экрана */
+      const p=clamp01((vh-r.top)/(vh+r.height));
+      /* блик проходит буквы, пока надпись идёт по средней части экрана */
+      const t=clamp01((p-.12)/.62);
+      band.style.setProperty('--x',((t*2-1)*half).toFixed(1)+'px');
+    };
+    if(rm.matches){
+      band.style.setProperty('--x','0px');
+    }else{
+      const onScroll=()=>{if(!tick){tick=true;requestAnimationFrame(place)}};
+      addEventListener('scroll',onScroll,{passive:true});
+      addEventListener('resize',()=>{half=0;onScroll()});
+      place();
     }
   }
 }
