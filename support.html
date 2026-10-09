@@ -277,7 +277,13 @@ main{position:relative;z-index:1}
 }
 .dark-strip .inner{position:relative;max-width:1160px;margin:0 auto}
 @media (max-width:860px){
-  .ds-photo{width:100%;opacity:.42;-webkit-mask-image:none;mask-image:none}
+  /* на телефоне фото отдельной полосой над текстом, товар виден целиком (владелец 08.10.2026: текст закрывал SSD);
+     кадр обрезан к правой части, где накопитель, низ растворяется в тёмный фон; параллакс из fx.js здесь выключен */
+  .dark-strip{display:flex;flex-direction:column;padding:0 20px clamp(48px,8vh,70px)}
+  .dark-strip picture{display:block;margin:0 -20px}
+  .dark-strip .ds-photo[data-par],.ds-photo{position:static;width:100%;height:72vw!important;top:auto!important;object-position:75% 50%;opacity:1;transform:none!important;
+    -webkit-mask-image:linear-gradient(to bottom,#000 62%,transparent);mask-image:linear-gradient(to bottom,#000 62%,transparent)}
+  .dark-strip .inner{margin-top:-6vw}
 }
 .dark-strip .kicker{color:var(--accent)}
 .dark-strip h2{
@@ -1431,7 +1437,7 @@ if(coopForm){
       {l:'В ноутбук',t:'Вам нужна память SO-DIMM',d:'Это укороченные модули для ноутбуков и мини-ПК. Сначала убедитесь, что память в вашей модели не распаяна и слот свободен.',go:['sodimm.html','Память для ноутбука'],faq:['faq.html#ram-fit','Как проверить совместимость']}]},
     ssd:{q:'Куда ставим',o:[
       {l:'ПК или ноутбук со слотом M.2',t:'Вам нужен SSD формата M.2',d:'Проверьте, какой интерфейс поддерживает слот вашего устройства: от этого зависит, какая модель раскроется полностью.',go:['ssd.html','Внутренние SSD'],faq:['faq.html#ssd-fit','Как проверить совместимость']},
-      {l:'Вместо жёсткого диска 2,5 дюйма',t:'Вам нужен SSD 2,5 дюйма с интерфейсом SATA',d:'Он ставится на место обычного диска в ноутбуке или ПК, разъём тот же.',go:['ssd-sata.html','SSD SATA Q600S'],faq:['faq.html#ssd-kit','Что идёт в комплекте']},
+      {l:'Вместо жёсткого диска 2,5 дюйма',t:'Вам нужен SSD 2,5 дюйма с интерфейсом SATA',d:'Он ставится на место обычного диска в ноутбуке или ПК, разъём тот же.',go:['ssd.html#sata','SSD SATA Q600S'],faq:['faq.html#ssd-kit','Что идёт в комплекте']},
       {l:'В PlayStation 5',t:'Для PS5 нужен M.2 2280 с PCI-E 4.0 и радиатор',d:'Накопители SATA и PCI-E 3.0 консоль не примет.',go:['ssd.html','Внутренние SSD'],faq:['faq.html#ssd-heat','SSD и PS5']},
       {l:'Во внешний бокс',t:'Бокс должен совпадать с типом накопителя',d:'Для диска 2,5 дюйма подойдёт любой бокс SATA, для M.2 нужен бокс под свой тип: SATA или NVMe.',go:['ssd.html','Внутренние SSD'],faq:['faq.html#ssd-box','SSD во внешнем боксе']}]},
     card:{q:'Для чего карта',o:[
