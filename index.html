@@ -446,7 +446,7 @@ main{position:relative;z-index:2;background:var(--canvas)}
   /* телефон (решение владельца 08.10.2026): вместо кикера «Почему QOPP» надпись QOPP из обсидиана (рендер из Genspark)
      с золотым бликом по прокрутке (src/partials/utp-mark.html + js/utp-mark.js), заголовок остаётся; карточки полосами во всю ширину встык,
      текст и картинки по центру, поля срезаны, на стыках тонкая линия золотого песка, разгорающаяся из центра к краям */
-  .utp{padding-left:0;padding-right:0;padding-bottom:clamp(125px,16vh,160px)} /* низ: отражение под последней полосой гаснет до границы секции */
+  .utp{padding-left:0;padding-right:0;padding-bottom:0} /* после последней полосы сразу идёт песочная секция .dawn (владелец, 09.10.2026) */
   .utp-head{padding:0 20px;margin-bottom:clamp(24px,4vh,36px)}
   .utp-head p{display:none}
   .utp-mark{display:block;position:relative;width:74%;margin:0 auto}
@@ -475,9 +475,9 @@ main{position:relative;z-index:2;background:var(--canvas)}
     background:radial-gradient(50% 100% at 50% 0,rgba(240,217,162,.42),rgba(184,134,59,.12) 55%,transparent 80%);
     transform:scaleX(.1);opacity:0;animation:utp-seam 5.6s ease-in-out infinite}
   .utp-card:nth-child(3)::before,.utp-card:nth-child(3)::after{animation-delay:1.9s}
-  /* отражение оставлено только под последней полосой;
+  /* отражений под полосами на телефоне нет (владелец, 09.10.2026);
      «none» Chromium не принимает (CSS.supports даёт false), поэтому отражение гасится прозрачной маской */
-  .utp-card:not(:last-child){-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
+  .utp-card{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
 }
 @keyframes utp-seam{
   0%{transform:scaleX(.1);opacity:0}
