@@ -231,6 +231,12 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   /* мобильные кадры от дизайнера (с 07.10.2026, review/Мобильная версия): у полос с классом mimg свой вытянутый кадр
      через <source media>, он показывается целиком, без обрезки по высоте; у тёмных кадров «Все модели» (mdark) растворение в фон отключено */
   .strip.mimg img{height:auto;object-fit:fill;object-position:50% 50%}
+  /* полосы с кадрами дизайнера продлены вниз полем цвета нижнего края кадра (--mb стоит на полосе в разметке),
+     кнопка «Купить» опущена в это поле и не закрывает товар (владелец, 21.10.2026) */
+  .strip.mimg{padding-bottom:64px;background:var(--mb,#fbfbfc)}
+  .strip.mimg .strip-acts{bottom:9px}
+  /* полосы «Все модели» без кадра дизайнера: фото целиком и выше, кнопка под ним (владелец, 21.10.2026) */
+  .strip#all:not(.mimg) img{object-fit:contain;object-position:50% 22%;height:max(300px,84vw)}
   .strip.mdark .strip-link::before,.strip.mdark .strip-link::after{display:none}
   /* кнопка на фото, как на большом экране (владелец 07.10.2026, прежде стояла под фото); у полос без своего мобильного кадра
      фото чуть выше, чтобы под кнопкой оставался товар */
@@ -265,14 +271,39 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
    на десктопе при наведении, фокусе и на текущей странице, сама окантовка не меняется;
    в мобильном меню так же выделяется нажатый и текущий пункт */
 .menu-pill .mi:hover,.menu-pill .mi:focus-visible,.menu-pill .mi.active{background:#14161c;color:#fff}
-.m-menu .mi:active,.m-menu .mi:focus-visible,.m-menu a.mi[aria-current],.m-menu .mm-si:active,.m-menu .mm-si[aria-current]{
-  background:#14161c;color:#fff;border-radius:999px;position:relative;z-index:1}
-.m-menu .mi:active::after,.m-menu a.mi[aria-current]::after,.m-menu .mm-si:active::after,.m-menu .mm-si[aria-current]::after{color:rgba(255,255,255,.75)}
+/* в мобильном меню пункты не подсвечиваются вовсе, панель единым слоем (владелец, 21.10.2026: подсветка выглядела как
+   случайное выделение «Контактов»); панель полупрозрачная с размытием, а не глухая белая */
+.m-menu{background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%)}
+/* кнопка «Купить» голубая на всех страницах (одно правило вместо копий на страницах каталога; владелец, 09.10 и 21.10.2026) */
+.pbtn-buy{
+  color:#14161c;
+  border-color:rgba(216,233,255,.55);
+  background:
+    linear-gradient(168deg,rgba(93,163,255,.92),rgba(44,131,245,.96) 64%),
+    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.4),transparent 58%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 0 -1px 0 rgba(10,40,90,.5),
+    inset 0 0 26px rgba(255,255,255,.1),
+    0 10px 26px rgba(44,131,245,.3);
+}
+.pbtn-buy:hover{
+  border-color:rgba(226,238,255,.85);
+  background:
+    linear-gradient(168deg,rgba(110,175,255,.96),rgba(60,142,250,.98) 64%),
+    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.48),transparent 58%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.58),
+    inset 0 -1px 0 rgba(10,40,90,.55),
+    inset 0 0 30px rgba(255,255,255,.14),
+    0 16px 36px rgba(44,131,245,.42);
+}
 @media (max-width:1024px){
   /* --- шапка --- */
   .menu-pill .mi{display:inline-flex;align-items:center;min-height:44px}
   nav .logo{display:flex;align-items:center;min-height:44px}
-  .menu-btn{min-height:44px}
+  /* кнопка «Меню» меньше и ближе по высоте к логотипу, без большого белого ореола (владелец, 21.10.2026) */
+  .menu-btn{min-height:40px;padding:0 16px;font-size:14px;gap:6px;box-shadow:0 3px 12px rgba(0,0,0,.22)}
   /* --- подвал --- */
   .coop-form input:not([type=checkbox]){font-size:16px;min-height:48px;padding:12px 14px;max-width:none}
   .foot-btn{font-size:16px;min-height:48px;max-width:none}

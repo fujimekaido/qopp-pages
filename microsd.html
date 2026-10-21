@@ -335,30 +335,7 @@ a.mi{cursor:pointer;text-decoration:none}
     inset 0 0 28px rgba(227,169,79,.16),
     0 16px 34px rgba(227,169,79,.28);
 }
-/* покупка: заливка голубым #2c83f5, цвет кнопок «Купить» и полос интерактивов по решению владельца 09.10.2026 */
-.pbtn-buy{
-  color:#14161c;
-  border-color:rgba(216,233,255,.55);
-  background:
-    linear-gradient(168deg,rgba(93,163,255,.92),rgba(44,131,245,.96) 64%),
-    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.4),transparent 58%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.5),
-    inset 0 -1px 0 rgba(10,40,90,.5),
-    inset 0 0 26px rgba(255,255,255,.1),
-    0 10px 26px rgba(44,131,245,.3);
-}
-.pbtn-buy:hover{
-  border-color:rgba(226,238,255,.85);
-  background:
-    linear-gradient(168deg,rgba(110,175,255,.96),rgba(60,142,250,.98) 64%),
-    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.48),transparent 58%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.58),
-    inset 0 -1px 0 rgba(10,40,90,.55),
-    inset 0 0 30px rgba(255,255,255,.14),
-    0 16px 36px rgba(44,131,245,.42);
-}
+/* .pbtn-buy (голубая «Купить») задана в общем фрагменте mobile.html */
 .pbtn[aria-disabled="true"]{cursor:default}
 @media (prefers-reduced-motion: reduce){.pbtn::before{display:none}}
 
@@ -617,6 +594,12 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   /* мобильные кадры от дизайнера (с 07.10.2026, review/Мобильная версия): у полос с классом mimg свой вытянутый кадр
      через <source media>, он показывается целиком, без обрезки по высоте; у тёмных кадров «Все модели» (mdark) растворение в фон отключено */
   .strip.mimg img{height:auto;object-fit:fill;object-position:50% 50%}
+  /* полосы с кадрами дизайнера продлены вниз полем цвета нижнего края кадра (--mb стоит на полосе в разметке),
+     кнопка «Купить» опущена в это поле и не закрывает товар (владелец, 21.10.2026) */
+  .strip.mimg{padding-bottom:64px;background:var(--mb,#fbfbfc)}
+  .strip.mimg .strip-acts{bottom:9px}
+  /* полосы «Все модели» без кадра дизайнера: фото целиком и выше, кнопка под ним (владелец, 21.10.2026) */
+  .strip#all:not(.mimg) img{object-fit:contain;object-position:50% 22%;height:max(300px,84vw)}
   .strip.mdark .strip-link::before,.strip.mdark .strip-link::after{display:none}
   /* кнопка на фото, как на большом экране (владелец 07.10.2026, прежде стояла под фото); у полос без своего мобильного кадра
      фото чуть выше, чтобы под кнопкой оставался товар */
@@ -651,14 +634,39 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
    на десктопе при наведении, фокусе и на текущей странице, сама окантовка не меняется;
    в мобильном меню так же выделяется нажатый и текущий пункт */
 .menu-pill .mi:hover,.menu-pill .mi:focus-visible,.menu-pill .mi.active{background:#14161c;color:#fff}
-.m-menu .mi:active,.m-menu .mi:focus-visible,.m-menu a.mi[aria-current],.m-menu .mm-si:active,.m-menu .mm-si[aria-current]{
-  background:#14161c;color:#fff;border-radius:999px;position:relative;z-index:1}
-.m-menu .mi:active::after,.m-menu a.mi[aria-current]::after,.m-menu .mm-si:active::after,.m-menu .mm-si[aria-current]::after{color:rgba(255,255,255,.75)}
+/* в мобильном меню пункты не подсвечиваются вовсе, панель единым слоем (владелец, 21.10.2026: подсветка выглядела как
+   случайное выделение «Контактов»); панель полупрозрачная с размытием, а не глухая белая */
+.m-menu{background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%)}
+/* кнопка «Купить» голубая на всех страницах (одно правило вместо копий на страницах каталога; владелец, 09.10 и 21.10.2026) */
+.pbtn-buy{
+  color:#14161c;
+  border-color:rgba(216,233,255,.55);
+  background:
+    linear-gradient(168deg,rgba(93,163,255,.92),rgba(44,131,245,.96) 64%),
+    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.4),transparent 58%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 0 -1px 0 rgba(10,40,90,.5),
+    inset 0 0 26px rgba(255,255,255,.1),
+    0 10px 26px rgba(44,131,245,.3);
+}
+.pbtn-buy:hover{
+  border-color:rgba(226,238,255,.85);
+  background:
+    linear-gradient(168deg,rgba(110,175,255,.96),rgba(60,142,250,.98) 64%),
+    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.48),transparent 58%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.58),
+    inset 0 -1px 0 rgba(10,40,90,.55),
+    inset 0 0 30px rgba(255,255,255,.14),
+    0 16px 36px rgba(44,131,245,.42);
+}
 @media (max-width:1024px){
   /* --- шапка --- */
   .menu-pill .mi{display:inline-flex;align-items:center;min-height:44px}
   nav .logo{display:flex;align-items:center;min-height:44px}
-  .menu-btn{min-height:44px}
+  /* кнопка «Меню» меньше и ближе по высоте к логотипу, без большого белого ореола (владелец, 21.10.2026) */
+  .menu-btn{min-height:40px;padding:0 16px;font-size:14px;gap:6px;box-shadow:0 3px 12px rgba(0,0,0,.22)}
   /* --- подвал --- */
   .coop-form input:not([type=checkbox]){font-size:16px;min-height:48px;padding:12px 14px;max-width:none}
   .foot-btn{font-size:16px;min-height:48px;max-width:none}
@@ -931,7 +939,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   <div class="strips">
 
     <!-- BASE (внутреннее имя модели Q80SD, на сайте не показываем) -->
-    <section class="strip reveal mimg" id="base">
+    <section class="strip reveal mimg" id="base" style="--mb:#d4d5d5">
       <h2 class="sr">BASE: объёмы 32, 64 и 128 ГБ</h2>
       <span class="strip-link part">
         <picture><source media="(max-width:860px)" srcset="assets/m-microsd-base.webp" type="image/webp"><source media="(max-width:860px)" srcset="assets/m-microsd-base.jpg"><source srcset="assets/microsd-base.webp" type="image/webp"><img src="assets/microsd-base.jpg" alt="Карта microSD QOPP BASE 128 ГБ в лотке смартфона" width="2400" height="655" decoding="async"></picture>
@@ -946,7 +954,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     </section>
 
     <!-- RUSH -->
-    <section class="strip reveal mimg" id="rush">
+    <section class="strip reveal mimg" id="rush" style="--mb:#d7d7d7">
       <h2 class="sr">RUSH: объёмы 32, 64, 128 и 256 ГБ</h2>
       <span class="strip-link part">
         <picture><source media="(max-width:860px)" srcset="assets/m-microsd-rush.webp" type="image/webp"><source media="(max-width:860px)" srcset="assets/m-microsd-rush.jpg"><source srcset="assets/microsd-rush.webp" type="image/webp"><img src="assets/microsd-rush.jpg" alt="Карта microSD QOPP RUSH 256 ГБ, A1 V30 U3, на крышке ноутбука" width="2400" height="655" loading="lazy" decoding="async"></picture>
@@ -961,7 +969,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     </section>
 
     <!-- RUSH+ -->
-    <section class="strip reveal mimg" id="rushplus">
+    <section class="strip reveal mimg" id="rushplus" style="--mb:#e6e6e6">
       <h2 class="sr">RUSH+: объёмы 128, 256 и 512 ГБ</h2>
       <span class="strip-link part">
         <picture><source media="(max-width:860px)" srcset="assets/m-microsd-rushplus.webp" type="image/webp"><source media="(max-width:860px)" srcset="assets/m-microsd-rushplus.jpg"><source srcset="assets/microsd-rushplus.webp" type="image/webp"><img src="assets/microsd-rushplus.jpg" alt="Карта microSD QOPP RUSH+ 512 ГБ, A2 V30 U3, и адаптер SD" width="2400" height="655" loading="lazy" decoding="async"></picture>
@@ -1029,7 +1037,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     </section>
 
     <!-- все модели -->
-    <section class="strip reveal mimg mdark" id="all">
+    <section class="strip reveal mimg mdark" id="all" style="--mb:#1a1515">
       <h2 class="sr">Все модели карт памяти</h2>
       <span class="strip-link part">
         <picture><source media="(max-width:860px)" srcset="assets/m-microsd-all.webp" type="image/webp"><source media="(max-width:860px)" srcset="assets/m-microsd-all.jpg"><source srcset="assets/microsd-all.webp" type="image/webp"><img src="assets/microsd-all.jpg" alt="Линейка карт памяти QOPP: RUSH, RUSH+ и BASE" width="2400" height="656" loading="lazy" decoding="async"></picture>

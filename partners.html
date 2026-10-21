@@ -634,6 +634,12 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   /* мобильные кадры от дизайнера (с 07.10.2026, review/Мобильная версия): у полос с классом mimg свой вытянутый кадр
      через <source media>, он показывается целиком, без обрезки по высоте; у тёмных кадров «Все модели» (mdark) растворение в фон отключено */
   .strip.mimg img{height:auto;object-fit:fill;object-position:50% 50%}
+  /* полосы с кадрами дизайнера продлены вниз полем цвета нижнего края кадра (--mb стоит на полосе в разметке),
+     кнопка «Купить» опущена в это поле и не закрывает товар (владелец, 21.10.2026) */
+  .strip.mimg{padding-bottom:64px;background:var(--mb,#fbfbfc)}
+  .strip.mimg .strip-acts{bottom:9px}
+  /* полосы «Все модели» без кадра дизайнера: фото целиком и выше, кнопка под ним (владелец, 21.10.2026) */
+  .strip#all:not(.mimg) img{object-fit:contain;object-position:50% 22%;height:max(300px,84vw)}
   .strip.mdark .strip-link::before,.strip.mdark .strip-link::after{display:none}
   /* кнопка на фото, как на большом экране (владелец 07.10.2026, прежде стояла под фото); у полос без своего мобильного кадра
      фото чуть выше, чтобы под кнопкой оставался товар */
@@ -668,14 +674,39 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
    на десктопе при наведении, фокусе и на текущей странице, сама окантовка не меняется;
    в мобильном меню так же выделяется нажатый и текущий пункт */
 .menu-pill .mi:hover,.menu-pill .mi:focus-visible,.menu-pill .mi.active{background:#14161c;color:#fff}
-.m-menu .mi:active,.m-menu .mi:focus-visible,.m-menu a.mi[aria-current],.m-menu .mm-si:active,.m-menu .mm-si[aria-current]{
-  background:#14161c;color:#fff;border-radius:999px;position:relative;z-index:1}
-.m-menu .mi:active::after,.m-menu a.mi[aria-current]::after,.m-menu .mm-si:active::after,.m-menu .mm-si[aria-current]::after{color:rgba(255,255,255,.75)}
+/* в мобильном меню пункты не подсвечиваются вовсе, панель единым слоем (владелец, 21.10.2026: подсветка выглядела как
+   случайное выделение «Контактов»); панель полупрозрачная с размытием, а не глухая белая */
+.m-menu{background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%)}
+/* кнопка «Купить» голубая на всех страницах (одно правило вместо копий на страницах каталога; владелец, 09.10 и 21.10.2026) */
+.pbtn-buy{
+  color:#14161c;
+  border-color:rgba(216,233,255,.55);
+  background:
+    linear-gradient(168deg,rgba(93,163,255,.92),rgba(44,131,245,.96) 64%),
+    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.4),transparent 58%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 0 -1px 0 rgba(10,40,90,.5),
+    inset 0 0 26px rgba(255,255,255,.1),
+    0 10px 26px rgba(44,131,245,.3);
+}
+.pbtn-buy:hover{
+  border-color:rgba(226,238,255,.85);
+  background:
+    linear-gradient(168deg,rgba(110,175,255,.96),rgba(60,142,250,.98) 64%),
+    radial-gradient(120% 90% at 22% 0%,rgba(255,255,255,.48),transparent 58%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.58),
+    inset 0 -1px 0 rgba(10,40,90,.55),
+    inset 0 0 30px rgba(255,255,255,.14),
+    0 16px 36px rgba(44,131,245,.42);
+}
 @media (max-width:1024px){
   /* --- шапка --- */
   .menu-pill .mi{display:inline-flex;align-items:center;min-height:44px}
   nav .logo{display:flex;align-items:center;min-height:44px}
-  .menu-btn{min-height:44px}
+  /* кнопка «Меню» меньше и ближе по высоте к логотипу, без большого белого ореола (владелец, 21.10.2026) */
+  .menu-btn{min-height:40px;padding:0 16px;font-size:14px;gap:6px;box-shadow:0 3px 12px rgba(0,0,0,.22)}
   /* --- подвал --- */
   .coop-form input:not([type=checkbox]){font-size:16px;min-height:48px;padding:12px 14px;max-width:none}
   .foot-btn{font-size:16px;min-height:48px;max-width:none}
@@ -1236,7 +1267,7 @@ toTop.addEventListener('click',()=>{
 /* ============ fx: интерактив текстовых страниц (с 22 сентября 2026) ============
    Приёмы, стили внедряет сам скрипт, разметке нужны только атрибуты:
    0. Буква Q в шапке страницы (svg.q-mark): контур буквы Q из шрифта Montserrat QOPP (Bold, тот же, что отдан дизайнеру),
-      по кольцу бежит золотой импульс и уходит в хвост, внутри кольца медленно плывут деления; прокрутка разгоняет импульс.
+      по кольцу бежит голубой импульс и уходит в хвост, внутри кольца медленно плывут деления; прокрутка разгоняет импульс.
       Импульс и деления обрезаны по контуру буквы (clipPath), вспышка хвоста это сама буква за пределами кольца (mask):
       ничего не выходит за букву и не заезжает внутрь кольца (замечание владельца 07.10.2026). До этого: кольцо и хвост
       рисовались отдельно (05.10.2026), ещё раньше простая крутящаяся дуга.
@@ -1255,8 +1286,8 @@ toTop.addEventListener('click',()=>{
 /* кнопка «наверх»: контур Q из шрифта вокруг кнопки, кольцо наливается золотом по мере чтения, хвост загорается в конце */
 .fx-q{position:absolute;left:-6px;top:-4px;width:65px;height:66px;pointer-events:none;overflow:visible}
 .fx-q .g{fill:rgba(20,22,28,.1)}
-.fx-q .p{fill:none;stroke:#b8863b;stroke-width:170;transition:stroke-dashoffset .15s linear}
-.fx-q .tl{fill:#b8863b;opacity:0;transition:opacity .5s ease}
+.fx-q .p{fill:none;stroke:#2c83f5;stroke-width:170;transition:stroke-dashoffset .15s linear}
+.fx-q .tl{fill:#2c83f5;opacity:0;transition:opacity .5s ease}
 .fx-q.full .tl{opacity:1}
 @media (hover:hover){
   .vow,.chan,.mp,.pillar{position:relative;transition:padding-left .45s cubic-bezier(.22,.61,.2,1)}
@@ -1273,8 +1304,8 @@ toTop.addEventListener('click',()=>{
 .q2-glyph{fill:#14161c;opacity:.08}
 .q2-cells{fill:none;stroke:#14161c;stroke-width:64;stroke-dasharray:4 16.83;opacity:.1;animation:q2back 120s linear infinite}
 .q2-orbit{opacity:0;animation:q2show .8s ease 1s forwards}
-.q2-orbit ellipse{fill:none;stroke:#e3a94f;stroke-width:180;animation:q2run 7s linear 1s infinite}
-.q2-glow{fill:#e3a94f;opacity:0;animation:q2flash 7s linear 1s infinite}
+.q2-orbit ellipse{fill:none;stroke:#2c83f5;stroke-width:180;animation:q2run 7s linear 1s infinite}
+.q2-glow{fill:#2c83f5;opacity:0;animation:q2flash 7s linear 1s infinite}
 @keyframes q2in{to{opacity:1}}
 @keyframes q2show{to{opacity:1}}
 @keyframes q2run{from{stroke-dashoffset:var(--o)}to{stroke-dashoffset:calc(var(--o) - 1000)}}
@@ -1312,11 +1343,13 @@ toTop.addEventListener('click',()=>{
       return '<ellipse cx="'+QCX+'" cy="'+QCY+'" rx="'+QRX+'" ry="'+QRY+'" pathLength="1000" stroke-dasharray="'+len+' '+(1000-len)+'" style="--o:'+(-start).toFixed(1)+'" opacity="'+op+'"/>'};
     qm.setAttribute('viewBox','0 0 804 816');
     qm.classList.add('q2');
-    qm.innerHTML='<defs><clipPath id="q2c"><path d="'+QD+'"/></clipPath>'+
+    /* второй клип по внешнему эллипсу кольца: импульс и деления не заезжают на хвост, хвост только вспыхивает
+       (владелец, 21.10.2026); цвет голубой, как кнопки */
+    qm.innerHTML='<defs><clipPath id="q2c"><path d="'+QD+'"/></clipPath><clipPath id="q2r"><ellipse cx="'+QCX+'" cy="'+QCY+'" rx="383" ry="362"/></clipPath>'+
       '<mask id="q2m"><rect width="804" height="816" fill="#fff"/><ellipse cx="'+QCX+'" cy="'+QCY+'" rx="386" ry="365" fill="#000"/></mask></defs>'+
-      '<g class="q2-body"><path class="q2-glyph" d="'+QD+'"/><g clip-path="url(#q2c)"><ellipse class="q2-cells" cx="'+QCX+'" cy="'+QCY+'" rx="'+QRX+'" ry="'+QRY+'" pathLength="1000"/></g></g>'+
+      '<g class="q2-body"><path class="q2-glyph" d="'+QD+'"/><g clip-path="url(#q2c)"><g clip-path="url(#q2r)"><ellipse class="q2-cells" cx="'+QCX+'" cy="'+QCY+'" rx="'+QRX+'" ry="'+QRY+'" pathLength="1000"/></g></g></g>'+
       '<path class="q2-glow" d="'+QD+'" mask="url(#q2m)"/>'+
-      '<g clip-path="url(#q2c)"><g class="q2-orbit">'+arc(200,.16)+arc(140,.3)+arc(78,.95)+'</g></g>';
+      '<g clip-path="url(#q2c)"><g clip-path="url(#q2r)"><g class="q2-orbit">'+arc(200,.16)+arc(140,.3)+arc(78,.95)+'</g></g></g>';
     if(!RM.matches&&qm.getAnimations){
       setTimeout(()=>{try{qAn=qm.getAnimations({subtree:true}).filter(a=>/q2run|q2flash|q2back/.test(a.animationName))}catch(e){}},1200);
       /* прокрутка разгоняет импульс, потом он сам возвращается к обычному ходу */
@@ -1331,8 +1364,8 @@ toTop.addEventListener('click',()=>{
   if(tt){
     const NS='http://www.w3.org/2000/svg',svg=document.createElementNS(NS,'svg');
     svg.setAttribute('class','fx-q');svg.setAttribute('viewBox','0 0 804 816');svg.setAttribute('aria-hidden','true');
-    svg.innerHTML='<defs><clipPath id="fxc"><path d="'+QD+'"/></clipPath><mask id="fxm"><rect width="804" height="816" fill="#fff"/><ellipse cx="'+QCX+'" cy="'+QCY+'" rx="386" ry="365" fill="#000"/></mask></defs>'+
-      '<path class="g" d="'+QD+'"/><g clip-path="url(#fxc)"><ellipse class="p" cx="'+QCX+'" cy="'+QCY+'" rx="'+QRX+'" ry="'+QRY+'" pathLength="1000" transform="rotate(-90 '+QCX+' '+QCY+')" stroke-dasharray="1000" stroke-dashoffset="1000"/></g>'+
+    svg.innerHTML='<defs><clipPath id="fxc"><path d="'+QD+'"/></clipPath><clipPath id="fxr"><ellipse cx="'+QCX+'" cy="'+QCY+'" rx="383" ry="362"/></clipPath><mask id="fxm"><rect width="804" height="816" fill="#fff"/><ellipse cx="'+QCX+'" cy="'+QCY+'" rx="386" ry="365" fill="#000"/></mask></defs>'+
+      '<path class="g" d="'+QD+'"/><g clip-path="url(#fxc)"><g clip-path="url(#fxr)"><ellipse class="p" cx="'+QCX+'" cy="'+QCY+'" rx="'+QRX+'" ry="'+QRY+'" pathLength="1000" transform="rotate(-90 '+QCX+' '+QCY+')" stroke-dasharray="1000" stroke-dashoffset="1000"/></g></g>'+
       '<path class="tl" d="'+QD+'" mask="url(#fxm)"/>';
     tt.appendChild(svg);qS=svg;qP=svg.querySelector('.p');
   }
