@@ -503,7 +503,34 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 
 /* ============ где купить: по референсу дизайнера ============ */
 .b-top{padding-top:clamp(64px,6.4vw,92px);background:#fff}
-.b-photo{margin:0;line-height:0}
+.b-photo{margin:0;line-height:0;position:relative}
+/* подсветка модулей: слой цвета в режиме color по маске свечения, ползунок задаёт оттенок (как на «Гарантии», владелец 22.10.2026) */
+.ds-tint{position:absolute;left:0;top:0;width:100%;height:clamp(250px,42.6vw,700px);pointer-events:none;
+  background:hsl(var(--hue,200),100%,55%);mix-blend-mode:color;opacity:0;transition:opacity .45s var(--ease);
+  -webkit-mask:url(assets/buy-hero-rgb-glow.webp) 54% 46%/cover no-repeat;mask:url(assets/buy-hero-rgb-glow.webp) 54% 46%/cover no-repeat}
+.ds-tint.on{opacity:1}
+.ds-hue{position:absolute;z-index:2;right:calc(clamp(14px,2.2vw,34px) - 98px);top:calc(50% - 22px);width:240px;height:44px;
+  display:flex;align-items:center;gap:8px;transform:rotate(-90deg)}
+.ds-hue button{flex:none;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer;display:grid;place-items:center}
+.ds-hue button::before{content:"";width:24px;height:24px;border-radius:50%;
+  background:conic-gradient(#ff3b30,#ffcc00,#34c759,#32ade6,#5856d6,#ff2d55,#ff3b30);
+  box-shadow:0 0 0 2px #0b0a08,0 0 0 3px rgba(242,240,234,.35);transition:box-shadow .3s var(--ease)}
+.ds-hue button.on::before{box-shadow:0 0 0 2px #0b0a08,0 0 0 4px #f2f0ea}
+.ds-hue input{-webkit-appearance:none;appearance:none;flex:1 1 auto;min-width:0;height:44px;margin:0;background:transparent;cursor:pointer}
+.ds-hue input::-webkit-slider-runnable-track{height:8px;border-radius:4px;box-shadow:0 0 0 1px rgba(242,240,234,.28),0 2px 12px rgba(0,0,0,.6);
+  background:linear-gradient(to right,hsl(0,100%,55%),hsl(60,100%,55%),hsl(120,100%,55%),hsl(180,100%,55%),hsl(240,100%,55%),hsl(300,100%,55%),hsl(360,100%,55%))}
+.ds-hue input::-moz-range-track{height:8px;border-radius:4px;box-shadow:0 0 0 1px rgba(242,240,234,.28),0 2px 12px rgba(0,0,0,.6);
+  background:linear-gradient(to right,hsl(0,100%,55%),hsl(60,100%,55%),hsl(120,100%,55%),hsl(180,100%,55%),hsl(240,100%,55%),hsl(300,100%,55%),hsl(360,100%,55%))}
+.ds-hue input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;margin-top:-8px;border-radius:50%;
+  background:hsl(var(--hue,200),100%,55%);border:3px solid #f2f0ea;box-shadow:0 2px 10px rgba(0,0,0,.6)}
+.ds-hue input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:hsl(var(--hue,200),100%,55%);border:3px solid #f2f0ea;box-shadow:0 2px 10px rgba(0,0,0,.6)}
+.ds-hue input:focus-visible{outline:none}
+.ds-hue input:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--accent)}
+/* на телефоне и планшете ползунок горизонтальный, под модулями (владелец, 22.10.2026) */
+@media (max-width:1024px){
+  .ds-hue{position:static;transform:none;width:auto;max-width:420px;margin:10px auto 0;padding:0 16px;flex-direction:row-reverse}
+  .b-photo{line-height:normal;padding-bottom:8px;background:#0b0b0c}
+}
 .b-photo img{display:block;width:100%;height:clamp(250px,42.6vw,700px);object-fit:cover;object-position:54% 46%}
 .b-body{position:relative;z-index:1;background:#fff;text-align:center;padding:clamp(40px,6.4vh,76px) clamp(16px,4vw,56px) clamp(60px,10vh,120px)}
 .b-lede{max-width:60ch;margin:0 auto;font-size:clamp(16px,1.45vw,20px);line-height:1.5;color:#2b2e35}
@@ -522,7 +549,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .shop-ic.q{width:60px;height:60px;margin:8px;border-radius:50%;background:#14161c;display:grid;place-items:center;box-shadow:0 6px 14px rgba(20,22,28,.22)}
 .shop-ic.q img{width:24px;height:auto;display:block}
 @media (max-width:1040px){.shops{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.shops{grid-template-columns:1fr;gap:10px}.shop-card{min-height:88px}.b-photo img{object-position:56% 46%}}
+@media (max-width:560px){.shops{grid-template-columns:1fr;gap:10px}.shop-card{min-height:88px}.b-photo img{object-position:56% 46%}.ds-tint{-webkit-mask-position:56% 46%;mask-position:56% 46%}}
 </style>
 <style id="mobile-fix">
 /* ============ мобильная версия: общие правки для всех страниц (01.10.2026) ============
@@ -600,6 +627,7 @@ nav.on-dark .logo img{filter:drop-shadow(0 2px 10px rgba(0,0,0,.55))}
   /* «Все модели» по центру, как на большом экране (владелец 07.10.2026) */
   .strip#all .strip-title{text-align:center;align-items:center}
   .strip .strip-title{font-size:20px}
+  .strip .st-rushp{justify-content:flex-start;text-align:left} /* подпись RUSH+ слева, как у остальных (встреча 21.10.2026) */
   .strip .et,.strip .cap-big .et{height:20px;margin:0}
   .strip .strip-cap{font-size:12px;gap:7px}
   .strip .cap-big{margin-top:6px;font-size:1em}
@@ -951,10 +979,16 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 <div class="b-top">
   <figure class="b-photo">
     <picture>
-      <!-- медоед с ноутбуком снят до завершения процедуры с талисманом (встреча 21.10.2026), пока фото DDR5 -->
-      <source type="image/webp" srcset="assets/udimm-ddr5-epic.webp">
-      <img src="assets/udimm-ddr5-epic.jpg" alt="" width="2208" height="950" fetchpriority="high" decoding="async">
+      <!-- медоед с ноутбуком снят до завершения процедуры с талисманом (встреча 21.10.2026); с 22.10 фото DDR5 с подсветкой,
+           цвет подсветки меняет ползунок (слой .ds-tint по маске assets/buy-hero-rgb-glow.webp, js:rgb как на «Гарантии») -->
+      <source type="image/webp" srcset="assets/buy-hero-rgb.webp">
+      <img src="assets/buy-hero-rgb.jpg" alt="" width="1024" height="412" fetchpriority="high" decoding="async">
     </picture>
+    <span class="ds-tint" aria-hidden="true"></span>
+    <div class="ds-hue">
+      <input type="range" min="0" max="360" step="1" value="200" aria-label="Цвет подсветки модулей на фото">
+      <button class="on" type="button" aria-pressed="true" aria-label="Подсветка как на фото: радуга"></button>
+    </div>
   </figure>
 </div>
 
@@ -1310,6 +1344,43 @@ toTop.addEventListener('click',()=>{
   addEventListener('scroll',req,{passive:true});addEventListener('resize',req);
   setTimeout(frame,60);frame();
 })();
+
+/* ============ rgb: цвет подсветки модулей на фото (с 01.10.2026) ============
+   Тёмная вставка страницы гарантии: поверх фото лежит слой .ds-tint сплошного цвета в режиме наложения color,
+   по маске свечения (assets/ram-warranty-glow, делает САЙТ РЕФЫ/rgb_mask.py). Ползунок задаёт оттенок,
+   круглая кнопка возвращает радугу, как на исходном фото.
+   Чтобы ползунок заметили: когда вставка впервые попадает на экран, подсветка один раз сама проходит по цветам
+   и возвращается к радуге. Любое действие человека показ прерывает. При prefers-reduced-motion показа нет. */
+{
+  const tint=document.querySelector('.ds-tint'),box=document.querySelector('.ds-hue');
+  if(tint&&box){
+    const r=box.querySelector('input'),back=box.querySelector('button');
+    let demo=0;
+    const hue=v=>{tint.style.setProperty('--hue',v);box.style.setProperty('--hue',v)};
+    const rainbow=()=>{tint.classList.remove('on');back.classList.add('on');back.setAttribute('aria-pressed','true')};
+    const paint=()=>{cancelAnimationFrame(demo);demo=0;hue(r.value);tint.classList.add('on');back.classList.remove('on');back.setAttribute('aria-pressed','false')};
+    r.addEventListener('input',paint);
+    r.addEventListener('pointerdown',paint);
+    back.addEventListener('click',()=>{cancelAnimationFrame(demo);demo=0;rainbow()});
+    hue(r.value);
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+      new IntersectionObserver((es,ob)=>es.forEach(e=>{
+        if(!e.isIntersecting)return;ob.disconnect();
+        setTimeout(()=>{
+          if(!back.classList.contains('on')||!matchMedia('(min-width:861px)').matches)return;
+          const t0=performance.now(),T=3200;
+          tint.classList.add('on');
+          const step=now=>{
+            const p=Math.min(1,(now-t0)/T),v=Math.round(360*(p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2));
+            r.value=v;hue(v);
+            if(p<1)demo=requestAnimationFrame(step);else{demo=0;r.value=200;hue(200);rainbow()}
+          };
+          demo=requestAnimationFrame(step);
+        },900);
+      }),{threshold:.6}).observe(box.parentElement);
+    }
+  }
+}
 /* форма в подвале: передаёт имя, почту и телефон в пошаговую форму на partners.html (sessionStorage, не адрес) */
 const coopForm=document.querySelector('.coop-form');
 if(coopForm){
