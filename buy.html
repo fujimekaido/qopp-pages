@@ -538,11 +538,12 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .shops{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;max-width:1160px;margin:clamp(30px,5vh,52px) auto 0;text-align:left}
 /* магазины без прямоугольников (встреча 21.10.2026): один общий блок, внутри логотип с названием,
    серые, при наведении оживают */
-.shops{border:1px solid rgba(20,22,28,.1);border-radius:18px;padding:clamp(18px,3vw,34px) clamp(10px,2vw,24px);background:#fff}
-.shop-card{display:flex;flex-direction:column-reverse;align-items:center;justify-content:center;text-align:center;gap:12px;min-height:150px;padding:12px;
-  color:var(--ink);text-decoration:none;filter:grayscale(1);opacity:.62;
-  transition:filter .3s var(--ease),opacity .3s var(--ease),transform .3s var(--ease)}
-.shop-card:hover,.shop-card:focus-visible{filter:none;opacity:1;transform:translateY(-3px)}
+/* без рамки, логотипы чёрно-белые в полную силу, при наведении цветные (владелец, 23.10.2026) */
+.shops{align-items:start;padding:clamp(18px,3vw,34px) clamp(10px,2vw,24px)}
+.shop-card{display:flex;flex-direction:column-reverse;align-items:center;justify-content:flex-start;text-align:center;gap:12px;padding:12px;
+  color:var(--ink);text-decoration:none;filter:grayscale(1);
+  transition:filter .3s var(--ease),transform .3s var(--ease)}
+.shop-card:hover,.shop-card:focus-visible{filter:none;transform:translateY(-3px)}
 .shop-card b{display:block;font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:.02em;line-height:1.2}
 .shop-card small{display:block;margin-top:6px;font-size:13px;line-height:1.35;color:var(--muted)}
 .shop-ic{flex:none;width:76px;height:76px;display:block}
@@ -982,7 +983,7 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
       <!-- медоед с ноутбуком снят до завершения процедуры с талисманом (встреча 21.10.2026); с 22.10 фото DDR5 с подсветкой,
            цвет подсветки меняет ползунок (слой .ds-tint по маске assets/buy-hero-rgb-glow.webp, js:rgb как на «Гарантии») -->
       <source type="image/webp" srcset="assets/buy-hero-rgb.webp">
-      <img src="assets/buy-hero-rgb.jpg" alt="" width="1024" height="412" fetchpriority="high" decoding="async">
+      <img src="assets/buy-hero-rgb.jpg" alt="" width="3264" height="1312" fetchpriority="high" decoding="async">
     </picture>
     <span class="ds-tint" aria-hidden="true"></span>
     <div class="ds-hue">
