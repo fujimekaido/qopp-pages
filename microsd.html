@@ -1032,23 +1032,23 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
           <button class="rchip" type="button" data-k="a" aria-pressed="false">Приложения и игры<b>A</b></button>
         </div>
         <div class="race-rows part">
-          <div class="rrow" data-v="10" data-vmax="80" data-a="0">
+          <div class="rrow" data-v="10" data-vmax="80" data-a="500" data-apre="до">
             <a class="rname" href="#base"><b>BASE</b><span data-v="U1 и Class 10: видео Full HD" data-a="Фото, музыка, документы">U1 и Class 10: видео Full HD</span></a>
             <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime"><span class="rv">от <b>10</b><span class="rto"> до <b class="rmax">80</b></span><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
+            <span class="rtime"><span class="rv"><span class="rpre">от </span><b>10</b><span class="rto"> до <b class="rmax">80</b></span><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
           </div>
           <div class="rrow fast" data-v="30" data-vmax="100" data-a="1500">
             <a class="rname" href="#rush"><b>RUSH</b><span data-v="U3 и V30: видео 4K" data-a="A1">U3 и V30: видео 4K</span></a>
             <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime"><span class="rv">от <b>30</b><span class="rto"> до <b class="rmax">100</b></span><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
+            <span class="rtime"><span class="rv"><span class="rpre">от </span><b>30</b><span class="rto"> до <b class="rmax">100</b></span><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
           </div>
           <div class="rrow fast" data-v="30" data-vmax="160" data-a="4000">
             <a class="rname" href="#rushplus"><b>RUSH+</b><span data-v="U3 и V30: видео 4K" data-a="A2">U3 и V30: видео 4K</span></a>
             <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime"><span class="rv">от <b>30</b><span class="rto"> до <b class="rmax">160</b></span><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
+            <span class="rtime"><span class="rv"><span class="rpre">от </span><b>30</b><span class="rto"> до <b class="rmax">160</b></span><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
           </div>
         </div>
-        <p class="cfx-note part" data-v="Класс скорости гарантирует минимальную скорость записи, меньше карта не опускается. Верхняя цифра зависит от картридера и устройства." data-a="Класс A: сколько операций чтения в секунду карта выдерживает, когда с неё запускают приложения и игры. При записи у A1 от 500 операций, у A2 от 2000.">Классы U, V и Class 10: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков.</p>
+        <p class="cfx-note part" data-v="Класс скорости гарантирует минимальную скорость записи, меньше карта не опускается. Верхняя цифра зависит от картридера и устройства." data-a="Класс A: сколько операций чтения в секунду карта выдерживает, когда с неё запускают приложения и игры. У BASE класса A нет, до 500 операций это типичный показатель таких карт, а не гарантия. При записи у A1 от 500 операций, у A2 от 2000.">Классы U, V и Class 10: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков.</p>
       </div>
     </section>
 
@@ -1306,12 +1306,13 @@ toTop.addEventListener('click',()=>{
    Блок #classes на странице карт памяти: кнопки переключают, что сравниваем (запись видео или приложения),
    полоски растут до гарантированного минимума своей линейки, число досчитывается, рядом верхняя скорость «до»
    (data-vmax, с упаковок: BASE 80, RUSH 100, RUSH+ 160 МБ/с; встреча 21.10.2026), самые быстрые выделены.
-   Значения лежат в разметке: data-v (МБ/с записи) и data-a (операций чтения в секунду) у строк,
+   Значения лежат в разметке: data-v (МБ/с записи) и data-a (операций чтения в секунду) у строк; у BASE класса A нет,
+   data-a=500 это типичный показатель, поэтому data-apre=«до» вместо «от» (решение владельца 22.10.2026),
    тексты подписей в data-v и data-a у самих подписей. Ноль значит, что класса у линейки нет: вместо числа показываем .rn. */
 {
   const sec=document.getElementById('classes');
   if(sec){
-    const rows=[...sec.querySelectorAll('.rrow')].map(el=>({el,bar:el.querySelector('.rbar i'),num:el.querySelector('.rtime b'),unit:el.querySelector('.rtime small'),sub:el.querySelector('.rname span'),cur:0}));
+    const rows=[...sec.querySelectorAll('.rrow')].map(el=>({el,bar:el.querySelector('.rbar i'),num:el.querySelector('.rtime b'),pre:el.querySelector('.rpre'),unit:el.querySelector('.rtime small'),sub:el.querySelector('.rname span'),cur:0}));
     const chips=[...sec.querySelectorAll('.rchip')],note=sec.querySelector('.cfx-note');
     const UNIT={v:'МБ/с',a:'операций/с'};
     let k='v',raf=0,played=false;
@@ -1319,7 +1320,7 @@ toTop.addEventListener('click',()=>{
     function run(instant){
       cancelAnimationFrame(raf);
       const to=rows.map(r=>+r.el.dataset[k]),max=Math.max(...to),t0=performance.now();
-      rows.forEach((r,i)=>{r.sub.textContent=r.sub.dataset[k];r.unit.textContent=UNIT[k];r.el.classList.toggle('fast',to[i]===max);r.el.classList.toggle('none',!to[i])});
+      rows.forEach((r,i)=>{r.sub.textContent=r.sub.dataset[k];r.unit.textContent=UNIT[k];r.pre.textContent=(k==='a'&&r.el.dataset.apre?r.el.dataset.apre:'от')+' ';r.el.classList.toggle('fast',to[i]===max);r.el.classList.toggle('none',!to[i])});
       sec.classList.toggle('k-a',k==='a'); /* для операций в секунду верхней цифры нет, «до» прячется */
       note.textContent=note.dataset[k];
       if(instant||reduced.matches){rows.forEach((r,i)=>paint(r,to[i],max));return}
