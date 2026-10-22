@@ -489,7 +489,8 @@ main{position:relative;z-index:1}
 .road-top .pbtn{font-size:15px;padding:16px 36px} /* кнопка крупнее (встреча 21.10.2026) */
 .road-lede{color:var(--muted);max-width:44ch;margin:0}
 .track{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,30px)}
-.track::before,.track::after{content:"";position:absolute;left:18px;right:calc(50% - 2px);top:8px;height:2px}
+/* линия от правого края первого кружка до левого края второго, по центру кружков (владелец, 22.10.2026) */
+.track::before,.track::after{content:"";position:absolute;left:24px;right:calc(50% - clamp(14px,2vw,30px)/2 - 2px);top:9px;height:2px}
 .track::before{background:rgba(165,171,183,.22)}
 .track::after{
   background:linear-gradient(90deg,var(--accent),rgba(227,169,79,.4));
