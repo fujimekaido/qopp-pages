@@ -508,7 +508,7 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 }
 
 /* шаги «После заявки» раздвинуты, чтобы не сливались (встреча 21.10.2026); ИНН обязателен */
-.vows .vow{padding-top:clamp(28px,4.5vh,44px);padding-bottom:clamp(28px,4.5vh,44px)}
+.vows .vow{padding-top:clamp(28px,4.5vh,44px);padding-bottom:clamp(28px,4.5vh,44px);grid-template-columns:minmax(260px,32%) 1fr} /* колонка заголовка шире, «Предложение» не упирается в текст */
 /* ============ сотрудничество: пошаговая форма ============ */
 .wz{max-width:780px}
 .wz-bar{height:2px;background:var(--hairline);position:relative;margin-bottom:clamp(26px,4vh,40px)}
