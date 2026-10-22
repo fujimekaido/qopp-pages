@@ -231,35 +231,8 @@ a.mi{cursor:pointer;text-decoration:none}
 @media (max-width:860px){
   .ds-photo{width:100%;opacity:.35;-webkit-mask-image:none;mask-image:none}
 }
-/* цвет подсветки модулей (с 01.10.2026): слой сплошного цвета в режиме color по маске свечения, см. js:rgb */
-.ds-tint{
-  position:absolute;right:0;top:0;height:100%;width:60%;pointer-events:none;
-  background:hsl(var(--hue,200),100%,55%);mix-blend-mode:color;opacity:0;transition:opacity .45s var(--ease);
-  -webkit-mask:url(assets/ram-warranty-glow.webp) right center/cover no-repeat;mask:url(assets/ram-warranty-glow.webp) right center/cover no-repeat;
-}
-/* фото прижато к правому краю: справа от модулей остаётся место под ползунок цвета */
+/* регулятор цвета подсветки снят 23.10.2026, фото без слоя цвета */
 @media (min-width:861px){.dark-strip .ds-photo{object-position:100% 50%}}
-.ds-tint.on{opacity:1}
-/* ползунок стоит вертикально справа от модулей: блок набран горизонтально и повёрнут на четверть оборота,
-   так он одинаково работает во всех браузерах. Оттенок растёт снизу вверх, кнопка «радуга» сверху. */
-.ds-hue{position:absolute;z-index:2;right:calc(clamp(14px,2.2vw,34px) - 98px);top:calc(50% - 22px);width:240px;height:44px;
-  display:flex;align-items:center;gap:8px;transform:rotate(-90deg)}
-.ds-hue button{flex:none;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer;display:grid;place-items:center}
-.ds-hue button::before{content:"";width:24px;height:24px;border-radius:50%;
-  background:conic-gradient(#ff3b30,#ffcc00,#34c759,#32ade6,#5856d6,#ff2d55,#ff3b30);
-  box-shadow:0 0 0 2px #0b0a08,0 0 0 3px rgba(242,240,234,.35);transition:box-shadow .3s var(--ease)}
-.ds-hue button.on::before{box-shadow:0 0 0 2px #0b0a08,0 0 0 4px #f2f0ea}
-.ds-hue input{-webkit-appearance:none;appearance:none;flex:1 1 auto;min-width:0;height:44px;margin:0;background:transparent;cursor:pointer}
-.ds-hue input::-webkit-slider-runnable-track{height:8px;border-radius:4px;box-shadow:0 0 0 1px rgba(242,240,234,.28),0 2px 12px rgba(0,0,0,.6);
-  background:linear-gradient(to right,hsl(0,100%,55%),hsl(60,100%,55%),hsl(120,100%,55%),hsl(180,100%,55%),hsl(240,100%,55%),hsl(300,100%,55%),hsl(360,100%,55%))}
-.ds-hue input::-moz-range-track{height:8px;border-radius:4px;box-shadow:0 0 0 1px rgba(242,240,234,.28),0 2px 12px rgba(0,0,0,.6);
-  background:linear-gradient(to right,hsl(0,100%,55%),hsl(60,100%,55%),hsl(120,100%,55%),hsl(180,100%,55%),hsl(240,100%,55%),hsl(300,100%,55%),hsl(360,100%,55%))}
-.ds-hue input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;margin-top:-8px;border-radius:50%;
-  background:hsl(var(--hue,200),100%,55%);border:3px solid #f2f0ea;box-shadow:0 2px 10px rgba(0,0,0,.6)}
-.ds-hue input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:hsl(var(--hue,200),100%,55%);border:3px solid #f2f0ea;box-shadow:0 2px 10px rgba(0,0,0,.6)}
-.ds-hue input:focus-visible{outline:none}
-.ds-hue input:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--accent)}
-@media (max-width:1024px){.ds-tint,.ds-hue{display:none}} /* на планшетах и телефонах регулятор не нужен (встреча 21.10.2026) */
 
 /* ============ layout ============ */
 main{position:relative;z-index:1}
@@ -1105,15 +1078,11 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 <!-- тёмная вставка с SSD -->
 <section class="dark-strip reveal" aria-label="Гарантия как обещание">
   <picture><source srcset="assets/ram-warranty.webp" type="image/webp"><img class="ds-photo" src="assets/ram-warranty.jpg" alt="" width="2000" height="804" loading="lazy" aria-hidden="true" decoding="async"></picture>
-  <span class="ds-tint" aria-hidden="true"></span>
   <div class="inner">
     <h2 class="part">Гарантия: наше обещание, которое мы всегда выполняем</h2>
     <p class="part">Если что-то случилось, вопрос решаем мы: здесь, в России, быстро и профессионально.</p>
   </div>
-  <div class="ds-hue">
-    <input type="range" min="0" max="360" step="1" value="200" aria-label="Цвет подсветки модулей на фото" aria-orientation="vertical">
-    <button class="on" type="button" aria-pressed="true" aria-label="Подсветка как на фото: радуга"></button>
-  </div>
+  <!-- регулятор цвета подсветки снят 23.10.2026: такой же есть на «Где купить», два одинаковых интерактива владелец не хочет -->
 </section>
 
 <main id="main" tabindex="-1">
@@ -1659,43 +1628,6 @@ addEventListener('scroll',()=>{
 toTop.addEventListener('click',()=>{
   scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'});
 });
-
-/* ============ rgb: цвет подсветки модулей на фото (с 01.10.2026) ============
-   Тёмная вставка страницы гарантии: поверх фото лежит слой .ds-tint сплошного цвета в режиме наложения color,
-   по маске свечения (assets/ram-warranty-glow, делает САЙТ РЕФЫ/rgb_mask.py). Ползунок задаёт оттенок,
-   круглая кнопка возвращает радугу, как на исходном фото.
-   Чтобы ползунок заметили: когда вставка впервые попадает на экран, подсветка один раз сама проходит по цветам
-   и возвращается к радуге. Любое действие человека показ прерывает. При prefers-reduced-motion показа нет. */
-{
-  const tint=document.querySelector('.ds-tint'),box=document.querySelector('.ds-hue');
-  if(tint&&box){
-    const r=box.querySelector('input'),back=box.querySelector('button');
-    let demo=0;
-    const hue=v=>{tint.style.setProperty('--hue',v);box.style.setProperty('--hue',v)};
-    const rainbow=()=>{tint.classList.remove('on');back.classList.add('on');back.setAttribute('aria-pressed','true')};
-    const paint=()=>{cancelAnimationFrame(demo);demo=0;hue(r.value);tint.classList.add('on');back.classList.remove('on');back.setAttribute('aria-pressed','false')};
-    r.addEventListener('input',paint);
-    r.addEventListener('pointerdown',paint);
-    back.addEventListener('click',()=>{cancelAnimationFrame(demo);demo=0;rainbow()});
-    hue(r.value);
-    if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
-      new IntersectionObserver((es,ob)=>es.forEach(e=>{
-        if(!e.isIntersecting)return;ob.disconnect();
-        setTimeout(()=>{
-          if(!back.classList.contains('on')||!matchMedia('(min-width:861px)').matches)return;
-          const t0=performance.now(),T=3200;
-          tint.classList.add('on');
-          const step=now=>{
-            const p=Math.min(1,(now-t0)/T),v=Math.round(360*(p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2));
-            r.value=v;hue(v);
-            if(p<1)demo=requestAnimationFrame(step);else{demo=0;r.value=200;hue(200);rainbow()}
-          };
-          demo=requestAnimationFrame(step);
-        },900);
-      }),{threshold:.6}).observe(box.parentElement);
-    }
-  }
-}
 
 /* ============ fx: интерактив текстовых страниц (с 22 сентября 2026) ============
    Приёмы, стили внедряет сам скрипт, разметке нужны только атрибуты:
