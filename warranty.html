@@ -264,10 +264,6 @@ a.mi{cursor:pointer;text-decoration:none}
 /* ============ layout ============ */
 main{position:relative;z-index:1}
 .section{max-width:1080px;margin:0 auto;padding:clamp(60px,9vh,110px) clamp(20px,4vw,56px)}
-/* хлебные крошки: видно, где находишься, и можно вернуться на главную (встреча 21.10.2026) */
-.crumbs{max-width:1160px;margin:clamp(18px,3vh,28px) auto 0;padding:0 clamp(20px,6vw,80px);font-size:13px;color:var(--muted);display:flex;gap:10px;align-items:center}
-.crumbs a{color:inherit;text-decoration:none}
-.crumbs a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .section-head{max-width:640px;margin-bottom:clamp(30px,5vh,50px)}
 .section-head h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.4vw,42px);letter-spacing:.01em;margin-top:0}
 .section-head .kicker{margin-top:12px;font-size:13px} /* подпись под заголовком (встреча 21.10.2026) */
@@ -490,7 +486,7 @@ main{position:relative;z-index:1}
 .road-lede{color:var(--muted);max-width:44ch;margin:0}
 .track{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,30px)}
 /* линия от правого края первого кружка до левого края второго, по центру кружков (владелец, 22.10.2026) */
-.track::before,.track::after{content:"";position:absolute;left:24px;right:calc(50% - clamp(14px,2vw,30px)/2 - 2px);top:9px;height:2px}
+.track::before,.track::after{content:"";position:absolute;left:18px;right:calc(50% - clamp(14px,2vw,30px)/2 - 2px);top:9px;height:2px}
 .track::before{background:rgba(165,171,183,.22)}
 .track::after{
   background:linear-gradient(90deg,var(--accent),rgba(227,169,79,.4));
@@ -681,6 +677,21 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
    текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
    Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
 /* --- ссылки на документы в подвале и в галочке согласия (с 05.10.2026) --- */
+/* хлебные крошки в шапке на всех страницах (владелец, 22.10.2026): в одной ячейке с логотипом, справа от него;
+   на телефоне места нет, там работает меню; прячутся вместе с логотипом при прокрутке */
+@media (min-width:861px){nav{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}} /* колонки шапки не растут от длинных крошек, крошки обрезаются многоточием */
+.brand{display:flex;align-items:center;gap:20px;min-width:0;max-width:100%;justify-self:start}
+.nav-crumbs{display:block;overflow:hidden;text-overflow:ellipsis;margin:0;min-width:0;}
+.nav-crumbs>*{display:inline}
+.nav-crumbs span[aria-hidden]{margin:0 7px}
+.nav-crumbs{
+  font-size:13px;color:var(--muted,#5b6068);white-space:nowrap;pointer-events:auto;transition:opacity .35s ease}
+.nav-crumbs a{color:inherit;text-decoration:none}
+.nav-crumbs a:hover,.nav-crumbs a:focus-visible{color:var(--ink,#14161c);text-decoration:underline;text-underline-offset:3px}
+nav.on-dark .nav-crumbs{color:rgba(242,240,234,.82);text-shadow:0 1px 8px rgba(0,0,0,.5)}
+nav.on-dark .nav-crumbs a:hover{color:#fff}
+nav.logo-hide .nav-crumbs{opacity:0;pointer-events:none}
+@media (max-width:860px){.nav-crumbs{display:none}}
 /* подвал без формы: две колонки на всю ширину (встреча 21.10.2026), правило общее для всех страниц */
 .foot-grid{grid-template-columns:1fr 1fr;max-width:860px}
 .foot-legal a{color:inherit;text-decoration:none}
@@ -1025,9 +1036,9 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 <span class="side-label" aria-hidden="true">Гарантия</span>
 
 <nav aria-label="Основная навигация">
-  <a class="logo" href="index.html">
+  <div class="brand"><a class="logo" href="index.html">
     <img src="assets/logo.png" alt="QOPP. На главную" width="384" height="152">
-  </a>
+  </a><p class="nav-crumbs" aria-label="Вы здесь"><a href="index.html">Главная</a><span aria-hidden="true">›</span><span aria-current="page">Гарантия</span></p></div>
   <div class="menu-pill">
     <a class="mi" id="mi-catalog">Каталог</a>
     <a class="mi active" href="warranty.html" aria-current="page">Гарантия</a>
@@ -1105,7 +1116,6 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 </section>
 
 <main id="main" tabindex="-1">
-  <p class="crumbs"><a href="index.html">Главная</a><span aria-hidden="true">›</span><span>Гарантия</span></p>
   <!-- вводный текст политики -->
   <!-- блок обращения в поддержку стоит первым: два шага вместо четырёх (встреча 21.10.2026) -->
   <section class="section reveal" id="service" data-ch="Сервис">

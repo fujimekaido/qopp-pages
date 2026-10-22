@@ -514,6 +514,21 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
    текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
    Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
 /* --- ссылки на документы в подвале и в галочке согласия (с 05.10.2026) --- */
+/* хлебные крошки в шапке на всех страницах (владелец, 22.10.2026): в одной ячейке с логотипом, справа от него;
+   на телефоне места нет, там работает меню; прячутся вместе с логотипом при прокрутке */
+@media (min-width:861px){nav{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}} /* колонки шапки не растут от длинных крошек, крошки обрезаются многоточием */
+.brand{display:flex;align-items:center;gap:20px;min-width:0;max-width:100%;justify-self:start}
+.nav-crumbs{display:block;overflow:hidden;text-overflow:ellipsis;margin:0;min-width:0;}
+.nav-crumbs>*{display:inline}
+.nav-crumbs span[aria-hidden]{margin:0 7px}
+.nav-crumbs{
+  font-size:13px;color:var(--muted,#5b6068);white-space:nowrap;pointer-events:auto;transition:opacity .35s ease}
+.nav-crumbs a{color:inherit;text-decoration:none}
+.nav-crumbs a:hover,.nav-crumbs a:focus-visible{color:var(--ink,#14161c);text-decoration:underline;text-underline-offset:3px}
+nav.on-dark .nav-crumbs{color:rgba(242,240,234,.82);text-shadow:0 1px 8px rgba(0,0,0,.5)}
+nav.on-dark .nav-crumbs a:hover{color:#fff}
+nav.logo-hide .nav-crumbs{opacity:0;pointer-events:none}
+@media (max-width:860px){.nav-crumbs{display:none}}
 /* подвал без формы: две колонки на всю ширину (встреча 21.10.2026), правило общее для всех страниц */
 .foot-grid{grid-template-columns:1fr 1fr;max-width:860px}
 .foot-legal a{color:inherit;text-decoration:none}
@@ -857,9 +872,9 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 <div class="env" aria-hidden="true"><div class="dust"></div></div>
 
 <nav aria-label="Основная навигация">
-  <a class="logo" href="index.html">
+  <div class="brand"><a class="logo" href="index.html">
     <img src="assets/logo.png" alt="QOPP. На главную" width="384" height="152">
-  </a>
+  </a><p class="nav-crumbs" aria-label="Вы здесь"><a href="index.html">Главная</a><span aria-hidden="true">›</span><span aria-current="page">О компании</span></p></div>
   <div class="menu-pill">
     <a class="mi" id="mi-catalog">Каталог</a>
     <a class="mi" href="warranty.html">Гарантия</a>
