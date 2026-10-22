@@ -450,6 +450,8 @@ main{position:relative;z-index:2;background:var(--canvas)}
   font-size:clamp(16px,1.6vw,22px);letter-spacing:.2em;text-transform:uppercase; /* крупнее (встреча 21.10.2026) */
 }
 .utp-card p{color:#b4bac6;font-size:clamp(14px,1.2vw,17px);line-height:1.55;margin:14px auto 0;max-width:30ch}
+/* на десктопе заголовок и текст занимают одинаковую высоту во всех трёх карточках, картинки на одной линии (владелец, 23.10.2026) */
+@media (min-width:861px){.utp-card h3{white-space:nowrap;font-size:clamp(14px,1.3vw,20px);letter-spacing:.14em}.utp-card p{min-height:4.65em}.utp-card.wide img,.utp-card img{width:78%;height:clamp(120px,15vw,230px)}}
 /* карточки ведут в гарантию, «О компании» и каталог (встреча 21.10.2026) */
 a.utp-card{text-decoration:none;color:inherit;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
 @media (hover:hover){a.utp-card:hover{transform:translateY(-6px);box-shadow:0 34px 70px rgba(20,22,28,.3)}}
@@ -1254,15 +1256,15 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
       <p>Гарантируем качество и надёжность всем, кто выбирает наши продукты</p>
       <picture><source srcset="assets/utp-warranty.webp" type="image/webp"><img src="assets/utp-warranty.png" alt="" width="760" height="488" loading="lazy" loading="lazy" decoding="async"></picture>
     </a>
-    <a class="utp-card" href="about.html">
-      <h3>Российский бренд</h3>
-      <p>Контроль качества на всех этапах производства</p>
-      <picture><source srcset="assets/utp-brand.webp" type="image/webp"><img src="assets/utp-brand.png" alt="" width="460" height="462" loading="lazy" loading="lazy" decoding="async"></picture>
-    </a>
     <a class="utp-card" href="ssd.html">
       <h3>Комплектующие</h3>
       <p>Проверенные комплектующие ведущих производителей</p>
       <picture><source srcset="assets/utp-parts.webp" type="image/webp"><img src="assets/utp-parts.png" alt="" width="460" height="460" loading="lazy" loading="lazy" decoding="async"></picture>
+    </a>
+    <a class="utp-card" href="about.html">
+      <h3>Российский бренд</h3>
+      <p>Контроль качества на всех этапах производства</p>
+      <picture><source srcset="assets/utp-brand.webp" type="image/webp"><img src="assets/utp-brand.png" alt="" width="460" height="462" loading="lazy" loading="lazy" decoding="async"></picture>
     </a>
   </div>
 </section>
