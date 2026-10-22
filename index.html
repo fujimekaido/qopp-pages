@@ -451,7 +451,15 @@ main{position:relative;z-index:2;background:var(--canvas)}
 }
 .utp-card p{color:#b4bac6;font-size:clamp(14px,1.2vw,17px);line-height:1.55;margin:14px auto 0;max-width:30ch}
 /* на десктопе заголовок и текст занимают одинаковую высоту во всех трёх карточках, картинки на одной линии (владелец, 23.10.2026) */
-@media (min-width:861px){.utp-card h3{white-space:nowrap;font-size:clamp(14px,1.3vw,20px);letter-spacing:.14em}.utp-card p{min-height:4.65em}.utp-card.wide img,.utp-card img{width:78%;height:clamp(120px,15vw,230px)}}
+@media (min-width:861px){
+  .utp-card h3{white-space:nowrap;font-size:clamp(14px,1.3vw,20px);letter-spacing:.14em}
+  .utp-card p{min-height:4.65em}
+  /* компактные карточки (владелец, 23.10.2026): без фиксированной пропорции, картинка в общей рамке одной высоты и по её центру,
+     поэтому центр знака гарантии на одной горизонтали с центрами планеты и герба */
+  .utp-card{aspect-ratio:auto;padding:clamp(22px,2.2vw,28px) clamp(22px,2.4vw,30px) clamp(20px,2vw,26px)}
+  .utp-card picture{display:flex;align-items:center;justify-content:center;height:clamp(150px,13.5vw,196px);margin-top:clamp(18px,2vw,26px)}
+  .utp-card.wide img,.utp-card img{width:auto;max-width:86%;height:100%;object-fit:contain;object-position:center;margin:0}
+}
 /* карточки ведут в гарантию, «О компании» и каталог (встреча 21.10.2026) */
 a.utp-card{text-decoration:none;color:inherit;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
 @media (hover:hover){a.utp-card:hover{transform:translateY(-6px);box-shadow:0 34px 70px rgba(20,22,28,.3)}}
