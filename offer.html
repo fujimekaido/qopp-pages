@@ -524,6 +524,8 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
    текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
    Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
 /* --- ссылки на документы в подвале и в галочке согласия (с 05.10.2026) --- */
+/* подвал без формы: две колонки на всю ширину (встреча 21.10.2026), правило общее для всех страниц */
+.foot-grid{grid-template-columns:1fr 1fr;max-width:860px}
 .foot-legal a{color:inherit;text-decoration:none}
 .foot-legal a:hover,.foot-legal a:focus-visible{color:#14161c;text-decoration:underline;text-underline-offset:3px}
 .agree a{color:inherit;text-decoration:underline;text-underline-offset:3px}
@@ -1024,33 +1026,22 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 
 <footer id="footer" class="site-footer">
   <div class="foot-grid">
-    <div class="foot-col">
-      <h3>Сотрудничество</h3>
-      <p class="foot-lede">Подберём цены и условия под ваш формат</p>
-      <form class="coop-form" novalidate>
-        <input name="name" placeholder="Имя" autocomplete="name" aria-label="Имя">
-        <input name="email" type="email" placeholder="E-mail" autocomplete="email" aria-label="E-mail">
-        <!-- телефон вернулся в подвал 08.10.2026 по просьбе владельца: номера нужны для связи в мессенджерах; поле необязательное, уходит в пошаговую форму -->
-        <input name="phone" type="tel" placeholder="Телефон" autocomplete="tel" inputmode="tel" aria-label="Телефон">
-        <button class="foot-btn" type="submit">Продолжить</button>
-        <label class="agree"><input type="checkbox"> <span>Согласен на <a href="consent.html">обработку персональных данных</a></span></label>
-        <p class="form-done" hidden>Заявка принята, мы свяжемся с вами</p>
-      </form>
-    </div>
+    <!-- форма сотрудничества из подвала убрана (встреча 21.10.2026), заявки только через partners.html -->
     <div class="foot-col">
       <h3>Продукция</h3>
-      <a class="fl" href="notebooks.html">Ноутбуки</a>
-      <a class="fl" href="ram.html">Оперативная память</a>
       <a class="fl" href="ssd.html">Внутренние SSD</a>
+      <a class="fl" href="ram.html">Оперативная память</a>
       <a class="fl" href="microsd.html">Карты памяти</a>
       <a class="fl" href="usb.html">Флеш-накопители</a>
+      <a class="fl" href="notebooks.html">Ноутбуки</a>
     </div>
     <div class="foot-col">
       <h3>Покупателю</h3>
-      <a class="fl" href="about.html">О компании</a>
-      <a class="fl" href="buy.html">Где купить</a>
-      <a class="fl" href="support.html">Поддержка</a>
       <a class="fl" href="warranty.html">Гарантия</a>
+      <a class="fl" href="support.html">Поддержка</a>
+      <a class="fl" href="buy.html">Где купить</a>
+      <a class="fl" href="partners.html">Сотрудничество</a>
+      <a class="fl" href="about.html">О компании</a>
     </div>
   </div>
   <div class="foot-legal">

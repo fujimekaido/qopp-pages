@@ -416,13 +416,17 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .rname{display:flex;flex-direction:column;justify-content:center;min-height:44px;color:inherit;text-decoration:none}
 .rname b{font-family:var(--display-lat);font-weight:400;font-size:clamp(15px,1.5vw,20px);letter-spacing:.14em;line-height:1.1}
 .rname span{margin-top:5px;font-size:13px;color:var(--muted)}
+/* строки ведут на модели: стрелка после названия, чтобы было видно, что это ссылка (встреча 21.10.2026) */
+.race-rows .rname b::after{content:"\203A";margin-left:.4em;font-weight:400;opacity:.55;transition:transform .3s var(--ease),opacity .3s var(--ease);display:inline-block}
+.race-rows .rname:hover b::after{transform:translateX(3px);opacity:1}
+.cfx h2 sup{font-size:.55em;vertical-align:top;margin-left:2px;color:var(--muted)}
 .rbar{height:10px;border-radius:999px;background:rgba(20,22,28,.08);overflow:hidden}
 .rbar i{display:block;height:100%;border-radius:inherit;background:var(--ink);transform-origin:left center}
 /* полосы по возрастанию скорости в синей шкале: бледно-голубая у самой медленной, средняя у средней и голубой темы
    #2c83f5 у самой быстрой (владелец, 09.10.2026; серая шкала #b9bcc3 / графит / чёрный была до этого в тот же день);
    строки в .race-rows всегда идут от медленной к быстрой */
-.race-rows .rrow:nth-child(1) .rbar i{background:#bfd6fb}
-.race-rows .rrow:nth-child(2) .rbar i{background:#7fb0f8}
+.race-rows .rrow:nth-child(1) .rbar i{background:#9cc3fa}
+.race-rows .rrow:nth-child(2) .rbar i{background:#5f9ff6} /* без бледности (встреча 21.10.2026) */
 .race-rows .rrow:nth-child(3) .rbar i{background:#2c83f5}
 .rtime{font-family:var(--display);font-weight:600;font-size:clamp(17px,1.7vw,22px);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;
   color:#6b7078;transition:color .3s var(--ease)}
@@ -436,6 +440,10 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .cls .rrow.none .rv{display:none}
 .cls .rrow.none .rn{display:inline}
 .cls .rtime small{font-size:max(12px,.62em);font-weight:500;margin-left:.35em;color:var(--muted)}
+/* классы скорости: «от 10 до 80 МБ/с», для операций в секунду верхняя цифра прячется (встреча 21.10.2026) */
+.cls .rto{font-weight:400}
+.cls .rto b{font-weight:600}
+.cls.k-a .rto{display:none}
 .cls .rname span{font-variant-numeric:tabular-nums}
 .cls .rbar i{transition:background .3s var(--ease)}
 
@@ -455,14 +463,20 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .fits-range:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 2px var(--accent-deep),0 6px 14px rgba(20,22,28,.22)}
 .fits-range:focus-visible::-moz-range-thumb{box-shadow:0 0 0 2px var(--accent-deep),0 6px 14px rgba(20,22,28,.22)}
 .fits-ticks{display:flex;justify-content:space-between;width:100%;max-width:658px;margin:0 auto}
+/* насечки объёмов растут плавно от 32 к 512, как сами объёмы (встреча 21.10.2026) */
 .fits-ticks span{flex:0 0 44px;padding:4px 0 10px;text-align:center;font-size:13px;color:var(--muted);cursor:pointer;white-space:nowrap;transition:color .3s var(--ease)}
+.fits-ticks span:nth-child(1){font-size:12px;font-weight:400}
+.fits-ticks span:nth-child(2){font-size:13px;font-weight:500}
+.fits-ticks span:nth-child(3){font-size:15px;font-weight:600}
+.fits-ticks span:nth-child(4){font-size:17px;font-weight:600}
+.fits-ticks span:nth-child(5){font-size:19px;font-weight:700}
 .fits-ticks span.on{color:var(--ink);font-weight:600}
 .fits-nums{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(22px,3.6vh,40px);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
 .fits-nums>div{display:flex;flex-direction:column-reverse;justify-content:center;padding:clamp(18px,3vh,30px) 8px;text-align:center}
 .fits-nums>div+div{border-left:1px solid var(--hairline)}
-.fits-nums dd{font-family:var(--display);font-weight:600;font-size:clamp(22px,3.4vw,44px);line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
+.fits-nums dd{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,56px);line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap} /* крупнее (встреча 21.10.2026) */
 .fits-nums dd small{font-size:max(12px,.5em);font-weight:600;margin-left:.3em}
-.fits-nums dt{margin-top:8px;font-size:13px;line-height:1.3;color:var(--muted)}
+.fits-nums dt{margin-top:8px;font-size:14px;line-height:1.3;color:var(--muted)}
 .fits-lines{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0 6px;margin-top:clamp(14px,2.4vh,24px);font-size:14px;color:var(--muted)}
 .fits-lines a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-family:var(--display-lat);font-size:14px;letter-spacing:.14em;color:var(--ink);
   text-decoration:none;transition:opacity .3s var(--ease)}
@@ -516,9 +530,9 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
   .ff-mod.ff-s{width:52.2%}
   .rrow{grid-template-columns:1fr auto;gap:6px 12px}
   .rbar{grid-column:1/-1;grid-row:2}
-  .fits-nums dd{font-size:clamp(19px,5.6vw,26px)}
+  .fits-nums dd{font-size:clamp(22px,6.4vw,30px)}
   .fits-nums dt{font-size:12px}
-  .fits-ticks span{font-size:12px}
+  .fits-ticks span:nth-child(1){font-size:11px}.fits-ticks span:nth-child(2){font-size:12px}.fits-ticks span:nth-child(3){font-size:13px}.fits-ticks span:nth-child(4){font-size:15px}.fits-ticks span:nth-child(5){font-size:17px}
 }
 </style>
 <style id="mobile-fix">
@@ -528,6 +542,8 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
    текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
    Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
 /* --- ссылки на документы в подвале и в галочке согласия (с 05.10.2026) --- */
+/* подвал без формы: две колонки на всю ширину (встреча 21.10.2026), правило общее для всех страниц */
+.foot-grid{grid-template-columns:1fr 1fr;max-width:860px}
 .foot-legal a{color:inherit;text-decoration:none}
 .foot-legal a:hover,.foot-legal a:focus-visible{color:#14161c;text-decoration:underline;text-underline-offset:3px}
 .agree a{color:inherit;text-decoration:underline;text-underline-offset:3px}
@@ -1016,23 +1032,23 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
           <button class="rchip" type="button" data-k="a" aria-pressed="false">Приложения и игры<b>A</b></button>
         </div>
         <div class="race-rows part">
-          <div class="rrow" data-v="10" data-a="0">
+          <div class="rrow" data-v="10" data-vmax="80" data-a="0">
             <a class="rname" href="#base"><b>BASE</b><span data-v="U1 и Class 10: видео Full HD" data-a="Фото, музыка, документы">U1 и Class 10: видео Full HD</span></a>
             <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime"><span class="rv">от <b>10</b><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
+            <span class="rtime"><span class="rv">от <b>10</b><span class="rto"> до <b class="rmax">80</b></span><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
           </div>
-          <div class="rrow fast" data-v="30" data-a="1500">
+          <div class="rrow fast" data-v="30" data-vmax="100" data-a="1500">
             <a class="rname" href="#rush"><b>RUSH</b><span data-v="U3 и V30: видео 4K" data-a="A1">U3 и V30: видео 4K</span></a>
             <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime"><span class="rv">от <b>30</b><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
+            <span class="rtime"><span class="rv">от <b>30</b><span class="rto"> до <b class="rmax">100</b></span><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
           </div>
-          <div class="rrow fast" data-v="30" data-a="4000">
+          <div class="rrow fast" data-v="30" data-vmax="160" data-a="4000">
             <a class="rname" href="#rushplus"><b>RUSH+</b><span data-v="U3 и V30: видео 4K" data-a="A2">U3 и V30: видео 4K</span></a>
             <div class="rbar" aria-hidden="true"><i></i></div>
-            <span class="rtime"><span class="rv">от <b>30</b><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
+            <span class="rtime"><span class="rv">от <b>30</b><span class="rto"> до <b class="rmax">160</b></span><small>МБ/с</small></span><span class="rn">класса A нет</span></span>
           </div>
         </div>
-        <p class="cfx-note part" data-v="Классы U, V и Class 10: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков." data-a="Класс A: сколько операций чтения в секунду карта выдерживает, когда с неё запускают приложения и игры. При записи у A1 от 500 операций, у A2 от 2000.">Классы U, V и Class 10: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков.</p>
+        <p class="cfx-note part" data-v="Класс скорости гарантирует минимальную скорость записи, меньше карта не опускается. Верхняя цифра зависит от картридера и устройства." data-a="Класс A: сколько операций чтения в секунду карта выдерживает, когда с неё запускают приложения и игры. При записи у A1 от 500 операций, у A2 от 2000.">Классы U, V и Class 10: скорость записи, ниже которой карта не опускается. Поэтому видео пишется без пропусков.</p>
       </div>
     </section>
 
@@ -1056,33 +1072,22 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 
 <footer id="footer" class="site-footer">
   <div class="foot-grid">
-    <div class="foot-col">
-      <h3>Сотрудничество</h3>
-      <p class="foot-lede">Подберём цены и условия под ваш формат</p>
-      <form class="coop-form" novalidate>
-        <input name="name" placeholder="Имя" autocomplete="name" aria-label="Имя">
-        <input name="email" type="email" placeholder="E-mail" autocomplete="email" aria-label="E-mail">
-        <!-- телефон вернулся в подвал 08.10.2026 по просьбе владельца: номера нужны для связи в мессенджерах; поле необязательное, уходит в пошаговую форму -->
-        <input name="phone" type="tel" placeholder="Телефон" autocomplete="tel" inputmode="tel" aria-label="Телефон">
-        <button class="foot-btn" type="submit">Продолжить</button>
-        <label class="agree"><input type="checkbox"> <span>Согласен на <a href="consent.html">обработку персональных данных</a></span></label>
-        <p class="form-done" hidden>Заявка принята, мы свяжемся с вами</p>
-      </form>
-    </div>
+    <!-- форма сотрудничества из подвала убрана (встреча 21.10.2026), заявки только через partners.html -->
     <div class="foot-col">
       <h3>Продукция</h3>
-      <a class="fl" href="notebooks.html">Ноутбуки</a>
-      <a class="fl" href="ram.html">Оперативная память</a>
       <a class="fl" href="ssd.html">Внутренние SSD</a>
+      <a class="fl" href="ram.html">Оперативная память</a>
       <a class="fl current" href="microsd.html" aria-current="page">Карты памяти</a>
       <a class="fl" href="usb.html">Флеш-накопители</a>
+      <a class="fl" href="notebooks.html">Ноутбуки</a>
     </div>
     <div class="foot-col">
       <h3>Покупателю</h3>
-      <a class="fl" href="about.html">О компании</a>
-      <a class="fl" href="buy.html">Где купить</a>
-      <a class="fl" href="support.html">Поддержка</a>
       <a class="fl" href="warranty.html">Гарантия</a>
+      <a class="fl" href="support.html">Поддержка</a>
+      <a class="fl" href="buy.html">Где купить</a>
+      <a class="fl" href="partners.html">Сотрудничество</a>
+      <a class="fl" href="about.html">О компании</a>
     </div>
   </div>
   <div class="foot-legal">
@@ -1299,7 +1304,8 @@ toTop.addEventListener('click',()=>{
 
 /* ============ classes: классы скорости карт памяти (с 01.10.2026) ============
    Блок #classes на странице карт памяти: кнопки переключают, что сравниваем (запись видео или приложения),
-   полоски растут до гарантированного минимума своей линейки, число досчитывается, золотом выделены самые быстрые.
+   полоски растут до гарантированного минимума своей линейки, число досчитывается, рядом верхняя скорость «до»
+   (data-vmax, с упаковок: BASE 80, RUSH 100, RUSH+ 160 МБ/с; встреча 21.10.2026), самые быстрые выделены.
    Значения лежат в разметке: data-v (МБ/с записи) и data-a (операций чтения в секунду) у строк,
    тексты подписей в data-v и data-a у самих подписей. Ноль значит, что класса у линейки нет: вместо числа показываем .rn. */
 {
@@ -1314,6 +1320,7 @@ toTop.addEventListener('click',()=>{
       cancelAnimationFrame(raf);
       const to=rows.map(r=>+r.el.dataset[k]),max=Math.max(...to),t0=performance.now();
       rows.forEach((r,i)=>{r.sub.textContent=r.sub.dataset[k];r.unit.textContent=UNIT[k];r.el.classList.toggle('fast',to[i]===max);r.el.classList.toggle('none',!to[i])});
+      sec.classList.toggle('k-a',k==='a'); /* для операций в секунду верхней цифры нет, «до» прячется */
       note.textContent=note.dataset[k];
       if(instant||reduced.matches){rows.forEach((r,i)=>paint(r,to[i],max));return}
       const step=now=>{

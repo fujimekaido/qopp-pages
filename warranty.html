@@ -259,13 +259,18 @@ a.mi{cursor:pointer;text-decoration:none}
 .ds-hue input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:hsl(var(--hue,200),100%,55%);border:3px solid #f2f0ea;box-shadow:0 2px 10px rgba(0,0,0,.6)}
 .ds-hue input:focus-visible{outline:none}
 .ds-hue input:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--accent)}
-@media (max-width:860px){.ds-tint,.ds-hue{display:none}}
+@media (max-width:1024px){.ds-tint,.ds-hue{display:none}} /* на планшетах и телефонах регулятор не нужен (встреча 21.10.2026) */
 
 /* ============ layout ============ */
 main{position:relative;z-index:1}
 .section{max-width:1080px;margin:0 auto;padding:clamp(60px,9vh,110px) clamp(20px,4vw,56px)}
+/* хлебные крошки: видно, где находишься, и можно вернуться на главную (встреча 21.10.2026) */
+.crumbs{max-width:1160px;margin:clamp(18px,3vh,28px) auto 0;padding:0 clamp(20px,6vw,80px);font-size:13px;color:var(--muted);display:flex;gap:10px;align-items:center}
+.crumbs a{color:inherit;text-decoration:none}
+.crumbs a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .section-head{max-width:640px;margin-bottom:clamp(30px,5vh,50px)}
-.section-head h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.4vw,42px);letter-spacing:.01em;margin-top:12px}
+.section-head h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.4vw,42px);letter-spacing:.01em;margin-top:0}
+.section-head .kicker{margin-top:12px;font-size:13px} /* подпись под заголовком (встреча 21.10.2026) */
 .section-head .lede{color:var(--muted);margin-top:14px}
 
 /* reveal */
@@ -481,9 +486,10 @@ main{position:relative;z-index:1}
 /* дорога обращения: линия дорисовывается, станции загораются */
 .road{border:1px solid;border-radius:22px;padding:clamp(28px,4.4vw,52px);position:relative;overflow:hidden}
 .road-top{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(30px,4.5vh,46px)}
+.road-top .pbtn{font-size:15px;padding:16px 36px} /* кнопка крупнее (встреча 21.10.2026) */
 .road-lede{color:var(--muted);max-width:44ch;margin:0}
-.track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,30px)}
-.track::before,.track::after{content:"";position:absolute;left:9px;right:calc(25% - 4px);top:8px;height:2px}
+.track{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,30px)}
+.track::before,.track::after{content:"";position:absolute;left:18px;right:calc(50% - 2px);top:8px;height:2px}
 .track::before{background:rgba(165,171,183,.22)}
 .track::after{
   background:linear-gradient(90deg,var(--accent),rgba(227,169,79,.4));
@@ -493,7 +499,7 @@ main{position:relative;z-index:1}
 .stop{position:relative;padding-top:34px}
 .stop::before{
   content:"";position:absolute;left:2px;top:0;width:16px;height:16px;border-radius:50%;
-  background:#14161c;border:2px solid rgba(165,171,183,.35);
+  background:transparent;border:2px solid rgba(165,171,183,.35); /* кружок пустой внутри (встреча 21.10.2026) */
   transition:border-color .5s var(--ease),box-shadow .5s var(--ease);
 }
 .reveal.in .stop::before{border-color:var(--accent);box-shadow:0 0 0 5px rgba(227,169,79,.14)}
@@ -505,11 +511,14 @@ main{position:relative;z-index:1}
 .stop p{font-size:14.5px;color:var(--muted);margin-top:7px}
 @media (max-width:760px){
   .track{grid-template-columns:1fr;gap:0}
-  .track::before,.track::after{left:8px;right:auto;top:8px;bottom:14px;width:2px;height:auto}
-  .track::after{background:linear-gradient(180deg,var(--accent),rgba(227,169,79,.4));transform:scaleY(0);transform-origin:top}
-  .reveal.in .track::after{transform:scaleY(1)}
-  .stop{padding:0 0 22px 34px}
+  /* на телефоне линия идёт от кружка к кружку и заканчивается на последнем (встреча 21.10.2026) */
+  .track::before,.track::after{display:none}
+  .stop{padding:0 0 26px 34px}
+  .stop:last-child{padding-bottom:0}
   .stop::before{left:0;top:3px}
+  .stop:not(:last-child)::after{content:"";position:absolute;left:7px;top:21px;bottom:-5px;width:2px;
+    background:linear-gradient(180deg,var(--accent),rgba(227,169,79,.4));transform:scaleY(0);transform-origin:top;transition:transform 1.2s var(--ease) .35s}
+  .reveal.in .stop:not(:last-child)::after{transform:scaleY(1)}
 }
 .step p b{color:var(--ink);font-weight:600}
 .cta-row{margin-top:clamp(28px,4vh,40px)}
@@ -671,6 +680,8 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
    текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
    Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
 /* --- ссылки на документы в подвале и в галочке согласия (с 05.10.2026) --- */
+/* подвал без формы: две колонки на всю ширину (встреча 21.10.2026), правило общее для всех страниц */
+.foot-grid{grid-template-columns:1fr 1fr;max-width:860px}
 .foot-legal a{color:inherit;text-decoration:none}
 .foot-legal a:hover,.foot-legal a:focus-visible{color:#14161c;text-decoration:underline;text-underline-offset:3px}
 .agree a{color:inherit;text-decoration:underline;text-underline-offset:3px}
@@ -1093,7 +1104,25 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 </section>
 
 <main id="main" tabindex="-1">
+  <p class="crumbs"><a href="index.html">Главная</a><span aria-hidden="true">›</span><span>Гарантия</span></p>
   <!-- вводный текст политики -->
+  <!-- блок обращения в поддержку стоит первым: два шага вместо четырёх (встреча 21.10.2026) -->
+  <section class="section reveal" id="service" data-ch="Сервис">
+    <div class="section-head">
+      <h2 class="part">Напишите в поддержку</h2>
+      <p class="kicker part">Как обратиться по гарантии</p>
+    </div>
+    <div class="road panel-dark part">
+      <div class="road-top">
+        <a class="pbtn pbtn-gold" href="https://taplink.cc/qopp" target="_blank" rel="noopener">Написать в поддержку</a>
+      </div>
+      <div class="track">
+        <div class="stop"><b>Найдите электронный чек</b><p>Или другой документ, подтверждающий дату покупки.</p></div>
+        <div class="stop"><b>Напишите нам</b><p>В поддержку QOPP любым удобным способом. Дальше всё объясним в переписке.</p></div>
+      </div>
+    </div>
+  </section>
+
   <section class="section policy-intro reveal" data-ch="Общее">
     <p class="part">Бренд QOPP гарантирует покупателю товаров в оригинальной запечатанной упаковке («Вы»), что товары не имеют дефектов материала и изготовления при соблюдении условий, изложенных в настоящем документе, в течение ограниченного гарантийного периода, продолжительность которого указана на странице товара на сайте продавца, начиная с даты приобретения товара в оригинальной запечатанной упаковке.</p>
     <p class="part">В случае отсутствия действительного доказательства покупки срок ограниченной гарантии будет определяться датой изготовления товара. Настоящая гарантия распространяется исключительно на первоначального розничного покупателя товара и не может быть передана, уступлена или отчуждена последующим владельцам или третьим лицам.</p>
@@ -1107,8 +1136,8 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   <!-- SSD -->
   <section class="section reveal" id="ssd" data-ch="SSD">
     <div class="section-head">
-      <p class="kicker part">SSD · срок или TBW</p>
       <h2 class="part">Твердотельные накопители</h2>
+      <p class="kicker part">Срок или TBW, что наступит раньше</p>
     </div>
     <div class="ssd-panel panel-dark part">
       <div class="ssd-list">
@@ -1233,8 +1262,8 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   <!-- Оперативная память -->
   <section class="section reveal" id="ram" data-ch="Оперативная память">
     <div class="section-head">
-      <p class="kicker part">Оперативная память</p>
-      <h2 class="part" data-words>Гарантия без срока</h2>
+      <h2 class="part">Оперативная память</h2>
+      <p class="kicker part">Бессрочная гарантия</p>
     </div>
     <div class="ram-hero panel-dark part">
       <div class="ram-photo" aria-hidden="true">
@@ -1283,8 +1312,8 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   <!-- Карты памяти и флешки -->
   <section class="section reveal" id="cards" data-ch="Карты и флешки">
     <div class="section-head">
-      <p class="kicker part">Карты памяти и флешки</p>
-      <h2 class="part">Память, которая всегда с тобой</h2>
+      <h2 class="part">Карты памяти и флешки</h2>
+      <p class="kicker part">Срок по линейкам</p>
     </div>
     <div class="duo">
       <div class="duo-card panel-dark part">
@@ -1322,8 +1351,8 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   <!-- Ноутбуки -->
   <section class="section reveal" id="laptops" data-ch="Ноутбуки">
     <div class="section-head">
-      <p class="kicker part">Ноутбуки</p>
-      <h2 class="part">Разбираем ноутбук по частям</h2>
+      <h2 class="part">Ноутбуки</h2>
+      <p class="kicker part">Срок по узлам</p>
     </div>
     <div class="nb panel-dark part">
       <div class="nb-photo" aria-hidden="true"><picture><source srcset="assets/warranty-nb.webp" type="image/webp"><img src="assets/warranty-nb.jpg" alt="" width="1600" height="892" loading="lazy" loading="lazy" decoding="async"></picture></div>
@@ -1349,29 +1378,11 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
   </section>
 
   <!-- Как обратиться -->
-  <section class="section reveal" id="service" data-ch="Сервис">
-    <div class="section-head">
-      <p class="kicker part">Как обратиться</p>
-      <h2 class="part">Четыре шага до сервиса</h2>
-    </div>
-    <div class="road panel-dark part">
-      <div class="road-top">
-        <a class="pbtn pbtn-gold" href="https://taplink.cc/qopp" target="_blank" rel="noopener">Написать в поддержку</a>
-      </div>
-      <div class="track">
-        <div class="stop"><b>Найдите чек</b><p>Или другой документ, подтверждающий дату покупки.</p></div>
-        <div class="stop"><b>Напишите нам</b><p>В поддержку QOPP любым удобным способом.</p></div>
-        <div class="stop"><b>Назовите номер</b><p>Серийный номер продукта и что случилось.</p></div>
-        <div class="stop"><b>Отправьте продукт</b><p>В оригинальной или другой защитной упаковке.</p></div>
-      </div>
-    </div>
-  </section>
-
   <!-- Полные условия -->
   <section class="section legal reveal" id="terms" data-ch="Условия">
     <div class="section-head">
-      <p class="kicker part">Полные условия</p>
-      <h2 class="part">Мелкий шрифт, набранный крупно</h2>
+      <h2 class="part">Условия</h2>
+      <p class="kicker part">Полный текст гарантийной политики</p>
     </div>
     <div class="part">
       <details class="acc">
@@ -1430,33 +1441,22 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 
 <footer id="footer" class="site-footer">
   <div class="foot-grid">
-    <div class="foot-col">
-      <h3>Сотрудничество</h3>
-      <p class="foot-lede">Подберём цены и условия под ваш формат</p>
-      <form class="coop-form" novalidate>
-        <input name="name" placeholder="Имя" autocomplete="name" aria-label="Имя">
-        <input name="email" type="email" placeholder="E-mail" autocomplete="email" aria-label="E-mail">
-        <!-- телефон вернулся в подвал 08.10.2026 по просьбе владельца: номера нужны для связи в мессенджерах; поле необязательное, уходит в пошаговую форму -->
-        <input name="phone" type="tel" placeholder="Телефон" autocomplete="tel" inputmode="tel" aria-label="Телефон">
-        <button class="foot-btn" type="submit">Продолжить</button>
-        <label class="agree"><input type="checkbox"> <span>Согласен на <a href="consent.html">обработку персональных данных</a></span></label>
-        <p class="form-done" hidden>Заявка принята, мы свяжемся с вами</p>
-      </form>
-    </div>
+    <!-- форма сотрудничества из подвала убрана (встреча 21.10.2026), заявки только через partners.html -->
     <div class="foot-col">
       <h3>Продукция</h3>
-      <a class="fl" href="notebooks.html">Ноутбуки</a>
-      <a class="fl" href="ram.html">Оперативная память</a>
       <a class="fl" href="ssd.html">Внутренние SSD</a>
+      <a class="fl" href="ram.html">Оперативная память</a>
       <a class="fl" href="microsd.html">Карты памяти</a>
       <a class="fl" href="usb.html">Флеш-накопители</a>
+      <a class="fl" href="notebooks.html">Ноутбуки</a>
     </div>
     <div class="foot-col">
       <h3>Покупателю</h3>
-      <a class="fl" href="about.html">О компании</a>
-      <a class="fl" href="buy.html">Где купить</a>
-      <a class="fl" href="support.html">Поддержка</a>
       <a class="fl current" href="warranty.html" aria-current="page">Гарантия</a>
+      <a class="fl" href="support.html">Поддержка</a>
+      <a class="fl" href="buy.html">Где купить</a>
+      <a class="fl" href="partners.html">Сотрудничество</a>
+      <a class="fl" href="about.html">О компании</a>
     </div>
   </div>
   <div class="foot-legal">

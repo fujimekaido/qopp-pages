@@ -281,7 +281,7 @@ main{position:relative;z-index:1}
      кадр обрезан к правой части, где накопитель, низ растворяется в тёмный фон; параллакс из fx.js здесь выключен */
   .dark-strip{display:flex;flex-direction:column;padding:0 20px clamp(48px,8vh,70px)}
   .dark-strip picture{display:block;margin:0 -20px}
-  .dark-strip .ds-photo[data-par],.ds-photo{position:static;width:100%;height:72vw!important;top:auto!important;object-position:75% 50%;opacity:1;transform:none!important;
+  .dark-strip .ds-photo[data-par],.ds-photo{position:static;width:100%;height:72vw!important;top:auto!important;object-position:47% 50%;opacity:1;transform:none!important; /* накопитель по центру кадра (владелец, 21.10.2026) */
     -webkit-mask-image:linear-gradient(to bottom,#000 62%,transparent);mask-image:linear-gradient(to bottom,#000 62%,transparent)}
   .dark-strip .inner{margin-top:-6vw}
 }
@@ -541,29 +541,31 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 @media (max-width:760px){.chan{grid-template-columns:1fr}.chan-act{flex-wrap:wrap;grid-column:auto}}
 
 /* подбор за минуту */
-.pick{position:relative;z-index:1;background:#101216;color:#f4f1ea}
+/* подбор на белом, как интерактивы каталога (встреча 21.10.2026); раньше блок был на чёрном */
+.pick{position:relative;z-index:1;background:#f6f6f7;color:var(--ink);border-top:1px solid var(--hairline)}
 .pick .section{padding-top:clamp(70px,10vh,110px);padding-bottom:clamp(70px,10vh,110px)}
-.pick .kicker{color:var(--accent)}
+.pick .kicker{color:var(--accent-deep)}
+.kicker{font-size:14px;font-weight:700} /* подписи разделов крупнее (встреча 21.10.2026) */
 .pick h2{font-family:var(--display);font-weight:700;font-size:clamp(27px,3.6vw,44px);line-height:1.18;margin-top:14px;max-width:18ch}
-.pick .lede{color:#a9adb5;max-width:56ch}
+.pick .lede{color:var(--muted);max-width:56ch}
 .pick-step{margin-top:clamp(28px,5vh,44px)}
 .pick-step[hidden]{display:none}
-.pick-q{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#8b9098;margin-bottom:16px}
+.pick-q{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--silver);margin-bottom:16px}
 .pick-opts{display:flex;flex-wrap:wrap;gap:10px}
-.pick-opts button{font-family:var(--body);font-size:16px;font-weight:600;color:#f4f1ea;background:transparent;
-  border:1px solid rgba(244,241,234,.28);border-radius:999px;padding:13px 22px;cursor:pointer;
+.pick-opts button{font-family:var(--body);font-size:16px;font-weight:600;color:var(--ink);background:#fff;
+  border:1px solid rgba(20,22,28,.18);border-radius:999px;padding:13px 22px;cursor:pointer;
   transition:border-color .25s var(--ease),color .25s var(--ease),background .25s var(--ease)}
-.pick-opts button:hover,.pick-opts button:focus-visible{border-color:var(--accent);color:var(--accent)}
-.pick-opts button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#14161c}
-.pick-res{margin-top:clamp(28px,5vh,44px);border-top:1px solid rgba(244,241,234,.16);padding-top:clamp(22px,4vh,34px);max-width:720px}
+.pick-opts button:hover,.pick-opts button:focus-visible{border-color:var(--ink)}
+.pick-opts button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.pick-res{margin-top:clamp(28px,5vh,44px);border-top:1px solid var(--hairline);padding-top:clamp(22px,4vh,34px);max-width:720px}
 .pick-res[hidden]{display:none}
 .pick-res h3{font-family:var(--display);font-weight:700;font-size:clamp(21px,2.6vw,30px);line-height:1.22}
-.pick-res p{color:#a9adb5;margin-top:12px}
+.pick-res p{color:var(--muted);margin-top:12px}
 .pick-res .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.pick-res .s-btn{background:var(--accent);border-color:var(--accent);color:#14161c}
-.pick-res .s-btn:hover,.pick-res .s-btn:focus-visible{background:#f0c478;border-color:#f0c478}
-.pick-res .s-btn.ghost{background:transparent;color:#f4f1ea;border-color:rgba(244,241,234,.28)}
-.pick-res .s-btn.ghost:hover,.pick-res .s-btn.ghost:focus-visible{color:var(--accent);border-color:var(--accent)}
+.pick-res .s-btn{background:var(--ink);border-color:var(--ink);color:#fff}
+.pick-res .s-btn:hover,.pick-res .s-btn:focus-visible{background:#2c83f5;border-color:#2c83f5}
+.pick-res .s-btn.ghost{background:transparent;color:var(--ink);border-color:rgba(20,22,28,.22)}
+.pick-res .s-btn.ghost:hover,.pick-res .s-btn.ghost:focus-visible{border-color:var(--ink)}
 .pick-again{margin-top:22px;background:none;border:0;color:#8b9098;font-family:var(--body);font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .pick-again:hover{color:#f4f1ea}
 </style>
@@ -574,6 +576,8 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
    текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
    Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
 /* --- ссылки на документы в подвале и в галочке согласия (с 05.10.2026) --- */
+/* подвал без формы: две колонки на всю ширину (встреча 21.10.2026), правило общее для всех страниц */
+.foot-grid{grid-template-columns:1fr 1fr;max-width:860px}
 .foot-legal a{color:inherit;text-decoration:none}
 .foot-legal a:hover,.foot-legal a:focus-visible{color:#14161c;text-decoration:underline;text-underline-offset:3px}
 .agree a{color:inherit;text-decoration:underline;text-underline-offset:3px}
@@ -1015,29 +1019,14 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
     </div>
   </div>
 
-  <p class="chan-sub part">Активация гарантии</p>
-  <div class="chans">
-    <div class="chan part">
-      <h3>MAX</h3>
-      <div class="chan-act"><a class="s-btn" href="https://max.ru/id781604083587_1_bot" target="_blank" rel="noopener">Активировать</a></div>
-    </div>
-    <div class="chan part">
-      <h3>Telegram</h3>
-      <div class="chan-act"><a class="s-btn" href="https://app.leadteh.ru/w/fpq1C" target="_blank" rel="noopener">Активировать</a></div>
-    </div>
-    <div class="chan part">
-      <h3>Условия</h3>
-      <p>Сроки, покрытие и порядок обращения.</p>
-      <div class="chan-act"><a class="s-btn ghost" href="warranty.html">Страница гарантии</a></div>
-    </div>
-  </div>
+  <!-- блок «Активация гарантии» убран: активация живёт на наклейке и в боте (встреча 21.10.2026) -->
 </section>
 
 <!-- подбор за минуту -->
 <section class="pick reveal" id="pick" aria-labelledby="pick-h">
   <div class="section">
     <p class="kicker part">Подбор за минуту</p>
-    <h2 class="part" id="pick-h" data-words>Подойдёт ли к моему устройству?</h2>
+    <h2 class="part" id="pick-h" data-words>Подойдёт ли к моему устройству</h2>
 
     <div class="pick-step part" id="pick-1">
       <p class="pick-q">Что вы выбираете</p>
@@ -1079,33 +1068,22 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 
 <footer id="footer" class="site-footer">
   <div class="foot-grid">
-    <div class="foot-col">
-      <h3>Сотрудничество</h3>
-      <p class="foot-lede">Подберём цены и условия под ваш формат</p>
-      <form class="coop-form" novalidate>
-        <input name="name" placeholder="Имя" autocomplete="name" aria-label="Имя">
-        <input name="email" type="email" placeholder="E-mail" autocomplete="email" aria-label="E-mail">
-        <!-- телефон вернулся в подвал 08.10.2026 по просьбе владельца: номера нужны для связи в мессенджерах; поле необязательное, уходит в пошаговую форму -->
-        <input name="phone" type="tel" placeholder="Телефон" autocomplete="tel" inputmode="tel" aria-label="Телефон">
-        <button class="foot-btn" type="submit">Продолжить</button>
-        <label class="agree"><input type="checkbox"> <span>Согласен на <a href="consent.html">обработку персональных данных</a></span></label>
-        <p class="form-done" hidden>Заявка принята, мы свяжемся с вами</p>
-      </form>
-    </div>
+    <!-- форма сотрудничества из подвала убрана (встреча 21.10.2026), заявки только через partners.html -->
     <div class="foot-col">
       <h3>Продукция</h3>
-      <a class="fl" href="notebooks.html">Ноутбуки</a>
-      <a class="fl" href="ram.html">Оперативная память</a>
       <a class="fl" href="ssd.html">Внутренние SSD</a>
+      <a class="fl" href="ram.html">Оперативная память</a>
       <a class="fl" href="microsd.html">Карты памяти</a>
       <a class="fl" href="usb.html">Флеш-накопители</a>
+      <a class="fl" href="notebooks.html">Ноутбуки</a>
     </div>
     <div class="foot-col">
       <h3>Покупателю</h3>
-      <a class="fl" href="about.html">О компании</a>
-      <a class="fl" href="buy.html">Где купить</a>
-      <a class="fl current" href="support.html" aria-current="page">Поддержка</a>
       <a class="fl" href="warranty.html">Гарантия</a>
+      <a class="fl current" href="support.html" aria-current="page">Поддержка</a>
+      <a class="fl" href="buy.html">Где купить</a>
+      <a class="fl" href="partners.html">Сотрудничество</a>
+      <a class="fl" href="about.html">О компании</a>
     </div>
   </div>
   <div class="foot-legal">

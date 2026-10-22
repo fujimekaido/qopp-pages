@@ -509,10 +509,13 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
 .b-lede{max-width:60ch;margin:0 auto;font-size:clamp(16px,1.45vw,20px);line-height:1.5;color:#2b2e35}
 .b-body h1{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:clamp(26px,3.3vw,46px);line-height:1.1;margin-top:clamp(28px,4.6vh,48px)}
 .shops{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;max-width:1160px;margin:clamp(30px,5vh,52px) auto 0;text-align:left}
-.shop-card{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:96px;padding:14px 16px 14px 22px;
-  background:#fff;border:1px solid #8f939b;border-radius:2px;box-shadow:3px 3px 0 rgba(20,22,28,.07);
-  color:var(--ink);text-decoration:none;transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
-.shop-card:hover,.shop-card:focus-visible{border-color:var(--accent-deep);box-shadow:3px 3px 0 rgba(184,134,59,.28)}
+/* магазины без прямоугольников (встреча 21.10.2026): один общий блок, внутри логотип с названием,
+   серые, при наведении оживают */
+.shops{border:1px solid rgba(20,22,28,.1);border-radius:18px;padding:clamp(18px,3vw,34px) clamp(10px,2vw,24px);background:#fff}
+.shop-card{display:flex;flex-direction:column-reverse;align-items:center;justify-content:center;text-align:center;gap:12px;min-height:150px;padding:12px;
+  color:var(--ink);text-decoration:none;filter:grayscale(1);opacity:.62;
+  transition:filter .3s var(--ease),opacity .3s var(--ease),transform .3s var(--ease)}
+.shop-card:hover,.shop-card:focus-visible{filter:none;opacity:1;transform:translateY(-3px)}
 .shop-card b{display:block;font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:.02em;line-height:1.2}
 .shop-card small{display:block;margin-top:6px;font-size:13px;line-height:1.35;color:var(--muted)}
 .shop-ic{flex:none;width:76px;height:76px;display:block}
@@ -528,6 +531,8 @@ a.fl:hover::after,a.fl:focus-visible::after{transform:scaleX(1);transform-origin
    текст не мельче 12 px, мелкий текст на светлом фоне с контрастом от 4,5:1.
    Проверка: САЙТ РЕФЫ/МОБИЛЬНАЯ ВЕРСИЯ/audit.js */
 /* --- ссылки на документы в подвале и в галочке согласия (с 05.10.2026) --- */
+/* подвал без формы: две колонки на всю ширину (встреча 21.10.2026), правило общее для всех страниц */
+.foot-grid{grid-template-columns:1fr 1fr;max-width:860px}
 .foot-legal a{color:inherit;text-decoration:none}
 .foot-legal a:hover,.foot-legal a:focus-visible{color:#14161c;text-decoration:underline;text-underline-offset:3px}
 .agree a{color:inherit;text-decoration:underline;text-underline-offset:3px}
@@ -931,8 +936,9 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 <div class="b-top">
   <figure class="b-photo">
     <picture>
-      <source type="image/webp" srcset="assets/buy-hero-1200.webp 1200w, assets/buy-hero.webp 2400w" sizes="100vw">
-      <img src="assets/buy-hero.jpg" alt="" width="2400" height="1022" fetchpriority="high" decoding="async">
+      <!-- медоед с ноутбуком снят до завершения процедуры с талисманом (встреча 21.10.2026), пока фото DDR5 -->
+      <source type="image/webp" srcset="assets/udimm-ddr5-epic.webp">
+      <img src="assets/udimm-ddr5-epic.jpg" alt="" width="2208" height="950" fetchpriority="high" decoding="async">
     </picture>
   </figure>
 </div>
@@ -953,33 +959,22 @@ html.vt-in .c-hero.reveal .part:not(.side-label),html.vt-in .conf.reveal .part,h
 
 <footer id="footer" class="site-footer">
   <div class="foot-grid">
-    <div class="foot-col">
-      <h3>Сотрудничество</h3>
-      <p class="foot-lede">Подберём цены и условия под ваш формат</p>
-      <form class="coop-form" novalidate>
-        <input name="name" placeholder="Имя" autocomplete="name" aria-label="Имя">
-        <input name="email" type="email" placeholder="E-mail" autocomplete="email" aria-label="E-mail">
-        <!-- телефон вернулся в подвал 08.10.2026 по просьбе владельца: номера нужны для связи в мессенджерах; поле необязательное, уходит в пошаговую форму -->
-        <input name="phone" type="tel" placeholder="Телефон" autocomplete="tel" inputmode="tel" aria-label="Телефон">
-        <button class="foot-btn" type="submit">Продолжить</button>
-        <label class="agree"><input type="checkbox"> <span>Согласен на <a href="consent.html">обработку персональных данных</a></span></label>
-        <p class="form-done" hidden>Заявка принята, мы свяжемся с вами</p>
-      </form>
-    </div>
+    <!-- форма сотрудничества из подвала убрана (встреча 21.10.2026), заявки только через partners.html -->
     <div class="foot-col">
       <h3>Продукция</h3>
-      <a class="fl" href="notebooks.html">Ноутбуки</a>
-      <a class="fl" href="ram.html">Оперативная память</a>
       <a class="fl" href="ssd.html">Внутренние SSD</a>
+      <a class="fl" href="ram.html">Оперативная память</a>
       <a class="fl" href="microsd.html">Карты памяти</a>
       <a class="fl" href="usb.html">Флеш-накопители</a>
+      <a class="fl" href="notebooks.html">Ноутбуки</a>
     </div>
     <div class="foot-col">
       <h3>Покупателю</h3>
-      <a class="fl" href="about.html">О компании</a>
-      <a class="fl current" href="buy.html" aria-current="page">Где купить</a>
-      <a class="fl" href="support.html">Поддержка</a>
       <a class="fl" href="warranty.html">Гарантия</a>
+      <a class="fl" href="support.html">Поддержка</a>
+      <a class="fl current" href="buy.html" aria-current="page">Где купить</a>
+      <a class="fl" href="partners.html">Сотрудничество</a>
+      <a class="fl" href="about.html">О компании</a>
     </div>
   </div>
   <div class="foot-legal">
