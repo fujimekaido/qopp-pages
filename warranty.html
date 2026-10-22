@@ -454,18 +454,16 @@ main{position:relative;z-index:1}
 /* ============ шаги и CTA ============ */
 /* дорога обращения: линия дорисовывается, станции загораются */
 .road{border:1px solid;border-radius:22px;padding:clamp(28px,4.4vw,52px);position:relative;overflow:hidden}
-.road-top{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(30px,4.5vh,46px)}
+.road-top{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:clamp(30px,4.5vh,46px)} /* кнопка по центру (владелец, 23.10.2026) */
 .road-top .pbtn{font-size:15px;padding:16px 36px} /* кнопка крупнее (встреча 21.10.2026) */
 .road-lede{color:var(--muted);max-width:44ch;margin:0}
-.track{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,30px)}
-/* линия от правого края первого кружка до левого края второго, по центру кружков (владелец, 22.10.2026) */
-.track::before,.track::after{content:"";position:absolute;left:18px;right:calc(50% - clamp(14px,2vw,30px)/2 - 2px);top:9px;height:2px}
-.track::before{background:rgba(165,171,183,.22)}
-.track::after{
+.track{--gap:clamp(14px,2vw,30px);position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap)}
+/* линия рисуется у каждого шага, кроме последнего: от правого края его кружка (кружок 20px, стоит с отступом 2px)
+   до левого края кружка следующего шага; не зависит от ширины дорожки (владелец, 23.10.2026) */
+.stop:not(:last-child)::after{content:"";position:absolute;left:22px;right:calc(-1*var(--gap) - 2px);top:9px;height:2px;
   background:linear-gradient(90deg,var(--accent),rgba(227,169,79,.4));
-  transform:scaleX(0);transform-origin:left;transition:transform 1.8s var(--ease) .25s;
-}
-.reveal.in .track::after{transform:scaleX(1)}
+  transform:scaleX(0);transform-origin:left;transition:transform 1.8s var(--ease) .25s}
+.reveal.in .stop:not(:last-child)::after{transform:scaleX(1)}
 .stop{position:relative;padding-top:34px}
 .stop::before{
   content:"";position:absolute;left:2px;top:0;width:16px;height:16px;border-radius:50%;
@@ -481,12 +479,11 @@ main{position:relative;z-index:1}
 .stop p{font-size:14.5px;color:var(--muted);margin-top:7px}
 @media (max-width:760px){
   .track{grid-template-columns:1fr;gap:0}
-  /* на телефоне линия идёт от кружка к кружку и заканчивается на последнем (встреча 21.10.2026) */
-  .track::before,.track::after{display:none}
+  /* на телефоне линия идёт вниз от кружка к кружку и заканчивается на последнем (встреча 21.10.2026) */
   .stop{padding:0 0 26px 34px}
   .stop:last-child{padding-bottom:0}
   .stop::before{left:0;top:3px}
-  .stop:not(:last-child)::after{content:"";position:absolute;left:7px;top:21px;bottom:-5px;width:2px;
+  .stop:not(:last-child)::after{left:9px;right:auto;top:23px;bottom:-3px;width:2px;height:auto;
     background:linear-gradient(180deg,var(--accent),rgba(227,169,79,.4));transform:scaleY(0);transform-origin:top;transition:transform 1.2s var(--ease) .35s}
   .reveal.in .stop:not(:last-child)::after{transform:scaleY(1)}
 }
