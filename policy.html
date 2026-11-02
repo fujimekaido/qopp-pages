@@ -1276,7 +1276,7 @@ toTop.addEventListener('click',()=>{
 .q2-glow{fill:#2c83f5;opacity:0;animation:q2flash 7s linear 1s infinite}
 @keyframes q2in{to{opacity:1}}
 @keyframes q2show{to{opacity:1}}
-@keyframes q2run{from{stroke-dashoffset:var(--o)}to{stroke-dashoffset:calc(var(--o) - 1000)}}
+@keyframes q2run{from{stroke-dashoffset:var(--o)}to{stroke-dashoffset:var(--end)}}
 @keyframes q2back{to{stroke-dashoffset:1000}}
 @keyframes q2flash{0%{opacity:.95}16%{opacity:0}97%{opacity:0}100%{opacity:.95}}
 @media (prefers-reduced-motion:reduce){.q-mark.q2 .q2-body{opacity:1}.q2-orbit,.q2-glow{display:none}}
@@ -1308,7 +1308,7 @@ toTop.addEventListener('click',()=>{
   let qAn=[],qV=0,qRaf=0,qY=scrollY;
   if(qm){
     const arc=(len,op)=>{const start=1000*QTAIL/360-len;
-      return '<ellipse cx="'+QCX+'" cy="'+QCY+'" rx="'+QRX+'" ry="'+QRY+'" pathLength="1000" stroke-dasharray="'+len+' '+(1000-len)+'" style="--o:'+(-start).toFixed(1)+'" opacity="'+op+'"/>'};
+      return '<ellipse cx="'+QCX+'" cy="'+QCY+'" rx="'+QRX+'" ry="'+QRY+'" pathLength="1000" stroke-dasharray="'+len+' '+(1000-len)+'" style="--o:'+(-start).toFixed(1)+'px;--end:'+(-start-1000).toFixed(1)+'px" opacity="'+op+'"/>'};
     qm.setAttribute('viewBox','0 0 804 816');
     qm.classList.add('q2');
     /* второй клип по внешнему эллипсу кольца: импульс и деления не заезжают на хвост, хвост только вспыхивает
