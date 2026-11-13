@@ -254,6 +254,10 @@ a.mi{cursor:pointer;text-decoration:none}
   display:block;--e:calc(var(--k,0)*var(--k,0)*(3 - 2*var(--k,0)));
   opacity:var(--e);filter:blur(calc((1 - var(--e))*7px));transform:translateY(calc((1 - var(--e))*10px));
 }
+/* На телефонах не создаём фильтруемый слой поверх аппаратного видео. */
+@media (max-width:720px), (pointer:coarse){
+  .e-line .ln{filter:none}
+}
 /* entrance: scatter (band 1, sand grains) */
 .e-scatter .c{
   --kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);
